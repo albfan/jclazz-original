@@ -11,7 +11,7 @@ class Fibo
     {
         if (int_1 > 1)
         {
-            return Fibo.fib(int_1 - 1) + Fibo.fib(int_1 - 2);
+            return (Fibo.fib((int_1 - 1)) + Fibo.fib((int_1 - 2)));
         }
         return int_1;
     }

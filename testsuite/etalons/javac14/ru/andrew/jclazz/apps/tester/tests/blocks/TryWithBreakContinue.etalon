@@ -86,4 +86,22 @@ public class TryWithBreakContinue
         while (0 != int_1);
     }
     
+    public void test4_2()
+    {
+        while (true)
+        {
+            System.out.println("START DO");
+            try
+            {
+                System.out.println("TRY");
+                continue;
+            }
+            catch (Exception exception_1)
+            {
+                System.out.println("CATCH");
+                System.out.println("END LOOP");
+            }
+        }
+    }
+    
 }

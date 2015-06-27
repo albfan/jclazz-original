@@ -130,7 +130,7 @@ public class ClientMorda extends JFrame implements MordaFunc
     
     public String getUser()
     {
-        return (String) usersArea.getSelectedValue();
+        return ((String) usersArea.getSelectedValue());
     }
     
     public void addPlugin(String string_1, Object object_1)
@@ -171,7 +171,7 @@ public class ClientMorda extends JFrame implements MordaFunc
         {
             if (null != usersArea.getSelectedValue())
             {
-                c_sender.exec(31, (String) usersArea.getSelectedValue(), inputArea.getText());
+                c_sender.exec(31, ((String) usersArea.getSelectedValue()), inputArea.getText());
                 inputArea.setText("");
             }
         }

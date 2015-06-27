@@ -39,6 +39,7 @@ public class EnumSourceView extends ClazzSourceView
             while (it.hasNext())
             {
                 CodeItem citem = (CodeItem) it.next();
+                if (!(citem instanceof PutFieldView)) continue;
                 if ("$VALUES".equals(((PutFieldView) citem).getFieldName()))
                 {
                     break;
@@ -46,7 +47,7 @@ public class EnumSourceView extends ClazzSourceView
                 if (!isFirstVar) pw.print(", ");
 
                 pw.print(((PutFieldView) citem).getFieldName());
-                String src = ((PutFieldView) citem).source();
+                String src = ((PutFieldView) citem).source3();
                 int index = src.indexOf(',', src.indexOf(',') + 1);
                 if (index != -1)
                 {

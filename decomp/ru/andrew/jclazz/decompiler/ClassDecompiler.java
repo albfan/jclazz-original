@@ -10,7 +10,7 @@ public final class ClassDecompiler
     public static String generateJavaFile(String in, Map params) throws ClazzException, IOException
     {
         Clazz clazz = new Clazz(in);
-        ClazzSourceView csv = ClazzSourceViewFactory.getClazzSourceView(new Clazz(in));
+        ClazzSourceView csv = ClazzSourceViewFactory.getClazzSourceView(clazz);
         csv.setDecompileParameters(params);
 
         String outFile;
@@ -25,7 +25,7 @@ public final class ClassDecompiler
             outFile += "jav_";
         }
 
-        PrintWriter pw = new PrintWriter(new FileOutputStream(outFile));
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile), "UTF-8"));
         pw.println(csv.getSource());
         pw.flush();
         pw.close();
@@ -56,6 +56,6 @@ public final class ClassDecompiler
 
     public static String getVersion()
     {
-        return "1.1";
+        return "1.2";
     }
 }

@@ -11,26 +11,34 @@ public class Block implements CodeItem
     protected final String NL = System.getProperty("line.separator");
 
     protected List ops;
+    protected long fakeStartByte;
     protected Block parent;
     private MethodSourceView m_info;
     protected String indent = "";
+    protected MethodContext context;
 
     protected Block(Block parent)
     {
-        this.ops = new ArrayList();
-        this.parent = parent;
+        this(parent, new ArrayList());
     }
 
     public Block(Block parent, List ops)
     {
         this.ops = ops;
         this.parent = parent;
+        this.context = parent.context;
     }
 
     public Block(List ops, MethodSourceView m_info)
     {
         this.ops = ops;
         this.m_info = m_info;
+        this.context = m_info.getMethodContext();
+    }
+
+    public MethodContext getMethodContext()
+    {
+        return context;
     }
 
     public void setParent(Block parent)
@@ -61,6 +69,16 @@ public class Block implements CodeItem
     public void setIndent(String indent)
     {
         this.indent = indent;
+    }
+
+    public long getFakeStartByte()
+    {
+        return fakeStartByte;
+    }
+
+    public void setFakeStartByte(long fakeStartByte)
+    {
+        this.fakeStartByte = fakeStartByte;
     }
 
     // Handling block operations by iterating
@@ -135,6 +153,10 @@ public class Block implements CodeItem
         {
             ops.add(pos, subblock);
             subblock.setOperations(subops);
+            if (subops.isEmpty())
+            {
+                subblock.setFakeStartByte(startOp);
+            }
             subblock.setParent(this);
             subblock.postCreate();
         }
@@ -149,6 +171,19 @@ public class Block implements CodeItem
         if (ci instanceof Block)
         {
             ((Block) ci).setParent(this);
+        }
+    }
+
+    public void addOperation(CodeItem ci, long beforeOperation)
+    {
+        for (int i = 0; i < ops.size(); i++)
+        {
+            CodeItem ci0 = (CodeItem) ops.get(i);
+            if (ci0.getStartByte() == beforeOperation)
+            {
+                addOperation(i, ci);
+                return;
+            }
         }
     }
 
@@ -350,6 +385,19 @@ public class Block implements CodeItem
         return ops == null ? 0 : ops.size();
     }
 
+    public int printedSize()
+    {
+        int s = 0;
+        for (int i = 0; i < ops.size(); i++)
+        {
+            if (ops.get(i) instanceof Block || ((OperationView) ops.get(i)).isPrintable())
+            {
+                s++;
+            }
+        }
+        return s;
+    }
+
     public CodeItem getFirstOperation()
     {
         return ops.isEmpty() ? null : (CodeItem) ops.get(0);
@@ -360,8 +408,38 @@ public class Block implements CodeItem
         return ops.isEmpty() ? null : (CodeItem) ops.get(ops.size() - 1);
     }
 
+    public CodeItem getFirstPrintedOperation()
+    {
+        for (int i = 0; i < ops.size(); i++)
+        {
+            CodeItem citem = (CodeItem) ops.get(i);
+            if (citem instanceof Block || ((OperationView) citem).isPrintable())
+            {
+                return citem;
+            }
+        }
+        return null;
+    }
+
+    public CodeItem getLastPrintedOperation()
+    {
+        for (int i = ops.size() - 1; i >= 0; i--)
+        {
+            CodeItem citem = (CodeItem) ops.get(i);
+            if (citem instanceof Block || ((OperationView) citem).isPrintable())
+            {
+                return citem;
+            }
+        }
+        return null;
+    }
+
     public long getStartByte()
     {
+        if (ops == null || ops.isEmpty())
+        {
+            return fakeStartByte;
+        }
         return ((CodeItem) ops.get(0)).getStartByte();
     }
 
@@ -415,8 +493,12 @@ public class Block implements CodeItem
             }
             else
             {
-                String opSource = ((OperationView) citem).source();
-                if (opSource != null) sb.append(indent).append("    ").append(opSource).append(";").append(NL);
+                OperationView ov = (OperationView) citem;
+                if (ov.isPrintable())
+                {
+                    String opSource = ov.source2();
+                    if (opSource != null) sb.append(indent).append("    ").append(opSource).append(";").append(NL);
+                }
             }
         }
         return sb.toString();
@@ -433,7 +515,7 @@ public class Block implements CodeItem
 
     // Local Variables management
 
-    private HashMap lvars = new HashMap();
+    protected HashMap lvars = new HashMap();
 
     public LocalVariable getLocalVariable(int ivar, String type)
     {
@@ -449,8 +531,7 @@ public class Block implements CodeItem
             if (!checkType(type, lv.getType()))
             {
                 // Reuse local variable
-                // TODO renew of local variables currently is not supported
-                //lv = null;
+                lv = null;
             }
         }
         if (lv != null && type != null && LocalVariable.UNKNOWN_TYPE.equals(lv.getType()))
@@ -460,9 +541,14 @@ public class Block implements CodeItem
         if (lv == null)
         {
             lv = new LocalVariable(ivar, type, getMethodView());
-            lvars.put(new Integer(ivar), lv);
+            storeLVInBlock(ivar, lv);
         }
         return lv;
+    }
+
+    protected void storeLVInBlock(int ivar, LocalVariable lv)
+    {
+        lvars.put(new Integer(ivar), lv);
     }
 
     // Checks if fqn can be casted to fqnBase without special cast operator
@@ -496,6 +582,8 @@ public class Block implements CodeItem
 
     public static boolean widePrimitiveConversion(String type, String wideType)
     {
+        if ("boolean".equals(wideType) && "int".equals(type)) return true;
+
         // Widening primitive conversions
         if ("byte".equals(type))
         {
@@ -541,5 +629,10 @@ public class Block implements CodeItem
         {
             throw new IllegalArgumentException("Not a primitive type");
         }
+    }
+
+    public void analyze2(Block block)
+    {
+        analyze(block);
     }
 }

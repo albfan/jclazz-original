@@ -11,18 +11,20 @@ public abstract class OperationView implements CodeItem
 {
     protected Operation operation;
     protected MethodSourceView methodView;
+    protected Ref ref;
+    protected MethodContext context;
+
+    protected Object[] view;
 
     public OperationView(Operation operation, MethodSourceView methodView)
     {
         this.operation = operation;
         this.methodView = methodView;
+        if (methodView != null)
+        {
+            this.context = methodView.getMethodContext();
+        }
     }
-
-    // For Fake Push Operation and Nop operation
-    //protected OperationView(long start_byte)
-    //{
-    //    this.start_byte = start_byte;
-    //}
 
     public int getOpcode()
     {
@@ -43,26 +45,120 @@ public abstract class OperationView implements CodeItem
 
     protected String alias(String fqn)
     {
-        return ImportManager.getInstance().importClass(fqn, methodView.getClazzView());
-    }
-
-    public abstract String source();
-
-    public abstract void analyze(Block block);
-
-    protected String getLVName(LocalVariable lv)
-    {
-        lv.ensure((int) getStartByte());
-        return lv.getName();
-    }
-
-    protected String getLVType(LocalVariable lv)
-    {
-        lv.ensure((int) getStartByte());
-        if (LocalVariable.UNKNOWN_TYPE.equals(lv.getType()))
+        String clazzAlias0 = ImportManager.getInstance().importClass(fqn, methodView.getClazzView());
+        String clazzAlias = clazzAlias0;
+        int ind = clazzAlias.lastIndexOf('$');
+        while (ind != -1)
         {
-            lv.renewType("java.lang.Object");
+            if (startWithNumber(clazzAlias.substring(ind + 1)))
+            {
+                return clazzAlias0;
+            }
+            clazzAlias = clazzAlias.substring(0, ind) + "." + clazzAlias.substring(ind + 1);
+            ind = clazzAlias.indexOf('$');
         }
-        return lv.getType();
+        return clazzAlias;
     }
+
+    private boolean startWithNumber(String str)
+    {
+        char ch = str.charAt(0);
+        return ch == '0' || ch == '1' || ch == '2' || ch == '3' || ch == '4' ||
+                ch == '5' || ch == '6' || ch == '7' || ch == '8' || ch == '9';
+    }
+
+    //public abstract String source();
+
+    protected void buildView()
+    {
+    }
+
+    public String source2()
+    {
+        buildView();
+        if (view != null)
+        {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < view.length; i++)
+            {
+                Object subItem = view[i];
+                if (subItem instanceof String)
+                {
+                    sb.append((String) subItem);
+                }
+                else if (subItem instanceof LocalVariable.LVView)
+                {
+                    LocalVariable.LVView lvView = (LocalVariable.LVView) subItem;
+                    if (LocalVariable.UNKNOWN_TYPE.equals(lvView.getType()))
+                    {
+                        lvView.renew("java.lang.Object");
+                    }
+                    String importedType = alias(lvView.getType());
+                    lvView.setAliasedType(importedType);
+                    sb.append(lvView.getView());
+                    lvView.setPrinted();
+                }
+                else
+                {
+                    OperationView ov = (OperationView) subItem;
+                    sb.append(ov.source2());
+                }
+            }
+            return sb.toString();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * @deprecated 
+     */
+    public String source3()
+    {
+        buildView();
+        if (view != null)
+        {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < view.length; i++)
+            {
+                Object subItem = view[i];
+                if (subItem instanceof String)
+                {
+                    sb.append((String) subItem);
+                }
+                else if (subItem instanceof LocalVariable.LVView)
+                {
+                    LocalVariable.LVView lvView = (LocalVariable.LVView) subItem;
+                    sb.append(lvView.getView());
+
+                }
+                else
+                {
+                    OperationView ov = (OperationView) subItem;
+                    sb.append(ov.source3());
+                }
+            }
+            return sb.toString();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public Object[] getView()
+    {
+        return view;
+    }
+
+    public boolean isPrintable()
+    {
+        return true;
+    }
+
+    //public abstract void analyze(Block block);
+
+    public abstract void analyze2(Block block);
 }

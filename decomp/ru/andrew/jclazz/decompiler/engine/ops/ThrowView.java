@@ -25,7 +25,16 @@ public class ThrowView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView prev = block.removePriorPushOperation();
         thrownValue = prev.source();
+         */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView prev = context.pop();
+        view = new Object[]{"throw ", prev};
+        context.push(this);
     }
 }

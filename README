@@ -7,7 +7,7 @@ jclazz - a set of utilities for manipulating Java class files. Further this set 
  * Java Class Info - produces all information about Java class in text mode
  * Java Decompiler - produces source file from Java class that is nearly the
                            same as it was written originally
-Version 1.1 is tested on sun compiler (javac) supplied with JDK 1.4 and 1.6.
+Version 1.2 is tested on sun compiler (javac) supplied with JDK 1.4 and 1.6.
 A set of supported compilers will be extended further with Jikes, EJC, GCJ an others.
 
 
@@ -16,6 +16,7 @@ A set of supported compilers will be extended further with Jikes, EJC, GCJ an ot
 As jclazz written in interpreted language (Java), it requires installed JRE or JDK
 on your machine. Required version - 1.4 and higher.
 To use provided scripts for running applications you need JAVA_HOME environment set.
+For windows environment native executable is supplied.
 
 
 3. Invokation
@@ -25,6 +26,8 @@ GUI interface is also available.
 To run Java Class info execute: java -classpath ./jclazz-core.jar ru.andrew.jclazz.core.infoj.InfoJ 
 To run Java Decompiler execute: java -classpath ./jclazz-core.jar;./jclazz-decomp.jar ru.andrew.jclazz.decompiler.ClassDecompiler
 To run jclazz GUI execute: java -jar ./jclazz-gui.jar or simply double click on jar file jclazz-gui.jar
+
+For windows a native exeutable is provided for GUI.
 
 4. Reporting bugs
 

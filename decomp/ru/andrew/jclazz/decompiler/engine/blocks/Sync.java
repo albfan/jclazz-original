@@ -7,9 +7,9 @@ import java.util.*;
 
 public class Sync extends Block
 {
-    private String syncObject;
+    private OperationView syncObject;
 
-    public Sync(String syncObject, Block parent, List ops)
+    public Sync(OperationView syncObject, Block parent, List ops)
     {
         super(parent, ops);
         this.syncObject = syncObject;
@@ -18,21 +18,25 @@ public class Sync extends Block
         CodeItem monitorExit = getLastOperation();
         if (!(monitorExit instanceof MonitorExitView))
         {
-            throw new RuntimeException("monitorexit opcode's not found in Sync block");
+            // TODO in some cases it can be consumed by nested blocks
+            //throw new RuntimeException("monitorexit opcode's not found in Sync block");
         }
-        CodeItem push = getOperationPriorTo(monitorExit.getStartByte());
-        if (!(push instanceof OperationView) || !((OperationView) push).isPush())
+        else
         {
-            throw new RuntimeException("push opcode for monitorexit's not found in Sync block");
+            CodeItem push = getOperationPriorTo(monitorExit.getStartByte());
+            if (!(push instanceof OperationView) || !((OperationView) push).isPush())
+            {
+                throw new RuntimeException("push opcode for monitorexit's not found in Sync block");
+            }
+            removeOperation(monitorExit.getStartByte());
+            removeOperation(push.getStartByte());
         }
-        removeOperation(monitorExit.getStartByte());
-        removeOperation(push.getStartByte());
     }
 
     public String getSource()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(indent).append("synchronized (").append(syncObject).append(")").append(NL).append(super.getSource());
+        sb.append(indent).append("synchronized (").append(syncObject.source2()).append(")").append(NL).append(super.getSource());
         return sb.toString();
     }
 }

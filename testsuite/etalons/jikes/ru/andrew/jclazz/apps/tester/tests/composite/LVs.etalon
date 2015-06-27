@@ -60,6 +60,34 @@ public class LVs
         }
     }
     
+    public void test5() throws IOException
+    {
+        BufferedReader bufferedreader_1 = new BufferedReader(new InputStreamReader(new FileInputStream("path")));
+        String string_1 = null;
+        while ((string_1 = bufferedreader_1.readLine()).equals("456"))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(string_1).toString());
+        }
+    }
+    
+    public void test6(boolean boolean_1) throws IOException
+    {
+        File file_1 = null;
+        while ((boolean_1) && ((file_1 = new File("path")).isDirectory()))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(file_1).toString());
+        }
+    }
+    
+    public void test7(boolean boolean_1) throws IOException
+    {
+        int int_1 = 0;
+        while ((boolean_1) && ((int_1 = new Integer("123").intValue()) > 10))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(int_1).toString());
+        }
+    }
+    
     public LVs()
     {
     }

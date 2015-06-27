@@ -1,15 +1,19 @@
 package ru.andrew.jclazz.decompiler.engine.blockdetectors;
 
 import ru.andrew.jclazz.core.attributes.*;
+import ru.andrew.jclazz.core.attributes.Code.ExceptionTable;
 import ru.andrew.jclazz.decompiler.engine.blocks.*;
 import ru.andrew.jclazz.decompiler.engine.*;
 
 import java.util.*;
+import ru.andrew.jclazz.decompiler.engine.ops.GoToView;
 
 public class TryDetector implements Detector
 {
     private List trys = new ArrayList();
     private List fakeFinallies = new ArrayList();
+
+    private List suspiciousFinallies = new ArrayList();
 
     public TryDetector(Code.ExceptionTable[] exc_table)
     {
@@ -28,14 +32,43 @@ public class TryDetector implements Detector
                 }
             }
 
+            // Join splitted try-catch blocks
+            for (Iterator fit = trys.iterator(); fit.hasNext();)
+            {
+                Code.ExceptionTable cet = (Code.ExceptionTable) fit.next();
+                for (int k = 0; k < trys.size(); k++)
+                {
+                    Code.ExceptionTable etn = (ExceptionTable) trys.get(k);
+                    if (cet.start_pc == etn.start_pc && cet.end_pc == etn.end_pc && cet.handler_pc == etn.handler_pc) continue;
+                    if (etn.handler_pc == cet.handler_pc && cet.start_pc > etn.end_pc)
+                    {
+                        // Removing etn as it is simply continue of cet
+                        suspiciousFinallies.add(new int[]{etn.end_pc, cet.start_pc});
+                        fit.remove();
+                        etn.end_pc = cet.end_pc;
+                        break;
+                    }
+                }
+            }
+
             // sorting try-catches
             Collections.sort(trys, new Comparator()
             {
                 public int compare(Object o1, Object o2)
                 {
-                    int comparison = ((Code.ExceptionTable) o1).end_pc - ((Code.ExceptionTable) o2).end_pc;
-                    if (comparison == 0) comparison = ((Code.ExceptionTable) o1).handler_pc - ((Code.ExceptionTable) o2).handler_pc;
-                    return comparison;
+                    Code.ExceptionTable cet1 = (Code.ExceptionTable) o1;
+                    Code.ExceptionTable cet2 = (Code.ExceptionTable) o2;
+
+                    if (cet1.end_pc < cet2.start_pc)
+                    {
+                        int comparison = cet1.end_pc - cet2.end_pc;
+                        if (comparison == 0) comparison = cet1.handler_pc - cet2.handler_pc;
+                        return comparison;
+                    }
+                    else
+                    {
+                        return cet1.start_pc - cet2.start_pc;
+                    }
                 }
             });
         }
@@ -85,6 +118,7 @@ public class TryDetector implements Detector
 
             Try _try = new Try(et.start_pc, et.end_pc, block);
             _try.setFinallyException(fakeFinallies);
+            _try.setSuspiciousFinallies(suspiciousFinallies);
             block.createSubBlock(et.start_pc, gop.getStartByte() + 1, _try);
             it.remove();
 
@@ -107,8 +141,22 @@ public class TryDetector implements Detector
                 it.remove();
             }
             // Processing last catch block
-            block.createSubBlock(et.handler_pc, _try.getRetrieveOperation(), _catch);
+            long retr_pc = _try.getRetrieveOperation();
+            for (Iterator cit = _try.getCatchBlocks().iterator(); cit.hasNext();)
+            {
+                Catch __catch = (Catch) cit.next();
+                if (__catch.getRetrievePc() < retr_pc)
+                {
+                    retr_pc = __catch.getRetrievePc();
+                }
+            }
+            if (retr_pc == Integer.MAX_VALUE && block.getLastOperation() instanceof GoToView)
+            {
+                retr_pc = block.getLastOperation().getStartByte();
+            }
+            block.createSubBlock(et.handler_pc, retr_pc, _catch);
             _try.addCatchBlock(_catch);
+            _try.removeSuspiciousInlinedFinallyBlocks();
         }
         while (hasMoreTries);
     }

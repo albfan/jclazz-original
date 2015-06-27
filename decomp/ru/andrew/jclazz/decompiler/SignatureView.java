@@ -189,17 +189,27 @@ public class SignatureView
         int addition = m_info.getMethod().isStatic() ? 0 : 1;
         if (m_info.getMethod().isInit() && clazz.getClazz().isEnumeration()) addition += 2;
         TypeSignature[] paramTypes = sign.getParamTypes();
+        int lvi = 0;
         for (int i = 0; i < paramTypes.length - 1; i++)
         {
             String genType = asString(paramTypes[i], clazz);
-            LocalVariable lv = m_info.getTopBlock().getLocalVariable(i + addition, genType.indexOf('<') != -1 ? genType.substring(0, genType.indexOf('<')) : genType);
+            String rawgenType = genType.indexOf('<') != -1 ? genType.substring(0, genType.indexOf('<')) : genType;
+            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, rawgenType);
             lv.setPrinted(true);
+            if ("long".equals(rawgenType) || "double".equals(rawgenType))
+            {
+                lvi += 2;
+            }
+            else
+            {
+                lvi++;
+            }
             sb.append(genType).append(" ").append(lv.getName()).append(", ");
         }
         if (paramTypes.length > 0)
         {
             String lp = asString(paramTypes[paramTypes.length - 1], clazz);
-            LocalVariable lv = m_info.getTopBlock().getLocalVariable(paramTypes.length - 1 + addition, lp.indexOf('<') != -1 ? lp.substring(0, lp.indexOf('<')) : lp);
+            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, lp.indexOf('<') != -1 ? lp.substring(0, lp.indexOf('<')) : lp);
             lv.setPrinted(true);
 
             if (!m_info.getMethod().isVarargs())

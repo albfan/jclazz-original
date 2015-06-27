@@ -1,13 +1,9 @@
-Changes in jclazz 1.1
+Changes in jclazz 1.2.0
 
-#1 Feature: Graphical User Interface is added
+Full JVM operations support.
+Now all operations including different dups and swap opcodes are supported.
 
-#2 Feature: Support line numbers debug information
-
-#3 Feature: Support local variable debug information
-
-#4 Bug Fix: Construction this.var = var was decompiled as var = var, - Fixed
-
-#5 Feature: Support finally blocks (jsr-ret constructions) for Java 1.5 and prior versions
-
-#6 Feature: Java 1.5 Enumerations support
+A plenty of minor and critical bugfixes for decompiler for almost all Java constructions:
+loops, try-catch-finally, synchronized, condition blocks;
+Changes in almost all operations.
+Important bugfix for encoding support.

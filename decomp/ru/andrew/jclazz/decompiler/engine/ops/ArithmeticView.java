@@ -34,6 +34,7 @@ public class ArithmeticView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         int opcode = getOpcode();
         if (opcode >= 116 && opcode <= 119) // neg
         {
@@ -47,5 +48,29 @@ public class ArithmeticView extends OperationView
             OperationView pushVal2 = block.removePriorPushOperation();
             value2 = pushVal2.source();
         }
+         * */
+    }
+    
+    public void analyze2(Block block)
+    {
+        int opcode = getOpcode();
+        if (opcode >= 116 && opcode <= 119) // neg
+        {
+            OperationView prev = context.pop();
+            view = new Object[]{"-", prev};
+            context.push(this);
+        }
+        else
+        {
+            OperationView prev1 = context.pop();
+            OperationView prev2 = context.pop();
+            view = new Object[]{"(", prev2, " " + ((Arithmetic) operation).getOperation() + " ", prev1, ")"};
+            context.push(this);
+        }
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

@@ -44,8 +44,17 @@ public class FieldDescriptor
             case 'L':
                 String type = descriptor.substring(currentPos + 1, descriptor.length() - 1);
                 type = type.replace('/', '.');
-                _package = type.substring(0, type.lastIndexOf('.'));
-                _class = type.substring(type.lastIndexOf('.') + 1);
+                int ind = type.lastIndexOf('.');
+                if (ind >= 0)
+                {
+                    _package = type.substring(0, ind);
+                    _class = type.substring(ind + 1);
+                }
+                else
+                {
+                    _package = "";
+                    _class = type;
+                }
                 break;
             case 'V':
                 baseType = "void";
@@ -83,7 +92,7 @@ public class FieldDescriptor
     public String getFQN()
     {
         StringBuffer sb = new StringBuffer();
-        if (_package != null)
+        if (_package != null && !"".equals(_package))
         {
             sb.append(_package).append(".").append(_class);
         }

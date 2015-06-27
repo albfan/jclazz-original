@@ -25,7 +25,21 @@ public class TypeConversionView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView prev = block.removePriorPushOperation();
         convValue = prev.source();
+         */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView prev = context.pop();
+        view = new Object[]{"(" + ((TypeConversion) operation).getCastType() + ") ", prev};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

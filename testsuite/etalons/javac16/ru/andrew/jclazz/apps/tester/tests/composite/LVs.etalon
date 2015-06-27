@@ -1,6 +1,7 @@
 package ru.andrew.jclazz.apps.tester.tests.composite;
 
 import java.util.*;
+import java.io.*;
 
 public class LVs
 {
@@ -15,7 +16,7 @@ public class LVs
         try
         {
             int_1 = 7;
-            int_1 = int_1 & 4;
+            int_1 = (int_1 & 4);
         }
         catch (Exception exception_1)
         {
@@ -29,7 +30,7 @@ public class LVs
         try
         {
             int_1 = 7;
-            int_1 = int_1 & 4;
+            int_1 = (int_1 & 4);
         }
         catch (Exception exception_1)
         {
@@ -60,7 +61,35 @@ public class LVs
             System.out.println("CYCLE");
             hashset_1 = new LinkedHashSet();
             System.out.println(new StringBuilder().append("i = ").append(int_1).toString());
-            int_1 = (char) int_1 + 1;
+            int_1 = (char) (int_1 + 1);
+        }
+    }
+    
+    public void test5() throws IOException
+    {
+        BufferedReader bufferedreader_1 = new BufferedReader(new InputStreamReader(new FileInputStream("path")));
+        String string_1 = null;
+        while ((string_1 = bufferedreader_1.readLine()).equals("456"))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(string_1).toString());
+        }
+    }
+    
+    public void test6(boolean boolean_1) throws IOException
+    {
+        File file_1 = null;
+        while ((boolean_1) && ((file_1 = new File("path")).isDirectory()))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(file_1).toString());
+        }
+    }
+    
+    public void test7(boolean boolean_1) throws IOException
+    {
+        int int_1 = 0;
+        while ((boolean_1) && ((int_1 = new Integer("123").intValue()) > 10))
+        {
+            System.out.println(new StringBuilder().append(" = ").append(int_1).toString());
         }
     }
     

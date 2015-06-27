@@ -9,11 +9,18 @@ public class PushConstView extends OperationView
     public PushConstView(Operation operation, MethodSourceView methodView)
     {
         super(operation, methodView);
+
+        view = new Object[]{source()};
     }
 
     public String getPushType()
     {
         return ((PushConst) operation).getPushType();
+    }
+
+    public String getPushValue()
+    {
+        return ((PushConst) operation).getPushValue();
     }
 
     public String source()
@@ -23,5 +30,15 @@ public class PushConstView extends OperationView
     
     public void analyze(Block block)
     {
+    }
+
+    public void analyze2(Block block)
+    {
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

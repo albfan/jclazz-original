@@ -26,16 +26,20 @@ public class EnumClinitMethodSourceView extends MethodSourceView
                 if ("$VALUES".equals(((PutFieldView) citem).getFieldName()))
                 {
                     it.remove();
-                    break;
+                    CodeItem returnItem = (CodeItem) it.next();
+                    if (returnItem instanceof ReturnView && !it.hasNext())
+                    {
+                        return null;
+                    }
                 }
                 it.remove();
             }
         }
-        if (getTopBlock().getOperations().size() == 1 &&
-                getTopBlock().getOperations().get(0) instanceof ReturnView) 
-        {
-            return null;
-        }
+//        if (getTopBlock().getOperations().size() == 1 &&
+//                getTopBlock().getOperations().get(0) instanceof ReturnView)
+//        {
+//            return null;
+//        }
 
         return super.codeBlockSource(block);
     }

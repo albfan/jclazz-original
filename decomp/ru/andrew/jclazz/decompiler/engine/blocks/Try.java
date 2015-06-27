@@ -13,6 +13,8 @@ public class Try extends Block
     private List catchBlocks = new ArrayList();
     private List finallyExceptions = new ArrayList();
 
+    private List suspiciousFinallies = null;
+
     private int goto_cmd = -1;
 
     private long start_pc;
@@ -23,6 +25,11 @@ public class Try extends Block
         super(parent);
         this.start_pc = start_pc;
         this.end_pc = end_pc;
+    }
+
+    public void setSuspiciousFinallies(List suspiciousFinallies)
+    {
+        this.suspiciousFinallies = suspiciousFinallies;
     }
 
     public void addCatchBlock(Catch _catch)
@@ -63,13 +70,48 @@ public class Try extends Block
     public void postCreate()
     {
         CodeItem gop = getLastOperation();
-        if (gop instanceof GoToView)
+        if (gop instanceof GoToView && ((GoToView) gop).isForwardBranch())
         {
             goto_cmd = (int) ((GoToView) gop).getTargetOperation();
         }
         else
         {
             goto_cmd = Integer.MAX_VALUE;
+        }
+    }
+
+    public void removeSuspiciousInlinedFinallyBlocks()
+    {
+        // Checking inlined finally block in try block
+        if (suspiciousFinallies != null && !suspiciousFinallies.isEmpty())
+        {
+            for (Iterator sif = suspiciousFinallies.iterator(); sif.hasNext();)
+            {
+                int[] gap = (int[]) sif.next();
+                if (gap[0] > start_pc && gap[1] < end_pc)
+                {
+                    CodeItem retItem = getOperationPriorTo(gap[1]);
+                    if (retItem instanceof ReturnView)
+                    {
+                        boolean isFinallyExists = false;
+                        for (int k = 0; k < catchBlocks.size(); k++)
+                        {
+                            if (((Catch) catchBlocks.get(k)).isFinally())
+                            {
+                                isFinallyExists = true;
+                                break;
+                            }
+                        }
+                        if (isFinallyExists)
+                        {
+                            for (long f_byte = gap[0]; f_byte < retItem.getStartByte(); f_byte++)
+                            {
+                                removeOperation(f_byte);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

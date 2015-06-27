@@ -20,7 +20,7 @@ public class GetField extends PushOperation
     {
         super(opcode, start_byte, code);
 
-        CONSTANT_Fieldref f_info = (CONSTANT_Fieldref) code.getClazz().getConstant_pool()[(params[0]) | params[1]];
+        CONSTANT_Fieldref f_info = (CONSTANT_Fieldref) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
         name = f_info.getName();
         fieldType = f_info.getFieldDescriptor().getFQN();
         if (opcode == 178)   // getstatic

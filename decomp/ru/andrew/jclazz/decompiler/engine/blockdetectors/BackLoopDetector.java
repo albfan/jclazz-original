@@ -15,8 +15,8 @@ public class BackLoopDetector implements Detector
         {
             CodeItem citem = block.next();
             if (!(citem instanceof IfView)) continue;
-            IfView ifCond = (IfView) citem;
 
+            IfView ifCond = (IfView) citem;
             if (!ifCond.isForwardBranch())
             {
                 createBackLoop(block, ifCond);
@@ -39,7 +39,24 @@ public class BackLoopDetector implements Detector
 
         Loop loop = new Loop(block, true);
         loop.setPrintPrecondition(printCondition);
-        block.createSubBlock(ifCond.getTargetOperation(), ifCond.getStartByte(), loop);
+
+        //try-catch inside loop with break in try block results in loop block inside catch
+        boolean isLoopCreated = false;
+        if (block instanceof Catch)
+        {
+            Try tryBlock = (Try) block.getParent().getOperationPriorTo(block.getStartByte());
+            if (tryBlock.getStartByte() >= ifCond.getTargetOperation())
+            {
+                block.getParent().createSubBlock(ifCond.getTargetOperation(), ifCond.getStartByte(), loop);
+                isLoopCreated = true;
+            }
+        }
+
+        if (!isLoopCreated)
+        {
+            block.createSubBlock(ifCond.getTargetOperation(), ifCond.getStartByte(), loop);
+        }
+
         List firstConditions = block.createSubBlock(ifCond.getStartByte(), ifCond.getStartByte() + 1, null);
         loop.addAndConditions(firstConditions); // TODO smth with multiple conditions
     }

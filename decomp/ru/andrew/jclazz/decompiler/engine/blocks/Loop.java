@@ -8,6 +8,7 @@ import java.util.*;
 public class Loop extends Block
 {
     private List andConditions = new ArrayList();
+    private boolean alwaysTrueCondition = false;
 
     private boolean printPrecondition;   //WHILE(){} vs DO{}WHILE()
     private boolean isBackLoop;          // If conditions at the end of block then true
@@ -35,13 +36,21 @@ public class Loop extends Block
         return printPrecondition;
     }
 
+    public boolean isAlwaysTrueCondition() {
+        return alwaysTrueCondition;
+    }
+
+    public void setAlwaysTrueCondition(boolean alwaysTrueCondition) {
+        this.alwaysTrueCondition = alwaysTrueCondition;
+    }
+
     public void postCreate()
     {
         // Remove last goto
         if (!isBackLoop && (getLastOperation() instanceof GoToView))
         {
             // TODO bug for inner loops
-            //GoTo lastGoto = (GoTo) removeLastOperation();
+            //GoToView lastGoto = (GoToView) removeLastOperation();
             GoToView lastGoto = (GoToView) getLastOperation();
             lastGoto.setLoop(this);
             begin_pc = lastGoto.getTargetOperation();
@@ -125,7 +134,7 @@ public class Loop extends Block
                 if (citem.getStartByte() >= incPartStartByte)
                 {
                     // Suppose there are no Blocks
-                    String opStr = ((OperationView) citem).source();
+                    String opStr = ((OperationView) citem).source2();
                     if (opStr != null && !"".equals(opStr)) sb.append(" " + opStr);
                 }
             }
@@ -141,23 +150,30 @@ public class Loop extends Block
             sb.append(indent).append("do").append(NL).append(super.getSource());
         }
         sb.append(indent).append("while ");
-        if (andConditions.size() > 1) sb.append("(");
-        for (Iterator i = andConditions.iterator(); i.hasNext();)
+        if (alwaysTrueCondition)
         {
-            List orConditions = (List) i.next();
-            if (orConditions.size() > 1) sb.append("(");
-            for (Iterator j = orConditions.iterator(); j.hasNext();)
-            {
-                Condition cond = (Condition) j.next();
-                if (j.hasNext() && orConditions.size() > 1) cond.setNeedReverseOperation(false);
-                sb.append("(" + cond.str() + ")");
-                if (j.hasNext()) sb.append(isBackLoop ? " && " : " || ");
-            }
-            if (orConditions.size() > 1) sb.append(")");
-            if (i.hasNext()) sb.append(isBackLoop ? " || " : " && ");
+            sb.append("(true)");
         }
-        if (andConditions.size() > 1) sb.append(")");
-        sb.append(printPrecondition ? "" : ";");
+        else
+        {
+            if (andConditions.size() > 1) sb.append("(");
+            for (Iterator i = andConditions.iterator(); i.hasNext();)
+            {
+                List orConditions = (List) i.next();
+                if (orConditions.size() > 1) sb.append("(");
+                for (Iterator j = orConditions.iterator(); j.hasNext();)
+                {
+                    Condition cond = (Condition) j.next();
+                    if (j.hasNext() && orConditions.size() > 1) cond.setNeedReverseOperation(false);
+                    sb.append("(" + cond.str() + ")");
+                    if (j.hasNext()) sb.append(isBackLoop ? " && " : " || ");
+                }
+                if (orConditions.size() > 1) sb.append(")");
+                if (i.hasNext()) sb.append(isBackLoop ? " || " : " && ");
+            }
+            if (andConditions.size() > 1) sb.append(")");
+            sb.append(printPrecondition ? "" : ";");
+        }
         sb.append(NL);
         if (printPrecondition)
         {
@@ -166,11 +182,11 @@ public class Loop extends Block
         return sb.toString();
     }
 
-    public void postanalyze(Block block)
+    public void preanalyze(Block block)
     {
         if (isBackLoop)
         {
-            this.seekEnd();
+            return;
         }
 
         // All other conditions are analyzed with themselves
@@ -180,7 +196,27 @@ public class Loop extends Block
             for (Iterator j = orConditions.iterator(); j.hasNext();)
             {
                 Condition cond = (Condition) j.next();
-                cond.analyze(isBackLoop ? this : block);
+                cond.analyze(block);
+            }
+        }
+    }
+
+    public void postanalyze(Block block)
+    {
+        if (!isBackLoop)
+        {
+            return;
+        }
+
+        this.seekEnd();
+        // All other conditions are analyzed with themselves
+        for (Iterator i = andConditions.iterator(); i.hasNext();)
+        {
+            List orConditions = (List) i.next();
+            for (Iterator j = orConditions.iterator(); j.hasNext();)
+            {
+                Condition cond = (Condition) j.next();
+                cond.analyze(this);
             }
         }
     }

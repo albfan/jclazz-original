@@ -7,4 +7,6 @@ public interface CodeItem
     public long getStartByte();
 
     public void analyze(Block block);
+
+    public void analyze2(Block block);
 }

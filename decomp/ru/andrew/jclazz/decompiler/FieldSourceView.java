@@ -18,6 +18,11 @@ public class FieldSourceView extends SourceView
 
     protected void parse()
     {
+        if (fieldInfo.isSynthetic() && fieldInfo.getName().startsWith("$SwitchMap$"))
+        {
+            print("static int[] switchMap;");
+        }
+
         if (fieldInfo.isSynthetic()) return;
 
         if (fieldInfo.isDeprecated())

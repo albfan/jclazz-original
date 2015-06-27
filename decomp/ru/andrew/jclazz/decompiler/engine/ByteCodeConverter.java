@@ -1,5 +1,6 @@
 package ru.andrew.jclazz.decompiler.engine;
 
+import java.lang.reflect.Constructor;
 import ru.andrew.jclazz.core.code.ops.*;
 import ru.andrew.jclazz.decompiler.engine.blocks.*;
 import ru.andrew.jclazz.decompiler.engine.blockdetectors.*;
@@ -11,16 +12,26 @@ public class ByteCodeConverter
 {
     public static Block detectBlocks(Block topBlock, MethodSourceView msv)
     {
+        detectBlocks(topBlock, new TryDetector(msv.getMethod().getCodeBlock().getExceptionTable()));
+
+        detectBlocks(topBlock, new SwitchDetector());
+
         detectBlocks(topBlock, new BackLoopDetector());
         detectBlocks(topBlock, new LoopDetector());
 
-        detectBlocks(topBlock, new TryDetector(msv.getMethod().getCodeBlock().getExceptionTable()));
-        detectBlocks(topBlock, new SwitchDetector());
+        
+        
 
+        detectBlocks(topBlock, new IfDetector());
+
+        detectBlocks(topBlock, new UnconditionalBackLoopDetector());
+
+        // Pass 2
         detectBlocks(topBlock, new IfDetector());
         return topBlock;
     }
 
+    private static HashMap op2constructor = new HashMap();
     public static Block convertToViewOperations(List operations, MethodSourceView msv)
     {
         ArrayList list = new ArrayList(operations.size());
@@ -28,17 +39,35 @@ public class ByteCodeConverter
         {
             Operation op = (Operation) i.next();
             String className = op.getClass().getName();
-            className = className.substring(className.lastIndexOf('.') + 1);
-            String newName = "ru.andrew.jclazz.decompiler.engine.ops." + className + "View";
+            Constructor constructor = (Constructor) op2constructor.get(className);
+            if (constructor == null)
+            {
+                String shortClassName = className.substring(className.lastIndexOf('.') + 1);
+                String newName = "ru.andrew.jclazz.decompiler.engine.ops." + shortClassName + "View";
+                try
+                {
+                    constructor = Class.forName(newName).getConstructor(new Class[]{Operation.class, MethodSourceView.class});
+                    op2constructor.put(className, constructor);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    throw new RuntimeException(e);
+                }
+                catch (NoSuchMethodException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+            CodeItem codeItem;
             try
             {
-                CodeItem codeItem = (CodeItem) Class.forName(newName).getConstructor(new Class[]{Operation.class, MethodSourceView.class}).newInstance(new Object[]{op, msv});
-                list.add(codeItem);
+                codeItem = (CodeItem) constructor.newInstance(new Object[]{op, msv});
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new RuntimeException(e);
+                throw new RuntimeException(ex);
             }
+            list.add(codeItem);
         }
         return new Block(list, msv);
     }
@@ -63,7 +92,8 @@ public class ByteCodeConverter
     {
         detectBlocks(topBlock, msv);
         postProcess(topBlock);
-        analyze(topBlock);
+        //analyze(topBlock);
+        analyze2(topBlock);
         detectCompoundBackLoops(topBlock, new BackLoopDetector());
         return topBlock;
     }
@@ -94,8 +124,35 @@ public class ByteCodeConverter
 
             if (citem instanceof Block)
             {
+                if (citem instanceof Loop)
+                {
+                    ((Loop) citem).preanalyze(block);
+                }
                 analyze((Block) citem);
+                if (citem instanceof Loop)
+                {
+                    ((Loop) citem).postanalyze(block);
+                }
+            }
+        }
+    }
 
+    private static void analyze2(Block block)
+    {
+        if (block == null) return;
+        block.reset();
+        while (block.hasMoreOperations())
+        {
+            CodeItem citem = block.next();
+            citem.analyze2(block);
+
+            if (citem instanceof Block)
+            {
+                if (citem instanceof Loop)
+                {
+                    ((Loop) citem).preanalyze(block);
+                }
+                analyze2((Block) citem);
                 if (citem instanceof Loop)
                 {
                     ((Loop) citem).postanalyze(block);

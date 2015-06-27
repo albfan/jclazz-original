@@ -44,6 +44,7 @@ public class ClazzSourceView extends SourceView
         }
 
         if (clazz.isPublic()) pw.print("public ");
+        if (clazz.isStatic()) pw.print("static ");
         if (clazz.isFinal() && !clazz.isEnumeration()) pw.print("final ");
         if (clazz.isAbstract() && !clazz.isInterface()) pw.print("abstract ");
         if (clazz.isInterface())
@@ -64,6 +65,17 @@ public class ClazzSourceView extends SourceView
         if (isInnerClass())
         {
             clazzName = clazzName.substring(clazzName.lastIndexOf('$') + 1);
+
+            // Search for field starting with $SwitchMap$
+            FieldInfo[] fields = clazz.getFields();
+            for (int i = 0; i < fields.length; i++)
+            {
+                if (fields[i].getName().startsWith("$SwitchMap$"))
+                {
+                    clazzName = "SM_" + clazzName;
+                    break;
+                }
+            }
         }
         pw.print(clazzName);
 
@@ -112,7 +124,15 @@ public class ClazzSourceView extends SourceView
         }
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintWriter pw = new PrintWriter(baos);
+        PrintWriter pw;
+        try
+        {
+            pw = new PrintWriter(new OutputStreamWriter(baos, "UTF-16"));
+        }
+        catch (UnsupportedEncodingException ex)
+        {
+            throw new RuntimeException(ex);
+        }
 
         printClassSignature(pw);
 
@@ -134,6 +154,11 @@ public class ClazzSourceView extends SourceView
                     innerClassViews[i].getClazzView() instanceof AnonymousClazzSourceView) continue;
                 
                 pw.flush();
+
+                if (!innerClassViews[i].getInnerFQN().startsWith(getClazz().getThisClassInfo().getFullyQualifiedName()))
+                {
+                    continue;
+                }
 
                 if (getInnerClazzView(innerClassViews[i].getInnerFQN()) != null)
                 {
@@ -163,9 +188,9 @@ public class ClazzSourceView extends SourceView
 
         printPackageAndImports();
         pw.flush();
-        print(baos.toString());
         try
         {
+            print(baos.toString("UTF-16"));
             baos.close();
         }
         catch (IOException e)
@@ -202,12 +227,14 @@ public class ClazzSourceView extends SourceView
         methodViews = new MethodSourceView[clazz.getMethods().length];
 
         // First load synthetic methods
+        int methodsNum = 0;
         for (int i = 0; i < clazz.getMethods().length; i++)
         {
             if (!clazz.getMethods()[i].isSynthetic()) continue;
 
             MethodSourceView msv = createMethodView(clazz.getMethods()[i]);
-            methodViews[i] = msv;
+            methodViews[methodsNum] = msv;
+            methodsNum++;
 
             printMethod(pw, msv);
         }
@@ -217,7 +244,8 @@ public class ClazzSourceView extends SourceView
         {
             if (clazz.getMethods()[i].isSynthetic()) continue;
             MethodSourceView msv = createMethodView(clazz.getMethods()[i]);
-            methodViews[i] = msv;
+            methodViews[methodsNum] = msv;
+            methodsNum++;
 
             printMethod(pw, msv);
         }
@@ -350,7 +378,7 @@ public class ClazzSourceView extends SourceView
         return outerClazz;
     }
 
-    public MethodSourceView getFieldNameForSyntheticMethod(String methodName)
+    public MethodSourceView getSyntheticMethodForIC(String methodName)
     {
         for (int i = 0; i < methodViews.length; i++)
         {
@@ -359,7 +387,7 @@ public class ClazzSourceView extends SourceView
 
             if (methodViews[i].getMethod().getName().equals(methodName))
             {
-                if (methodViews[i].isGetFieldForIC())
+                if (methodViews[i].isForIC())
                 {
                     return methodViews[i];
                 }

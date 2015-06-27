@@ -114,6 +114,15 @@ public class Clazz
             else if (attributes[i] instanceof InnerClasses) 
             {
                 innerClasses = ((InnerClasses) attributes[i]).getInnerClasses();
+
+                // Actualizing access flags for inner classes
+                for (int k = 0; k < innerClasses.length; k++)
+                {
+                    if (getThisClassInfo().getFullyQualifiedName().equals(innerClasses[k].getInnerClass().getFullyQualifiedName()))
+                    {
+                        access_flags = innerClasses[k].getInnerClassAccessFlags();
+                    }
+                }
             }
             else
             {
@@ -339,6 +348,11 @@ public class Clazz
     public boolean isSynthetic()
     {
         return (access_flags & ACC_SYNTHETIC) > 0 || isSynthetic;
+    }
+
+    public boolean isStatic()
+    {
+        return (access_flags & ACC_STATIC) > 0;
     }
 
     public boolean isEnumeration()

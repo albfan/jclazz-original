@@ -24,4 +24,8 @@ public class RetView extends OperationView
     public void analyze(Block block)
     {
     }
+
+    public void analyze2(Block block)
+    {
+    }
 }

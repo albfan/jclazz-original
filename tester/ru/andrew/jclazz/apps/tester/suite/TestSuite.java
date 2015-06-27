@@ -152,11 +152,11 @@ public class TestSuite
         {
             if (compile_1_result == -13)
             {
-                logError(source, compiler, "Compile PASS-1 terminated by timeout");
+                logError(source, compiler, "Compile source terminated by timeout");
             }
             else
             {
-                logError(source, compiler, "Compile PASS-1 error: " + wrapper.getError());
+                logError(source, compiler, "Compile source error: " + wrapper.getError());
             }
             return;
         }
@@ -171,31 +171,17 @@ public class TestSuite
         }
         catch (ClazzException ce)
         {
-            logError(source, compiler, "Decompile PASS-1 clazz error: " + ce.getMessage());
+            logError(source, compiler, "Decompile class error: " + ce.getMessage());
             return;
         }
         catch (Exception ce)
         {
-            logError(source, compiler, "Decompile PASS-1 unexpected error", ce);
+            logError(source, compiler, "Decompile unexpected error", ce);
             return;
         }
 
-        // Here we can try to compare with etalon
-        if (!new File(source.getPath(compiler) + ".etalon").exists())
-        {
-            logError(source, compiler, "Etalon PASS-1 etalon file is MISSING");
-        }
-        else
-        {
-            boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
-            if (!etalonComparison)
-            {
-                logError(source, compiler, "Etalon PASS-1 test FAILED");
-            }
-        }
-
         // Stage 3 - Recompiling source
-        new File(source.getPath(compiler) + ".class").renameTo(new File(source.getPath(compiler) + "_1.class"));
+        new File(source.getPath(compiler) + ".class").renameTo(new File(source.getPath(compiler) + "_orig.class"));
         CompilerWrapper wrapper2 = new CompilerWrapper(compiler.getCmd() + " " + source.getPath(compiler) + ".java");
         wrapper2.start();
         int compile_2_result = wrapper2.result();
@@ -213,7 +199,7 @@ public class TestSuite
         }
 
         // Comparing compiled classes
-        boolean classComparison1 = FileComparator.compare(source.getPath(compiler) + ".class", source.getPath(compiler) + "_1.class");
+        boolean classComparison1 = FileComparator.compare(source.getPath(compiler) + ".class", source.getPath(compiler) + "_orig.class");
         if (!classComparison1)
         {
             logError(source, compiler, "Compiled Class Comparison FAILED after PASS-2 compilation");
@@ -221,9 +207,9 @@ public class TestSuite
             try
             {
                 InfoJCreator.generateInfoFile(source.getPath(compiler) + ".class");
-                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + ".jinfo2"));
-                InfoJCreator.generateInfoFile(source.getPath(compiler) + "_1.class");
-                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + ".jinfo1"));
+                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + ".jinfo"));
+                InfoJCreator.generateInfoFile(source.getPath(compiler) + "_orig.class");
+                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + "_orig.jinfo"));
             }
             catch (IOException ioe)
             {
@@ -231,77 +217,21 @@ public class TestSuite
             }
             catch (ClazzException ce)
             {
-                logError(source, compiler, "InfoJ generation error after PASS-2 compilation: " + ce.getMessage());
+                logError(source, compiler, "InfoJ generation error: " + ce.getMessage());
             }
         }
 
-        // Stage 4 - decompiling .class
-        new File(source.getPath(compiler) + ".java").renameTo(new File(source.getPath(compiler) + ".java_decomp"));
-        try
-        {
-            ClassDecompiler.generateJavaFile(source.getPath(compiler) + ".class", params);
-        }
-        catch (ClazzException ce)
-        {
-            logError(source, compiler, "Decompile PASS-2 clazz error: " + ce.getMessage());
-            return;
-        }
-        catch (Exception e)
-        {
-            logError(source, compiler, "Decompile PASS-2 unexpected error", e);
-            return;
-        }
-
-        // Here we can try to compare with etalon one more time
+        // Here we can try to compare with etalon
         if (!new File(source.getPath(compiler) + ".etalon").exists())
         {
-            logError(source, compiler, "Etalon PASS-2 etalon file is MISSING");
+            logError(source, compiler, "Etalon file is MISSING");
         }
         else
         {
-            boolean etalonComparison2 = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
-            if (!etalonComparison2)
+            boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
+            if (!etalonComparison)
             {
-                logError(source, compiler, "Etalon PASS-2 test FAILED");
-            }
-        }
-
-        // Stage 5 - Recompiling source another time
-        new File(source.getPath(compiler) + ".class").renameTo(new File(source.getPath(compiler) + "_2.class"));
-        CompilerWrapper wrapper3 = new CompilerWrapper(compiler.getCmd() + " " + source.getPath(compiler) + ".java");
-        wrapper3.start();
-        int compile_3_result = wrapper3.result();
-        if (compile_3_result != 0)
-        {
-            if (compile_3_result == -13)
-            {
-                logError(source, compiler, "Compile PASS-3 terminated by timeout");
-            }
-            else
-            {
-                logError(source, compiler, "Compile PASS-3 error: " + wrapper3.getError());
-            }
-            return;
-        }
-
-        // Comparing compiled classes another time
-        boolean classComparison2 = FileComparator.compare(source.getPath(compiler) + ".class", source.getPath(compiler) + "_2.class");
-        if (!classComparison2)
-        {
-            logError(source, compiler, "Compiled Class Comparison FAILED after PASS-3 compilation");
-            // Generating infoj files for further comparison
-            try
-            {
-                InfoJCreator.generateInfoFile(source.getPath(compiler) + ".class");
-                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + ".jinfo3"));
-            }
-            catch (IOException ioe)
-            {
-                throw new RuntimeException(ioe);
-            }
-            catch (ClazzException ce)
-            {
-                logError(source, compiler, "InfoJ generation error after PASS-3 compilation: " + ce.getMessage());
+                logError(source, compiler, "Etalon test FAILED");
             }
         }
     }
@@ -315,14 +245,21 @@ public class TestSuite
         {
             ClassDecompiler.generateJavaFile(source.getPath(compiler) + ".class", params);
         }
-        catch (ClazzException ce)
-        {
-            logError(source, compiler, "Decompile external class error: " + ce.getMessage());
-            return;
-        }
         catch (Exception ce)
         {
-            logError(source, compiler, "Decompile external class unexpected error", ce);
+            logError(source, compiler, "Decompile external class error: ", ce);
+            try
+            {
+                InfoJCreator.generateInfoFile(source.getPath(compiler) + ".class");
+            }
+            catch (IOException ioe)
+            {
+                throw new RuntimeException(ioe);
+            }
+            catch (ClazzException ce2)
+            {
+                logError(source, compiler, "InfoJ generation error: " + ce2.getMessage());
+            }
             return;
         }
 

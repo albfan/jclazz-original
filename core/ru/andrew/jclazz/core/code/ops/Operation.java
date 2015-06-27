@@ -4,8 +4,6 @@ import ru.andrew.jclazz.core.attributes.*;
 import ru.andrew.jclazz.core.code.*;
 import ru.andrew.jclazz.core.*;
 
-// TODO the following opcodes should be implemented
-// 90 - 95   <- dup[2][_x[1,2]], swap
 public class Operation
 {
     protected Code codeAttribute;

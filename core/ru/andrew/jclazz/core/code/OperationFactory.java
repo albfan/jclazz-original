@@ -38,9 +38,17 @@ public class OperationFactory
         {
             return new Pop(opcode, start_byte, code);
         }
-        else if (opcode == 89)
+        else if (opcode >= 89 && opcode <= 91)
         {
             return new Dup(opcode, start_byte, code);
+        }
+        else if (opcode >= 92 && opcode <= 94)
+        {
+            return new Dup2(opcode, start_byte, code);
+        }
+        else if (opcode == 95)
+        {
+            return new Swap(opcode, start_byte, code);
         }
         else if (opcode >= 96 && opcode <= 119)
         {

@@ -25,11 +25,25 @@ public class ArrayLengthView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView prev = block.removePriorPushOperation();
         arrayRef = prev.source();
         if (prev instanceof CheckCastView)
         {
             arrayRef = "(" + arrayRef + ")";
         }
+         * */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView prev = context.pop();
+        view = new Object[]{prev, ".length"};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

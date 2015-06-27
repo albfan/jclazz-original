@@ -9,23 +9,23 @@ public class ClassTest
     
     public int foo(int int_1, int int_2)
     {
-        while (true) 
+        while (true)
         {
             try
-            {   
-                while (i < j)
+            {
+                while (int_1 < int_2)
                 {
-                    i = j++/i;
+                    int_2++;
+                    int_1 = (int_2 / int_1);
                 }
+                break;
             }
-            catch (RuntimeException re)
-            {   
-                i = 10;
-                continue;
+            catch (RuntimeException runtimeexception_1)
+            {
+                int_1 = 10;
             }
-            break;
         }
-        return j;
+        return int_2;
     }
     
 }

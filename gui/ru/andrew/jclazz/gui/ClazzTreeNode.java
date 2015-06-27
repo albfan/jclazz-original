@@ -1,5 +1,6 @@
 package ru.andrew.jclazz.gui;
 
+import java.net.URL;
 import javax.swing.tree.*;
 import javax.swing.*;
 import ru.andrew.jclazz.core.*;
@@ -17,38 +18,38 @@ public class ClazzTreeNode extends DefaultMutableTreeNode
 
         if (clazzObject instanceof AttributeInfo)
         {
-            icon = new ImageIcon("rsc\\anonymousClass.png");
+            icon = loadIconFromJar("/res/anonymousClass.png");
         }
         else if (clazzObject instanceof FieldInfo)
         {
-            icon = new ImageIcon("rsc\\field.png");
+            icon = loadIconFromJar("/res/field.png");
         }
         else if (clazzObject instanceof MethodInfo)
         {
-            icon = new ImageIcon("rsc\\method.png");
+            icon = loadIconFromJar("/res/method.png");
         }
         else if (clazzObject instanceof Clazz)
         {
             if (((Clazz) clazzObject).isInterface())
             {
-                icon = new ImageIcon("rsc\\interface.png");
+                icon = loadIconFromJar("/res/interface.png");
             }
             else
             {
-                icon = new ImageIcon("rsc\\class.png");
+                icon = loadIconFromJar("/res/class.png");
             }
         }
         else if (clazzObject instanceof InnerClass)
         {
-            icon = new ImageIcon("rsc\\class.png");
+            icon = loadIconFromJar("/res/class.png");
         }
         else if (clazzObject instanceof CONSTANT[])
         {
-            icon = new ImageIcon("rsc\\class.png");
+            icon = loadIconFromJar("/res/class.png");
         }
         else
         {
-            icon = new ImageIcon("rsc\\advice.png");
+            icon = loadIconFromJar("/res/advice.png");
         }
 
         this.description = description;
@@ -62,5 +63,11 @@ public class ClazzTreeNode extends DefaultMutableTreeNode
     public Icon getIcon()
     {
         return icon;
+    }
+
+    private Icon loadIconFromJar(String path)
+    {
+        URL url = this.getClass().getResource(path);
+        return new ImageIcon(url);
     }
 }

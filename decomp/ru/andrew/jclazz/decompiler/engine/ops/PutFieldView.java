@@ -4,6 +4,7 @@ import ru.andrew.jclazz.decompiler.engine.blocks.*;
 import ru.andrew.jclazz.decompiler.*;
 import ru.andrew.jclazz.core.code.ops.*;
 import ru.andrew.jclazz.core.*;
+import ru.andrew.jclazz.decompiler.engine.CodeItem;
 
 public class PutFieldView extends OperationView
 {
@@ -33,6 +34,7 @@ public class PutFieldView extends OperationView
     public String source()
     {
         // Inner Class support
+        /*
         FieldInfo fieldInfo = msv.getClazzView().getFieldByName(((PutField) operation).getFieldName());
         if (fieldInfo != null && fieldInfo.isSynthetic())
         {
@@ -68,6 +70,8 @@ public class PutFieldView extends OperationView
             sb.append(value);
         }
         return sb.toString();
+         */
+         return null;
     }
 
     public String getPushType()
@@ -82,6 +86,7 @@ public class PutFieldView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView pushOp = block.removePriorPushOperation();
         value = pushOp.source();
 
@@ -95,6 +100,118 @@ public class PutFieldView extends OperationView
             else
             {
                 objectRef = "this";
+            }
+        }
+         */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView pushOp = context.pop();
+
+        Object[] val = null;
+        // Check for (condition ? result1 : result2) construction
+        CodeItem prevItem = block.getPreviousOperation();
+        if (prevItem != null && (prevItem instanceof Else) && ((Else) prevItem).getOperationByStartByte(pushOp.getStartByte()) != null)
+        {
+            OperationView pushOp2 = context.peek();
+            CodeItem prev2 = block.getOperationPriorTo(prevItem.getStartByte());
+            if (prev2 != null && (prev2 instanceof IfBlock) && ((IfBlock) prev2).getOperationByStartByte(pushOp2.getStartByte()) != null)
+            {
+                context.pop();
+                IfBlock ifb = (IfBlock) prev2;
+                String scond = ifb.getSourceConditions();
+                val = new Object[]{scond.substring(1, scond.length() - 1), pushOp2, pushOp}; // remove first ( and last )
+                block.removePreviousOperation();
+                block.removePreviousOperation();
+            }
+        }
+
+        OperationView refOp = null;
+        if (getOpcode() == 181)  // putfield (non static)
+        {
+            refOp = context.pop();
+        }
+
+        buildView(pushOp, refOp, val);
+    }
+
+    private void buildView(OperationView pushOp, OperationView refOp, Object[] val0)
+    {
+        // Inner Class support
+        FieldInfo fieldInfo = msv.getClazzView().getFieldByName(((PutField) operation).getFieldName());
+        if (fieldInfo != null && fieldInfo.isSynthetic())
+        {
+            return;
+        }
+
+        // final variables initialization in constructors should not be printed
+        if (getOpcode() == 181 && msv.getMethod().isInit())
+        {
+            if (refOp == null || "this".equals(refOp.source3()))
+            {
+                FieldInfo field = msv.getClazzView().getFieldByName(((PutField) operation).getFieldName());
+                if (field != null && field.isFinal() && field.getConstantValue() != null)
+                {
+                    return;
+                }
+            }
+        }
+
+        Object val = null;
+        if (isBoolean)
+        {
+            val = "0".equals(pushOp.source3()) ? "false" : "true";
+        }
+        else
+        {
+            val = pushOp;
+        }
+
+        if (getOpcode() == 179)   // putstatic
+        {
+            String fieldName = ((PutField) operation).getFieldName();
+            if (fieldName.startsWith("$SwitchMap$"))
+            {
+                fieldName = "switchMap";
+                if (isInInnerClass)
+                {
+                    String clazzName = msv.getClazzView().getClazz().getThisClassInfo().getName();
+                    clazzName = clazzName.substring(clazzName.lastIndexOf('$') + 1);
+                }
+            }
+            if (val0 != null)
+            {
+                view = new Object[]{alias(objectRef), ".", fieldName + " = ", val0[0], " ? ", val0[1], " : ", val0[2]};
+            }
+            else
+            {
+                view = new Object[]{alias(objectRef), ".", fieldName + " = ", val};
+            }
+        }
+        else
+        {
+            if ("this".equals(refOp.source3()) && ((val instanceof OperationView && !((OperationView) val).source3().equals(((PutField) operation).getFieldName())) || val instanceof String))
+            {
+                if (val0 != null)
+                {
+                    view = new Object[]{((PutField) operation).getFieldName() + " = ", val0[0], " ? ", val0[1], " : ", val0[2]};
+                }
+                else
+                {
+                    view = new Object[]{((PutField) operation).getFieldName() + " = ", val};
+                }
+            }
+            else
+            {
+                if (val0 != null)
+                {
+                    view = new Object[]{refOp, ".", ((PutField) operation).getFieldName() + " = ", val0[0], " ? ", val0[1], " : ", val0[2]};
+                }
+                else
+                {
+                    view = new Object[]{refOp, ".", ((PutField) operation).getFieldName() + " = ", val};
+                }
             }
         }
     }

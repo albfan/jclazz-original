@@ -13,7 +13,7 @@ public class Casting
         while (int_1 < 128)
         {
             System.out.println(new StringBuffer().append("ascii ").append(int_1).append(" character ").append((char) int_1).toString());
-            int_1 = (char) int_1 + 1;
+            int_1 = (char) (int_1 + 1);
         }
     }
     

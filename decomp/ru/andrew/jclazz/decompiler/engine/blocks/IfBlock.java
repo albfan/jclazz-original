@@ -3,6 +3,8 @@ package ru.andrew.jclazz.decompiler.engine.blocks;
 import ru.andrew.jclazz.decompiler.engine.ops.*;
 
 import java.util.*;
+import java.util.ArrayList;
+import ru.andrew.jclazz.decompiler.engine.CodeItem;
 
 public class IfBlock extends Block
 {
@@ -53,6 +55,14 @@ public class IfBlock extends Block
     {
         StringBuffer sb = new StringBuffer();
         sb.append(indent).append(isElseIf ? "else " : "").append("if ");
+        sb.append(getSourceConditions());
+        sb.append(NL).append(super.getSource());
+        return sb.toString();
+    }
+
+    public String getSourceConditions()
+    {
+        StringBuffer sb = new StringBuffer();
         if (isNegConditions) sb.append("(!");
         if (andConditions.size() > 1) sb.append("(");
         for (Iterator i = andConditions.iterator(); i.hasNext();)
@@ -71,8 +81,33 @@ public class IfBlock extends Block
         }
         if (andConditions.size() > 1) sb.append(")");
         if (isNegConditions) sb.append(")");
-        sb.append(NL).append(super.getSource());
         return sb.toString();
+    }
+
+    public List getSourceConditionsView()
+    {
+        List src = new ArrayList();
+        if (isNegConditions) src.add("(!");
+        if (andConditions.size() > 1) src.add("(");
+        for (Iterator i = andConditions.iterator(); i.hasNext();)
+        {
+            List orConditions = (List) i.next();
+            if (orConditions.size() > 1) src.add("(");
+            for (Iterator j = orConditions.iterator(); j.hasNext();)
+            {
+                Condition cond = (Condition) j.next();
+                if (j.hasNext() && orConditions.size() > 1) cond.setNeedReverseOperation(false);
+                src.add("(");
+                src.addAll(cond.getView());
+                src.add(")");
+                if (j.hasNext()) src.add(" || ");
+            }
+            if (orConditions.size() > 1) src.add(")");
+            if (i.hasNext()) src.add(" && ");
+        }
+        if (andConditions.size() > 1) src.add(")");
+        if (isNegConditions) src.add(")");
+        return src;
     }
 
     public void addAndConditions(List ops)
@@ -82,7 +117,7 @@ public class IfBlock extends Block
         Iterator i = ops.iterator();
         while (i.hasNext())
         {
-            OperationView ci = (OperationView) i.next();
+            CodeItem ci = (CodeItem) i.next();
             newOps.add(ci);
             if (ci instanceof IfView)
             {

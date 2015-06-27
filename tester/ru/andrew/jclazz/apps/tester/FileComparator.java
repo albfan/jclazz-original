@@ -7,14 +7,17 @@ public final class FileComparator
 {
     public static boolean compare(String path1, String path2)
     {
+        File file1 = new File(path1);
+        File file2 = new File(path2);
+        int bufferSize = (int) Math.max(file1.length(), file2.length());
         FileInputStream fis1 = null;
         FileInputStream fis2 = null;
-        byte b1[] = new byte[1024 * 1024];
-        byte b2[] = new byte[1024 * 1024];
+        byte b1[] = new byte[bufferSize];
+        byte b2[] = new byte[bufferSize];
         try
         {
-            fis1 = new FileInputStream(path1);
-            fis2 = new FileInputStream(path2);
+            fis1 = new FileInputStream(file1);
+            fis2 = new FileInputStream(file2);
 
             int res1, res2;
             do

@@ -1,0 +1,238 @@
+package ru.andrew.jclazz.gui;
+
+import java.awt.*;
+import javax.swing.tree.*;
+import javax.swing.*;
+import java.io.*;
+import ru.andrew.jclazz.core.*;
+import javax.swing.event.*;
+import java.awt.event.*;
+import javax.swing.filechooser.FileFilter;
+
+public class MainForm extends JFrame implements ActionListener, TreeSelectionListener
+{
+    private static final String A_EXIT = "EXIT";
+    private static final String A_OPEN = "OPEN";
+    private static final String A_DECOMPILE = "DECOMPILE";
+    private Clazz clazz;
+    private JMenuItem decompileMenuItem;
+    private JMenuItem exitMenuItem;
+    private JMenu fileMenu;
+    private JSeparator fileSeparator;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane3;
+    private JPanel mainPanel;
+    private JMenuBar menuBar;
+    private JMenuItem openMenuItem;
+    private JMenu operationsMenu;
+    private JSplitPane splitPanel;
+    private JTextPane textPane;
+    private JTree tree;
+
+    public MainForm()
+    {
+        initComponents();
+        tree.addTreeSelectionListener(this);
+        tree.setCellRenderer(new ClazzTreeNodeCellRenderer());
+        tree.setModel(new DefaultTreeModel(null));
+        setContentPane(mainPanel);
+    }
+    
+    public void valueChanged(TreeSelectionEvent tse)
+    {
+        ClazzTreeNode node = ((ClazzTreeNode) tse.getPath().getLastPathComponent());
+        textPane.setText(node.getDescription());
+    }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+        String cmd = e.getActionCommand();
+        if ("EXIT".equals(cmd))
+        {
+            System.exit(0);
+        }
+        else if ("OPEN".equals(cmd))
+        {
+            openClass();
+        }
+        else if ("DECOMPILE".equals(cmd))
+        {
+            openDecompileWindow();
+        }
+    }
+    
+    protected void openClass()
+    {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new javax.swing.filechooser.FileFilter()
+        {
+        
+            public boolean accept(File pathname)
+            {
+                return ((pathname.getName().endsWith(".class")) || (pathname.isDirectory()));
+            }
+            
+            public String getDescription()
+            {
+                return "Java class files";
+            }
+            
+        });
+        int returnVal = chooser.showOpenDialog(this);
+        if (0 != returnVal)
+        {
+            JOptionPane.showMessageDialog(this, "No class selected", "Exiting...", 2);
+            return;
+        }
+        try
+        {
+            clazz = new Clazz(chooser.getSelectedFile().getAbsolutePath());
+        }
+        catch (ClazzException ce)
+        {
+            JOptionPane.showMessageDialog(this, ce.toString(), "Clazz Exception", 0);
+            System.exit(1);
+        }
+        catch (IOException ioe)
+        {
+            JOptionPane.showMessageDialog(this, ioe.toString(), "Input/Output Exception", 0);
+            System.exit(1);
+        }
+        setTitle(clazz.getThisClassInfo().getFullyQualifiedName());
+        decompileMenuItem.setEnabled(true);
+        tree.setModel(new ClazzTreeUI(clazz).getTreeModel());
+        tree.setSelectionRow(0);
+        pack();
+    }
+    
+    protected void openDecompileWindow()
+    {
+        DecompileForm decompileForm = new DecompileForm();
+        try
+        {
+            decompileForm.setClazz(clazz);
+        }
+        catch (IllegalArgumentException illegalargumentexception_1)
+        {
+            return;
+        }
+        decompileForm.setModal(true);
+        decompileForm.setSize(1000, 500);
+        decompileForm.setVisible(true);
+    }
+    
+    private void initComponents()
+    {
+        mainPanel = new JPanel();
+        splitPanel = new JSplitPane();
+        jScrollPane1 = new JScrollPane();
+        tree = new JTree();
+        jScrollPane3 = new JScrollPane();
+        textPane = new JTextPane();
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu();
+        openMenuItem = new JMenuItem();
+        fileSeparator = new JSeparator();
+        exitMenuItem = new JMenuItem();
+        operationsMenu = new JMenu();
+        decompileMenuItem = new JMenuItem();
+        setDefaultCloseOperation(3);
+        setTitle("jclazz");
+        setName("mainFrame");
+        getContentPane().setLayout(new BoxLayout(getContentPane(), 2));
+        mainPanel.setPreferredSize(new Dimension(600, 400));
+        mainPanel.setLayout(new GridBagLayout());
+        splitPanel.setDividerLocation(250);
+        jScrollPane1.setViewportView(tree);
+        splitPanel.setLeftComponent(jScrollPane1);
+        textPane.setContentType("text/html");
+        textPane.setEditable(false);
+        jScrollPane3.setViewportView(textPane);
+        splitPanel.setRightComponent(jScrollPane3);
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = 1;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        mainPanel.add(splitPanel, gridBagConstraints);
+        getContentPane().add(mainPanel);
+        fileMenu.setText("File");
+        openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new ActionListener()
+        {
+        
+            public void actionPerformed(ActionEvent evt)
+            {
+                openMenuItemActionPerformed(evt);
+            }
+            
+        });
+        fileMenu.add(openMenuItem);
+        fileMenu.add(fileSeparator);
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new ActionListener()
+        {
+        
+            public void actionPerformed(ActionEvent evt)
+            {
+                exitMenuItemActionPerformed(evt);
+            }
+            
+        });
+        fileMenu.add(exitMenuItem);
+        menuBar.add(fileMenu);
+        operationsMenu.setText("Operations");
+        decompileMenuItem.setText("Decompile");
+        decompileMenuItem.setEnabled(false);
+        decompileMenuItem.addActionListener(new ActionListener()
+        {
+        
+            public void actionPerformed(ActionEvent evt)
+            {
+                decompileMenuItemActionPerformed(evt);
+            }
+            
+        });
+        operationsMenu.add(decompileMenuItem);
+        menuBar.add(operationsMenu);
+        setJMenuBar(menuBar);
+        pack();
+    }
+    
+    private void exitMenuItemActionPerformed(ActionEvent evt)
+    {
+        System.exit(0);
+    }
+    
+    private void openMenuItemActionPerformed(ActionEvent evt)
+    {
+        openClass();
+    }
+    
+    private void decompileMenuItemActionPerformed(ActionEvent evt)
+    {
+        openDecompileWindow();
+    }
+    
+    public static void main(String[] args)
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+        
+            public void run()
+            {
+                try
+                {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                MainForm mf = new MainForm();
+                mf.setVisible(true);
+            }
+            
+        });
+    }
+    
+}

@@ -1,34 +1,71 @@
 package ru.andrew.jclazz.apps.tester.tests.clazz;
 
-enum OperatingSystems
-{
-    windows, unix, linux, macintosh
-}
+import java.awt.*;
 
 public class ClazzEnum2
 {
+
+    public ClazzEnum2()
+    {
+    }
+    
     public void main()
     {
-        OperatingSystems os;
-
-        os = OperatingSystems.windows;          
-        switch (os)
+        Component.BaselineResizeBehavior component$baselineresizebehavior_1 = Component.BaselineResizeBehavior.CONSTANT_ASCENT;
+        switch (SM_1.switchMap[component$baselineresizebehavior_1.ordinal()])
         {
-            case windows:
+            case 1:
                 System.out.println("You chose Windows!");
                 break;
-            case unix:
+            case 2:
                 System.out.println("You chose Unix!");
                 break;
-            case linux:
+            case 3:
                 System.out.println("You chose Linux!");
                 break;
-            case macintosh:
+            case 4:
                 System.out.println("You chose Macintosh!");
                 break;
             default:
                 System.out.println("I don't know your OS.");
-                break;
         }
     }
+    
+    static class SM_1
+    {
+        static int[] switchMap;
+        static 
+        {
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CONSTANT_ASCENT.ordinal()] = 1;
+            }
+            catch (NoSuchFieldError nosuchfielderror_1)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CONSTANT_DESCENT.ordinal()] = 2;
+            }
+            catch (NoSuchFieldError nosuchfielderror_2)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CENTER_OFFSET.ordinal()] = 3;
+            }
+            catch (NoSuchFieldError nosuchfielderror_3)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.OTHER.ordinal()] = 4;
+            }
+            catch (NoSuchFieldError nosuchfielderror_4)
+            {
+            }
+        }
+        
+    }
+
 }

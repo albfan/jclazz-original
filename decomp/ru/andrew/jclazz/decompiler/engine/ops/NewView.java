@@ -62,4 +62,32 @@ public class NewView extends OperationView
             }
         }
     }
+
+    public void analyze2(Block block)
+    {
+        // Inner Class support
+        clazzName = ((New) operation).getNewType();
+        if (clazzName.indexOf('$') != -1)
+        {
+            InnerClass ic = methodView.getClazzView().getInnerClass(clazzName);
+            if (ic != null)
+            {
+                if (ic.getInnerName() == null)
+                {
+                    isACConstructor = true;
+                    anonymousClass = ic;
+                }
+                clazzName = clazzName.substring(clazzName.indexOf('$') + 1);
+                isICConstructor = true;
+            }
+        }
+
+        view = new Object[]{alias(clazzName)};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
+    }
 }

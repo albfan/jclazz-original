@@ -7,7 +7,7 @@ import java.util.*;
 
 public class SwitchBlock extends Block
 {
-    private String switchVar;
+    private OperationView switchVar;
     private ArrayList caseBlocks = new ArrayList();
 
     public SwitchBlock(Block parent)
@@ -25,7 +25,7 @@ public class SwitchBlock extends Block
     public String getSource()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(indent).append("switch (").append(switchVar).append(")").append(NL);
+        sb.append(indent).append("switch (").append(switchVar.source2()).append(")").append(NL);
         sb.append(indent).append("{").append(NL);
         for (Iterator it = caseBlocks.iterator(); it.hasNext();)
         {
@@ -44,7 +44,8 @@ public class SwitchBlock extends Block
 
     public void analyze(Block block)
     {
-        OperationView intVal = block.removePriorPushOperation();
-        switchVar = intVal.source();
+        //OperationView intVal = block.removePriorPushOperation();
+        OperationView intVal = context.pop();
+        switchVar = intVal;
     }
 }

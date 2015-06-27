@@ -11,7 +11,7 @@ public class AnonymousClazz01
 
     public void test(List list_1)
     {
-        Collections.sort(list_1, new Comparator()    
+        Collections.sort(list_1, new Comparator()
         {
         
             public final int compare(Object object_1, Object object_2)

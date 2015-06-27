@@ -25,6 +25,10 @@ public class IfView extends OperationView
     {
     }
 
+    public void analyze2(Block block)
+    {
+    }
+
     public long getTargetOperation()
     {
         return ((If) operation).getTargetOperation();

@@ -66,4 +66,9 @@ public class Arithmetic extends PushOperation
     {
         return resType;
     }
+
+    public boolean isPrintable()
+    {
+        return false;
+    }
 }

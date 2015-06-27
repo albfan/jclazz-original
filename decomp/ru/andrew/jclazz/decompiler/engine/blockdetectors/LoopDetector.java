@@ -34,7 +34,7 @@ public class LoopDetector implements Detector
 
             GoToView priorTargetGoTo = (GoToView) priorTarget;
 
-            if (!priorTargetGoTo.isForwardBranch() && (priorTargetGoTo.getLoop() != null || !isIfContinue(block, priorTargetGoTo)))
+            if (!priorTargetGoTo.isForwardBranch() && (priorTargetGoTo.getTargetOperation() <= ifCond.getStartByte()) && (priorTargetGoTo.getLoop() != null || !isIfContinue(block, priorTargetGoTo)))
             {
                 createForwardLoop(block, ifCond);
                 continue;
@@ -56,6 +56,7 @@ public class LoopDetector implements Detector
             }
             loop = loop.getParent();
         }
+
         return false;
     }
 
@@ -71,7 +72,7 @@ public class LoopDetector implements Detector
         }
 
         CodeItem next = block.getParent().getOperationAfter(block.getStartByte());
-        return next.getStartByte() == ifCond.getTargetOperation();
+        return next != null && next.getStartByte() == ifCond.getTargetOperation();
     }
 
     private void createForwardLoop(Block block, IfView firstIf)
@@ -86,9 +87,12 @@ public class LoopDetector implements Detector
             return;
         }
 
+        if (firstPriorOp instanceof GoToView && block.getOperationByStartByte(((GoToView) firstPriorOp).getTargetOperation()) == null) return;
+
         Loop loop = new Loop(block, false);
         block.createSubBlock(ifCond.getStartByte() + 1, ifCond.getTargetOperation(), loop);
-        List firstConditions = block.createSubBlock(firstIf.getStartByte(), ifCond.getStartByte() + 1, null);
+        //List firstConditions = block.createSubBlock(firstIf.getStartByte(), ifCond.getStartByte() + 1, null);
+        List firstConditions = block.createSubBlock(loop.getBeginPc(), ifCond.getStartByte() + 1, null);
         loop.addAndConditions(firstConditions);
     }
 }

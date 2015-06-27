@@ -23,5 +23,11 @@ public class MonitorExitView extends OperationView
 
     public void analyze(Block block)
     {
+        //block.removePriorPushOperation();
+    }
+
+    public void analyze2(Block block)
+    {
+        context.pop();
     }
 }

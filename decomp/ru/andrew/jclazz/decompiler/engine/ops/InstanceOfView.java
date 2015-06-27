@@ -25,7 +25,21 @@ public class InstanceOfView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView prev = block.removePriorPushOperation();
         var = prev.source();
+         * */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView prev = context.pop();
+        view = new Object[]{prev, " instanceof " + alias(((InstanceOf) operation).getCastClass())};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

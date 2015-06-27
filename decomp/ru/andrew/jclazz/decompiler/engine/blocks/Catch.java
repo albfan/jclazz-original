@@ -9,6 +9,8 @@ public class Catch extends Block
     private CONSTANT_Class exceptionClassInfo;
     private long handler_pc;
 
+    private long retrieve_pc = Integer.MAX_VALUE;
+
     private LocalVariable lv;
 
     public Catch(long handler_pc, CONSTANT_Class cl_info, Block parent)
@@ -21,6 +23,17 @@ public class Catch extends Block
     public long getStartByte()
     {
         return handler_pc;
+    }
+
+    public void postCreate()
+    {
+        if (getLastOperation() instanceof GoToView)
+        {
+            if (!checkLastGoTo((GoToView) getLastOperation()))
+            {
+                retrieve_pc = ((GoToView) getLastOperation()).getTargetOperation();
+            }
+        }
     }
 
     public void postProcess()
@@ -117,6 +130,11 @@ public class Catch extends Block
         return false;
     }
 
+    public long getRetrievePc()
+    {
+        return retrieve_pc;
+    }
+
     public String getExceptionType()
     {
         return exceptionClassInfo != null ? exceptionClassInfo.getFullyQualifiedName() : null;
@@ -129,6 +147,7 @@ public class Catch extends Block
         if (exceptionClassInfo != null)
         {
             sb.append("catch (").append(alias(exceptionClassInfo.getFullyQualifiedName())).append(" ").append(lv != null ? lv.getName() : "").append(")");
+            lv.setPrinted(true);
         }
         else
         {
@@ -137,5 +156,9 @@ public class Catch extends Block
         sb.append(NL).append(super.getSource());
         return sb.toString();
     }
-    
+
+    public boolean isFinally()
+    {
+        return exceptionClassInfo == null;
+    }
 }

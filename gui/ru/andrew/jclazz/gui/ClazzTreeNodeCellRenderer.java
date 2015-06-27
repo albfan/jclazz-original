@@ -1,6 +1,5 @@
 package ru.andrew.jclazz.gui;
 
-import ru.andrew.jclazz.gui.ClazzTreeNode;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;

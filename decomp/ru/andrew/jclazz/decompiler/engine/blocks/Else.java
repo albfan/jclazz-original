@@ -13,20 +13,35 @@ public class Else extends Block
     public String getSource()
     {
         StringBuffer sb = new StringBuffer();
-        if ( ((size() == 1) && (getFirstOperation() instanceof IfBlock)) ||
-             ((size() == 2) && (getFirstOperation() instanceof IfBlock) && (getLastOperation() instanceof Else)) )
+//        if ( ((size() == 1) && (getFirstOperation() instanceof IfBlock)) ||
+//             ((size() == 2) && (getFirstOperation() instanceof IfBlock) && (getLastOperation() instanceof Else)) )
+//        {
+//            IfBlock ifb = (IfBlock) getFirstOperation();
+//            ifb.setElseIf(true);
+//            ifb.setIndent(getIndent());
+//            sb.append(ifb.getSource());
+//            if (size() == 2)
+//            {
+//                Else elb = (Else) getLastOperation();
+//                elb.setIndent(getIndent());
+//                sb.append(elb.getSource());
+//            }
+//        }
+        if ( ((printedSize() == 1) && (getFirstPrintedOperation() instanceof IfBlock)) ||
+             ((printedSize() == 2) && (getFirstPrintedOperation() instanceof IfBlock) && (getLastPrintedOperation() instanceof Else)) )
         {
-            IfBlock ifb = (IfBlock) getFirstOperation();
+            IfBlock ifb = (IfBlock) getFirstPrintedOperation();
             ifb.setElseIf(true);
             ifb.setIndent(getIndent());
             sb.append(ifb.getSource());
-            if (size() == 2)
+            if (printedSize() == 2)
             {
-                Else elb = (Else) getLastOperation();
+                Else elb = (Else) getLastPrintedOperation();
                 elb.setIndent(getIndent());
                 sb.append(elb.getSource());
             }
         }
+
         else
         {
             sb.append(indent).append("else").append(NL).append(super.getSource());

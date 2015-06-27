@@ -25,6 +25,7 @@ public class CheckCastView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView prev = block.removePriorPushOperation();
 
         // Strange behaviour, found on jre 1.6: doubling of identical checkcast
@@ -39,5 +40,31 @@ public class CheckCastView extends OperationView
         }
 
         var = prev.source();
+         * */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView prev = context.pop();
+
+        // Strange behaviour, found on jre 1.6: doubling of identical checkcast
+        if (prev instanceof CheckCastView)
+        {
+            CheckCastView cc = (CheckCastView) prev;
+            if (((CheckCast) operation).getCastClass().equals(cc.getPushType()))
+            {
+                view = prev.view;
+                context.push(this);
+                return;
+            }
+        }
+
+        view = new Object[]{"((" + alias(((CheckCast) operation).getCastClass()) + ") ", prev, ")"};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

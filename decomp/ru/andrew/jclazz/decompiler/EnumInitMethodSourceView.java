@@ -3,7 +3,6 @@ package ru.andrew.jclazz.decompiler;
 import ru.andrew.jclazz.core.*;
 import ru.andrew.jclazz.decompiler.engine.blocks.*;
 import ru.andrew.jclazz.decompiler.engine.ops.*;
-import ru.andrew.jclazz.decompiler.engine.*;
 
 import java.util.*;
 
@@ -39,7 +38,10 @@ public class EnumInitMethodSourceView extends MethodSourceView
     protected String codeBlockSource(Block block)
     {
         // Remove first super(String, int)
-        block.removeFirstOperation();
+        block.removeFirstOperation();   // aload_0
+        block.removeFirstOperation();   // aload_1
+        block.removeFirstOperation();   // iload_2
+        block.removeFirstOperation();   // invokespecial <init>
 
         if (getTopBlock().getOperations().size() == 1 &&
                 getTopBlock().getOperations().get(0) instanceof ReturnView)

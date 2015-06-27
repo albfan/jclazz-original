@@ -7,6 +7,7 @@ import ru.andrew.jclazz.decompiler.engine.*;
 import ru.andrew.jclazz.decompiler.engine.blocks.*;
 
 import java.util.*;
+import java.util.ArrayList;
 
 public class MethodSourceView extends SourceView
 {
@@ -16,17 +17,20 @@ public class MethodSourceView extends SourceView
     protected MethodInfo methodInfo;
     protected ClazzSourceView clazzView;
     protected Block topBlock;
+    protected MethodContext context;
 
     public MethodSourceView(MethodInfo methodInfo, ClazzSourceView clazzView)
     {
         this.methodInfo = methodInfo;
         this.clazzView = clazzView;
+        this.context = new MethodContext(methodInfo);
 
         // InnerClass support
         if (methodInfo.isSynthetic() && methodInfo.isStatic() && methodInfo.getName().startsWith("access$"))
         {
             List syn_pars = methodInfo.getDescriptor().getParams();
             List ops = methodInfo.getOperations() != null ? methodInfo.getOperations() : null;
+            // Synthetic method for getting field from inner class
             if (syn_pars.size() == 1 && ((FieldDescriptor) syn_pars.get(0)).getFQN().equals(clazzView.getClazz().getThisClassInfo().getFullyQualifiedName()) &&
                     ops != null && ops.size() == 3)
             {
@@ -40,7 +44,35 @@ public class MethodSourceView extends SourceView
                 if (op1 == 42 && op2 == 180 && op3 >= 172 && op3 <= 176)
                 {
                     fieldName = ((GetField) ops.get(1)).getFieldName();
-                    isGetFieldForIC = true;
+                    isForIC = true;
+                }
+            }
+            // Synthetic method for invoking method from inner class
+            if (ops != null)
+            {
+                // Standard bytecode for synthetic Inner Class support method:
+                // 0 aload_0
+                // 1 aload_Y
+                // ...
+                // N invokespecial XXX
+                // K Xreturn
+                int pos = 0;
+                int op = 0;
+                do
+                {
+                    op = ((Operation) ops.get(pos)).getOpcode().getOpcode();
+                    pos++;
+                }
+                while (op >= 21 && op <= 53 && (pos < ops.size()));
+                if (pos + 1 == ops.size())
+                {
+                    int opInvoke = op;
+                    int opReturn = ((Operation) ops.get(pos)).getOpcode().getOpcode();
+                    if (opInvoke == 183 && opReturn >= 172 && opReturn <= 177)    // invokespecial & Xreturn
+                    {
+                        methodNameForIC = ((Invoke) ops.get(pos - 1)).getMethodName();
+                        isForIC = true;
+                    }
                 }
             }
         }
@@ -51,6 +83,11 @@ public class MethodSourceView extends SourceView
     public MethodInfo getMethod()
     {
         return methodInfo;
+    }
+
+    public MethodContext getMethodContext()
+    {
+        return context;
     }
 
     public Clazz getClazz()
@@ -80,6 +117,8 @@ public class MethodSourceView extends SourceView
         {
             topBlock = new Block(new ArrayList(), this);
         }
+
+        view = new ArrayList();
 
         if (methodInfo.isDeprecated())
         {
@@ -213,36 +252,54 @@ public class MethodSourceView extends SourceView
             // Inner Class support
             if (clazzView.isInnerClass() &&
                     INIT_METHOD.equals(methodInfo.getName()) &&
+                    !params.isEmpty() &&
                     clazzView.getOuterClazz().getClazz().getThisClassInfo().getFullyQualifiedName().equals(((FieldDescriptor) params.get(0)).getFQN()))
             {
                 addition++;
                 params.remove(0);
             }
 
+            int lvi = 0;
             for (int i = 0; i < params.size() - 1; i++)
             {
                 FieldDescriptor fd = (FieldDescriptor) params.get(i);
-                LocalVariable lv = topBlock.getLocalVariable(i + addition, fd.getFQN());
+                String rawType = fd.getFQN();
+                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, rawType);
                 lv.ensure(0);
-                print(importClass(fd.getFQN()) + " " + lv.getName());
+                printView(lv.getView());
+                //print(importClass(fd.getFQN()) + " " + lv.getName());
+
+                String lvAliasType = importClass(fd.getFQN());
                 lv.setPrinted(true);
+                lv.getView().setAliasedType(lvAliasType);
+                if ("long".equals(rawType) || "double".equals(rawType))
+                {
+                    lvi += 2;
+                }
+                else
+                {
+                    lvi++;
+                }
                 print(", ");
             }
             if (params.size() > 0)
             {
                 FieldDescriptor fd = (FieldDescriptor) params.get(params.size() - 1);
-                LocalVariable lv = topBlock.getLocalVariable(params.size() - 1 + addition, fd.getFQN());
+                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, fd.getFQN());
                 lv.ensure(0);
                 String lpFQN = importClass(fd.getFQN());
                 if (!methodInfo.isVarargs())
                 {
-                    print(lpFQN + " " + lv.getName());
+                    //print(lpFQN + " " + lv.getName());
+                    printView(lv.getView());
                 }
                 else
                 {
-                    lpFQN = lpFQN.substring(0, lpFQN.length() - 2);
-                    print(lpFQN + "... " + lv.getName());
+                    lpFQN = lpFQN.substring(0, lpFQN.length() - 2) + "...";
+                    //print(lpFQN + "... " + lv.getName());
+                    printView(lv.getView());
                 }
+                lv.getView().setAliasedType(lpFQN);
                 lv.setPrinted(true);
             }
             print(")");
@@ -261,17 +318,23 @@ public class MethodSourceView extends SourceView
     }
 
     // Inner Class support
-    private boolean isGetFieldForIC = false;
+    private boolean isForIC = false;
     private String fieldName;
+    private String methodNameForIC;
 
     public String getFieldNameForIC()
     {
         return fieldName;
     }
 
-    public boolean isGetFieldForIC()
+    public String getMethodNameForIC()
     {
-        return isGetFieldForIC;
+        return methodNameForIC;
+    }
+
+    public boolean isForIC()
+    {
+        return isForIC;
     }
     
     // Local variable naming support
@@ -320,7 +383,7 @@ public class MethodSourceView extends SourceView
         }
         else
         {
-            str = m_name + "_" + (Integer.valueOf(str.substring(str.indexOf('_') + 1)).intValue() + 1);
+            str = m_name + "_" + (Integer.valueOf(str.substring(str.lastIndexOf('_') + 1)).intValue() + 1);
         }
         lvarNames.put(m_name, str);
 

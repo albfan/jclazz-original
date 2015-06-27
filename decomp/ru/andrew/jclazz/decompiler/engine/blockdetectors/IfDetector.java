@@ -190,5 +190,4 @@ public class IfDetector implements Detector
 
         // Add return in previous "if" if adding new "if" 
     }
-    
 }

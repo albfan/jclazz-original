@@ -21,6 +21,7 @@ public class MainForm extends JFrame implements ActionListener, TreeSelectionLis
     private static final String A_DECOMPILE = "DECOMPILE";
 
     private Clazz clazz;
+    private File lastOpenedDirectory = null;
 
     public MainForm()
     {
@@ -75,6 +76,10 @@ public class MainForm extends JFrame implements ActionListener, TreeSelectionLis
                 return "Java class files";
             }
         });
+        if (lastOpenedDirectory != null)
+        {
+            chooser.setCurrentDirectory(lastOpenedDirectory);
+        }
 
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal != JFileChooser.APPROVE_OPTION)
@@ -84,6 +89,7 @@ public class MainForm extends JFrame implements ActionListener, TreeSelectionLis
         }
         try
         {
+            lastOpenedDirectory = chooser.getSelectedFile().getParentFile();
             this.clazz = new Clazz(chooser.getSelectedFile().getAbsolutePath());
         }
         catch (ClazzException ce)

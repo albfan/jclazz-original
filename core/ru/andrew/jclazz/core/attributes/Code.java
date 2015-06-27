@@ -57,10 +57,7 @@ public class Code extends AttributeInfo
         
         int code_length = (int) cis.readU4();
         code = new int[code_length];
-        for (int j = 0; j < code_length; j++)
-        {
-            code[j] = cis.readU1();
-        }
+        cis.read(code);
 
         int exception_table_length = cis.readU2();
         exception_table = new ExceptionTable[exception_table_length];

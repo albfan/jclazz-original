@@ -53,18 +53,18 @@ public class ejbc20 extends Tool
             runFromCmdLine = false;
         }
     }
-
+    
     private void setEJBCMessageListener(EJBCMessageListener ejbcmessagelistener_1)
     {
         messageCoordinator.setEJBCMessageListener(ejbcmessagelistener_1);
         ejbcmessagelistener_1.setEJBCMessageProducer(messageCoordinator);
     }
-
+    
     public void setRunFromCmdLine(boolean boolean_1)
     {
         runFromCmdLine = true;
     }
-
+    
     public void prepare()
     {
         opts.addFlag("nodeploy", "Do not unpack jar files into the target dir.");
@@ -114,13 +114,13 @@ public class ejbc20 extends Tool
             throw new weblogic.utils.AssertionError(badoptionexception_1);
         }
     }
-
+    
     private String getSourceJarFileName(Getopt2 getopt2_1)
     {
         String[] strings_1 = getopt2_1.args();
         return strings_1[0];
     }
-
+    
     private void makeOutputDir(String string_1) throws ToolFailureException
     {
         outputDir = new File(string_1);
@@ -136,7 +136,7 @@ public class ejbc20 extends Tool
             throw new ToolFailureException(new StringBuffer().append("ERROR: Ejbc can not write to the temporary working directory:").append(outputDir.getAbsolutePath()).append(".  Please ensure that you have write permission for this directory.  You may also specify an alternative output directory on the weblogic.ejbc command line.").toString());
         }
     }
-
+    
     private String getTargetJarFileName(Getopt2 getopt2_1) throws ToolFailureException
     {
         String[] strings_1 = getopt2_1.args();
@@ -168,7 +168,7 @@ public class ejbc20 extends Tool
         }
         return targetJarFileName;
     }
-
+    
     private void validateToolInputs() throws ToolFailureException
     {
         if ((opts.args().length < 1) || (opts.args().length > 2))
@@ -202,7 +202,7 @@ public class ejbc20 extends Tool
             throw new weblogic.utils.AssertionError(badoptionexception_1);
         }
     }
-
+    
     private File backupJar(File file_1) throws ToolFailureException
     {
         File file_2 = new File(new StringBuffer().append(file_1).append("SAVE").toString());
@@ -227,7 +227,7 @@ public class ejbc20 extends Tool
         }
         return file_2;
     }
-
+    
     private void createOutputJar(String string_1) throws ToolFailureException
     {
         File file_1 = new File(string_1);
@@ -262,27 +262,27 @@ public class ejbc20 extends Tool
             throw new ToolFailureException(new StringBuffer().append("ERROR: Could not create output jar.  The error was:").append(exception_1).toString());
         }
     }
-
+    
     public void setClose(boolean boolean_1)
     {
         doClose = true;
     }
-
+    
     public void setClassLoader(ClassLoader classloader_1)
     {
-        m_classLoader = (GenericClassLoader) classloader_1;
+        m_classLoader = ((GenericClassLoader) classloader_1);
     }
-
+    
     public void setJarFile(VirtualJarFile virtualjarfile_1)
     {
         myJar = virtualjarfile_1;
     }
-
+    
     public void setCreateOutputJar(boolean boolean_1)
     {
         createOutputJar = true;
     }
-
+    
     public void runBody() throws ToolFailureException, ErrorCollectionException
     {
         validateToolInputs();
@@ -336,7 +336,7 @@ public class ejbc20 extends Tool
                 if (runFromCmdLine)
                 {
                     errorcollectionexception_1.printStackTrace();
-                    ErrorCollectionException errorcollectionexception_1 = formatErrorsInCollection(errorcollectionexception_1);
+                    errorcollectionexception_1 = formatErrorsInCollection(errorcollectionexception_1);
                     errorcollectionexception_1.add(new ToolFailureException("ERROR: ejbc couldn't load descriptor from jar"));
                 }
                 throw errorcollectionexception_1;
@@ -379,7 +379,7 @@ public class ejbc20 extends Tool
         {
             if (runFromCmdLine)
             {
-                ErrorCollectionException errorcollectionexception_2 = formatErrorsInCollection(errorcollectionexception_2);
+                errorcollectionexception_2 = formatErrorsInCollection(errorcollectionexception_2);
                 errorcollectionexception_2.add(new ToolFailureException("ERROR: ejbc couldn't invoke compiler"));
             }
             throw errorcollectionexception_2;
@@ -425,10 +425,10 @@ public class ejbc20 extends Tool
             inform(new StringBuffer().append("\n").append(fmt.getEJBCSuccess()).toString());
         }
     }
-
+    
     private void convertOldDescriptorsToLatest(VirtualJarFile virtualjarfile_1) throws ErrorCollectionException
     {
-        EJBDescriptorBean ejbdescriptorbean_1 = null;
+        EjbDescriptorBean ejbdescriptorbean_1 = null;
         try
         {
             ejbdescriptorbean_1 = getDescriptorFromJar(virtualjarfile_1, false);
@@ -437,7 +437,7 @@ public class ejbc20 extends Tool
         {
             if (runFromCmdLine)
             {
-                ErrorCollectionException errorcollectionexception_1 = formatErrorsInCollection(errorcollectionexception_1);
+                errorcollectionexception_1 = formatErrorsInCollection(errorcollectionexception_1);
                 errorcollectionexception_1.add(new ToolFailureException("ERROR: ejbc couldn't find descriptor"));
             }
             throw errorcollectionexception_1;
@@ -474,7 +474,7 @@ public class ejbc20 extends Tool
         }
         persistNewDescriptors(ejbdescriptorbean_1);
     }
-
+    
     private void persistNewDescriptors(EjbDescriptorBean ejbdescriptorbean_1) throws ErrorCollectionException
     {
         try
@@ -492,7 +492,7 @@ public class ejbc20 extends Tool
             throw errorcollectionexception_1;
         }
     }
-
+    
     private void renameOldDescriptors()
     {
         File file_1 = new File(outputDir.getAbsolutePath());
@@ -501,27 +501,29 @@ public class ejbc20 extends Tool
         while (int_1 < strings_1.length)
         {
             System.out.println(new StringBuffer().append("the file names are ").append(strings_1[int_1]).toString());
-            while ((strings_1[int_1].equalsIgnoreCase("META-INF")) && (null.isDirectory()))
+            if (strings_1[int_1].equalsIgnoreCase("META-INF"))
             {
-                String[] strings_2 = null.list();
-                int int_2 = 0;
-                if (!(int_2 < strings_2.length))
+                File file_2 = new File(new StringBuffer().append(outputDir.getAbsolutePath()).append(System.getProperty("file.separator")).append(strings_1[int_1]).toString());
+                if (file_2.isDirectory())
                 {
-                    System.out.println(new StringBuffer().append("the xml file names are ").append(strings_2[int_2]).toString());
-                    if ((strings_2[int_2].equalsIgnoreCase("ejb-jar.xml")) || (strings_2[int_2].equalsIgnoreCase("weblogic-ejb-jar.xml")) || (strings_2[int_2].equalsIgnoreCase("weblogic-cmp-rdbms-jar.xml")))
+                    String[] strings_2 = file_2.list();
+                    int int_2 = 0;
+                    while (int_2 < strings_2.length)
                     {
-                        String string_1 = new StringBuffer().append(null.getAbsolutePath()).append(System.getProperty("file.separator")).append(strings_2[int_2]).toString();
-                        new File(string_1).renameTo(new File(new StringBuffer().append(string_1).append(".old").toString()));
+                        System.out.println(new StringBuffer().append("the xml file names are ").append(strings_2[int_2]).toString());
+                        if ((strings_2[int_2].equalsIgnoreCase("ejb-jar.xml")) || (strings_2[int_2].equalsIgnoreCase("weblogic-ejb-jar.xml")) || (strings_2[int_2].equalsIgnoreCase("weblogic-cmp-rdbms-jar.xml")))
+                        {
+                            String string_1 = new StringBuffer().append(file_2.getAbsolutePath()).append(System.getProperty("file.separator")).append(strings_2[int_2]).toString();
+                            new File(string_1).renameTo(new File(new StringBuffer().append(string_1).append(".old").toString()));
+                        }
+                        int_2++;
                     }
-                    int_2++;
-                    continue;
-                    break;
                 }
             }
             int_1++;
         }
     }
-
+    
     public ErrorCollectionException formatErrorsInCollection(ErrorCollectionException errorcollectionexception_1)
     {
         Collection collection_1 = errorcollectionexception_1.getExceptions();
@@ -530,13 +532,13 @@ public class ejbc20 extends Tool
         Iterator iterator_1 = collection_1.iterator();
         while (iterator_1.hasNext())
         {
-            Throwable throwable_1 = (Throwable) iterator_1.next();
+            Throwable throwable_1 = ((Throwable) iterator_1.next());
             string_1 = formatExceptionMessage(throwable_1);
             errorcollectionexception_2.add(new ToolFailureException(string_1));
         }
         return errorcollectionexception_2;
     }
-
+    
     public String formatExceptionMessage(Throwable throwable_1)
     {
         String string_1 = new StringBuffer().append(throwable_1.getMessage()).append("\n").toString();
@@ -555,7 +557,7 @@ public class ejbc20 extends Tool
             }
             else if (throwable_1 instanceof XMLProcessingException)
             {
-                XMLProcessingException xmlprocessingexception_1 = (XMLProcessingException) throwable_1;
+                XMLProcessingException xmlprocessingexception_1 = ((XMLProcessingException) throwable_1);
                 stringbuffer_1.append(new StringBuffer().append("Error processing '").append(xmlprocessingexception_1.getFileName()).append("': ").append(string_1).toString());
             }
             else
@@ -569,7 +571,7 @@ public class ejbc20 extends Tool
         }
         return stringbuffer_1.toString();
     }
-
+    
     private EjbDescriptorBean getDescriptorFromJar(VirtualJarFile virtualjarfile_1, boolean boolean_1) throws ErrorCollectionException
     {
         ErrorCollectionException errorcollectionexception_1 = new ErrorCollectionException();
@@ -605,7 +607,7 @@ public class ejbc20 extends Tool
         }
         return ejbdescriptorbean_1;
     }
-
+    
     private boolean isBug(Throwable throwable_1)
     {
         int int_1 = 0;
@@ -619,7 +621,7 @@ public class ejbc20 extends Tool
         }
         return false;
     }
-
+    
     private void inform(String string_1)
     {
         if (null != listener)
@@ -627,21 +629,21 @@ public class ejbc20 extends Tool
             listener.update(string_1);
         }
     }
-
+    
     public ICompilerFactory getCompilerFactory()
     {
         return compilerFactory;
     }
-
+    
     public void setCompilerFactory(ICompilerFactory icompilerfactory_1)
     {
         compilerFactory = icompilerfactory_1;
     }
-
+    
     public static void main(String[] strings_1) throws Exception
     {
         System.out.println("\nDEPRECATED: The weblogic.ejbc20 compiler is deprecated and will be removed in a future version of WebLogic Server.  Please use weblogic.ejbc instead.\n");
         new ejbc20(strings_1).run();
     }
-
+    
 }

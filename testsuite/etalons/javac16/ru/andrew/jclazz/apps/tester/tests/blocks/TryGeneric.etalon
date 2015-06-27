@@ -1,5 +1,7 @@
 package ru.andrew.jclazz.apps.tester.tests.blocks;
 
+import java.io.*;
+
 public class TryGeneric
 {
 
@@ -83,6 +85,101 @@ public class TryGeneric
             System.out.println(".");
         }
         System.out.println("After try");
+    }
+    
+    public void test3(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                return;
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+        }
+    }
+    
+    public void test4(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                return;
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test5(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                throw new RuntimeException();
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test6(String string_1) throws Throwable
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                throw new Throwable();
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test7() throws Throwable
+    {
+        DataInputStream datainputstream_1 = new DataInputStream(null);
+        try
+        {
+            while (true)
+            {
+                System.out.println(datainputstream_1.readUTF());
+            }
+        }
+        catch (EOFException eofexception_1)
+        {
+        }
+        catch (Throwable throwable_1)
+        {
+            throw throwable_1;
+        }
+        System.out.println("1");
     }
     
 }

@@ -21,11 +21,20 @@ public class IincView extends OperationView
 
     public String source()
     {
+        /*
         return getLVName(lvar) + (((Iinc) operation).getIncValue() == 1 ? "++" : " += " + ((Iinc) operation).getIncValue());
+         */
+        return null;
     }
 
     public void analyze(Block block)
     {
         lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null);
+    }
+
+    public void analyze2(Block block)
+    {
+        lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null);
+        view = new Object[]{lvar.getView(), (((Iinc) operation).getIncValue() == 1 ? "++" : " += " + ((Iinc) operation).getIncValue())};
     }
 }

@@ -6,8 +6,8 @@ import ru.andrew.jclazz.core.code.ops.*;
 
 public class SignumView extends OperationView
 {
-    private String var1;
-    private String var2;
+    private OperationView var1;
+    private OperationView var2;
 
     public SignumView(Operation operation, MethodSourceView methodView)
     {
@@ -24,21 +24,34 @@ public class SignumView extends OperationView
         return "signum(" + var1 + " - " + var2 + ")";
     }
 
-    public String getVar1()
+    public OperationView getVar1()
     {
         return var1;
     }
 
-    public String getVar2()
+    public OperationView getVar2()
     {
         return var2;
     }
 
     public void analyze(Block block)
     {
-        OperationView prev1 = block.removePriorPushOperation();
-        var1 = prev1.source();
-        OperationView prev2 = block.removePriorPushOperation();
-        var2 = prev2.source();
+        //OperationView prev1 = block.removePriorPushOperation();
+        //var1 = prev1.source();
+        //OperationView prev2 = block.removePriorPushOperation();
+        //var2 = prev2.source();
+    }
+
+    public void analyze2(Block block)
+    {
+        var1 = context.pop();
+        var2 = context.pop();
+        view = new Object[]{"signum(", var1, " - ", var2, ")"};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

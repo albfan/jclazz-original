@@ -19,11 +19,18 @@ public class GoToView extends OperationView
     public void setBreak(boolean isBreak)
     {
         this.isBreak = isBreak;
+        view = new Object[]{"break"};
     }
 
     public void setContinue(boolean isContinue)
     {
         this.isContinue = isContinue;
+        view = new Object[]{"continue"};
+    }
+
+    public boolean isPrintable()
+    {
+        return isBreak || isContinue;
     }
 
     public boolean isBreak()
@@ -73,6 +80,10 @@ public class GoToView extends OperationView
     }
 
     public void analyze(Block block)
+    {
+    }
+
+    public void analyze2(Block block)
     {
     }
 

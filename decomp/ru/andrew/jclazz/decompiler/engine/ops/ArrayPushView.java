@@ -17,6 +17,10 @@ public class ArrayPushView extends OperationView
 
     public String source()
     {
+//        if (ref != null)
+//        {
+//            return ref.getOperation();
+//        }
         return arrayRef + "[" + index + "]";
     }
 
@@ -27,6 +31,7 @@ public class ArrayPushView extends OperationView
 
     public void analyze(Block block)
     {
+        /*
         OperationView indexOp = block.removePriorPushOperation();
         index = indexOp.source();
 
@@ -35,5 +40,24 @@ public class ArrayPushView extends OperationView
         arrayType = arrayOp.getPushType();
         // Removing 1 array dimension
         if (arrayType.endsWith("[]")) arrayType = arrayType.substring(0, arrayType.length() - 2);
+         * */
+    }
+
+    public void analyze2(Block block)
+    {
+        OperationView indexOp = context.pop();
+        OperationView arrayOp = context.pop();
+
+        arrayType = arrayOp.getPushType();
+        // Removing 1 array dimension
+        if (arrayType.endsWith("[]")) arrayType = arrayType.substring(0, arrayType.length() - 2);
+        
+        view = new Object[]{arrayOp, "[", indexOp, "]"};
+        context.push(this);
+    }
+
+    public boolean isPrintable()
+    {
+        return false;
     }
 }

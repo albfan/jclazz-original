@@ -17,4 +17,20 @@ public class SyncGeneric
         System.out.println("AFTER SYNC");
     }
     
+    public void testSyncInLoop(boolean boolean_1)
+    {
+        int int_1 = 0;
+        while (true)
+        {
+            synchronized (this)
+            {
+                if (boolean_1)
+                {
+                    continue;
+                }
+            }
+            System.out.println("4");
+        }
+    }
+    
 }

@@ -56,8 +56,16 @@ public class CONSTANT_Class extends CONSTANT
         {
             String typeL = descriptor.substring(currentPos, descriptor.length());
             typeL = typeL.replace('/', '.');
-            packageName = typeL.substring(0, typeL.lastIndexOf('.'));
-            name = typeL.substring(typeL.lastIndexOf('.') + 1);
+            if (typeL.lastIndexOf('.') != -1)
+            {
+                packageName = typeL.substring(0, typeL.lastIndexOf('.'));
+                name = typeL.substring(typeL.lastIndexOf('.') + 1);
+            }
+            else
+            {
+                packageName = null;
+                name = typeL;
+            }
         }
         else
         {

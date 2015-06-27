@@ -17,6 +17,15 @@ public class ClazzInputStream
         if (dis != null) dis.close();
     }
 
+    public void read(int[] buf) throws IOException
+    {
+        for (int i = 0; i < buf.length; i++)
+        {
+            buf[i] = dis.readUnsignedByte();
+            cnt++;
+        }
+    }
+
     public int readU1() throws IOException
     {
         cnt++;
