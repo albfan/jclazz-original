@@ -1,0 +1,298 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.IfOr
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: IfOr.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                8: line 13
+                19: line 15
+                27: line 17
+                35: line 18
+            @LocalVariableTable: 
+                0+36: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;), 0
+                0+36: i1 (I), 1
+                0+36: i2 (I), 2
+            @StackMapTable: 
+                SameFrame (+19): 
+                SameFrame (+7): 
+            
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 19
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 27
+        19 getstatic java.lang.System.out
+        22 ldc "IF" (java.lang.String)
+        24 invokevirtual println
+        27 getstatic java.lang.System.out
+        30 ldc "AFTER IF" (java.lang.String)
+        32 invokevirtual println
+        35 return
+    }
+}
+
+test2 : (int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 22
+                8: line 23
+                24: line 25
+                32: line 27
+                40: line 28
+            @LocalVariableTable: 
+                0+41: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;), 0
+                0+41: i1 (I), 1
+                0+41: i2 (I), 2
+                0+41: i3 (I), 3
+            @StackMapTable: 
+                SameFrame (+24): 
+                SameFrame (+7): 
+            
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 24
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmpgt 24
+        19 iload_3
+        20 iconst_4
+        21 if_icmpgt 32
+        24 getstatic java.lang.System.out
+        27 ldc "IF" (java.lang.String)
+        29 invokevirtual println
+        32 getstatic java.lang.System.out
+        35 ldc "AFTER IF" (java.lang.String)
+        37 invokevirtual println
+        40 return
+    }
+}
+
+test3 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 32
+                8: line 33
+                19: line 35
+                30: line 39
+                38: line 41
+                46: line 42
+            @LocalVariableTable: 
+                0+47: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;), 0
+                0+47: i1 (I), 1
+                0+47: i2 (I), 2
+            @StackMapTable: 
+                SameFrame (+19): 
+                SameFrame (+10): 
+                SameFrame (+7): 
+            
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 19
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 30
+        19 getstatic java.lang.System.out
+        22 ldc "IF" (java.lang.String)
+        24 invokevirtual println
+        27 goto 38
+        30 getstatic java.lang.System.out
+        33 ldc "ELSE" (java.lang.String)
+        35 invokevirtual println
+        38 getstatic java.lang.System.out
+        41 ldc "AFTER IF" (java.lang.String)
+        43 invokevirtual println
+        46 return
+    }
+}
+
+test4 : (int, int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+            @LineNumberTable:
+                0: line 46
+                8: line 47
+                32: line 49
+                43: line 53
+                51: line 55
+                59: line 56
+            @LocalVariableTable: 
+                0+60: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;), 0
+                0+60: i1 (I), 1
+                0+60: i2 (I), 2
+                0+60: i3 (I), 3
+                0+60: i4 (I), 4
+            @StackMapTable: 
+                SameFrame (+19): 
+                SameFrame (+12): 
+                SameFrame (+10): 
+                SameFrame (+7): 
+            
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 19
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 43
+        19 iload_3
+        20 bipush 8 (int)
+        22 if_icmplt 32
+        25 iload LV-4
+        27 bipush 7 (int)
+        29 if_icmplt 43
+        32 getstatic java.lang.System.out
+        35 ldc "IF" (java.lang.String)
+        37 invokevirtual println
+        40 goto 51
+        43 getstatic java.lang.System.out
+        46 ldc "ELSE" (java.lang.String)
+        48 invokevirtual println
+        51 getstatic java.lang.System.out
+        54 ldc "AFTER IF" (java.lang.String)
+        56 invokevirtual println
+        59 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "BEFORE IF"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "IF"
+6: String: "AFTER IF"
+7: String: "ELSE"
+8: Class: ru.andrew.jclazz.apps.tester.tests.blocks.IfOr
+9: Class: java.lang.Object
+10: Utf8: <init>
+11: Utf8: ()V
+12: Utf8: Code
+13: Utf8: LineNumberTable
+14: Utf8: LocalVariableTable
+15: Utf8: this
+16: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/IfOr;
+17: Utf8: test1
+18: Utf8: (II)V
+19: Utf8: i1
+20: Utf8: I
+21: Utf8: i2
+22: Utf8: StackMapTable
+23: Utf8: test2
+24: Utf8: (III)V
+25: Utf8: i3
+26: Utf8: test3
+27: Utf8: test4
+28: Utf8: (IIII)V
+29: Utf8: i4
+30: Utf8: SourceFile
+31: Utf8: IfOr.java
+32: NameAndType: <init> (()V)
+33: Class: java.lang.System
+34: NameAndType: out (Ljava/io/PrintStream;)
+35: Utf8: BEFORE IF
+36: Class: java.io.PrintStream
+37: NameAndType: println ((Ljava/lang/String;)V)
+38: Utf8: IF
+39: Utf8: AFTER IF
+40: Utf8: ELSE
+41: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/IfOr
+42: Utf8: java/lang/Object
+43: Utf8: java/lang/System
+44: Utf8: out
+45: Utf8: Ljava/io/PrintStream;
+46: Utf8: java/io/PrintStream
+47: Utf8: println
+48: Utf8: (Ljava/lang/String;)V

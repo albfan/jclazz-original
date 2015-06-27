@@ -1,0 +1,242 @@
+package Client;
+
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
+import java.awt.event.*;
+
+public class ClientMorda extends JFrame implements MordaFunc
+{
+    private JMenuBar menu;
+    private JMenu m_plugin;
+    private JMenu m_file;
+    public JPanel pluginArea;
+    public JTextArea inputArea;
+    private JScrollPane inputScroll;
+    private JTextArea outputArea;
+    private JScrollPane outputScroll;
+    private JList usersArea;
+    private JScrollPane usersScroll;
+    private JButton sendB;
+    private SendAL sendL;
+    private JTextField status;
+    private MordaAdapter mAdapter;
+    private GridBagLayout gridbag;
+    private GridBagConstraints c;
+    private Sender c_sender;
+    private Loader ldr;
+    private ClientLogin client;
+
+    ClientMorda(ClientLogin clientlogin_1, int int_1, int int_2, int int_3, int int_4)
+    {
+        client = clientlogin_1;
+        gridbag = new GridBagLayout();
+        c = new GridBagConstraints();
+        setSize(int_3, int_4);
+        setLocation(int_1, int_2);
+        getContentPane().setLayout(gridbag);
+        m_file = new JMenu("File");
+        JMenuItem jmenuitem_1 = new JMenuItem("quit");
+        jmenuitem_1.addActionListener(new QuitListener(this));
+        m_file.add(jmenuitem_1);
+        m_plugin = new JMenu("Plugins");
+        menu = new JMenuBar();
+        menu.add(m_file);
+        menu.add(m_plugin);
+        setJMenuBar(menu);
+        outputArea = new JTextArea(6, 40);
+        outputArea.setEditable(false);
+        outputArea.setBackground(Color.white);
+        outputArea.setLineWrap(true);
+        c.gridwidth = -1;
+        c.gridheight = 7;
+        c.weightx = 10.0;
+        c.weighty = 7.0;
+        c.anchor = 18;
+        c.fill = 1;
+        outputScroll = new JScrollPane(outputArea, 20, 31);
+        gridbag.setConstraints(outputScroll, c);
+        getContentPane().add(outputScroll);
+        usersArea = new JList();
+        usersArea.setSelectionMode(0);
+        c.weightx = 1.0;
+        c.gridwidth = 0;
+        c.anchor = 12;
+        usersScroll = new JScrollPane(usersArea, 20, 31);
+        gridbag.setConstraints(usersScroll, c);
+        getContentPane().add(usersScroll);
+        inputArea = new JTextArea(4, 40);
+        inputArea.setLineWrap(true);
+        c.anchor = 15;
+        c.gridheight = 5;
+        c.weighty = 5.0;
+        c.weightx = 0.0;
+        inputScroll = new JScrollPane(inputArea, 20, 31);
+        gridbag.setConstraints(inputScroll, c);
+        getContentPane().add(inputScroll);
+        status = new JTextField("Status");
+        status.setEditable(false);
+        status.setForeground(Color.green);
+        c.anchor = 16;
+        c.fill = 2;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        c.weighty = 1.0;
+        c.weightx = 6.0;
+        gridbag.setConstraints(status, c);
+        getContentPane().add(status);
+        sendL = new SendAL();
+        sendB = new JButton("Send");
+        sendB.addActionListener(sendL);
+        c.fill = 0;
+        c.gridheight = 1;
+        c.gridwidth = -1;
+        c.weighty = 0.0;
+        c.weightx = 0.0;
+        gridbag.setConstraints(sendB, c);
+        getContentPane().add(sendB);
+    }
+    
+    public void addInputText(String string_1)
+    {
+        inputArea.append(string_1);
+    }
+    
+    public void addOutputText(String string_1)
+    {
+        outputArea.append(string_1);
+    }
+    
+    public void setUserList(String[] strings_1)
+    {
+        usersArea.removeAll();
+        usersArea.setListData(strings_1);
+    }
+    
+    public void addStatusText(String string_1)
+    {
+        status.setText(string_1);
+    }
+    
+    public JFrame getFrame()
+    {
+        return this;
+    }
+    
+    public String getInputText()
+    {
+        return inputArea.getText();
+    }
+    
+    public String getUser()
+    {
+        return ((String) usersArea.getSelectedValue());
+    }
+    
+    public void addPlugin(String string_1, Object object_1)
+    {
+        ListenPlug listenplug_1 = new ListenPlug(object_1);
+        JMenuItem jmenuitem_1 = new JMenuItem(string_1);
+        jmenuitem_1.addActionListener(listenplug_1);
+        m_plugin.add(jmenuitem_1);
+        menu.updateUI();
+    }
+    
+    public void updateUI()
+    {
+        SwingUtilities.updateComponentTreeUI(this);
+        ldr.updatePluginUI();
+    }
+    
+    public void start(String string_1, String string_2) throws IOException
+    {
+        setTitle(string_1);
+        setVisible(true);
+        inputArea.requestFocus();
+        mAdapter = new MordaAdapter(this);
+        addWindowListener(mAdapter);
+        ldr = new Loader(this);
+        ldr.loadPlugins(pluginArea);
+        c_sender = new Sender(string_2, this, string_1);
+    }
+    
+    class SendAL implements ActionListener
+    {
+    
+        SendAL()
+        {
+        }
+        
+        public void actionPerformed(ActionEvent actionevent_1)
+        {
+            if (null != usersArea.getSelectedValue())
+            {
+                c_sender.exec(31, ((String) usersArea.getSelectedValue()), inputArea.getText());
+                inputArea.setText("");
+            }
+        }
+        
+    }
+
+    class MordaAdapter extends WindowAdapter
+    {
+        private ClientMorda cMorda;
+    
+        MordaAdapter(ClientMorda clientmorda_1)
+        {
+            cMorda = clientmorda_1;
+        }
+        
+        public void windowClosing(WindowEvent windowevent_1)
+        {
+            c_sender.exec(13);
+            cMorda.setVisible(false);
+            client.SavePreferences(cMorda.getLocation().x, cMorda.getLocation().y, cMorda.getSize().width, cMorda.getSize().height);
+            System.exit(0);
+        }
+        
+    }
+
+    class QuitListener implements ActionListener
+    {
+        private ClientMorda cMorda;
+    
+        QuitListener(ClientMorda clientmorda_1)
+        {
+            cMorda = clientmorda_1;
+        }
+        
+        public void actionPerformed(ActionEvent actionevent_1)
+        {
+            c_sender.exec(13);
+            cMorda.setVisible(false);
+            client.SavePreferences(cMorda.getLocation().x, cMorda.getLocation().y, cMorda.getSize().width, cMorda.getSize().height);
+            System.exit(0);
+        }
+        
+    }
+
+    class ListenPlug implements ActionListener
+    {
+        private Object obj;
+    
+        ListenPlug(Object object_1)
+        {
+            obj = object_1;
+        }
+        
+        public void actionPerformed(ActionEvent actionevent_1)
+        {
+            try
+            {
+                obj.getClass().getMethod("execute", null).invoke(obj, null);
+            }
+            catch (Exception exception_1)
+            {
+                System.out.println(exception_1);
+            }
+        }
+        
+    }
+
+}

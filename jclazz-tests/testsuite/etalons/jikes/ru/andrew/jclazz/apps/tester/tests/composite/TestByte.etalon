@@ -1,0 +1,265 @@
+package ru.andrew.jclazz.apps.tester.tests.composite;
+
+import java.util.*;
+import java.io.*;
+
+public class TestByte extends ArrayList
+{
+    public static int field;
+    static final String[] lm_errlist;
+
+    static 
+    {
+        TestByte.field = 0;
+        TestByte.lm_errlist = new String[]{"err1", "err2", "err3"};
+    }
+    
+    public TestByte()
+    {
+        super(2);
+    }
+    
+    public void testdec1()
+    {
+        int int_1 = 1;
+        while (true)
+        {
+            System.out.println("0");
+            while (int_1 > 3)
+            {
+                if (int_1 > 1)
+                {
+                    System.out.println("5");
+                }
+                switch (int_1)
+                {
+                    case 0:
+                        System.out.println("1");
+                        break;
+                    case 1:
+                        continue;
+                    case 2:
+                        return;
+                    case 3:
+                        System.out.println("2");
+                }
+                System.out.println("3");
+            }
+        }
+    }
+    
+    public static void main(String[] strings_1) throws Throwable
+    {
+        int int_1 = 10;
+        int int_2 = 0;
+        int int_3 = 0;
+        while (int_2 < 1)
+        {
+            int_2++;
+        }
+        if (int_1 != 10)
+        {
+        }
+        System.out.println("12");
+        int_1 = ~int_1;
+        System.out.println(Integer.toHexString(-1));
+        System.out.println(Long.toHexString(-1L));
+    }
+    
+    public static int trans(int int_1)
+    {
+        return (int_1 & 17043521) | ((int_1 & 8521760) >>> 4) | ((int_1 & 532610) << 4);
+    }
+    
+    public static int trans1(int int_1)
+    {
+        return (int_1 & 17043521) | ((int_1 & 8521760) >>> 4) | ((int_1 & 532610) << 4);
+    }
+    
+    public void test() throws Throwable
+    {
+        Class class_1 = Integer.class;
+        Vector vector = null;
+        DataInputStream datainputstream_1 = new DataInputStream(null);
+        try
+        {
+            while (true)
+            {
+                vector.addElement(datainputstream_1.readUTF());
+            }
+        }
+        catch (EOFException eofexception_1)
+        {
+        }
+        catch (Throwable throwable_1)
+        {
+            throw throwable_1;
+        }
+        System.out.println("1");
+    }
+    
+    public static void test1()
+    {
+        int int_1 = 1;
+        while (true)
+        {
+            switch (int_1)
+            {
+                case 1:
+                    if (int_1 == 1)
+                    {
+                        break;
+                    }
+                default:
+                    return;
+            }
+        }
+    }
+    
+    public static void printIntValue(int int_1)
+    {
+        int int_2 = 0;
+        while (true)
+        {
+            if (int_2 > 1)
+            {
+                break;
+            }
+            System.out.println("1");
+        }
+        System.out.println("2");
+    }
+    
+    public void graph()
+    {
+        int int_1 = 0;
+        while (int_1 > 4)
+        {
+            System.out.println("1");
+            try
+            {
+                System.out.println("2");
+                if (int_1 > 2)
+                {
+                    continue;
+                }
+            }
+            finally
+            {
+                System.out.println("3");
+            }
+            System.out.println("4".length());
+        }
+    }
+    
+    public static void testdec()
+    {
+        Object object_1 = new Object();
+        Integer integer_1 = new Integer(1);
+        integer_1 = new Long(1L);
+        object_1 = integer_1;
+        if (null == object_1)
+        {
+        }
+        System.out.println();
+        int int_1 = 0;
+        int int_2;
+        while ((int_2 = 3) < 2)
+        {
+            System.out.println(int_2);
+            int_1++;
+        }
+        int_1 = 2;
+        System.out.println(new StringBuilder("a").append(int_1).append("b").append(int_1).append("c").toString());
+        ArrayList arraylist_1 = new ArrayList();
+        Iterator iterator_1 = arraylist_1.iterator();
+        while (iterator_1.hasNext())
+        {
+            Integer integer_2 = (Integer) iterator_1.next();
+            System.out.println(integer_2.intValue());
+        }
+        int int_3 = 5;
+        int_3 = int_3 + 6 + int_3;
+    }
+    
+    public static void testb(byte byte_1)
+    {
+        try
+        {
+            if (Boolean.FALSE.booleanValue())
+            {
+                return;
+            }
+        }
+        finally
+        {
+            System.out.println("1");
+        }
+    }
+    
+    public void graph1()
+    {
+        int int_1 = 0;
+        while (true)
+        {
+            synchronized (this)
+            {
+                if(Boolean.FALSE.booleanValue())
+                {
+                    continue;
+                }
+            }
+            System.out.println("4".length());
+        }
+    }
+    
+    public int testf()
+    {
+        int int_1 = 0;
+        try
+        {
+            System.out.println("1");
+            return 1;
+        }
+        finally
+        {
+            System.out.println("2");
+            return 2;
+        }
+    }
+    
+    public void testloop()
+    {
+        int int_1 = 10;
+        int_1 = ~int_1;
+        System.out.println(int_1);
+        while (true)
+        {
+            if (int_1 > 0)
+            {
+                System.out.println("1");
+                continue;
+            }
+            if (int_1 > 0)
+            {
+                System.out.println("2");
+                continue;
+            }
+            if (int_1 > 0)
+            {
+                System.out.println("3");
+                continue;
+            }
+            if (int_1 > 0)
+            {
+                System.out.println();
+                continue;
+            }
+            if (int_1 > 0)
+            {
+                System.out.println();
+                continue;
+            }
+        }
+    }
+}

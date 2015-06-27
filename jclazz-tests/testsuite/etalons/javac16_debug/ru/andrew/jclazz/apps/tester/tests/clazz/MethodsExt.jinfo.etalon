@@ -1,0 +1,260 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.MethodsExt
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: MethodsExt.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 10
+                4: line 11
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+testGenerics1 : (java.util.Collection, java.util.Collection) : java.util.List
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.ClassNotFoundException
+    @Signature: (Ljava/util/Collection<*>;Ljava/util/Collection<-Ljava/util/ArrayList;>;)Ljava/util/List<Ljava/lang/Number;>;
+    CODE
+       (
+        Max stack = 1
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 15
+                6: line 16
+            @LocalVariableTable: 
+                0+8: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+                0+8: par1 (Ljava/util/Collection;), 1
+                0+8: par2 (Ljava/util/Collection;), 2
+            @LocalVariableTypeTable: 
+                0+8: par1 (sign=Ljava/util/Collection<*>;), 1
+                0+8: par2 (sign=Ljava/util/Collection<-Ljava/util/ArrayList;>;), 2
+        Exceptions:
+       )
+    {
+        0 ldc "fake" (java.lang.String)
+        2 invokestatic java.lang.Class.forName
+        5 pop
+        6 aconst_null
+        7 areturn
+    }
+}
+
+testGenerics2 : (java.util.Collection, java.util.Collection) : java.util.List
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.ClassNotFoundException
+    @Signature: (Ljava/util/Collection<+Ljava/util/List;>;Ljava/util/Collection<Ljava/lang/Number;>;)Ljava/util/List<Ljava/lang/Number;>;
+    CODE
+       (
+        Max stack = 1
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 21
+                6: line 22
+            @LocalVariableTable: 
+                0+8: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+                0+8: par3 (Ljava/util/Collection;), 1
+                0+8: par4 (Ljava/util/Collection;), 2
+            @LocalVariableTypeTable: 
+                0+8: par3 (sign=Ljava/util/Collection<+Ljava/util/List;>;), 1
+                0+8: par4 (sign=Ljava/util/Collection<Ljava/lang/Number;>;), 2
+        Exceptions:
+       )
+    {
+        0 ldc "fake" (java.lang.String)
+        2 invokestatic java.lang.Class.forName
+        5 pop
+        6 aconst_null
+        7 areturn
+    }
+}
+
+testGenerics3 : (java.util.Map) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Signature: (Ljava/util/Map<Ljava/lang/String;Ljava/util/List<+Ljava/io/Serializable;>;>;)V
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 27
+                8: line 28
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+                0+9: map (Ljava/util/Map;), 1
+            @LocalVariableTypeTable: 
+                0+9: map (sign=Ljava/util/Map<Ljava/lang/String;Ljava/util/List<+Ljava/io/Serializable;>;>;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "INNER GENERICS" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+testGenerics4 : (java.util.Collection) : java.util.List
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Signature: <T:Ljava/lang/Object;>(Ljava/util/Collection<TT;>;)Ljava/util/List<TT;>;
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 32
+            @LocalVariableTable: 
+                0+2: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+                0+2: c (Ljava/util/Collection;), 1
+            @LocalVariableTypeTable: 
+                0+2: c (sign=Ljava/util/Collection<TT;>;), 1
+        Exceptions:
+       )
+    {
+        0 aconst_null
+        1 areturn
+    }
+}
+
+testSignature : (int) : java.util.List
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Signature: (I)Ljava/util/List<Ljava/lang/Number;>;
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 37
+            @LocalVariableTable: 
+                0+2: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;), 0
+                0+2: i (I), 1
+        Exceptions:
+       )
+    {
+        0 aconst_null
+        1 areturn
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: String: "fake"
+3: Methodref: java.lang.Class.forName ((Ljava/lang/String;)Ljava/lang/Class;)
+4: Fieldref: java.io.PrintStream
+5: String: "INNER GENERICS"
+6: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+7: Class: ru.andrew.jclazz.apps.tester.tests.clazz.MethodsExt
+8: Class: java.lang.Object
+9: Utf8: <init>
+10: Utf8: ()V
+11: Utf8: Code
+12: Utf8: LineNumberTable
+13: Utf8: LocalVariableTable
+14: Utf8: this
+15: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt;
+16: Utf8: testGenerics1
+17: Utf8: (Ljava/util/Collection;Ljava/util/Collection;)Ljava/util/List;
+18: Utf8: par1
+19: Utf8: Ljava/util/Collection;
+20: Utf8: par2
+21: Utf8: LocalVariableTypeTable
+22: Utf8: Ljava/util/Collection<*>;
+23: Utf8: Ljava/util/Collection<-Ljava/util/ArrayList;>;
+24: Utf8: Exceptions
+25: Class: java.lang.ClassNotFoundException
+26: Utf8: Signature
+27: Utf8: (Ljava/util/Collection<*>;Ljava/util/Collection<-Ljava/util/ArrayList;>;)Ljava/util/List<Ljava/lang/Number;>;
+28: Utf8: testGenerics2
+29: Utf8: par3
+30: Utf8: par4
+31: Utf8: Ljava/util/Collection<+Ljava/util/List;>;
+32: Utf8: Ljava/util/Collection<Ljava/lang/Number;>;
+33: Utf8: (Ljava/util/Collection<+Ljava/util/List;>;Ljava/util/Collection<Ljava/lang/Number;>;)Ljava/util/List<Ljava/lang/Number;>;
+34: Utf8: testGenerics3
+35: Utf8: (Ljava/util/Map;)V
+36: Utf8: map
+37: Utf8: Ljava/util/Map;
+38: Utf8: Ljava/util/Map<Ljava/lang/String;Ljava/util/List<+Ljava/io/Serializable;>;>;
+39: Utf8: (Ljava/util/Map<Ljava/lang/String;Ljava/util/List<+Ljava/io/Serializable;>;>;)V
+40: Utf8: testGenerics4
+41: Utf8: (Ljava/util/Collection;)Ljava/util/List;
+42: Utf8: c
+43: Utf8: Ljava/util/Collection<TT;>;
+44: Utf8: <T:Ljava/lang/Object;>(Ljava/util/Collection<TT;>;)Ljava/util/List<TT;>;
+45: Utf8: testSignature
+46: Utf8: (I)Ljava/util/List;
+47: Utf8: i
+48: Utf8: I
+49: Utf8: (I)Ljava/util/List<Ljava/lang/Number;>;
+50: Utf8: SourceFile
+51: Utf8: MethodsExt.java
+52: NameAndType: <init> (()V)
+53: Utf8: fake
+54: Class: java.lang.Class
+55: NameAndType: forName ((Ljava/lang/String;)Ljava/lang/Class;)
+56: Class: java.lang.System
+57: NameAndType: out (Ljava/io/PrintStream;)
+58: Utf8: INNER GENERICS
+59: Class: java.io.PrintStream
+60: NameAndType: println ((Ljava/lang/String;)V)
+61: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/MethodsExt
+62: Utf8: java/lang/Object
+63: Utf8: java/lang/ClassNotFoundException
+64: Utf8: java/lang/Class
+65: Utf8: forName
+66: Utf8: (Ljava/lang/String;)Ljava/lang/Class;
+67: Utf8: java/lang/System
+68: Utf8: out
+69: Utf8: Ljava/io/PrintStream;
+70: Utf8: java/io/PrintStream
+71: Utf8: println
+72: Utf8: (Ljava/lang/String;)V

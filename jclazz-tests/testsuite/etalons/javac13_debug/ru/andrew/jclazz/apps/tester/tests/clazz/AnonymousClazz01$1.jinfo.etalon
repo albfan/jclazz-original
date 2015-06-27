@@ -1,0 +1,168 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+Super Class : java.lang.Object
+Implemented Interfaces:
+   java.util.Comparator
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 0 ()
+
+Attributes:
+@SourceFile: AnonymousClazz01.java
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+      Outer class - 
+      Inner name - 
+      Inner class access flags - 0
+
+Fields:
+this$0 : ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01
+{
+    Access Flags: 18 ( PRIVATE  FINAL )
+
+    Attributes:
+        @Synthetic
+}
+
+
+Methods:
+<init> : (ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01) : void
+{
+    Access Flags: 0 ()
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 21
+            @LocalVariableTable: 
+                0+10: this (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01$1;), 0
+                0+10: this$0 (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 1
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 aload_0
+        5 aload_1
+        6 putfield this$0
+        9 return
+    }
+}
+
+compare : (java.lang.Object, java.lang.Object) : int
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 23
+                12: line 25
+                34: line 27
+                49: line 29
+                51: line 33
+            @LocalVariableTable: 
+                0+53: this (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01$1;), 0
+                0+53: o1 (Ljava/lang/Object;), 1
+                0+53: o2 (Ljava/lang/Object;), 2
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield this$0
+        4 invokestatic ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$000
+        7 bipush 12 (int)
+        9 if_icmpne 51
+        12 aload_0
+        13 getfield this$0
+        16 invokestatic ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$100
+        19 new java.math.BigInteger
+        22 dup
+        23 ldc "1234" (java.lang.String)
+        25 invokespecial <init>
+        28 invokevirtual equals
+        31 ifeq 51
+        34 aload_0
+        35 getfield this$0
+        38 invokestatic ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$200
+        41 ldc "123" (java.lang.String)
+        43 invokevirtual equals
+        46 ifeq 51
+        49 iconst_1
+        50 ireturn
+        51 iconst_0
+        52 ireturn
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01
+3: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$000 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)I)
+4: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$100 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/math/BigInteger;)
+5: Class: java.math.BigInteger
+6: String: "1234"
+7: Methodref: java.math.BigInteger.<init> ((Ljava/lang/String;)V)
+8: Methodref: java.math.BigInteger.equals ((Ljava/lang/Object;)Z)
+9: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01.access$200 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/lang/String;)
+10: String: "123"
+11: Methodref: java.lang.String.equals ((Ljava/lang/Object;)Z)
+12: Class: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+13: Class: java.lang.Object
+14: Class: java.util.Comparator
+15: Utf8: this$0
+16: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;
+17: Utf8: Synthetic
+18: Utf8: <init>
+19: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)V
+20: Utf8: Code
+21: Utf8: LineNumberTable
+22: Utf8: LocalVariableTable
+23: Utf8: this
+24: Utf8: 
+25: Utf8: InnerClasses
+26: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01$1;
+27: Utf8: compare
+28: Utf8: (Ljava/lang/Object;Ljava/lang/Object;)I
+29: Utf8: o1
+30: Utf8: Ljava/lang/Object;
+31: Utf8: o2
+32: Utf8: SourceFile
+33: Utf8: AnonymousClazz01.java
+34: NameAndType: <init> (()V)
+35: NameAndType: this$0 (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)
+36: Class: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01
+37: NameAndType: access$000 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)I)
+38: NameAndType: access$100 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/math/BigInteger;)
+39: Utf8: java/math/BigInteger
+40: Utf8: 1234
+41: NameAndType: <init> ((Ljava/lang/String;)V)
+42: NameAndType: equals ((Ljava/lang/Object;)Z)
+43: NameAndType: access$200 ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/lang/String;)
+44: Utf8: 123
+45: Class: java.lang.String
+46: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01$1
+47: Utf8: java/lang/Object
+48: Utf8: java/util/Comparator
+49: Utf8: ()V
+50: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01
+51: Utf8: access$000
+52: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)I
+53: Utf8: access$100
+54: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/math/BigInteger;
+55: Utf8: (Ljava/lang/String;)V
+56: Utf8: equals
+57: Utf8: (Ljava/lang/Object;)Z
+58: Utf8: access$200
+59: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/lang/String;
+60: Utf8: java/lang/String

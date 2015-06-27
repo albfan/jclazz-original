@@ -1,0 +1,37 @@
+package ru.andrew.jclazz.apps.tester.tests.composite;
+
+public class DoubleIfInLoop
+{
+    public boolean exit;
+
+    public DoubleIfInLoop()
+    {
+    }
+    
+    public void run(String string_1, String string_2)
+    {
+        while (exit)
+        {
+            System.out.println("LOOP START");
+            if (string_1.equalsIgnoreCase("connect"))
+            {
+                if (!string_2.equalsIgnoreCase("accept"))
+                {
+                    System.out.println("IF-1-1");
+                    System.exit(1);
+                }
+                else
+                {
+                    System.out.println("IF-1-2");
+                }
+            }
+            if (string_1.equalsIgnoreCase("disconnect"))
+            {
+                System.out.println("IF-2-1");
+                System.exit(1);
+            }
+            System.out.println("LOOP END");
+        }
+    }
+    
+}

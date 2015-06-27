@@ -1,0 +1,17 @@
+jclazz - How to use, quick guide
+
+1. Requirements
+
+a. Download jclazz binary
+b. Download and install JRE version 1.4 or greater (if you don't already have), try this
+c. Set up JAVA_HOME environment variable or appropriate PATH environment variable, where java
+   executable can be found (optional, if you want to use scripts for launching jclazz)
+
+2. Invokation
+
+a. jclazz-GUI can be launched by double clicking on jclazz-gui.jar file (if jar files
+   are associated with java in your system)
+b. use .sh (on Linux) or .cmd (on Windows) scripts to launch InfoJ, Decompiler or jclazz-GUI
+c. on Windows you can use native executable 'jclazz.exe' to launch jclazz-GUI
+d. execute Java classes as usual. Main classes for InfoJ and decompiler are 
+   ru.andrew.jclazz.core.infoj.InfoJ and ru.andrew.jclazz.decompiler.ClassDecompiler

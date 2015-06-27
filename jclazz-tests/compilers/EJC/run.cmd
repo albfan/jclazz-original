@@ -1,0 +1,1 @@
+c:\Soft\Java\jre6\bin\java.exe -cp org.eclipse.jdt.core.jar org.eclipse.jdt.internal.compiler.batch.Main %*

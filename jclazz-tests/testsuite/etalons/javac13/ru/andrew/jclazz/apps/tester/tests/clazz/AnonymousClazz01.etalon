@@ -1,0 +1,39 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+import java.util.*;
+import java.math.*;
+
+public class AnonymousClazz01
+{
+    private String str;
+    private BigInteger bi;
+    private int i;
+
+    public AnonymousClazz01()
+    {
+    }
+    
+    public void test(List list_1)
+    {
+        Collections.sort(list_1, new Comparator()
+        {
+        
+            public int compare(Object object_1, Object object_2)
+            {
+                if (i == 12)
+                {
+                    if (bi.equals(new BigInteger("1234")))
+                    {
+                        if (str.equals("123"))
+                        {
+                            return 1;
+                        }
+                    }
+                }
+                return 0;
+            }
+            
+        });
+    }
+    
+}

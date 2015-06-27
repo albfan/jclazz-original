@@ -1,0 +1,338 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_Arithmetic
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_Arithmetic.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Arithmetic;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 49
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                2: line 13
+                4: line 14
+                6: line 15
+                11: line 16
+                14: line 17
+                17: line 18
+                20: line 19
+                25: line 20
+                33: line 21
+                38: line 22
+                44: line 23
+                51: line 24
+                58: line 25
+                66: line 26
+                71: line 27
+                77: line 28
+                84: line 29
+                91: line 30
+                99: line 31
+                104: line 32
+                110: line 33
+                117: line 34
+                124: line 35
+                132: line 36
+                137: line 37
+                143: line 38
+                150: line 39
+                157: line 40
+                165: line 41
+                170: line 42
+                176: line 43
+                183: line 44
+                190: line 45
+                198: line 46
+                202: line 47
+                206: line 48
+                211: line 49
+                216: line 50
+            @LocalVariableTable: 
+                0+217: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Arithmetic;), 0
+                2+215: i1 (I), 1
+                4+213: i2 (I), 2
+                6+211: l1 (J), 3
+                11+206: l2 (J), 5
+                14+203: f1 (F), 7
+                17+200: f2 (F), 8
+                20+197: d1 (D), 9
+                25+192: d2 (D), 11
+                38+179: i3 (I), 13
+                44+173: l3 (J), 14
+                51+166: f3 (F), 16
+                58+159: d3 (D), 17
+                71+146: i4 (I), 19
+                77+140: l4 (J), 20
+                84+133: f4 (F), 22
+                91+126: d4 (D), 23
+                104+113: i5 (I), 25
+                110+107: l5 (J), 26
+                117+100: f5 (F), 28
+                124+93: d5 (D), 29
+                137+80: i6 (I), 31
+                143+74: l6 (J), 32
+                150+67: f6 (F), 34
+                157+60: d6 (D), 35
+                170+47: i7 (I), 37
+                176+41: l7 (J), 38
+                183+34: f7 (F), 40
+                190+27: d7 (D), 41
+                202+15: i8 (I), 43
+                206+11: l8 (J), 44
+                211+6: f8 (F), 46
+                216+1: d8 (D), 47
+        Exceptions:
+       )
+    {
+        0 iconst_1
+        1 istore_1
+        2 iconst_2
+        3 istore_2
+        4 lconst_1
+        5 lstore_3
+        6 ldc2_w 2L (long)
+        9 lstore LV-5
+        11 fconst_1
+        12 fstore LV-7
+        14 fconst_2
+        15 fstore LV-8
+        17 dconst_1
+        18 dstore LV-9
+        20 ldc2_w 2.0 (double)
+        23 dstore LV-11
+        25 getstatic java.lang.System.out
+        28 ldc "Add" (java.lang.String)
+        30 invokevirtual println
+        33 iload_1
+        34 iload_2
+        35 iadd
+        36 istore LV-13
+        38 lload_3
+        39 lload LV-5
+        41 ladd
+        42 lstore LV-14
+        44 fload LV-7
+        46 fload LV-8
+        48 fadd
+        49 fstore LV-16
+        51 dload LV-9
+        53 dload LV-11
+        55 dadd
+        56 dstore LV-17
+        58 getstatic java.lang.System.out
+        61 ldc "Sub" (java.lang.String)
+        63 invokevirtual println
+        66 iload_1
+        67 iload_2
+        68 isub
+        69 istore LV-19
+        71 lload_3
+        72 lload LV-5
+        74 lsub
+        75 lstore LV-20
+        77 fload LV-7
+        79 fload LV-8
+        81 fsub
+        82 fstore LV-22
+        84 dload LV-9
+        86 dload LV-11
+        88 dsub
+        89 dstore LV-23
+        91 getstatic java.lang.System.out
+        94 ldc "Mul" (java.lang.String)
+        96 invokevirtual println
+        99 iload_1
+        100 iload_2
+        101 imul
+        102 istore LV-25
+        104 lload_3
+        105 lload LV-5
+        107 lmul
+        108 lstore LV-26
+        110 fload LV-7
+        112 fload LV-8
+        114 fmul
+        115 fstore LV-28
+        117 dload LV-9
+        119 dload LV-11
+        121 dmul
+        122 dstore LV-29
+        124 getstatic java.lang.System.out
+        127 ldc "Div" (java.lang.String)
+        129 invokevirtual println
+        132 iload_1
+        133 iload_2
+        134 idiv
+        135 istore LV-31
+        137 lload_3
+        138 lload LV-5
+        140 ldiv
+        141 lstore LV-32
+        143 fload LV-7
+        145 fload LV-8
+        147 fdiv
+        148 fstore LV-34
+        150 dload LV-9
+        152 dload LV-11
+        154 ddiv
+        155 dstore LV-35
+        157 getstatic java.lang.System.out
+        160 ldc "Rem" (java.lang.String)
+        162 invokevirtual println
+        165 iload_1
+        166 iload_2
+        167 irem
+        168 istore LV-37
+        170 lload_3
+        171 lload LV-5
+        173 lrem
+        174 lstore LV-38
+        176 fload LV-7
+        178 fload LV-8
+        180 frem
+        181 fstore LV-40
+        183 dload LV-9
+        185 dload LV-11
+        187 drem
+        188 dstore LV-41
+        190 getstatic java.lang.System.out
+        193 ldc "Neg" (java.lang.String)
+        195 invokevirtual println
+        198 iload_1
+        199 ineg
+        200 istore LV-43
+        202 lload_3
+        203 lneg
+        204 lstore LV-44
+        206 fload LV-7
+        208 fneg
+        209 fstore LV-46
+        211 dload LV-9
+        213 dneg
+        214 dstore LV-47
+        216 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Long: 2L
+3: 
+4: Double: 2.0
+5: 
+6: Fieldref: java.io.PrintStream
+7: String: "Add"
+8: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+9: String: "Sub"
+10: String: "Mul"
+11: String: "Div"
+12: String: "Rem"
+13: String: "Neg"
+14: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_Arithmetic
+15: Class: java.lang.Object
+16: Utf8: <init>
+17: Utf8: ()V
+18: Utf8: Code
+19: Utf8: LineNumberTable
+20: Utf8: LocalVariableTable
+21: Utf8: this
+22: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_Arithmetic;
+23: Utf8: test
+24: Utf8: i1
+25: Utf8: I
+26: Utf8: i2
+27: Utf8: l1
+28: Utf8: J
+29: Utf8: l2
+30: Utf8: f1
+31: Utf8: F
+32: Utf8: f2
+33: Utf8: d1
+34: Utf8: D
+35: Utf8: d2
+36: Utf8: i3
+37: Utf8: l3
+38: Utf8: f3
+39: Utf8: d3
+40: Utf8: i4
+41: Utf8: l4
+42: Utf8: f4
+43: Utf8: d4
+44: Utf8: i5
+45: Utf8: l5
+46: Utf8: f5
+47: Utf8: d5
+48: Utf8: i6
+49: Utf8: l6
+50: Utf8: f6
+51: Utf8: d6
+52: Utf8: i7
+53: Utf8: l7
+54: Utf8: f7
+55: Utf8: d7
+56: Utf8: i8
+57: Utf8: l8
+58: Utf8: f8
+59: Utf8: d8
+60: Utf8: SourceFile
+61: Utf8: Test_Arithmetic.java
+62: NameAndType: <init> (()V)
+63: Class: java.lang.System
+64: NameAndType: out (Ljava/io/PrintStream;)
+65: Utf8: Add
+66: Class: java.io.PrintStream
+67: NameAndType: println ((Ljava/lang/String;)V)
+68: Utf8: Sub
+69: Utf8: Mul
+70: Utf8: Div
+71: Utf8: Rem
+72: Utf8: Neg
+73: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_Arithmetic
+74: Utf8: java/lang/Object
+75: Utf8: java/lang/System
+76: Utf8: out
+77: Utf8: Ljava/io/PrintStream;
+78: Utf8: java/io/PrintStream
+79: Utf8: println
+80: Utf8: (Ljava/lang/String;)V

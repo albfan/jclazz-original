@@ -1,0 +1,148 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.composite.FinalParam$2
+Super Class : java.lang.Object
+Implemented Interfaces:
+   java.util.Comparator
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 0 ()
+
+Attributes:
+@SourceFile: FinalParam.java
+@EnclosingMethod: 
+    Enclosing class: ru.andrew.jclazz.apps.tester.tests.composite.FinalParam
+    Enclosing method: test2 ((Ljava/lang/String;)V)
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.composite.FinalParam$2
+      Outer class - 
+      Inner name - 
+      Inner class access flags - 0
+
+Fields:
+val$str : java.lang.String
+{
+    Access Flags: 4112 ( FINAL  SYNTHETIC )
+
+    Attributes:
+}
+
+this$0 : ru.andrew.jclazz.apps.tester.tests.composite.FinalParam
+{
+    Access Flags: 4112 ( FINAL  SYNTHETIC )
+
+    Attributes:
+}
+
+
+Methods:
+<init> : (ru.andrew.jclazz.apps.tester.tests.composite.FinalParam, java.lang.String) : void
+{
+    Access Flags: 0 ()
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 30
+            @LocalVariableTable: 
+                0+15: this (Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam$2;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 aload_1
+        2 putfield this$0
+        5 aload_0
+        6 aload_2
+        7 putfield val$str
+        10 aload_0
+        11 invokespecial <init>
+        14 return
+    }
+}
+
+compare : (java.lang.Object, java.lang.Object) : int
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 34
+                10: line 35
+            @LocalVariableTable: 
+                0+12: this (Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam$2;), 0
+                0+12: o1 (Ljava/lang/Object;), 1
+                0+12: o2 (Ljava/lang/Object;), 2
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 aload_0
+        4 getfield val$str
+        7 invokevirtual println
+        10 iconst_0
+        11 ireturn
+    }
+}
+
+Constant Pool:
+0: 
+1: Fieldref: ru.andrew.jclazz.apps.tester.tests.composite.FinalParam
+2: Fieldref: java.lang.String
+3: Methodref: java.lang.Object.<init> (()V)
+4: Fieldref: java.io.PrintStream
+5: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+6: Class: ru.andrew.jclazz.apps.tester.tests.composite.FinalParam$2
+7: Class: java.lang.Object
+8: Class: java.util.Comparator
+9: Utf8: val$str
+10: Utf8: Ljava/lang/String;
+11: Utf8: this$0
+12: Utf8: Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam;
+13: Utf8: <init>
+14: Utf8: (Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam;Ljava/lang/String;)V
+15: Utf8: Code
+16: Utf8: LineNumberTable
+17: Utf8: LocalVariableTable
+18: Utf8: this
+19: Utf8: 
+20: Utf8: InnerClasses
+21: Utf8: Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam$2;
+22: Utf8: compare
+23: Utf8: (Ljava/lang/Object;Ljava/lang/Object;)I
+24: Utf8: o1
+25: Utf8: Ljava/lang/Object;
+26: Utf8: o2
+27: Utf8: SourceFile
+28: Utf8: FinalParam.java
+29: Utf8: EnclosingMethod
+30: Class: ru.andrew.jclazz.apps.tester.tests.composite.FinalParam
+31: NameAndType: test2 ((Ljava/lang/String;)V)
+32: NameAndType: this$0 (Lru/andrew/jclazz/apps/tester/tests/composite/FinalParam;)
+33: NameAndType: val$str (Ljava/lang/String;)
+34: NameAndType: <init> (()V)
+35: Class: java.lang.System
+36: NameAndType: out (Ljava/io/PrintStream;)
+37: Class: java.io.PrintStream
+38: NameAndType: println ((Ljava/lang/String;)V)
+39: Utf8: ru/andrew/jclazz/apps/tester/tests/composite/FinalParam$2
+40: Utf8: java/lang/Object
+41: Utf8: java/util/Comparator
+42: Utf8: ru/andrew/jclazz/apps/tester/tests/composite/FinalParam
+43: Utf8: test2
+44: Utf8: (Ljava/lang/String;)V
+45: Utf8: ()V
+46: Utf8: java/lang/System
+47: Utf8: out
+48: Utf8: Ljava/io/PrintStream;
+49: Utf8: java/io/PrintStream
+50: Utf8: println

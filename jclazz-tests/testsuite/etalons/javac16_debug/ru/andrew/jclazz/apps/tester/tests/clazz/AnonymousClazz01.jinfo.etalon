@@ -1,0 +1,216 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: AnonymousClazz01.java
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+      Outer class - 
+      Inner name - 
+      Inner class access flags - 0
+
+Fields:
+str : java.lang.String
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+bi : java.math.BigInteger
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+i : int
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 13
+                4: line 14
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test : (java.util.List) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 18
+                12: line 37
+            @LocalVariableTable: 
+                0+13: this (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 0
+                0+13: list (Ljava/util/List;), 1
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 new ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+        4 dup
+        5 aload_0
+        6 invokespecial <init>
+        9 invokestatic java.util.Collections.sort
+        12 return
+    }
+}
+
+access$000 : (ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01) : int
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 6
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield i
+        4 ireturn
+    }
+}
+
+access$100 : (ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01) : java.math.BigInteger
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 6
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield bi
+        4 areturn
+    }
+}
+
+access$200 : (ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01) : java.lang.String
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 6
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield str
+        4 areturn
+    }
+}
+
+Constant Pool:
+0: 
+1: Fieldref: java.lang.String
+2: Fieldref: java.math.BigInteger
+3: Fieldref: int
+4: Methodref: java.lang.Object.<init> (()V)
+5: Class: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1
+6: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01$1.<init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)V)
+7: Methodref: java.util.Collections.sort ((Ljava/util/List;Ljava/util/Comparator;)V)
+8: Class: ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01
+9: Class: java.lang.Object
+10: Utf8: str
+11: Utf8: Ljava/lang/String;
+12: Utf8: bi
+13: Utf8: Ljava/math/BigInteger;
+14: Utf8: i
+15: Utf8: I
+16: Utf8: <init>
+17: Utf8: ()V
+18: Utf8: Code
+19: Utf8: LineNumberTable
+20: Utf8: LocalVariableTable
+21: Utf8: this
+22: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;
+23: Utf8: test
+24: Utf8: (Ljava/util/List;)V
+25: Utf8: list
+26: Utf8: Ljava/util/List;
+27: Utf8: access$000
+28: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)I
+29: Utf8: x0
+30: Utf8: access$100
+31: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/math/BigInteger;
+32: Utf8: access$200
+33: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)Ljava/lang/String;
+34: Utf8: SourceFile
+35: Utf8: AnonymousClazz01.java
+36: NameAndType: str (Ljava/lang/String;)
+37: NameAndType: bi (Ljava/math/BigInteger;)
+38: NameAndType: i (I)
+39: NameAndType: <init> (()V)
+40: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01$1
+41: Utf8: 
+42: Utf8: InnerClasses
+43: NameAndType: <init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)V)
+44: Class: java.util.Collections
+45: NameAndType: sort ((Ljava/util/List;Ljava/util/Comparator;)V)
+46: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01
+47: Utf8: java/lang/Object
+48: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/AnonymousClazz01;)V
+49: Utf8: java/util/Collections
+50: Utf8: sort
+51: Utf8: (Ljava/util/List;Ljava/util/Comparator;)V

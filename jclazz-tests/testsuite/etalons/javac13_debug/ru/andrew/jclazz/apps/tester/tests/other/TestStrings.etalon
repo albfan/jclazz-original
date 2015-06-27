@@ -1,0 +1,28 @@
+package ru.andrew.jclazz.apps.tester.tests.other;
+
+public class TestStrings
+{
+
+    public TestStrings()
+    {
+    }
+    
+    public void test1()
+    {
+        String str1 = "a\ba";
+        String str2 = "b\tb";
+        String str3 = "c\nc";
+        String str4 = "d\fd";
+        String str5 = "e\re";
+        String str6 = "f\"f";
+        String str7 = "g'g";
+        String str8 = "h\\h";
+        String str9 = "Ì";
+        String str10 = "";
+        String str11 = "";
+        String str12 = "'";
+        String str13 = "n";
+        String str14 = "русский";
+    }
+    
+}

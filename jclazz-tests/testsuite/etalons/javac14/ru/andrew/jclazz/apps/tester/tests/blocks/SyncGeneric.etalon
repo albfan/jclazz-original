@@ -1,0 +1,36 @@
+package ru.andrew.jclazz.apps.tester.tests.blocks;
+
+public class SyncGeneric
+{
+
+    public SyncGeneric()
+    {
+    }
+    
+    public void testSync(Object object_1)
+    {
+        System.out.println("BEFORE SYNC");
+        synchronized (object_1)
+        {
+            System.out.println("SYNC BLOCK");
+        }
+        System.out.println("AFTER SYNC");
+    }
+    
+    public void testSyncInLoop(boolean boolean_1)
+    {
+        int int_1 = 0;
+        while (true)
+        {
+            synchronized (this)
+            {
+                if (boolean_1)
+                {
+                    continue;
+                }
+            }
+            System.out.println("4");
+        }
+    }
+    
+}

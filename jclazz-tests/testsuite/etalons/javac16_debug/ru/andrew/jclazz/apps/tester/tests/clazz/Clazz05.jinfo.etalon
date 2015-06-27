@@ -1,0 +1,93 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.Clazz05
+Super Class : java.lang.Object
+Implemented Interfaces:
+   java.lang.Runnable
+   java.io.Serializable
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@Signature: <Type:Ljava/lang/Object;Type2:Ljava/lang/Object;Type3:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Runnable;Ljava/io/Serializable;
+@SourceFile: Clazz05.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 9
+                4: line 10
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05;), 0
+            @LocalVariableTypeTable: 
+                0+5: this (sign=Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05<TType;TType2;TType3;>;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+run : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 0
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 14
+            @LocalVariableTable: 
+                0+1: this (Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05;), 0
+            @LocalVariableTypeTable: 
+                0+1: this (sign=Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05<TType;TType2;TType3;>;), 0
+        Exceptions:
+       )
+    {
+        0 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Class: ru.andrew.jclazz.apps.tester.tests.clazz.Clazz05
+3: Class: java.lang.Object
+4: Class: java.lang.Runnable
+5: Class: java.io.Serializable
+6: Utf8: <init>
+7: Utf8: ()V
+8: Utf8: Code
+9: Utf8: LineNumberTable
+10: Utf8: LocalVariableTable
+11: Utf8: this
+12: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05;
+13: Utf8: LocalVariableTypeTable
+14: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz05<TType;TType2;TType3;>;
+15: Utf8: run
+16: Utf8: Signature
+17: Utf8: <Type:Ljava/lang/Object;Type2:Ljava/lang/Object;Type3:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Runnable;Ljava/io/Serializable;
+18: Utf8: SourceFile
+19: Utf8: Clazz05.java
+20: NameAndType: <init> (()V)
+21: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/Clazz05
+22: Utf8: java/lang/Object
+23: Utf8: java/lang/Runnable
+24: Utf8: java/io/Serializable

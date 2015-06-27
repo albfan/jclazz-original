@@ -1,0 +1,177 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.other.Fibo
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 32 ( SUPER )
+
+Attributes:
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 0 ()
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+fib : (int) : int
+{
+    Access Flags: 10 ( PRIVATE  STATIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 3
+        Max locals = 1
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 iload_0
+        1 iconst_1
+        2 if_icmple 19
+        5 iload_0
+        6 iconst_1
+        7 isub
+        8 invokestatic ru.andrew.jclazz.apps.tester.tests.other.Fibo.fib
+        11 iload_0
+        12 iconst_2
+        13 isub
+        14 invokestatic ru.andrew.jclazz.apps.tester.tests.other.Fibo.fib
+        17 iadd
+        18 ireturn
+        19 iload_0
+        20 ireturn
+    }
+}
+
+main : (java.lang.String[]) : void
+{
+    Access Flags: 9 ( PUBLIC  STATIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.Exception
+    CODE
+       (
+        Max stack = 3
+        Max locals = 3
+        Attributes:
+        Exceptions:
+            [2-9): 12 - java.lang.Exception
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 aload_0
+        3 iconst_0
+        4 aaload
+        5 invokestatic java.lang.Integer.parseInt
+        8 istore_1
+        9 goto 25
+        12 astore_2
+        13 getstatic java.lang.System.out
+        16 ldc "Input error" (java.lang.String)
+        18 invokevirtual println
+        21 iconst_1
+        22 invokestatic java.lang.System.exit
+        25 iload_1
+        26 invokestatic ru.andrew.jclazz.apps.tester.tests.other.Fibo.fib
+        29 istore_2
+        30 getstatic java.lang.System.out
+        33 new java.lang.StringBuffer
+        36 dup
+        37 invokespecial <init>
+        40 ldc "fibonacci(" (java.lang.String)
+        42 invokevirtual append
+        45 iload_1
+        46 invokevirtual append
+        49 ldc ") = " (java.lang.String)
+        51 invokevirtual append
+        54 iload_2
+        55 invokevirtual append
+        58 invokevirtual toString
+        61 invokevirtual println
+        64 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Methodref: ru.andrew.jclazz.apps.tester.tests.other.Fibo.fib ((I)I)
+3: Methodref: java.lang.Integer.parseInt ((Ljava/lang/String;)I)
+4: Class: java.lang.Exception
+5: Fieldref: java.io.PrintStream
+6: String: "Input error"
+7: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+8: Methodref: java.lang.System.exit ((I)V)
+9: Class: java.lang.StringBuffer
+10: Methodref: java.lang.StringBuffer.<init> (()V)
+11: String: "fibonacci("
+12: Methodref: java.lang.StringBuffer.append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+13: Methodref: java.lang.StringBuffer.append ((I)Ljava/lang/StringBuffer;)
+14: String: ") = "
+15: Methodref: java.lang.StringBuffer.toString (()Ljava/lang/String;)
+16: Class: ru.andrew.jclazz.apps.tester.tests.other.Fibo
+17: Class: java.lang.Object
+18: Utf8: <init>
+19: Utf8: ()V
+20: Utf8: Code
+21: Utf8: fib
+22: Utf8: (I)I
+23: Utf8: main
+24: Utf8: ([Ljava/lang/String;)V
+25: Utf8: Exceptions
+26: NameAndType: <init> (()V)
+27: NameAndType: fib ((I)I)
+28: Class: java.lang.Integer
+29: NameAndType: parseInt ((Ljava/lang/String;)I)
+30: Utf8: java/lang/Exception
+31: Class: java.lang.System
+32: NameAndType: out (Ljava/io/PrintStream;)
+33: Utf8: Input error
+34: Class: java.io.PrintStream
+35: NameAndType: println ((Ljava/lang/String;)V)
+36: NameAndType: exit ((I)V)
+37: Utf8: java/lang/StringBuffer
+38: Utf8: fibonacci(
+39: NameAndType: append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+40: NameAndType: append ((I)Ljava/lang/StringBuffer;)
+41: Utf8: ) = 
+42: NameAndType: toString (()Ljava/lang/String;)
+43: Utf8: ru/andrew/jclazz/apps/tester/tests/other/Fibo
+44: Utf8: java/lang/Object
+45: Utf8: java/lang/Integer
+46: Utf8: parseInt
+47: Utf8: (Ljava/lang/String;)I
+48: Utf8: java/lang/System
+49: Utf8: out
+50: Utf8: Ljava/io/PrintStream;
+51: Utf8: java/io/PrintStream
+52: Utf8: println
+53: Utf8: (Ljava/lang/String;)V
+54: Utf8: exit
+55: Utf8: (I)V
+56: Utf8: append
+57: Utf8: (Ljava/lang/String;)Ljava/lang/StringBuffer;
+58: Utf8: (I)Ljava/lang/StringBuffer;
+59: Utf8: toString
+60: Utf8: ()Ljava/lang/String;

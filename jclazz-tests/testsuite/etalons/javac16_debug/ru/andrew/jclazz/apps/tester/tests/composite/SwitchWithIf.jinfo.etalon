@@ -1,0 +1,122 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.composite.SwitchWithIf
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: SwitchWithIf.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/composite/SwitchWithIf;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                20: line 15
+                26: line 17
+                37: line 21
+                45: line 24
+            @LocalVariableTable: 
+                0+46: this (Lru/andrew/jclazz/apps/tester/tests/composite/SwitchWithIf;), 0
+                0+46: i (I), 1
+                0+46: str (I), 2
+            @StackMapTable: 
+                SameFrame (+20): 
+                SameFrame (+16): 
+                SameFrame (+7): 
+            
+        Exceptions:
+       )
+    {
+        0 iload_1
+        1 lookupswitch default:45 31:20 
+        20 iload_2
+        21 bipush 7 (int)
+        23 if_icmpne 37
+        26 getstatic java.lang.System.out
+        29 ldc "IF" (java.lang.String)
+        31 invokevirtual println
+        34 goto 45
+        37 getstatic java.lang.System.out
+        40 ldc "ELSE" (java.lang.String)
+        42 invokevirtual println
+        45 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "IF"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "ELSE"
+6: Class: ru.andrew.jclazz.apps.tester.tests.composite.SwitchWithIf
+7: Class: java.lang.Object
+8: Utf8: <init>
+9: Utf8: ()V
+10: Utf8: Code
+11: Utf8: LineNumberTable
+12: Utf8: LocalVariableTable
+13: Utf8: this
+14: Utf8: Lru/andrew/jclazz/apps/tester/tests/composite/SwitchWithIf;
+15: Utf8: test1
+16: Utf8: (II)V
+17: Utf8: i
+18: Utf8: I
+19: Utf8: str
+20: Utf8: StackMapTable
+21: Utf8: SourceFile
+22: Utf8: SwitchWithIf.java
+23: NameAndType: <init> (()V)
+24: Class: java.lang.System
+25: NameAndType: out (Ljava/io/PrintStream;)
+26: Utf8: IF
+27: Class: java.io.PrintStream
+28: NameAndType: println ((Ljava/lang/String;)V)
+29: Utf8: ELSE
+30: Utf8: ru/andrew/jclazz/apps/tester/tests/composite/SwitchWithIf
+31: Utf8: java/lang/Object
+32: Utf8: java/lang/System
+33: Utf8: out
+34: Utf8: Ljava/io/PrintStream;
+35: Utf8: java/io/PrintStream
+36: Utf8: println
+37: Utf8: (Ljava/lang/String;)V

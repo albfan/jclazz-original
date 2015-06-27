@@ -1,0 +1,45 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_TypeConversion
+{
+
+    public Test_TypeConversion()
+    {
+    }
+    
+    public void test1()
+    {
+        int int_1 = 4;
+        long long_1 = (long) int_1;
+        float float_1 = (float) int_1;
+        double double_1 = (double) int_1;
+        byte byte_1 = (byte) int_1;
+        char char_1 = (char) int_1;
+        short short_1 = (short) int_1;
+    }
+    
+    public void test2()
+    {
+        long long_1 = 12L;
+        int int_1 = (int) long_1;
+        float float_1 = (float) long_1;
+        double double_1 = (double) long_1;
+    }
+    
+    public void test3()
+    {
+        float float_1 = 12.0f;
+        int int_1 = (int) float_1;
+        long long_1 = (long) float_1;
+        double double_1 = (double) float_1;
+    }
+    
+    public void test4()
+    {
+        double double_1 = 12.0;
+        int int_1 = (int) double_1;
+        long long_1 = (long) double_1;
+        float float_1 = (float) double_1;
+    }
+    
+}

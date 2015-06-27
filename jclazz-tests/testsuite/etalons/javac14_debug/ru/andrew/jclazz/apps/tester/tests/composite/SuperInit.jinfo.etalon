@@ -1,0 +1,107 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.composite.SuperInit
+Super Class : java.io.File
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: SuperInit.java
+
+Fields:
+
+Methods:
+<init> : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 10
+                5: line 11
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/composite/SuperInit;), 0
+                0+6: pathname (Ljava/lang/String;), 1
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 aload_1
+        2 invokespecial <init>
+        5 return
+    }
+}
+
+<init> : (java.lang.String, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 15
+                5: line 16
+                12: line 17
+            @LocalVariableTable: 
+                0+13: this (Lru/andrew/jclazz/apps/tester/tests/composite/SuperInit;), 0
+                0+13: pathname (Ljava/lang/String;), 1
+                0+13: i (I), 2
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 aload_1
+        2 invokespecial <init>
+        5 getstatic java.lang.System.out
+        8 iload_2
+        9 invokevirtual println
+        12 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.io.File.<init> ((Ljava/lang/String;)V)
+2: Methodref: ru.andrew.jclazz.apps.tester.tests.composite.SuperInit.<init> ((Ljava/lang/String;)V)
+3: Fieldref: java.io.PrintStream
+4: Methodref: java.io.PrintStream.println ((I)V)
+5: Class: ru.andrew.jclazz.apps.tester.tests.composite.SuperInit
+6: Class: java.io.File
+7: Utf8: <init>
+8: Utf8: (Ljava/lang/String;)V
+9: Utf8: Code
+10: Utf8: LineNumberTable
+11: Utf8: LocalVariableTable
+12: Utf8: this
+13: Utf8: Lru/andrew/jclazz/apps/tester/tests/composite/SuperInit;
+14: Utf8: pathname
+15: Utf8: Ljava/lang/String;
+16: Utf8: (Ljava/lang/String;I)V
+17: Utf8: i
+18: Utf8: I
+19: Utf8: SourceFile
+20: Utf8: SuperInit.java
+21: NameAndType: <init> ((Ljava/lang/String;)V)
+22: Class: java.lang.System
+23: NameAndType: out (Ljava/io/PrintStream;)
+24: Class: java.io.PrintStream
+25: NameAndType: println ((I)V)
+26: Utf8: ru/andrew/jclazz/apps/tester/tests/composite/SuperInit
+27: Utf8: java/io/File
+28: Utf8: java/lang/System
+29: Utf8: out
+30: Utf8: Ljava/io/PrintStream;
+31: Utf8: java/io/PrintStream
+32: Utf8: println
+33: Utf8: (I)V

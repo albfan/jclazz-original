@@ -1,0 +1,20 @@
+package ru.andrew.jclazz.apps.tester.tests.other;
+
+public class Casting
+{
+
+    public Casting()
+    {
+    }
+    
+    public static void main(String[] strings_1)
+    {
+        int int_1 = 0;
+        while (int_1 < 128)
+        {
+            System.out.println(new StringBuffer().append("ascii ").append(int_1).append(" character ").append((char) int_1).toString());
+            int_1 = (char) (int_1 + 1);
+        }
+    }
+    
+}

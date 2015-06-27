@@ -1,0 +1,30 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_Array
+{
+
+    public Test_Array()
+    {
+    }
+    
+    public void test1(Object[] objects_1)
+    {
+        int int_1 = objects_1.length;
+    }
+    
+    public void test2(Object[] objects_1)
+    {
+        Object object_1 = objects_1[7];
+    }
+    
+    public void test3()
+    {
+        String[] strings_1 = new String[]{"1", "2", "3"};
+    }
+    
+    public void test4()
+    {
+        int[][] intss_1 = new int[10][];
+    }
+    
+}

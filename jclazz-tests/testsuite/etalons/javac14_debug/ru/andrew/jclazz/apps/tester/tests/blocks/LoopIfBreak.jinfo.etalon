@@ -1,0 +1,563 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.LoopIfBreak
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: LoopIfBreak.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                2: line 13
+                8: line 15
+                16: line 16
+                21: line 18
+                29: line 19
+                32: line 21
+                35: line 22
+                46: line 24
+            @LocalVariableTable: 
+                0+47: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+45: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 46
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 46
+        32 iinc LV-1 by 1
+        35 getstatic java.lang.System.out
+        38 ldc "END LOOP" (java.lang.String)
+        40 invokevirtual println
+        43 goto 2
+        46 return
+    }
+}
+
+test2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 28
+                2: line 29
+                8: line 31
+                16: line 32
+                21: line 34
+                32: line 38
+                38: line 40
+                46: line 41
+                49: line 43
+                57: line 45
+                60: line 46
+                71: line 48
+            @LocalVariableTable: 
+                0+72: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+70: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 71
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 57
+        32 iload_1
+        33 bipush 6 (int)
+        35 if_icmpne 49
+        38 getstatic java.lang.System.out
+        41 ldc "IFELSE" (java.lang.String)
+        43 invokevirtual println
+        46 goto 71
+        49 getstatic java.lang.System.out
+        52 ldc "ELSE" (java.lang.String)
+        54 invokevirtual println
+        57 iinc LV-1 by 1
+        60 getstatic java.lang.System.out
+        63 ldc "END LOOP" (java.lang.String)
+        65 invokevirtual println
+        68 goto 2
+        71 return
+    }
+}
+
+test3 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 52
+                2: line 53
+                8: line 55
+                16: line 56
+                21: line 58
+                29: line 59
+                32: line 61
+                40: line 62
+                46: line 64
+            @LocalVariableTable: 
+                0+47: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+45: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 46
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 46
+        32 getstatic java.lang.System.out
+        35 ldc "END LOOP" (java.lang.String)
+        37 invokevirtual println
+        40 iinc LV-1 by 1
+        43 goto 2
+        46 return
+    }
+}
+
+test4 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 68
+                2: line 69
+                8: line 71
+                16: line 72
+                21: line 74
+                32: line 78
+                38: line 80
+                46: line 81
+                49: line 83
+                57: line 85
+                65: line 86
+                71: line 88
+            @LocalVariableTable: 
+                0+72: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+70: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 71
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 57
+        32 iload_1
+        33 bipush 6 (int)
+        35 if_icmpne 49
+        38 getstatic java.lang.System.out
+        41 ldc "IFELSE" (java.lang.String)
+        43 invokevirtual println
+        46 goto 71
+        49 getstatic java.lang.System.out
+        52 ldc "ELSE" (java.lang.String)
+        54 invokevirtual println
+        57 getstatic java.lang.System.out
+        60 ldc "END LOOP" (java.lang.String)
+        62 invokevirtual println
+        65 iinc LV-1 by 1
+        68 goto 2
+        71 return
+    }
+}
+
+test5 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 92
+                2: line 95
+                10: line 96
+                15: line 98
+                23: line 99
+                26: line 101
+                29: line 102
+                37: line 104
+                43: line 105
+            @LocalVariableTable: 
+                0+44: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+42: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 getstatic java.lang.System.out
+        5 ldc "START LOOP" (java.lang.String)
+        7 invokevirtual println
+        10 iload_1
+        11 iconst_5
+        12 if_icmpne 26
+        15 getstatic java.lang.System.out
+        18 ldc "IF" (java.lang.String)
+        20 invokevirtual println
+        23 goto 43
+        26 iinc LV-1 by 1
+        29 getstatic java.lang.System.out
+        32 ldc "END LOOP" (java.lang.String)
+        34 invokevirtual println
+        37 iload_1
+        38 bipush 10 (int)
+        40 if_icmplt 2
+        43 return
+    }
+}
+
+test6 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 109
+                2: line 112
+                10: line 113
+                15: line 115
+                26: line 119
+                32: line 121
+                40: line 122
+                43: line 124
+                51: line 126
+                54: line 127
+                62: line 129
+                68: line 130
+            @LocalVariableTable: 
+                0+69: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+67: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 getstatic java.lang.System.out
+        5 ldc "START LOOP" (java.lang.String)
+        7 invokevirtual println
+        10 iload_1
+        11 iconst_5
+        12 if_icmpne 26
+        15 getstatic java.lang.System.out
+        18 ldc "IF" (java.lang.String)
+        20 invokevirtual println
+        23 goto 51
+        26 iload_1
+        27 bipush 6 (int)
+        29 if_icmpne 43
+        32 getstatic java.lang.System.out
+        35 ldc "IFELSE" (java.lang.String)
+        37 invokevirtual println
+        40 goto 68
+        43 getstatic java.lang.System.out
+        46 ldc "ELSE" (java.lang.String)
+        48 invokevirtual println
+        51 iinc LV-1 by 1
+        54 getstatic java.lang.System.out
+        57 ldc "END LOOP" (java.lang.String)
+        59 invokevirtual println
+        62 iload_1
+        63 bipush 10 (int)
+        65 if_icmplt 2
+        68 return
+    }
+}
+
+test7 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 134
+                2: line 135
+                8: line 137
+                16: line 138
+                21: line 140
+                32: line 142
+                38: line 144
+                49: line 148
+                57: line 149
+                60: line 151
+                63: line 152
+                74: line 154
+            @LocalVariableTable: 
+                0+75: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+73: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 74
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 60
+        32 iload_1
+        33 bipush 6 (int)
+        35 if_icmpne 49
+        38 getstatic java.lang.System.out
+        41 ldc "IFELSE" (java.lang.String)
+        43 invokevirtual println
+        46 goto 60
+        49 getstatic java.lang.System.out
+        52 ldc "ELSE" (java.lang.String)
+        54 invokevirtual println
+        57 goto 74
+        60 iinc LV-1 by 1
+        63 getstatic java.lang.System.out
+        66 ldc "END LOOP" (java.lang.String)
+        68 invokevirtual println
+        71 goto 2
+        74 return
+    }
+}
+
+test8 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 158
+                2: line 159
+                8: line 161
+                16: line 162
+                21: line 164
+                32: line 168
+                38: line 170
+                46: line 171
+                49: line 173
+                55: line 175
+                66: line 179
+                74: line 182
+                77: line 183
+                88: line 185
+            @LocalVariableTable: 
+                0+89: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;), 0
+                2+87: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 bipush 10 (int)
+        5 if_icmpge 88
+        8 getstatic java.lang.System.out
+        11 ldc "START LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iload_1
+        17 iconst_5
+        18 if_icmpne 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 74
+        32 iload_1
+        33 bipush 6 (int)
+        35 if_icmpne 49
+        38 getstatic java.lang.System.out
+        41 ldc "IFELSE" (java.lang.String)
+        43 invokevirtual println
+        46 goto 88
+        49 iload_1
+        50 bipush 7 (int)
+        52 if_icmpne 66
+        55 getstatic java.lang.System.out
+        58 ldc "ELSE" (java.lang.String)
+        60 invokevirtual println
+        63 goto 74
+        66 getstatic java.lang.System.out
+        69 ldc "ELSE2" (java.lang.String)
+        71 invokevirtual println
+        74 iinc LV-1 by 1
+        77 getstatic java.lang.System.out
+        80 ldc "END LOOP" (java.lang.String)
+        82 invokevirtual println
+        85 goto 2
+        88 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "START LOOP"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "IF"
+6: String: "END LOOP"
+7: String: "IFELSE"
+8: String: "ELSE"
+9: String: "ELSE2"
+10: Class: ru.andrew.jclazz.apps.tester.tests.blocks.LoopIfBreak
+11: Class: java.lang.Object
+12: Utf8: <init>
+13: Utf8: ()V
+14: Utf8: Code
+15: Utf8: LineNumberTable
+16: Utf8: LocalVariableTable
+17: Utf8: this
+18: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak;
+19: Utf8: test1
+20: Utf8: i
+21: Utf8: I
+22: Utf8: test2
+23: Utf8: test3
+24: Utf8: test4
+25: Utf8: test5
+26: Utf8: test6
+27: Utf8: test7
+28: Utf8: test8
+29: Utf8: SourceFile
+30: Utf8: LoopIfBreak.java
+31: NameAndType: <init> (()V)
+32: Class: java.lang.System
+33: NameAndType: out (Ljava/io/PrintStream;)
+34: Utf8: START LOOP
+35: Class: java.io.PrintStream
+36: NameAndType: println ((Ljava/lang/String;)V)
+37: Utf8: IF
+38: Utf8: END LOOP
+39: Utf8: IFELSE
+40: Utf8: ELSE
+41: Utf8: ELSE2
+42: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/LoopIfBreak
+43: Utf8: java/lang/Object
+44: Utf8: java/lang/System
+45: Utf8: out
+46: Utf8: Ljava/io/PrintStream;
+47: Utf8: java/io/PrintStream
+48: Utf8: println
+49: Utf8: (Ljava/lang/String;)V

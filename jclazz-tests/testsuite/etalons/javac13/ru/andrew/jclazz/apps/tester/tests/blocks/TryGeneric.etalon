@@ -1,0 +1,208 @@
+package ru.andrew.jclazz.apps.tester.tests.blocks;
+
+import java.io.*;
+
+public class TryGeneric
+{
+
+    public TryGeneric()
+    {
+    }
+    
+    public void test1()
+    {
+        System.out.println("Before try");
+        try
+        {
+            System.out.println("TRY BLOCK");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("CATCH BLOCK 1");
+        }
+        catch (Error error_1)
+        {
+            System.out.println("CATCH BLOCK 2");
+        }
+        catch (Throwable throwable_1)
+        {
+            System.out.println("CATCH BLOCK 3");
+        }
+        finally
+        {
+            System.out.println(".");
+            System.out.println("..");
+            System.out.println("...");
+            System.out.println("FINALLY BLOCK");
+            System.out.println("...");
+            System.out.println("..");
+            System.out.println(".");
+        }
+        System.out.println("After try");
+    }
+    
+    public void test2()
+    {
+        System.out.println("Before try");
+        try
+        {
+            System.out.println("TRY BLOCK start");
+            try
+            {
+                System.out.println("INNER TRY BLOCK");
+            }
+            catch (Exception exception_1)
+            {
+                System.out.println("INNER CATCH BLOCK 1");
+            }
+            catch (Throwable throwable_1)
+            {
+                System.out.println("INNER CATCH BLOCK 2");
+            }
+            System.out.println("TRY BLOCK end");
+        }
+        catch (Exception exception_2)
+        {
+            System.out.println("CATCH BLOCK 1");
+            throw new RuntimeException();
+        }
+        catch (Error error_1)
+        {
+            System.out.println("CATCH BLOCK 2");
+        }
+        catch (Throwable throwable_2)
+        {
+            System.out.println("CATCH BLOCK 3");
+        }
+        finally
+        {
+            System.out.println(".");
+            System.out.println("..");
+            System.out.println("...");
+            System.out.println("FINALLY BLOCK");
+            System.out.println("...");
+            System.out.println("..");
+            System.out.println(".");
+        }
+        System.out.println("After try");
+    }
+    
+    public void test3(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                return;
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+        }
+    }
+    
+    public void test4(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                return;
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test5(String string_1)
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                throw new RuntimeException();
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test6(String string_1) throws Throwable
+    {
+        try
+        {
+            if ("".equals(string_1))
+            {
+                throw new Throwable();
+            }
+            System.out.println("SOUT");
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println("EXCEPTION");
+        }
+        finally
+        {
+            System.out.println("FINALLY");
+        }
+    }
+    
+    public void test7() throws Throwable
+    {
+        DataInputStream datainputstream_1 = new DataInputStream(null);
+        try
+        {
+            while (true)
+            {
+                System.out.println(datainputstream_1.readUTF());
+            }
+        }
+        catch (EOFException eofexception_1)
+        {
+        }
+        catch (Throwable throwable_1)
+        {
+            throw throwable_1;
+        }
+        System.out.println("1");
+    }
+    
+    public void test8()
+    {
+        try
+        {
+            System.out.println("TRY");
+        }
+        catch (Exception exception_1)
+        {
+            exception_1.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                System.out.println("FINALLY TRY");
+            }
+            catch (Exception exception_2)
+            {
+                System.out.println(new StringBuffer().append("EX2").append(exception_2).toString());
+            }
+        }
+    }
+    
+}

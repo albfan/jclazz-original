@@ -1,0 +1,139 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_MultiArray
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_MultiArray.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_MultiArray;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+testMultiArray1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                8: line 13
+                16: line 14
+            @LocalVariableTable: 
+                0+17: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_MultiArray;), 0
+                16+1: myArray ([[I), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "---" (java.lang.String)
+        5 invokevirtual println
+        8 iconst_5
+        9 bipush 7 (int)
+        11 multianewarray 2-dim array of int[][]
+        15 astore_1
+        16 return
+    }
+}
+
+testMultiArray2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 18
+                8: line 19
+                16: line 20
+            @LocalVariableTable: 
+                0+17: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_MultiArray;), 0
+                16+1: myArray ([[Ljava/lang/String;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "---" (java.lang.String)
+        5 invokevirtual println
+        8 iconst_5
+        9 bipush 7 (int)
+        11 multianewarray 2-dim array of java.lang.String[][]
+        15 astore_1
+        16 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "---"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: Class: int[][]
+6: Class: java.lang.String[][]
+7: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_MultiArray
+8: Class: java.lang.Object
+9: Utf8: <init>
+10: Utf8: ()V
+11: Utf8: Code
+12: Utf8: LineNumberTable
+13: Utf8: LocalVariableTable
+14: Utf8: this
+15: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_MultiArray;
+16: Utf8: testMultiArray1
+17: Utf8: myArray
+18: Utf8: [[I
+19: Utf8: testMultiArray2
+20: Utf8: [[Ljava/lang/String;
+21: Utf8: SourceFile
+22: Utf8: Test_MultiArray.java
+23: NameAndType: <init> (()V)
+24: Class: java.lang.System
+25: NameAndType: out (Ljava/io/PrintStream;)
+26: Utf8: ---
+27: Class: java.io.PrintStream
+28: NameAndType: println ((Ljava/lang/String;)V)
+29: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_MultiArray
+30: Utf8: java/lang/Object
+31: Utf8: java/lang/System
+32: Utf8: out
+33: Utf8: Ljava/io/PrintStream;
+34: Utf8: java/io/PrintStream
+35: Utf8: println
+36: Utf8: (Ljava/lang/String;)V

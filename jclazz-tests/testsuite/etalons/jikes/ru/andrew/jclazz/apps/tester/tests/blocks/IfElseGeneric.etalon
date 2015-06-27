@@ -1,0 +1,105 @@
+package ru.andrew.jclazz.apps.tester.tests.blocks;
+
+import java.util.*;
+
+public class IfElseGeneric
+{
+
+    public void test1(List list_1)
+    {
+        System.out.println("BEFORE IF");
+        if (list_1 instanceof ArrayList)
+        {
+            System.out.println("TRUE");
+        }
+        System.out.println("AFTER IF");
+    }
+    
+    public void test2(List list_1)
+    {
+        System.out.println("BEFORE IF");
+        if (list_1 instanceof ArrayList)
+        {
+            System.out.println("TRUE");
+        }
+        else
+        {
+            System.out.println("FALSE");
+        }
+        System.out.println("AFTER IF");
+    }
+    
+    public void test3(List list_1, int int_1)
+    {
+        System.out.println("BEFORE IF");
+        if ((list_1 instanceof ArrayList) && (int_1 > 10))
+        {
+            System.out.println("IF");
+        }
+        else if (int_1 <= 10)
+        {
+            System.out.println("ELSEIF");
+        }
+        else
+        {
+            System.out.println("ELSE");
+        }
+        System.out.println("AFTER IF");
+    }
+    
+    public void test4(List list_1, int int_1)
+    {
+        System.out.println("BEFORE IF");
+        if ((list_1 instanceof ArrayList) && (int_1 > 10))
+        {
+            System.out.println("IF");
+        }
+        else if (int_1 <= 10)
+        {
+            System.out.println("ELSEIF");
+        }
+        System.out.println("AFTER IF");
+    }
+    
+    public void test5(long long_1)
+    {
+        if (long_1 == 17L)
+        {
+            System.out.println("lcmp");
+        }
+    }
+    
+    public void test6(double double_1)
+    {
+        if (double_1 < (double) 2)
+        {
+            System.out.println("dcmpl");
+        }
+    }
+    
+    public void test7(String string_1)
+    {
+        if (string_1 == "")
+        {
+            System.out.println("==");
+        }
+        System.out.println("IF");
+        if (string_1 != "")
+        {
+            System.out.println("!=");
+        }
+    }
+    
+    public void test8(int int_1)
+    {
+        if (int_1 == 10)
+        {
+        }
+        System.out.println("A");
+    }
+    
+    public IfElseGeneric()
+    {
+    }
+    
+}

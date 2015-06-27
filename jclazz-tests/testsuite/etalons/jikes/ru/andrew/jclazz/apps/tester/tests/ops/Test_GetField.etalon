@@ -1,0 +1,22 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_GetField
+{
+    public static String str;
+    private int f;
+
+    public void test1(Test_GetField test_getfield_1)
+    {
+        f = test_getfield_1.f;
+    }
+    
+    public void test2()
+    {
+        System.out.println(Test_GetField.str);
+    }
+    
+    public Test_GetField()
+    {
+    }
+    
+}

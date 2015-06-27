@@ -1,0 +1,227 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_PutField
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_PutField.java
+
+Fields:
+sstr : java.lang.String
+{
+    Access Flags: 9 ( PUBLIC  STATIC )
+
+    Attributes:
+}
+
+pstr : java.lang.String
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+}
+
+str : java.lang.String
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+b : boolean
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+b2 : boolean
+{
+    Access Flags: 18 ( PRIVATE  FINAL )
+
+    Attributes:
+        @ConstantValue: 1
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                4: line 9
+                9: line 13
+            @LocalVariableTable: 
+                0+10: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 aload_0
+        5 iconst_1
+        6 putfield b2
+        9 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 17
+                6: line 18
+            @LocalVariableTable: 
+                0+7: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 ldc "123" (java.lang.String)
+        3 putfield str
+        6 return
+    }
+}
+
+test2 : (ru.andrew.jclazz.apps.tester.tests.ops.Test_PutField) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 22
+                6: line 23
+            @LocalVariableTable: 
+                0+7: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 0
+                0+7: obj (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 1
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 ldc "456" (java.lang.String)
+        3 putfield pstr
+        6 return
+    }
+}
+
+test3 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 27
+                5: line 28
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 0
+        Exceptions:
+       )
+    {
+        0 ldc "789" (java.lang.String)
+        2 putstatic ru.andrew.jclazz.apps.tester.tests.ops.Test_PutField.sstr
+        5 return
+    }
+}
+
+test4 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 32
+                5: line 33
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 iconst_1
+        2 putfield b
+        5 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: boolean
+3: String: "123"
+4: Fieldref: java.lang.String
+5: String: "456"
+6: Fieldref: java.lang.String
+7: String: "789"
+8: Fieldref: java.lang.String
+9: Fieldref: boolean
+10: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_PutField
+11: Class: java.lang.Object
+12: Utf8: sstr
+13: Utf8: Ljava/lang/String;
+14: Utf8: pstr
+15: Utf8: str
+16: Utf8: b
+17: Utf8: Z
+18: Utf8: b2
+19: Utf8: ConstantValue
+20: Integer: 1
+21: Utf8: <init>
+22: Utf8: ()V
+23: Utf8: Code
+24: Utf8: LineNumberTable
+25: Utf8: LocalVariableTable
+26: Utf8: this
+27: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;
+28: Utf8: test1
+29: Utf8: test2
+30: Utf8: (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PutField;)V
+31: Utf8: obj
+32: Utf8: test3
+33: Utf8: test4
+34: Utf8: SourceFile
+35: Utf8: Test_PutField.java
+36: NameAndType: <init> (()V)
+37: NameAndType: b2 (Z)
+38: Utf8: 123
+39: NameAndType: str (Ljava/lang/String;)
+40: Utf8: 456
+41: NameAndType: pstr (Ljava/lang/String;)
+42: Utf8: 789
+43: NameAndType: sstr (Ljava/lang/String;)
+44: NameAndType: b (Z)
+45: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_PutField
+46: Utf8: java/lang/Object

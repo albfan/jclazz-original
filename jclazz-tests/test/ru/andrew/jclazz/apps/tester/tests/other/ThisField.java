@@ -1,0 +1,11 @@
+package ru.andrew.jclazz.apps.tester.tests.other;
+
+public class ThisField
+{
+    private String string_1;
+
+    public void test1(String string_1)
+    {
+       this.string_1 = string_1;
+    }
+}

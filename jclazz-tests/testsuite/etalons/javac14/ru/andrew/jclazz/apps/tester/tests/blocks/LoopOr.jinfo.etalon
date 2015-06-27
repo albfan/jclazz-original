@@ -1,0 +1,415 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.LoopOr
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 19
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 36
+        19 getstatic java.lang.System.out
+        22 ldc "LOOP" (java.lang.String)
+        24 invokevirtual println
+        27 iinc LV-1 by 1
+        30 iinc LV-2 by 1
+        33 goto 8
+        36 getstatic java.lang.System.out
+        39 ldc "AFTER LOOP" (java.lang.String)
+        41 invokevirtual println
+        44 return
+    }
+}
+
+test2 : (int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 24
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmpgt 24
+        19 iload_3
+        20 iconst_4
+        21 if_icmpgt 41
+        24 getstatic java.lang.System.out
+        27 ldc "LOOP" (java.lang.String)
+        29 invokevirtual println
+        32 iinc LV-1 by 1
+        35 iinc LV-2 by 1
+        38 goto 8
+        41 getstatic java.lang.System.out
+        44 ldc "AFTER LOOP" (java.lang.String)
+        46 invokevirtual println
+        49 return
+    }
+}
+
+test3 : (int, int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpeq 19
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 49
+        19 iload_3
+        20 bipush 8 (int)
+        22 if_icmplt 32
+        25 iload LV-4
+        27 bipush 7 (int)
+        29 if_icmplt 49
+        32 getstatic java.lang.System.out
+        35 ldc "LOOP" (java.lang.String)
+        37 invokevirtual println
+        40 iinc LV-1 by 1
+        43 iinc LV-2 by 1
+        46 goto 8
+        49 getstatic java.lang.System.out
+        52 ldc "AFTER LOOP" (java.lang.String)
+        54 invokevirtual println
+        57 return
+    }
+}
+
+test4 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iinc LV-1 by 1
+        19 iinc LV-2 by 1
+        22 iload_1
+        23 iconst_2
+        24 if_icmpeq 8
+        27 iload_2
+        28 bipush 7 (int)
+        30 if_icmpgt 8
+        33 getstatic java.lang.System.out
+        36 ldc "AFTER LOOP" (java.lang.String)
+        38 invokevirtual println
+        41 return
+    }
+}
+
+test5 : (int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iinc LV-1 by 1
+        19 iinc LV-2 by 1
+        22 iload_1
+        23 iconst_2
+        24 if_icmpeq 8
+        27 iload_2
+        28 bipush 7 (int)
+        30 if_icmpgt 8
+        33 iload_3
+        34 iconst_4
+        35 if_icmple 8
+        38 getstatic java.lang.System.out
+        41 ldc "AFTER LOOP" (java.lang.String)
+        43 invokevirtual println
+        46 return
+    }
+}
+
+test6 : (int, int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iinc LV-1 by 1
+        19 iinc LV-2 by 1
+        22 iload_1
+        23 iconst_2
+        24 if_icmpeq 36
+        27 iload_2
+        28 bipush 7 (int)
+        30 if_icmpgt 36
+        33 goto 49
+        36 iload_3
+        37 bipush 8 (int)
+        39 if_icmplt 8
+        42 iload LV-4
+        44 bipush 7 (int)
+        46 if_icmpge 8
+        49 getstatic java.lang.System.out
+        52 ldc "AFTER LOOP" (java.lang.String)
+        54 invokevirtual println
+        57 return
+    }
+}
+
+test7 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 iload_1
+        9 iconst_2
+        10 if_icmpne 36
+        13 iload_2
+        14 bipush 7 (int)
+        16 if_icmple 36
+        19 getstatic java.lang.System.out
+        22 ldc "LOOP" (java.lang.String)
+        24 invokevirtual println
+        27 iinc LV-1 by 1
+        30 iinc LV-2 by 1
+        33 goto 8
+        36 getstatic java.lang.System.out
+        39 ldc "AFTER LOOP" (java.lang.String)
+        41 invokevirtual println
+        44 return
+    }
+}
+
+test8 : (int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iinc LV-1 by 1
+        19 iinc LV-2 by 1
+        22 iload_1
+        23 iconst_2
+        24 if_icmpeq 30
+        27 goto 36
+        30 iload_2
+        31 bipush 7 (int)
+        33 if_icmpgt 8
+        36 getstatic java.lang.System.out
+        39 ldc "AFTER LOOP" (java.lang.String)
+        41 invokevirtual println
+        44 return
+    }
+}
+
+test9 : (int, int, int, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE LOOP" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "LOOP" (java.lang.String)
+        13 invokevirtual println
+        16 iinc LV-1 by 1
+        19 iinc LV-2 by 1
+        22 iload_3
+        23 bipush 8 (int)
+        25 if_icmplt 8
+        28 iload LV-4
+        30 bipush 7 (int)
+        32 if_icmpge 8
+        35 getstatic java.lang.System.out
+        38 ldc "BETWEEN LOOPS" (java.lang.String)
+        40 invokevirtual println
+        43 iload_1
+        44 iconst_2
+        45 if_icmpeq 8
+        48 iload_2
+        49 bipush 7 (int)
+        51 if_icmpgt 8
+        54 getstatic java.lang.System.out
+        57 ldc "AFTER LOOP" (java.lang.String)
+        59 invokevirtual println
+        62 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "BEFORE LOOP"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "LOOP"
+6: String: "AFTER LOOP"
+7: String: "BETWEEN LOOPS"
+8: Class: ru.andrew.jclazz.apps.tester.tests.blocks.LoopOr
+9: Class: java.lang.Object
+10: Utf8: <init>
+11: Utf8: ()V
+12: Utf8: Code
+13: Utf8: test1
+14: Utf8: (II)V
+15: Utf8: test2
+16: Utf8: (III)V
+17: Utf8: test3
+18: Utf8: (IIII)V
+19: Utf8: test4
+20: Utf8: test5
+21: Utf8: test6
+22: Utf8: test7
+23: Utf8: test8
+24: Utf8: test9
+25: NameAndType: <init> (()V)
+26: Class: java.lang.System
+27: NameAndType: out (Ljava/io/PrintStream;)
+28: Utf8: BEFORE LOOP
+29: Class: java.io.PrintStream
+30: NameAndType: println ((Ljava/lang/String;)V)
+31: Utf8: LOOP
+32: Utf8: AFTER LOOP
+33: Utf8: BETWEEN LOOPS
+34: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/LoopOr
+35: Utf8: java/lang/Object
+36: Utf8: java/lang/System
+37: Utf8: out
+38: Utf8: Ljava/io/PrintStream;
+39: Utf8: java/io/PrintStream
+40: Utf8: println
+41: Utf8: (Ljava/lang/String;)V

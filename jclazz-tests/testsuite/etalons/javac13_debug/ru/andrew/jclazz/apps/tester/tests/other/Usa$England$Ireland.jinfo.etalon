@@ -1,0 +1,146 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.other.Usa$England$Ireland
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 1 ( PUBLIC )
+
+Attributes:
+@SourceFile: Usa.java
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.other.Usa$England
+      Outer class - ru.andrew.jclazz.apps.tester.tests.other.Usa
+      Inner name - England
+      Inner class access flags - 1
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.other.Usa$England$Ireland
+      Outer class - ru.andrew.jclazz.apps.tester.tests.other.Usa$England
+      Inner name - Ireland
+      Inner class access flags - 1
+
+Fields:
+name : java.lang.String
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+}
+
+this$1 : ru.andrew.jclazz.apps.tester.tests.other.Usa$England
+{
+    Access Flags: 18 ( PRIVATE  FINAL )
+
+    Attributes:
+        @Synthetic
+}
+
+
+Methods:
+<init> : (ru.andrew.jclazz.apps.tester.tests.other.Usa$England) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 26
+                9: line 27
+                15: line 28
+            @LocalVariableTable: 
+                0+16: this (Lru/andrew/jclazz/apps/tester/tests/other/Usa$England$Ireland;), 0
+                0+16: this$1 (Lru/andrew/jclazz/apps/tester/tests/other/Usa$England;), 1
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 aload_0
+        5 aload_1
+        6 putfield this$1
+        9 aload_0
+        10 ldc "Dublin" (java.lang.String)
+        12 putfield name
+        15 return
+    }
+}
+
+print_names : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 32
+                10: line 33
+            @LocalVariableTable: 
+                0+11: this (Lru/andrew/jclazz/apps/tester/tests/other/Usa$England$Ireland;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 aload_0
+        4 getfield name
+        7 invokevirtual println
+        10 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: ru.andrew.jclazz.apps.tester.tests.other.Usa$England
+3: String: "Dublin"
+4: Fieldref: java.lang.String
+5: Fieldref: java.io.PrintStream
+6: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+7: Class: ru.andrew.jclazz.apps.tester.tests.other.Usa$England$Ireland
+8: Class: java.lang.Object
+9: Utf8: name
+10: Utf8: Ljava/lang/String;
+11: Utf8: this$1
+12: Class: ru.andrew.jclazz.apps.tester.tests.other.Usa$England
+13: Utf8: England
+14: Utf8: InnerClasses
+15: Utf8: Lru/andrew/jclazz/apps/tester/tests/other/Usa$England;
+16: Utf8: Synthetic
+17: Utf8: <init>
+18: Utf8: (Lru/andrew/jclazz/apps/tester/tests/other/Usa$England;)V
+19: Utf8: Code
+20: Utf8: LineNumberTable
+21: Utf8: LocalVariableTable
+22: Utf8: this
+23: Utf8: Ireland
+24: Utf8: Lru/andrew/jclazz/apps/tester/tests/other/Usa$England$Ireland;
+25: Utf8: print_names
+26: Utf8: ()V
+27: Utf8: SourceFile
+28: Utf8: Usa.java
+29: NameAndType: <init> (()V)
+30: NameAndType: this$1 (Lru/andrew/jclazz/apps/tester/tests/other/Usa$England;)
+31: Utf8: Dublin
+32: NameAndType: name (Ljava/lang/String;)
+33: Class: java.lang.System
+34: NameAndType: out (Ljava/io/PrintStream;)
+35: Class: java.io.PrintStream
+36: NameAndType: println ((Ljava/lang/String;)V)
+37: Utf8: ru/andrew/jclazz/apps/tester/tests/other/Usa$England$Ireland
+38: Utf8: java/lang/Object
+39: Class: ru.andrew.jclazz.apps.tester.tests.other.Usa
+40: Utf8: ru/andrew/jclazz/apps/tester/tests/other/Usa$England
+41: Utf8: java/lang/System
+42: Utf8: out
+43: Utf8: Ljava/io/PrintStream;
+44: Utf8: java/io/PrintStream
+45: Utf8: println
+46: Utf8: (Ljava/lang/String;)V
+47: Utf8: ru/andrew/jclazz/apps/tester/tests/other/Usa

@@ -1,0 +1,1 @@
+jikes.exe -classpath "c:\Soft\Java\j2sdk1.4.2_18\jre\lib\rt.jar" Clazz01.java

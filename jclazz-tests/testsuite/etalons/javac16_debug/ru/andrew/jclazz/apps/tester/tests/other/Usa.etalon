@@ -1,0 +1,39 @@
+package ru.andrew.jclazz.apps.tester.tests.other;
+
+public class Usa
+{
+    public String name;
+
+    public Usa()
+    {
+        name = "Detroit";
+    }
+    
+    public class England
+    {
+        public String name;
+    
+        public England()
+        {
+            name = "London";
+        }
+        
+        public class Ireland
+        {
+            public String name;
+        
+            public Ireland()
+            {
+                name = "Dublin";
+            }
+            
+            public void print_names()
+            {
+                System.out.println(name);
+            }
+            
+        }
+    
+    }
+
+}
