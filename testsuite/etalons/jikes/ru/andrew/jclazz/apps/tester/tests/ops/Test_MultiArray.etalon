@@ -1,0 +1,22 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_MultiArray
+{
+
+    public void testMultiArray1()
+    {
+        System.out.println("---");
+        int[][] intss_1 = new int[5][7];
+    }
+    
+    public void testMultiArray2()
+    {
+        System.out.println("---");
+        String[][] stringss_1 = new String[5][7];
+    }
+    
+    public Test_MultiArray()
+    {
+    }
+    
+}

@@ -1,0 +1,38 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+import java.util.*;
+
+public class Test_CheckCast
+{
+    public int k;
+
+    public Test_CheckCast()
+    {
+    }
+    
+    public void test1(List list_1)
+    {
+        String string_1 = (String) list_1.get(0);
+    }
+    
+    public void test2(Object[] objects_1)
+    {
+        Integer[] integers_1 = (Integer[]) objects_1;
+    }
+    
+    public void test3(List list_1)
+    {
+        ((Integer) list_1.get(0)).intValue();
+    }
+    
+    public void test4(List list_1)
+    {
+        int int_1 = ((Object[]) list_1.get(0)).length;
+    }
+    
+    public void test5(List list_1)
+    {
+        int int_1 = ((Test_CheckCast) list_1.get(0)).k;
+    }
+    
+}

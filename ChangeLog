@@ -1,13 +1,13 @@
-Changes in jclazz 1.0 rc2
+Changes in jclazz 1.1
 
-#1 Feature: Support for sun jdk 1.4 compiler constructions like Integer.class
+#1 Feature: Graphical User Interface is added
 
-#2 Bug Fix: opcode pop2 form 1 support's added, which stack oprands are of 1st computational type
+#2 Feature: Support line numbers debug information
 
-#3 Bug Fix: Not needed return statements generation fixed
+#3 Feature: Support local variable debug information
 
-#4 Bug Fix: Improved 148-152 opcodes printing
+#4 Bug Fix: Construction this.var = var was decompiled as var = var, - Fixed
 
-#5 Bug Fix: Improved conditions detecting in loops
+#5 Feature: Support finally blocks (jsr-ret constructions) for Java 1.5 and prior versions
 
-#6 Bug Fix: loops with multiple conditions generation fixed
+#6 Feature: Java 1.5 Enumerations support

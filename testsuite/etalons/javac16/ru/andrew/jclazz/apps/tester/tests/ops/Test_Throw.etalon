@@ -1,0 +1,18 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_Throw
+{
+
+    public Test_Throw()
+    {
+    }
+    
+    public void test1(int int_1, RuntimeException runtimeexception_1)
+    {
+        if (int_1 == 4)
+        {
+            throw runtimeexception_1;
+        }
+    }
+    
+}

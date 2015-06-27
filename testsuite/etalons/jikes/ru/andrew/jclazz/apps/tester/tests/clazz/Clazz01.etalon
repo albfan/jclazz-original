@@ -1,0 +1,17 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+import java.io.*;
+
+public final class Clazz01 extends File implements Serializable, Runnable
+{
+
+    public final void run()
+    {
+    }
+    
+    public Clazz01(String string_1)
+    {
+        super(string_1);
+    }
+    
+}

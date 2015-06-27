@@ -1,5 +1,10 @@
 #!/bin/sh
+export LIB_PATH=../../bin
+export JAVA="java"
 
-./setenv.sh
+if [ "$JAVA_HOME" != "" ]
+then
+    export JAVA="$JAVA_HOME/bin/java"
+fi
 
-$JAVA_HOME/bin/java -classpath ./jclazz.jar ru.andrew.jclazz.apps.infoj.InfoJ $@
+$JAVA -classpath $LIB_PATH/jclazz-core.jar ru.andrew.jclazz.core.infoj.InfoJ $@
