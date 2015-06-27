@@ -7,15 +7,15 @@ import java.io.*;
 
 public class Annotation
 {
-    private String type;
+    private CONSTANT_Utf8 type;
     private ElementValuePair[] element_value_pairs;
 
     public String getType()
     {
-        return type;
+        return type.getString();
     }
 
-    public void setType(String type)
+    public void setType(CONSTANT_Utf8 type)
     {
         this.type = type;
     }
@@ -35,14 +35,14 @@ public class Annotation
         Annotation ann = new Annotation();
         
         int type_index = cis.readU2();
-        ann.setType(((CONSTANT_Utf8_info) clazz.getConstant_pool()[type_index]).getString());
+        ann.setType((CONSTANT_Utf8) clazz.getConstant_pool()[type_index]);
 
         int num_element_value_pairs = cis.readU2();
         ElementValuePair[] pairs = new ElementValuePair[num_element_value_pairs];
         for (int j = 0; j < num_element_value_pairs; j++)
         {
             int element_name_index = cis.readU2();
-            String element_name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[element_name_index]).getString();
+            CONSTANT_Utf8 element_name = (CONSTANT_Utf8) clazz.getConstant_pool()[element_name_index];
             char tag = (char) cis.readU1();
             pairs[j] = new ElementValuePair(element_name, tag);
             pairs[j].loadValue(cis, clazz);
@@ -51,10 +51,20 @@ public class Annotation
         return ann;
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU2(type.getIndex());
+        cos.writeU2(element_value_pairs.length);
+        for (int j = 0; j < element_value_pairs.length; j++)
+        {
+            element_value_pairs[j].storeValue(cos);
+        }
+    }
+
     public String toString()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("#").append(type);
+        sb.append("#").append(type.getString());
         sb.append("{");
         for (int i = 0; i < element_value_pairs.length; i++)
         {

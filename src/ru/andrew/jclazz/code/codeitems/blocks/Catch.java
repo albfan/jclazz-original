@@ -9,14 +9,21 @@ import java.io.*;
 
 public class Catch extends Block
 {
-    private CONSTANT_Class_info exceptionClassInfo;
+    private CONSTANT_Class exceptionClassInfo;
+    private long handler_pc;
 
     private LocalVariable lv;
 
-    public Catch(CONSTANT_Class_info cl_info, Block parent)
+    public Catch(long handler_pc, CONSTANT_Class cl_info, Block parent)
     {
         super(parent);
+        this.handler_pc = handler_pc;
         exceptionClassInfo = cl_info;
+    }
+
+    public long getStartByte()
+    {
+        return handler_pc;
     }
 
     public void postProcess()
@@ -76,12 +83,12 @@ public class Catch extends Block
         if (ff_block instanceof Loop)
         {
             Loop ff_loop = (Loop) ff_block;
-            if (ff_loop.isPrecondition() && (ff_loop.getBeginPc() == oper.getTargetOperation()))
+            if (!ff_loop.isBackLoop() && (ff_loop.getBeginPc() == oper.getTargetOperation()))
             {
                 oper.setContinue(true);
                 return true;
             }
-            else if (!ff_loop.isPrecondition())
+            else if (ff_loop.isBackLoop())
             {
                 if (!(prevFF instanceof Catch))
                 {

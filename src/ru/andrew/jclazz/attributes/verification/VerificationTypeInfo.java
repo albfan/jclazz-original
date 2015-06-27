@@ -13,7 +13,7 @@ public class VerificationTypeInfo
     private int tag;
 
     // Object variable
-    private CONSTANT_Class_info object_class;
+    private CONSTANT_Class object_class;
 
     // Uninitialized variable
     private int offset;
@@ -39,11 +39,24 @@ public class VerificationTypeInfo
         if (tag == 7)   // Object
         {
             int cp_index = cis.readU2();
-            object_class = (CONSTANT_Class_info) clazz.getConstant_pool()[cp_index];
+            object_class = (CONSTANT_Class) clazz.getConstant_pool()[cp_index];
         }
         if (tag == 8)   // Uninitialized
         {
             offset = cis.readU2();
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU1(tag);
+        if (tag == 7)   // Object
+        {
+            cos.writeU2(object_class.getIndex());
+        }
+        if (tag == 8)   // Uninitialized
+        {
+            cos.writeU2(offset);
         }
     }
 
@@ -57,7 +70,7 @@ public class VerificationTypeInfo
         return (String) types.get(Integer.valueOf(tag));
     }
 
-    public CONSTANT_Class_info getObjectClassForObjectVariable()
+    public CONSTANT_Class getObjectClassForObjectVariable()
     {
         return object_class;
     }
@@ -69,7 +82,7 @@ public class VerificationTypeInfo
 
     public String toString()
     {
-        return types.get(tag) +
+        return types.get(Integer.valueOf(tag)) +
                 (tag == 7 ? "(" + object_class.getFullyQualifiedName() + ")" : "") +
                 (tag == 8 ? "(at +" + offset + ")" : "");
     }

@@ -5,24 +5,35 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class Signature extends ATTRIBUTE_INFO
+public class Signature extends AttributeInfo
 {
-    private String signature;
+    private CONSTANT_Utf8 signature;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public Signature(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // attribute length
+        super(attributeName, clazz);
+    }
 
-        signature = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[cis.readU2()]).getString();
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
+
+        signature = (CONSTANT_Utf8) clazz.getConstant_pool()[cis.readU2()];
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(signature.getIndex());
     }
 
     public String getSignature()
     {
-        return signature;
+        return signature.getString();
     }
 
     public String toString()
     {
-        return ATTR + "Signature: " + signature;
+        return ATTR + "Signature: " + signature.getString();
     }
 }

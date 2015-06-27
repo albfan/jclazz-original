@@ -21,7 +21,7 @@ public class MultiNewArray extends Operation
     {
         super(opcode, start_byte, code);
 
-        CONSTANT_Class_info cl_info = (CONSTANT_Class_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+        CONSTANT_Class cl_info = (CONSTANT_Class) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
         arrayClass = cl_info.getFullyQualifiedName();
 
         dimensions = params[2];

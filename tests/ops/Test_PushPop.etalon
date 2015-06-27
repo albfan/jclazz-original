@@ -50,4 +50,30 @@ public class Test_PushPop
         double double_1 = doubles_1[1];
     }
 
+    private native int getInt();
+
+    private native long getLong();
+
+    public int test87()
+    {
+        int int_1 = 2;
+        getInt();
+        return int_1;
+    }
+
+    public long test88()
+    {
+        long long_1 = 5L;
+        getLong();
+        return long_1;
+    }
+
+    public long test88_2()
+    {
+        long long_1 = 5L;
+        getInt();
+        getInt();
+        return long_1;
+    }
+
 }

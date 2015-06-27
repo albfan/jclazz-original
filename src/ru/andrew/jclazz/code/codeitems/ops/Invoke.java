@@ -41,13 +41,13 @@ public class Invoke extends Operation
 
         if (opcode == 185)  // invokeinterface
         {
-            CONSTANT_InterfaceMethodref_info mi_info = (CONSTANT_InterfaceMethodref_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+            CONSTANT_InterfaceMethodref mi_info = (CONSTANT_InterfaceMethodref) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
             md = mi_info.getMethodDescriptor();
             methodName = mi_info.getName();
         }
         else if (opcode == 186) // invokedynamic
         {
-            CONSTANT_NameAndType_info nat_info = (CONSTANT_NameAndType_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+            CONSTANT_NameAndType nat_info = (CONSTANT_NameAndType) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
             methodName = nat_info.getName();
             try
             {
@@ -60,7 +60,7 @@ public class Invoke extends Operation
         }
         else
         {
-            CONSTANT_Methodref_info m_info = (CONSTANT_Methodref_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+            CONSTANT_Methodref m_info = (CONSTANT_Methodref) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
             md = m_info.getMethodDescriptor();
             methodName = m_info.getName();
 
@@ -83,7 +83,7 @@ public class Invoke extends Operation
                         objectref.equals(code.getClazz().getOuterClazz().getThisClassInfo().getFullyQualifiedName()) &&
                         methodName.startsWith("access$"))
                 {
-                    METHOD_INFO m_ic = code.getClazz().getOuterClazz().getFieldNameForSyntheticMethod(methodName);
+                    MethodInfo m_ic = code.getClazz().getOuterClazz().getFieldNameForSyntheticMethod(methodName);
                     if (m_ic != null && m_ic.isGetFieldForIC())
                     {
                         icFieldName = m_ic.getFieldNameForIC();

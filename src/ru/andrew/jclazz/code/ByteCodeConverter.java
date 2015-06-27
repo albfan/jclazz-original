@@ -5,7 +5,6 @@ import ru.andrew.jclazz.code.codeitems.*;
 import ru.andrew.jclazz.code.codeitems.ops.*;
 import ru.andrew.jclazz.code.codeitems.blocks.*;
 import ru.andrew.jclazz.code.blockdetectors.*;
-import ru.andrew.jclazz.*;
 
 import java.util.*;
 
@@ -15,6 +14,7 @@ public class ByteCodeConverter
     {
         Block topBlock = codeAttr.getCodeBlock();
 
+        detectBlocks(topBlock, new BackLoopDetector());
         detectBlocks(topBlock, new LoopDetector());
 
         detectBlocks(topBlock, new TryDetector(codeAttr.getExceptionTable()));
@@ -53,6 +53,7 @@ public class ByteCodeConverter
         Block topBlock = detectBlocks(codeAttr);
         postProcess(topBlock);
         analyze(topBlock);
+        detectCompoundBackLoops(topBlock, new BackLoopDetector());
         return topBlock;
     }
 
@@ -93,6 +94,11 @@ public class ByteCodeConverter
             if (citem instanceof Block)
             {
                 analyze((Block) citem);
+
+                if (citem instanceof Loop)
+                {
+                    ((Loop) citem).postanalyze(block);
+                }
             }
             else if (citem instanceof Switch)
             {
@@ -104,5 +110,40 @@ public class ByteCodeConverter
                 }
             }
         }
+    }
+
+    private static Loop detectCompoundBackLoops(Block block, BackLoopDetector detector)
+    {
+        if (block == null) return null;
+        Loop innerLoop = detector.collapseBackLoops(block);
+        if (innerLoop != null)
+        {
+            return innerLoop;
+        }
+
+        block.reset();
+        while (block.hasMoreOperations())
+        {
+            CodeItem ci = block.next();
+            if (ci instanceof Block)
+            {
+                Block loop = (Block) ci;
+                do
+                {
+                    loop = detectCompoundBackLoops(loop, detector);
+                    if (loop != null) block.replaceCurrentOperation(loop);
+                }
+                while (loop != null);
+            }
+            else if (ci instanceof Switch)
+            {
+                Switch sci = (Switch) ci;
+                for (Iterator cbit = sci.getCaseBlocks().iterator(); cbit.hasNext();)
+                {
+                    detectCompoundBackLoops(((Switch.CaseBlock) cbit.next()).getBlock(), detector);
+                }
+            }
+        }
+        return null;
     }
 }

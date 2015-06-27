@@ -13,7 +13,7 @@ public class Block implements CodeItem
     protected List ops;
     protected Block parent;
     protected Clazz clazz;
-    protected METHOD_INFO m_info;
+    protected MethodInfo m_info;
 
     protected Block(Block parent)
     {
@@ -29,7 +29,7 @@ public class Block implements CodeItem
         this.clazz = parent.getClazz();
     }
 
-    public Block(List ops, Clazz clazz, METHOD_INFO m_info)
+    public Block(List ops, Clazz clazz, MethodInfo m_info)
     {
         this.ops = ops;
         this.clazz = clazz;
@@ -80,6 +80,11 @@ public class Block implements CodeItem
     public void back()
     {
         ext_pos--;
+    }
+
+    public void seekEnd()
+    {
+        ext_pos = ops.size();
     }
 
     public void reset()
@@ -213,7 +218,8 @@ public class Block implements CodeItem
         {
             if (ops.get(i) instanceof Block)
             {
-                return null;
+                Operation priorPush = getPriorPushFromSubblock((Block) ops.get(i));
+                if (priorPush != null) return priorPush;
             }
             else if (((Operation) ops.get(i)).isPush())
             {
@@ -222,6 +228,17 @@ public class Block implements CodeItem
             }
         }
         return null;
+    }
+
+    private Operation getPriorPushFromSubblock(Block subblock)
+    {
+        // Checking is last operation is Nop for correct seekEnd
+        if (!(subblock.getLastOperation() instanceof Nop))
+        {
+            subblock.addOperation(subblock.size(), new Nop(-1));
+        }
+        subblock.seekEnd();
+        return subblock.removePriorPushOperation();
     }
 
     public CodeItem removeCurrentOperation()
@@ -236,7 +253,8 @@ public class Block implements CodeItem
         {
             if (ops.get(i) instanceof Block)
             {
-                return null;
+                Operation priorPush = getPriorPushFromSubblock((Block) ops.get(i));
+                if (priorPush != null) return priorPush;
             }
             else if (((Operation) ops.get(i)).isPush())
             {
@@ -269,6 +287,19 @@ public class Block implements CodeItem
             return (CodeItem) ops.get(ext_pos);
         }
         return null;
+    }
+
+    public void replaceOperation(long start_byte, CodeItem newop)
+    {
+        for (int i = 0; i < ops.size(); i++)
+        {
+            if (((CodeItem) ops.get(i)).getStartByte() == start_byte)
+            {
+                ops.remove(i);
+                ops.add(i, newop);
+                return;
+            }
+        }
     }
 
     public void replaceCurrentOperation(CodeItem newop)
@@ -397,7 +428,7 @@ public class Block implements CodeItem
             {
                 preBlock = preBlock.parent;
             }
-            METHOD_INFO method = preBlock.m_info; 
+            MethodInfo method = preBlock.m_info;
             lv = new LocalVariable(ivar, type, name != null ? name : (type != null ? method.getLVName(type) : null));
             lvars.put(Integer.valueOf(ivar), lv);
         }

@@ -65,7 +65,7 @@ public class NewArray extends Operation
         }
         else if (opcode == 189)
         {
-            classType = ((CONSTANT_Class_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]]).getFullyQualifiedName();
+            classType = ((CONSTANT_Class) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]]).getFullyQualifiedName();
         }
     }
 

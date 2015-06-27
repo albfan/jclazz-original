@@ -7,17 +7,18 @@ import java.io.*;
 
 public class ElementValuePair
 {
-    private String element_name;
+    private CONSTANT_Utf8 element_name;
     private char tag;
 
     private boolean isConstValue;
-    private CP_INFO const_value;
+    private CONSTANT const_value;
 
     private boolean isEnumConstValue;
-    private String enum_const_type_name;
-    private String enum_const_name;
+    private CONSTANT_Utf8 enum_const_type_name;
+    private CONSTANT_Utf8 enum_const_name;
 
     private boolean isClassInfo;
+    private CONSTANT_Utf8 returnClassCPInfo;
     private FieldDescriptor returnClassInfo;
 
     private boolean isAnnotationValue;
@@ -26,7 +27,7 @@ public class ElementValuePair
     private boolean isArrayValue;
     private ElementValuePair[] arrayValue;
 
-    public ElementValuePair(String element_name, char tag) throws ClazzException
+    public ElementValuePair(CONSTANT_Utf8 element_name, char tag) throws ClazzException
     {
         this.element_name = element_name;
         this.tag = tag;
@@ -87,15 +88,16 @@ public class ElementValuePair
         else if (isEnumConstValue)
         {
             int ec_type_name_index = cis.readU2();
-            enum_const_type_name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[ec_type_name_index]).getString();
+            enum_const_type_name = (CONSTANT_Utf8) clazz.getConstant_pool()[ec_type_name_index];
 
             int ec_name_index = cis.readU2();
-            enum_const_name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[ec_name_index]).getString();
+            enum_const_name = (CONSTANT_Utf8) clazz.getConstant_pool()[ec_name_index];
         }
         else if (isClassInfo)
         {
             int class_info_index = cis.readU2();
-            returnClassInfo = new FieldDescriptor(((CONSTANT_Utf8_info) clazz.getConstant_pool()[class_info_index]).getString());
+            returnClassCPInfo = (CONSTANT_Utf8) clazz.getConstant_pool()[class_info_index];
+            returnClassInfo = new FieldDescriptor(returnClassCPInfo.getString());
         }
         else if (isAnnotationValue)
         {
@@ -113,26 +115,55 @@ public class ElementValuePair
         }
     }
 
+    public void storeValue(ClazzOutputStream cos) throws IOException
+    {
+        if (isConstValue)
+        {
+            cos.writeU2(const_value.getIndex());
+        }
+        else if (isEnumConstValue)
+        {
+            cos.writeU2(enum_const_type_name.getIndex());
+            cos.writeU2(enum_const_name.getIndex());
+        }
+        else if (isClassInfo)
+        {
+            cos.writeU2(returnClassCPInfo.getIndex());
+        }
+        else if (isAnnotationValue)
+        {
+            annotationValue.store(cos);
+        }
+        else if (isArrayValue)
+        {
+            cos.writeU2(arrayValue.length);
+            for (int k = 0; k < arrayValue.length; k++)
+            {
+                arrayValue[k].storeValue(cos);
+            }
+        }
+    }
+
     // Getters
 
     public String getElementName()
     {
-        return element_name;
+        return element_name.getString();
     }
 
-    public CP_INFO getConstValue()
+    public CONSTANT getConstValue()
     {
         return const_value;
     }
 
     public String getEnumConstTypeName()
     {
-        return enum_const_type_name;
+        return enum_const_type_name.getString();
     }
 
     public String getEnumConstName()
     {
-        return enum_const_name;
+        return enum_const_name.getString();
     }
 
     public FieldDescriptor getReturnClassInfo()
@@ -153,9 +184,18 @@ public class ElementValuePair
     public String toString()
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("(").append(element_name).append(" = ");
-        if (isConstValue) sb.append(const_value.toString());
-        if (isEnumConstValue) sb.append(enum_const_name).append(" of ").append(enum_const_type_name);
+        sb.append("(");
+        if (element_name != null)
+        {
+            sb.append(element_name.getString());
+        }
+        else
+        {
+            sb.append("default");
+        }
+        sb.append(" = ");
+        if (isConstValue) sb.append(const_value.str());
+        if (isEnumConstValue) sb.append(enum_const_name.getString()).append(" of ").append(enum_const_type_name.getString());
         if (isClassInfo) sb.append(returnClassInfo.getFQN());
         if (isAnnotationValue) sb.append(annotationValue.toString());
         if (isArrayValue)

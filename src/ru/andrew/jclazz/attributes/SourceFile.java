@@ -5,26 +5,37 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class SourceFile extends ATTRIBUTE_INFO
+public class SourceFile extends AttributeInfo
 {
-    private String sourceFile;
+    private CONSTANT_Utf8 sourceFile;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public SourceFile(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        long attribute_length = cis.readU4();
-        if (attribute_length != 2) throw new ClazzException("SourceFile Attribute length is invalid");
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
+        if (attributeLength != 2) throw new ClazzException("SourceFile Attribute length is invalid");
         
         int sourcefile_index = cis.readU2();
-        sourceFile = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[sourcefile_index]).getString();
+        sourceFile = (CONSTANT_Utf8) clazz.getConstant_pool()[sourcefile_index];
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(sourceFile.getIndex());
     }
 
     public String getSourceFile()
     {
-        return sourceFile;
+        return sourceFile.getString();
     }
 
     public String toString()
     {
-        return ATTR + "SourceFile: " + sourceFile;
+        return ATTR + "SourceFile: " + sourceFile.getString();
     }
 }

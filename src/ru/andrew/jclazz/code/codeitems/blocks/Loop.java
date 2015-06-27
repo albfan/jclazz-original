@@ -8,8 +8,10 @@ import java.util.*;
 
 public class Loop extends Block
 {
-    private boolean precondition;   //WHILE(){} vs DO{}WHILE() 
-    private String ifCondition;
+    private List andConditions = new ArrayList();
+
+    private boolean printPrecondition;   //WHILE(){} vs DO{}WHILE()
+    private boolean isBackLoop;          // If conditions at the end of block then true
 
     private long begin_pc;
 
@@ -17,18 +19,27 @@ public class Loop extends Block
     private boolean isInForStyle = false;
     private long incPartStartByte;
 
-    public Loop(Block parent, boolean precondition)
+    public Loop(Block parent, boolean isBackLoop)
     {
         super(parent);
-        this.precondition = precondition;
+        this.isBackLoop = isBackLoop;
+        this.printPrecondition = !isBackLoop;
+    }
+
+    public void setPrintPrecondition(boolean precondition)
+    {
+        this.printPrecondition = precondition;
     }
 
     public void postCreate()
     {
         // Remove last goto
-        if (precondition && (getLastOperation() instanceof GoTo))
+        if (!isBackLoop && (getLastOperation() instanceof GoTo))
         {
-            GoTo lastGoto = (GoTo) removeLastOperation();
+            // TODO bug for inner loops
+            //GoTo lastGoto = (GoTo) removeLastOperation();
+            GoTo lastGoto = (GoTo) getLastOperation();
+            lastGoto.setLoop(this);
             begin_pc = lastGoto.getTargetOperation();
         }
         else
@@ -36,15 +47,40 @@ public class Loop extends Block
             begin_pc = getFirstOperation().getStartByte();
         }
     }
-
-    public void setIfCondition(String ifCondition)
+    
+    public void addAndConditions(List ops)
     {
-        this.ifCondition = ifCondition;
+        List orConditions = new ArrayList();
+        List newOps = new ArrayList();
+        Iterator i = ops.iterator();
+        while (i.hasNext())
+        {
+            CodeItem ci = (CodeItem) i.next();
+            newOps.add(ci);
+            if (ci instanceof If)
+            {
+                Condition cond = new Condition((If) ci, this, new ArrayList(newOps));
+                cond.setNeedReverseOperation(!isBackLoop);
+                orConditions.add(cond);
+                newOps.clear();
+            }
+        }
+        andConditions.add(orConditions);
     }
 
-    public boolean isPrecondition()
+    public void addAndConditions2(List conditions)
     {
-        return precondition;
+        andConditions.addAll(conditions);
+    }
+
+    public List getConditions()
+    {
+        return andConditions;
+    }
+
+    public boolean isBackLoop()
+    {
+        return isBackLoop;
     }
 
     public void setIncrementalPartStartOperation(long incPartStartByte)
@@ -62,13 +98,29 @@ public class Loop extends Block
     {
         if (isInForStyle)
         {
-            pw.print(init_indent + "for (; " + ifCondition + ";");
+            pw.print(init_indent + "for (; ");
+            for (Iterator i = andConditions.iterator(); i.hasNext();)
+            {
+                List orConditions = (List) i.next();
+                if (orConditions.size() > 1) pw.print("(");
+                for (Iterator j = orConditions.iterator(); j.hasNext();)
+                {
+                    Condition cond = (Condition) j.next();
+                    if (j.hasNext() && orConditions.size() > 1) cond.setNeedReverseOperation(false);
+                    pw.print(cond.str());
+                    if (j.hasNext()) pw.print(" || ");
+                }
+                if (orConditions.size() > 1) pw.print(")");
+                if (i.hasNext()) pw.print(" && ");
+            }
+            pw.print(";");
             for (Iterator i = ops.iterator(); i.hasNext();)
             {
                 CodeItem citem = (CodeItem) i.next();
                 if (citem.getStartByte() >= incPartStartByte)
                 {
-                    pw.print(" " + ((Operation) citem).str());
+                    String opStr = ((Operation) citem).str();
+                    if (!"".equals(opStr)) pw.print(" " + opStr);
                 }
             }
             pw.println(")");
@@ -83,16 +135,56 @@ public class Loop extends Block
             pw.println(init_indent + "}");
             return;
         }
-        if (!precondition)
+        if (!printPrecondition)
         {
             pw.println(init_indent + "do");
             super.print(pw, init_indent);
         }
-        pw.println(init_indent + "while (" + ifCondition + ")" + (precondition ? "" : ";"));
-        if (precondition)
+        pw.print(init_indent + "while ");
+        if (andConditions.size() > 1) pw.print("(");
+        for (Iterator i = andConditions.iterator(); i.hasNext();)
+        {
+            List orConditions = (List) i.next();
+            if (orConditions.size() > 1) pw.print("(");
+            for (Iterator j = orConditions.iterator(); j.hasNext();)
+            {
+                Condition cond = (Condition) j.next();
+                if (j.hasNext() && orConditions.size() > 1) cond.setNeedReverseOperation(false);
+                pw.print("(" + cond.str() + ")");
+                if (j.hasNext()) pw.print(isBackLoop ? " && " : " || ");
+            }
+            if (orConditions.size() > 1) pw.print(")");
+            if (i.hasNext()) pw.print(isBackLoop ? " || " : " && ");
+        }
+        if (andConditions.size() > 1) pw.print(")");
+        pw.println(printPrecondition ? "" : ";");
+        if (printPrecondition)
         {
             super.print(pw, init_indent);
         }
     }
 
+    public void postanalyze(Block block)
+    {
+        if (isBackLoop)
+        {
+            // Checking if last operation is Nop for correct seekEnd
+            if (!(getLastOperation() instanceof Nop))
+            {
+                addOperation(size(), new Nop(-1));
+            }
+            this.seekEnd();
+        }
+
+        // All other conditions are analyzed with themselves
+        for (Iterator i = andConditions.iterator(); i.hasNext();)
+        {
+            List orConditions = (List) i.next();
+            for (Iterator j = orConditions.iterator(); j.hasNext();)
+            {
+                Condition cond = (Condition) j.next();
+                cond.analyze(isBackLoop ? this : block);
+            }
+        }
+    }
 }

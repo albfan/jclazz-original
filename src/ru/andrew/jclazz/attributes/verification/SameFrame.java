@@ -15,6 +15,10 @@ public class SameFrame extends StackMapFrame
     {
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+    }
+
     public int getOffsetDelta()
     {
         return frame_type;

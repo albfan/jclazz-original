@@ -150,7 +150,7 @@ public class ClassPrinter
             boolean isFirstVar = true;
             for (int i = 0; i < clazz.getFields().length; i++)
             {
-                FIELD_INFO f_info = clazz.getFields()[i];
+                FieldInfo f_info = clazz.getFields()[i];
                 if (f_info.isEnum())
                 {
                     if (!isFirstVar) pw.print(", ");

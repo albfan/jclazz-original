@@ -103,41 +103,41 @@ public class Push extends Operation
                 pushType = "int";
                 break;
             case 18:
-                CP_INFO cp_info_18 = code.getClazz().getConstant_pool()[params[0]];
-                if (cp_info_18 instanceof CONSTANT_Class_info)
+                CONSTANT cp_info_18 = code.getClazz().getConstant_pool()[params[0]];
+                if (cp_info_18 instanceof CONSTANT_Class)
                 {
-                    pushValue = ((CONSTANT_Class_info) cp_info_18).getFullyQualifiedName() + ".class";
+                    pushValue = ((CONSTANT_Class) cp_info_18).getFullyQualifiedName() + ".class";
                     isClassPushed = true;
                 }
                 else
                 {
-                    pushValue = cp_info_18.toString();
+                    pushValue = cp_info_18.str();
                 }
                 pushType = cp_info_18.getType();
                 break;
             case 19:
-                CP_INFO cp_info_19 = code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
-                if (cp_info_19 instanceof CONSTANT_Class_info)
+                CONSTANT cp_info_19 = code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+                if (cp_info_19 instanceof CONSTANT_Class)
                 {
-                    pushValue = ((CONSTANT_Class_info) cp_info_19).getFullyQualifiedName() + ".class";
+                    pushValue = ((CONSTANT_Class) cp_info_19).getFullyQualifiedName() + ".class";
                     isClassPushed = true;
                 }
                 else
                 {
-                    pushValue = cp_info_19.toString();
+                    pushValue = cp_info_19.str();
                 }
                 pushType = cp_info_19.getType();
                 break;
             case 20:
-                CP_INFO cp_info_20 = code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
-                if (cp_info_20 instanceof CONSTANT_Class_info)
+                CONSTANT cp_info_20 = code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+                if (cp_info_20 instanceof CONSTANT_Class)
                 {
-                    pushValue = ((CONSTANT_Class_info) cp_info_20).getFullyQualifiedName() + ".class";
+                    pushValue = ((CONSTANT_Class) cp_info_20).getFullyQualifiedName() + ".class";
                     isClassPushed = true;
                 }
                 else
                 {
-                    pushValue = cp_info_20.toString();
+                    pushValue = cp_info_20.str();
                 }
                 pushType = cp_info_20.getType();
                 break;

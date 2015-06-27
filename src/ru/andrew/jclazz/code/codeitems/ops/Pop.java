@@ -131,9 +131,13 @@ public class Pop extends Operation
                 lvar = block.getLocalVariable(varN, pushOp.getPushType());
             }
             pushedValue = pushOp.str();
-            if (opcode.getOpcode() == 88)   // pop2
+            if (opcode.getOpcode() == 88)
             {
-                // TODO
+                String pusht = pushOp.getPushType();
+                if (!"double".equals(pusht) && !"long".equals(pusht))    // pop2 form1 support
+                {
+                    block.removePriorPushOperation();   // removing previous second push
+                }
             }
         }
     }

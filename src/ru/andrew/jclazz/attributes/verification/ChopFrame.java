@@ -18,6 +18,11 @@ public class ChopFrame extends StackMapFrame
         offset_delta = cis.readU2();
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU2(offset_delta);
+    }
+
     public int getOffsetDelta()
     {
         return offset_delta;

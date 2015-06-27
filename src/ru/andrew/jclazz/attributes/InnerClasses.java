@@ -5,14 +5,18 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class InnerClasses extends ATTRIBUTE_INFO
+public class InnerClasses extends AttributeInfo
 {
-    public static final String ANONYMOUS = "Anonymous";
     private InnerClass classes[];
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public InnerClasses(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // Attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
         int number_of_classes = cis.readU2();
         classes = new InnerClass[number_of_classes];
         for (int i = 0; i < number_of_classes; i++)
@@ -21,23 +25,53 @@ public class InnerClasses extends ATTRIBUTE_INFO
             int inner_class_info_index = cis.readU2();
             if (inner_class_info_index != 0)
             {
-                classes[i].inner_class = (CONSTANT_Class_info) clazz.getConstant_pool()[inner_class_info_index];
+                classes[i].inner_class = (CONSTANT_Class) clazz.getConstant_pool()[inner_class_info_index];
             }
             int outer_class_info_index = cis.readU2();
             if (outer_class_info_index != 0)
             {
-                classes[i].outer_class = (CONSTANT_Class_info) clazz.getConstant_pool()[outer_class_info_index];
+                classes[i].outer_class = (CONSTANT_Class) clazz.getConstant_pool()[outer_class_info_index];
             }
             int inner_name_index = cis.readU2();
             if (inner_name_index != 0)
             {
-                classes[i].inner_name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[inner_name_index]).getString();
+                classes[i].inner_name = (CONSTANT_Utf8) clazz.getConstant_pool()[inner_name_index];
+            }
+            classes[i].inner_class_access_flags = cis.readU2();
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        for (int i = 0; i < classes.length; i++)
+        {
+            if (classes[i].inner_class == null)
+            {
+                cos.writeU2(0);
             }
             else
             {
-                classes[i].inner_name = ANONYMOUS;
+                cos.writeU2(classes[i].inner_class.getIndex());
             }
-            classes[i].inner_class_access_flags = cis.readU2();
+            if (classes[i].outer_class == null)
+            {
+                cos.writeU2(0);
+            }
+            else
+            {
+                cos.writeU2(classes[i].outer_class.getIndex());
+            }
+            if (classes[i].inner_name == null)
+            {
+                cos.writeU2(0);
+            }
+            else
+            {
+                cos.writeU2(classes[i].inner_name.getIndex());
+            }
+
+            cos.writeU2(classes[i].inner_class_access_flags);
         }
     }
 

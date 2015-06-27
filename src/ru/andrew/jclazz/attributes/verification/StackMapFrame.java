@@ -15,6 +15,8 @@ public abstract class StackMapFrame
 
     public abstract void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException;
 
+    public abstract void store(ClazzOutputStream cos) throws IOException;
+
     public abstract int getOffsetDelta();
 
     public static StackMapFrame loadStackMapFrame(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
@@ -63,6 +65,7 @@ public abstract class StackMapFrame
         return smf;
     }
 
+    // For printing
     protected String prefix(StackMapFrame obj)
     {
         return obj.getClass().getSimpleName() + " (+" + obj.getOffsetDelta() + "): ";

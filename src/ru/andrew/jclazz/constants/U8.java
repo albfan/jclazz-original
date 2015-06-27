@@ -4,10 +4,10 @@ import java.math.*;
 
 public final class U8
 {
+    private static final BigInteger LOW_MASK = new BigInteger("FFFFFFFF", 16);
+
     private long high;
     private long low;
-
-    private static final BigInteger LOW_MASK = new BigInteger("FFFFFFFF", 16);
 
     public U8(long high, long low)
     {

@@ -5,29 +5,48 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class EnclosingMethod extends ATTRIBUTE_INFO
+public class EnclosingMethod extends AttributeInfo
 {
-    private CONSTANT_Class_info enclosingClass;
-    private CONSTANT_NameAndType_info enclosingMethod;
+    private CONSTANT_Class enclosingClass;
+    private CONSTANT_NameAndType enclosingMethod;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public EnclosingMethod(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // attribute legth
+        super(attributeName, clazz);
+    }
 
-        enclosingClass = (CONSTANT_Class_info) clazz.getConstant_pool()[cis.readU2()];
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
+
+        enclosingClass = (CONSTANT_Class) clazz.getConstant_pool()[cis.readU2()];
         int enclosing_method_index = cis.readU2();
         if (enclosing_method_index > 0)
         {
-            enclosingMethod = (CONSTANT_NameAndType_info) clazz.getConstant_pool()[enclosing_method_index];
+            enclosingMethod = (CONSTANT_NameAndType) clazz.getConstant_pool()[enclosing_method_index];
         }
     }
 
-    public CONSTANT_Class_info getEnclosingClass()
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(enclosingClass.getIndex());
+        if (enclosingMethod == null)
+        {
+            cos.writeU2(0);
+        }
+        else
+        {
+            cos.writeU2(enclosingMethod.getIndex());
+        }
+    }
+
+    public CONSTANT_Class getEnclosingClass()
     {
         return enclosingClass;
     }
 
-    public CONSTANT_NameAndType_info getEnclosingMethod()
+    public CONSTANT_NameAndType getEnclosingMethod()
     {
         return enclosingMethod;
     }
@@ -40,7 +59,7 @@ public class EnclosingMethod extends ATTRIBUTE_INFO
         if (enclosingMethod != null)
         {
             sb.append("\n");
-            sb.append(INDENT).append("Enclosing method: ").append(enclosingMethod.toString());
+            sb.append(INDENT).append("Enclosing method: ").append(enclosingMethod.str());
         }
         return sb.toString();
     }

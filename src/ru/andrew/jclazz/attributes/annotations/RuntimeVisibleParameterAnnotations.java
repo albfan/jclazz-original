@@ -2,16 +2,22 @@ package ru.andrew.jclazz.attributes.annotations;
 
 import ru.andrew.jclazz.attributes.*;
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class RuntimeVisibleParameterAnnotations extends ATTRIBUTE_INFO
+public class RuntimeVisibleParameterAnnotations extends AttributeInfo
 {
     private Annotation[][] parameter_annotations;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public RuntimeVisibleParameterAnnotations(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
 
         int num_parameters = cis.readU1();
         parameter_annotations = new Annotation[num_parameters][];
@@ -22,6 +28,20 @@ public class RuntimeVisibleParameterAnnotations extends ATTRIBUTE_INFO
             for (int j = 0; j < num_annotations; j++)
             {
                 parameter_annotations[i][j] = Annotation.load(cis, clazz);
+            }
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU1(parameter_annotations.length);
+        for (int i = 0; i < parameter_annotations.length; i++)
+        {
+            cos.writeU2(parameter_annotations[i].length);
+            for (int j = 0; j < parameter_annotations[i].length; j++)
+            {
+                parameter_annotations[i][j].store(cos);
             }
         }
     }

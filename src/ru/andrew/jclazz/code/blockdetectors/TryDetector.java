@@ -92,7 +92,7 @@ public class TryDetector implements Detector
             it.remove();
 
             // Processing several catch blocks (except last)
-            Catch _catch = new Catch(et.catch_type, block);
+            Catch _catch = new Catch(et.handler_pc, et.catch_type, block);
             hasMoreTries = false;
             while (it.hasNext())
             {
@@ -106,7 +106,7 @@ public class TryDetector implements Detector
                 block.createSubBlock(et.handler_pc, etn.handler_pc, _catch);
                 _try.addCatchBlock(_catch);
                 et = etn;
-                _catch = new Catch(et.catch_type, block);
+                _catch = new Catch(et.handler_pc, et.catch_type, block);
                 it.remove();
 
             }

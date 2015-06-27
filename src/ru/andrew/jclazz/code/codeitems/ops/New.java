@@ -29,7 +29,7 @@ public class New extends Operation
         this.clazz = code.getClazz();
 
         int _newindex = (params[0] << 8) | params[1];
-        CONSTANT_Class_info cl_new_info = (CONSTANT_Class_info) code.getClazz().getConstant_pool()[_newindex];
+        CONSTANT_Class cl_new_info = (CONSTANT_Class) code.getClazz().getConstant_pool()[_newindex];
         clazzName = cl_new_info.getFullyQualifiedName();
     }
 
@@ -79,7 +79,7 @@ public class New extends Operation
             InnerClass ic = clazz.getInnerClass(clazzName);
             if (ic != null)
             {
-                if (InnerClasses.ANONYMOUS.equals(ic.getInnerName()))
+                if (ic.getInnerName() == null)
                 {
                     isACConstructor = true;
                     anonymousClass = ic;

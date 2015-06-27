@@ -134,12 +134,12 @@ public class Try extends Block
         if (ff_block instanceof Loop)
         {
             Loop ff_loop = (Loop) ff_block;
-            if (ff_loop.isPrecondition() && (ff_loop.getBeginPc() == oper.getTargetOperation()))
+            if (!ff_loop.isBackLoop() && (ff_loop.getBeginPc() == oper.getTargetOperation()))
             {
                 oper.setContinue(true);
                 return true;
             }
-            else if (!ff_loop.isPrecondition())
+            else if (ff_loop.isBackLoop())
             {
                 if (!(prevFF instanceof Catch))
                 {

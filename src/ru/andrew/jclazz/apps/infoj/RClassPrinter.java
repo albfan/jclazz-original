@@ -26,7 +26,7 @@ public class RClassPrinter
         pw.println("This Class  : " + clazz.getThisClassInfo().getFullyQualifiedName());
         pw.println("Super Class : " + (clazz.getSuperClassInfo() != null ? clazz.getSuperClassInfo().getFullyQualifiedName() : ""));
         pw.println("Implemented Interfaces:");
-        CONSTANT_Class_info[] intfs = clazz.getInterfaces();
+        CONSTANT_Class[] intfs = clazz.getInterfaces();
         for (int i = 0; i < intfs.length; i++)
         {
             pw.println("   " + intfs[i].getFullyQualifiedName());
@@ -47,7 +47,7 @@ public class RClassPrinter
         pw.println();
 
         pw.println("Attributes:");
-        ATTRIBUTE_INFO[] attrs = clazz.getAttributes();
+        AttributeInfo[] attrs = clazz.getAttributes();
         for (int i = 0; i < attrs.length; i++)
         {
             pw.println(attrs[i].toString());
@@ -56,7 +56,7 @@ public class RClassPrinter
 
         pw.println("Fields:");
         RFieldPrinter rfp = new RFieldPrinter();
-        FIELD_INFO[] fields = clazz.getFields();
+        FieldInfo[] fields = clazz.getFields();
         for (int i = 0; i < fields.length; i++)
         {
             rfp.print(pw, fields[i]);
@@ -66,7 +66,7 @@ public class RClassPrinter
 
         pw.println("Methods:");
         RMethodPrinter rmp = new RMethodPrinter();
-        METHOD_INFO[] methods = clazz.getMethods();
+        MethodInfo[] methods = clazz.getMethods();
         for (int i = 0; i < methods.length; i++)
         {
             rmp.print(pw, methods[i]);
@@ -76,16 +76,16 @@ public class RClassPrinter
         if ("yes".equals(clazz.getDecompileParameter(Params.PRINT_CONSTANT_POOL)))
         {
             pw.println("Constant Pool:");
-            CP_INFO[] cps = clazz.getConstant_pool();
+            CONSTANT[] cps = clazz.getConstant_pool();
             for (int i = 0; i < cps.length; i++)
             {
                 pw.print(i + ": ");
                 if (cps[i] != null)
                 {
                     String type = cps[i].getClass().getSimpleName();
-                    type = type.substring(type.indexOf('_') + 1, type.lastIndexOf('_'));
+                    type = type.substring(type.indexOf('_') + 1);
                     pw.print(type + ": ");
-                    pw.print(cps[i].toString());
+                    pw.print(cps[i].str());
                 }
                 pw.println();
             }

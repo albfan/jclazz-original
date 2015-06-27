@@ -4,6 +4,8 @@ import ru.andrew.jclazz.code.codeitems.blocks.*;
 import ru.andrew.jclazz.code.codeitems.*;
 import ru.andrew.jclazz.code.codeitems.ops.*;
 
+import java.util.*;
+
 public class LoopDetector implements Detector
 {
     public void analyze(Block block)
@@ -15,18 +17,16 @@ public class LoopDetector implements Detector
             if (!(citem instanceof If)) continue;
             If ifCond = (If) citem;
 
-            if (!ifCond.isForwardBranch())
-            {
-                createBackLoop(block, ifCond);
-                continue;
-            }
-
             CodeItem priorTarget = block.getOperationPriorTo(ifCond.getTargetOperation());
 
             if (priorTarget != null && priorTarget instanceof If)
             {
-                continue;
+                priorTarget = block.getOperationPriorTo(((If) priorTarget).getTargetOperation());
             }
+
+            // Inner loop
+            if (priorTarget == null) priorTarget = block.getLastOperation();   // TODO better detection of target operation
+
             if ((priorTarget == null) || (!(priorTarget instanceof GoTo)))
             {
                 continue;
@@ -34,7 +34,7 @@ public class LoopDetector implements Detector
 
             GoTo priorTargetGoTo = (GoTo) priorTarget;
 
-            if (!priorTargetGoTo.isForwardBranch() && !isIfContinue(block, priorTargetGoTo))
+            if (!priorTargetGoTo.isForwardBranch() && (priorTargetGoTo.getLoop() != null || !isIfContinue(block, priorTargetGoTo)))
             {
                 createForwardLoop(block, ifCond);
                 continue;
@@ -59,33 +59,36 @@ public class LoopDetector implements Detector
         return false;
     }
 
-    private void createBackLoop(Block block, If ifCond)
+    private boolean isCompoundForwardLoop(Block block, If ifCond)
     {
-        BranchCondition branchCond = new BranchCondition(ifCond);
-        block.replaceCurrentOperation(branchCond);
-
-        CodeItem preLoop = block.getOperationPriorTo(ifCond.getTargetOperation());
-        boolean isPreCondition = false;
-        if (preLoop != null && preLoop instanceof GoTo &&
-                ((GoTo) preLoop).isForwardBranch() &&
-                ((GoTo) preLoop).getTargetOperation() < ifCond.getStartByte())
+        if (ifCond.getTargetOperation() <= block.getLastOperation().getStartByte())
         {
-            isPreCondition = true;
-            block.removeOperation(preLoop.getStartByte());
+            return false;
+        }
+        if (!(block instanceof Loop))
+        {
+            return false;
         }
 
-        Loop loop = new Loop(block, isPreCondition);
-        branchCond.setConditionBlock(loop, isPreCondition);
-        block.createSubBlock(ifCond.getTargetOperation(), ifCond.getStartByte() + 1, loop);
+        CodeItem next = block.getParent().getOperationAfter(block.getStartByte());
+        return next.getStartByte() == ifCond.getTargetOperation();
     }
 
-    private void createForwardLoop(Block block, If ifCond)
+    private void createForwardLoop(Block block, If firstIf)
     {
-        BranchCondition branchCond = new BranchCondition(ifCond);
-        block.replaceCurrentOperation(branchCond);
+        CodeItem firstPriorOp = block.getOperationPriorTo(firstIf.getTargetOperation());
+        If ifCond = firstPriorOp instanceof If ? (If) firstPriorOp : firstIf;
 
-        Loop loop = new Loop(block, true);
-        branchCond.setConditionBlock(loop);
+        if (isCompoundForwardLoop(block, ifCond))
+        {
+            List conditions = block.createSubBlock(0, ifCond.getStartByte() + 1, null);
+            ((Loop) block).addAndConditions(conditions);
+            return;
+        }
+
+        Loop loop = new Loop(block, false);
         block.createSubBlock(ifCond.getStartByte() + 1, ifCond.getTargetOperation(), loop);
+        List firstConditions = block.createSubBlock(firstIf.getStartByte(), ifCond.getStartByte() + 1, null);
+        loop.addAndConditions(firstConditions);
     }
 }

@@ -171,4 +171,20 @@ public class LoopIfContinue
             System.out.println("END LOOP");
         }
     }
+
+    public void test9(int i2, int i3, int i4)
+    {
+        int i = 0;
+        while (i < 10)
+        {
+            System.out.println("START LOOP");
+            if ((i == 5 || i2 > 7) && (i3 <= 6 || i4 != 0))
+            {
+                System.out.println("IF");
+                continue;
+            }
+            i++;
+            System.out.println("END LOOP");
+        }
+    }
 }

@@ -38,7 +38,7 @@ public class Dup extends Operation
             return;
         }
         pushValue = prev.str();
-        pushType = prev.str(); 
+        pushType = prev.getPushType(); 
     }
 
     public String str()

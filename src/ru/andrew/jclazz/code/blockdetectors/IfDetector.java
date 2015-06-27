@@ -20,15 +20,15 @@ public class IfDetector implements Detector
             if (!ifCond.isForwardBranch()) continue;
 
             CodeItem priorTarget = block.getOperationPriorTo(ifCond.getTargetOperation());
+            CodeItem firstPriorTarget = priorTarget; 
 
             if (priorTarget != null && priorTarget instanceof If)
             {
-                createIfOR(block, ifCond, (If) priorTarget);
-                continue;
+                priorTarget = block.getOperationPriorTo(((If) priorTarget).getTargetOperation());
             }
             if ((priorTarget == null) || (!(priorTarget instanceof GoTo)))
             {
-                createIf(block, ifCond, priorTarget);
+                createIf(block, ifCond, firstPriorTarget);
                 continue;
             }
 
@@ -36,54 +36,37 @@ public class IfDetector implements Detector
 
             if (priorTargetGoTo.isForwardBranch())
             {
-                createIf(block, ifCond, priorTargetGoTo);
+                createIf(block, ifCond, firstPriorTarget);
                 continue;
             }
             else if (isIfContinue(block, priorTargetGoTo))
             {
-                createIfContinue(block, ifCond, priorTargetGoTo);
+                createIfContinue(block, ifCond, firstPriorTarget);
                 continue;
             }
         }
     }
 
-    private void createIfOR(Block block, If ifCond, If priorTarget)
+    private void createIf(Block block, If firstIf, CodeItem firstPriorTarget)
     {
-        CodeItem priorOp = block.getOperationPriorTo(priorTarget.getTargetOperation());
-        if (isCompoundIf(block, priorTarget))
-        {
-            List compoundConditions = block.createSubBlock(0, priorTarget.getStartByte() + 1, null);
-            ((IfBlock) block).addAndConditions(compoundConditions, false);
-            return;
-        }
+        If ifCond = firstPriorTarget instanceof If ? (If) firstPriorTarget : firstIf;
+        CodeItem priorOp = firstPriorTarget instanceof If ? block.getOperationPriorTo(((If) firstPriorTarget).getTargetOperation()) : firstPriorTarget;
 
-        IfBlock ifBlock = new IfBlock(block, ifCond);
-        block.createSubBlock(priorTarget.getStartByte() + 1, priorTarget.getTargetOperation(), ifBlock);
-        ifBlock.addAndConditions(block.createSubBlock(ifCond.getStartByte() + 1, priorTarget.getStartByte() + 1, null), true);
-        block.removeOperation(ifCond.getStartByte());
-
-        if (priorOp != null && priorOp instanceof GoTo)
-        {
-            detectElse(block, ifBlock, priorTarget, (GoTo) priorOp);
-        }
-    }
-
-    private void createIf(Block block, If ifCond, CodeItem priorTarget)
-    {
         if (isCompoundIf(block, ifCond))
         {
             List compoundConditions = block.createSubBlock(0, ifCond.getStartByte() + 1, null);
-            ((IfBlock) block).addAndConditions(compoundConditions, false);
+            ((IfBlock) block).addAndConditions(compoundConditions);
             return;
         }
 
-        IfBlock ifBlock = new IfBlock(block, ifCond);
+        IfBlock ifBlock = new IfBlock(block);
         block.createSubBlock(ifCond.getStartByte() + 1, ifCond.getTargetOperation(), ifBlock);
-        block.removeOperation(ifCond.getStartByte());
+        List firstConditions = block.createSubBlock(firstIf.getStartByte(), ifCond.getStartByte() + 1, null);
+        ifBlock.addAndConditions(firstConditions);
         
-        if (priorTarget != null && priorTarget instanceof GoTo)
+        if (priorOp != null && priorOp instanceof GoTo && ((GoTo) priorOp).isForwardBranch())
         {
-            detectElse(block, ifBlock, ifCond, (GoTo) priorTarget);
+            detectElse(block, ifBlock, ifCond, (GoTo) priorOp);
         }
     }
 
@@ -96,6 +79,12 @@ public class IfDetector implements Detector
         if (!(block instanceof IfBlock))
         {
             return false;
+        }
+
+        // If-continue case
+        if (block.getLastOperation() instanceof GoTo && ((GoTo) block.getLastOperation()).isContinue())
+        {
+            return true;
         }
 
         CodeItem next = block.getParent().getOperationAfter(block.getStartByte());
@@ -119,20 +108,25 @@ public class IfDetector implements Detector
         return false;
     }
 
-    private void createIfContinue(Block block, If ifCond, GoTo priorTarget)
+    private void createIfContinue(Block block, If firstIf, CodeItem firstPriorTarget)
     {
+        If ifCond = firstPriorTarget instanceof If ? (If) firstPriorTarget : firstIf;
+        GoTo priorTarget = (GoTo) (firstPriorTarget instanceof If ? block.getOperationPriorTo(((If) firstPriorTarget).getTargetOperation()) : firstPriorTarget); 
+
         if (isCompoundIf(block, ifCond))
         {
             List compoundConditions = block.createSubBlock(0, ifCond.getStartByte() + 1, null);
-            ((IfBlock) block).addAndConditions(compoundConditions, false);
+            ((IfBlock) block).addAndConditions(compoundConditions);
             return;
         }
 
         priorTarget.setContinue(true);
 
-        IfBlock ifBlock = new IfBlock(block, ifCond);
+        IfBlock ifBlock = new IfBlock(block);
         block.createSubBlock(ifCond.getStartByte() + 1, ifCond.getTargetOperation(), ifBlock);
-        block.removeOperation(ifCond.getStartByte());
+                                                                                                      
+        List firstConditions = block.createSubBlock(firstIf.getStartByte(), ifCond.getStartByte() + 1, null);
+        ifBlock.addAndConditions(firstConditions);
     }
 
     private void detectElse(Block block, IfBlock ifBlock, If ifCond, GoTo ifPriorTarget)
@@ -186,11 +180,12 @@ public class IfDetector implements Detector
 
         if (ff_block instanceof Loop)    // this is continue in for loop
         {
-            if (((Loop) ff_block).isPrecondition())
+            if (!((Loop) ff_block).isBackLoop())
             {
                 ((Loop) ff_block).setIncrementalPartStartOperation(ff_oper.getStartByte());
             }
             ifPriorTarget.setContinue(true);
+            return;
         }
 
         // Add return in previous "if" if adding new "if" 

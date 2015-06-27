@@ -8,16 +8,14 @@ import ru.andrew.jclazz.*;
 import java.io.*;
 
 // TODO the following opcodes should be implemented
-// 0         <- nop
 // 90 - 95   <- dup[2][_x[1,2]], swap
-// 168 - 169 <- jsr, ret
-// 201       <- jsr_w
+// 168, 169, 201 <- jsr, ret, jsr_w
 public abstract class Operation implements CodeItem
 {
     protected long start_byte;
     protected Opcode opcode;
     protected int params[];
-    protected METHOD_INFO m_info;
+    protected MethodInfo m_info;
 
     public Operation(int opcode, long start_byte, Code code, boolean loadParams)
     {
@@ -43,7 +41,12 @@ public abstract class Operation implements CodeItem
         }
     }
 
-    // For Fake Push Operation
+    public int getLength()
+    {
+        return this.opcode.getParamsCount() + 1;
+    }
+
+    // For Fake Push Operation and Nop operation
     protected Operation(long start_byte)
     {
         this.start_byte = start_byte;
@@ -64,7 +67,7 @@ public abstract class Operation implements CodeItem
         return start_byte;
     }
 
-    public METHOD_INFO getMethod()
+    public MethodInfo getMethod()
     {
         return m_info;
     }

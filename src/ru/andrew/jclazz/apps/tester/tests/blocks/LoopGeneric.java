@@ -11,4 +11,6 @@ public class LoopGeneric
             System.out.println("EXIT");
         }
     }
+
+    // TODO add tests with multiple conditions
 }

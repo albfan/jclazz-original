@@ -16,6 +16,8 @@ public class Switch extends Operation
     private List caseBlocks;
     private String switchVar;
 
+    private int operationLength;
+
     public Switch(int opcode, long start_byte, Code code)
     {
         super(opcode, start_byte, code);
@@ -27,6 +29,7 @@ public class Switch extends Operation
 
         int zero_bytes = 3 - (int) (start_byte % 4);
         code.skipBytes(zero_bytes);
+        operationLength = zero_bytes + 1;
 
         int def1 = code.getNextByte();
         int def2 = code.getNextByte();
@@ -34,6 +37,7 @@ public class Switch extends Operation
         int def4 = code.getNextByte();
         int defaultOffset = (def1 << 24) | (def2 << 16) | (def3 << 8) | def4;
         caseBlocks.add(new CaseBlock(0, start_byte + defaultOffset, true));
+        operationLength += 4;
 
         if (opcode.getOpcode() == 170)  // tableswitch
         {
@@ -47,7 +51,8 @@ public class Switch extends Operation
             int highbyte4 = code.getNextByte();
             int high = (highbyte1 << 24) | (highbyte2 << 16) | (highbyte3 << 8) | highbyte4;
             int low = (lowbyte1 << 24) | (lowbyte2 << 16) | (lowbyte3 << 8) | lowbyte4;
-            //int total_offsets = high - low + 1;
+
+            operationLength += 8;
 
             for (int i = low; i <= high; i++)
             {
@@ -58,6 +63,7 @@ public class Switch extends Operation
                 int jumpOffset = (jumpbyte1 << 24) | (jumpbyte2 << 16) | (jumpbyte3 << 8) | jumpbyte4;
                 caseBlocks.add(new CaseBlock(i, start_byte + jumpOffset, false));
             }
+            operationLength += 4 * (high - low + 1);
         }
         else if (opcode.getOpcode() == 171) // lookupswitch
         {
@@ -66,6 +72,7 @@ public class Switch extends Operation
             int npairs3 = code.getNextByte();
             int npairs4 = code.getNextByte();
             int total_pairs = (npairs1 << 24) | (npairs2 << 16) | (npairs3 << 8) | npairs4;
+            operationLength += 4;
 
             for (int i = 0; i < total_pairs; i++)
             {
@@ -82,7 +89,13 @@ public class Switch extends Operation
                 int jumpOffset = (jumpbyte1 << 24) | (jumpbyte2 << 16) | (jumpbyte3 << 8) | jumpbyte4;
                 caseBlocks.add(new CaseBlock(matchOffset, start_byte + jumpOffset, false));
             }
+            operationLength += total_pairs * 8;
         }
+    }
+
+    public int getLength()
+    {
+        return operationLength;
     }
 
     public boolean isPush()
@@ -232,7 +245,7 @@ public class Switch extends Operation
             }
             else
             {
-                pw.println(indent + "    BLOCK IS ABSENT!!!");  // TODO what to do
+                throw new RuntimeException("Printing switch case " + value + " - operation block is absent");
             }
             if (exitGoto != 0)
             {

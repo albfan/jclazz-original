@@ -1,23 +1,39 @@
 package ru.andrew.jclazz.attributes.verification;
 
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.constants.*;
 import ru.andrew.jclazz.attributes.*;
 
 import java.io.*;
 
-public class StackMapTable extends ATTRIBUTE_INFO
+public class StackMapTable extends AttributeInfo
 {
     private StackMapFrame[] stack_map_frame;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public StackMapTable(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
         
         int number_of_entries = cis.readU2();
         stack_map_frame = new StackMapFrame[number_of_entries];
         for (int i = 0; i < number_of_entries; i++)
         {
             stack_map_frame[i] = StackMapFrame.loadStackMapFrame(cis, clazz);
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(stack_map_frame.length);
+        for (int i = 0; i < stack_map_frame.length; i++)
+        {
+            stack_map_frame[i].store(cos);
         }
     }
 

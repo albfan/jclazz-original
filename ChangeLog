@@ -1,0 +1,13 @@
+Changes in jclazz 1.0 rc2
+
+#1 Feature: Support for sun jdk 1.4 compiler constructions like Integer.class
+
+#2 Bug Fix: opcode pop2 form 1 support's added, which stack oprands are of 1st computational type
+
+#3 Bug Fix: Not needed return statements generation fixed
+
+#4 Bug Fix: Improved 148-152 opcodes printing
+
+#5 Bug Fix: Improved conditions detecting in loops
+
+#6 Bug Fix: loops with multiple conditions generation fixed

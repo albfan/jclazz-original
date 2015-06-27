@@ -9,27 +9,27 @@ public class RMethodPrinter
 {
     private static final String INDENT = "    ";
     
-    public void print(PrintWriter pw, METHOD_INFO m_info)
+    public void print(PrintWriter pw, MethodInfo m_info)
     {
         pw.println(m_info.getName() + " is " + m_info.getDescriptor().getRawDescriptor());
         pw.println("{");
         pw.println(INDENT + "Access Flags: " + m_info.getAccessFlags());
-        pw.println(INDENT + "PUBLIC      : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_PUBLIC) > 0 ? "x" : ""));
-        pw.println(INDENT + "PRIVATE     : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_PRIVATE) > 0 ? "x" : ""));
-        pw.println(INDENT + "PROTECTED   : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_PROTECTED) > 0 ? "x" : ""));
-        pw.println(INDENT + "STATIC      : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_STATIC) > 0 ? "x" : ""));
-        pw.println(INDENT + "FINAL       : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_FINAL) > 0 ? "x" : ""));
-        pw.println(INDENT + "SYNCHRONIZED: " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_SYNCHRONIZED) > 0 ? "x" : ""));
-        pw.println(INDENT + "BRIDGE      : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_BRIDGE) > 0 ? "x" : ""));
-        pw.println(INDENT + "VARARGS     : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_VARARGS) > 0 ? "x" : ""));
-        pw.println(INDENT + "NATIVE      : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_NATIVE) > 0 ? "x" : ""));
-        pw.println(INDENT + "ABSTRACT    : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_ABSTRACT) > 0 ? "x" : ""));
-        pw.println(INDENT + "STRICT      : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_STRICT) > 0 ? "x" : ""));
-        pw.println(INDENT + "SYNTHETIC   : " + ((m_info.getAccessFlags() & METHOD_INFO.ACC_SYNTHETIC) > 0 ? "x" : ""));
+        pw.println(INDENT + "PUBLIC      : " + ((m_info.getAccessFlags() & MethodInfo.ACC_PUBLIC) > 0 ? "x" : ""));
+        pw.println(INDENT + "PRIVATE     : " + ((m_info.getAccessFlags() & MethodInfo.ACC_PRIVATE) > 0 ? "x" : ""));
+        pw.println(INDENT + "PROTECTED   : " + ((m_info.getAccessFlags() & MethodInfo.ACC_PROTECTED) > 0 ? "x" : ""));
+        pw.println(INDENT + "STATIC      : " + ((m_info.getAccessFlags() & MethodInfo.ACC_STATIC) > 0 ? "x" : ""));
+        pw.println(INDENT + "FINAL       : " + ((m_info.getAccessFlags() & MethodInfo.ACC_FINAL) > 0 ? "x" : ""));
+        pw.println(INDENT + "SYNCHRONIZED: " + ((m_info.getAccessFlags() & MethodInfo.ACC_SYNCHRONIZED) > 0 ? "x" : ""));
+        pw.println(INDENT + "BRIDGE      : " + ((m_info.getAccessFlags() & MethodInfo.ACC_BRIDGE) > 0 ? "x" : ""));
+        pw.println(INDENT + "VARARGS     : " + ((m_info.getAccessFlags() & MethodInfo.ACC_VARARGS) > 0 ? "x" : ""));
+        pw.println(INDENT + "NATIVE      : " + ((m_info.getAccessFlags() & MethodInfo.ACC_NATIVE) > 0 ? "x" : ""));
+        pw.println(INDENT + "ABSTRACT    : " + ((m_info.getAccessFlags() & MethodInfo.ACC_ABSTRACT) > 0 ? "x" : ""));
+        pw.println(INDENT + "STRICT      : " + ((m_info.getAccessFlags() & MethodInfo.ACC_STRICT) > 0 ? "x" : ""));
+        pw.println(INDENT + "SYNTHETIC   : " + ((m_info.getAccessFlags() & MethodInfo.ACC_SYNTHETIC) > 0 ? "x" : ""));
         pw.println();
 
         pw.println(INDENT + "Attributes:");
-        ATTRIBUTE_INFO[] attrs = m_info.getAttributes();
+        AttributeInfo[] attrs = m_info.getAttributes();
         Code code = null;
         for (int i = 0; i < attrs.length; i++)
         {

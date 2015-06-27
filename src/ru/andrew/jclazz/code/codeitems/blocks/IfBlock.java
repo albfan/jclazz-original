@@ -8,15 +8,15 @@ import java.util.*;
 
 public class IfBlock extends Block
 {
-    private Condition firstCondition;
     private List andConditions = new ArrayList();
 
     private Else elseBlock;
 
-    public IfBlock(Block parent, Operation ifOp)
+    private boolean isNegConditions = false;
+
+    public IfBlock(Block parent)
     {
         super(parent);
-        this.firstCondition = new Condition(ifOp, this, null);
     }
 
     public void setElseBlock(Else elseBlock)
@@ -44,6 +44,7 @@ public class IfBlock extends Block
     public void print(PrintWriter pw, String init_indent)
     {
         pw.print(init_indent + (isElseIf ? "else " : "") + "if ");
+        if (isNegConditions) pw.print("(!");
         if (andConditions.size() > 1) pw.print("(");
         for (Iterator i = andConditions.iterator(); i.hasNext();)
         {
@@ -60,11 +61,12 @@ public class IfBlock extends Block
             if (i.hasNext()) pw.print(" && ");
         }
         if (andConditions.size() > 1) pw.print(")");
+        if (isNegConditions) pw.print(")");
         pw.println();
         super.print(pw, init_indent);
     }
 
-    public void addAndConditions(List ops, boolean isFirstAnd)
+    public void addAndConditions(List ops)
     {
         List orConditions = new ArrayList();
         List newOps = new ArrayList();
@@ -75,50 +77,47 @@ public class IfBlock extends Block
             newOps.add(ci);
             if (ci instanceof If)
             {
-                orConditions.add(new Condition((Operation) ci, this, new ArrayList(newOps)));
+                orConditions.add(new Condition((If) ci, this, new ArrayList(newOps)));
                 newOps.clear();
             }
         }
 
-        if (isFirstAnd)
-        {
-            orConditions.add(0, firstCondition);
-        }
-        else if (andConditions.isEmpty())
-        {
-            List firstAndConditions = new ArrayList(1);
-            firstAndConditions.add(firstCondition);
-            andConditions.add(firstAndConditions);
-        }
         andConditions.add(orConditions);
     }
 
     public void analyze(Block block)
     {
-        firstCondition.analyze(block);
-
-        boolean skipFirst = true;
-        // All other conditions are analyzed with themselves
         for (Iterator i = andConditions.iterator(); i.hasNext();)
         {
             List orConditions = (List) i.next();
             for (Iterator j = orConditions.iterator(); j.hasNext();)
             {
                 Condition cond = (Condition) j.next();
-                if (skipFirst)
-                {
-                    skipFirst = false;
-                    continue;
-                }
-                cond.analyze(cond);
+                cond.analyze(block);
             }
         }
 
-        if (andConditions.isEmpty())
+        // Can be break in back loop
+        List firstOrConditions = (List) andConditions.get(0);
+        long target = ((Condition) firstOrConditions.get(firstOrConditions.size() - 1)).getIfOperation().getTargetOperation();
+        long start = ((Condition) firstOrConditions.get(firstOrConditions.size() - 1)).getIfOperation().getStartByte();
+        if (block.getLastOperation().getStartByte() < target && block instanceof Loop)
         {
-            List firstAndConditions = new ArrayList(1);
-            firstAndConditions.add(firstCondition);
-            andConditions.add(firstAndConditions);
+            Block par = block;
+            do
+            {
+                par = par.getParent();
+                if (par == null) break;
+            }
+            while (par.getOperationByStartByte(target) == null);
+            
+            if (par != null && par.getOperationPriorTo(target) instanceof Loop)
+            {
+                GoTo got = new GoTo(start, target);
+                got.setBreak(true);
+                ops.add(ops.size(), got);
+                isNegConditions = true;
+            }
         }
     }
 }

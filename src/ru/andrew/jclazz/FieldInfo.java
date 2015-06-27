@@ -7,10 +7,8 @@ import ru.andrew.jclazz.signature.*;
 
 import java.io.*;
 
-public class FIELD_INFO
+public class FieldInfo
 {
-    public boolean DEBUG = false;
-
     public static final int ACC_PUBLIC = 0x0001;
     public static final int ACC_PRIVATE = 0x0002;
     public static final int ACC_PROTECTED = 0x0004;
@@ -22,13 +20,14 @@ public class FIELD_INFO
     public static final int ACC_ENUM = 0x4000;
 
     private int access_flags; 
-    private String name;
+    private CONSTANT_Utf8 name;
     private FieldDescriptor descriptor;
-    private ATTRIBUTE_INFO[] attrs;
+    private CONSTANT_Utf8 descriptorUTF8;
+    private AttributeInfo[] attrs;
 
     private boolean isDeprecated;
     private boolean isSynthetic;
-    private CP_INFO constantValue = null;
+    private CONSTANT constantValue = null;
     private FieldTypeSignature signature;
 
     private Clazz clazz;
@@ -40,16 +39,17 @@ public class FIELD_INFO
         access_flags = cis.readU2();
 
         int name_index = cis.readU2();
-        name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[name_index]).getString();
+        name = (CONSTANT_Utf8) clazz.getConstant_pool()[name_index];
 
         int descriptor_index = cis.readU2();
-        descriptor = new FieldDescriptor(((CONSTANT_Utf8_info) clazz.getConstant_pool()[descriptor_index]).getString());
+        descriptorUTF8 = (CONSTANT_Utf8) clazz.getConstant_pool()[descriptor_index];
+        descriptor = new FieldDescriptor(descriptorUTF8.getString());
 
         int attributes_count = cis.readU2();
-        attrs = new ATTRIBUTE_INFO[attributes_count];
+        attrs = new AttributeInfo[attributes_count];
         for (int i = 0; i < attributes_count; i++)
         {
-            attrs[i] = ATTRIBUTE_INFO.loadAttribute(cis, clazz, null);
+            attrs[i] = AttributesLoader.loadAttribute(cis, clazz, null);
             if (attrs[i] instanceof Deprecated)
             {
                 isDeprecated = true;
@@ -68,14 +68,20 @@ public class FIELD_INFO
             }
             else
             {
-                if (isDebug()) System.out.println("FIELD INFO : attribute : " + attrs[i].getClass() + ", " + attrs[i]);
+                System.out.println("FIELD INFO : attribute : " + attrs[i].getClass() + ", " + attrs[i]);
             }
         }
     }
 
-    private boolean isDebug()
+    public void store(ClazzOutputStream cos) throws IOException
     {
-        return DEBUG;
+        cos.writeU2(access_flags);
+        cos.writeU2(name.getIndex());
+        cos.writeU2(descriptorUTF8.getIndex());
+        for (int i = 0; i < attrs.length; i++)
+        {
+            attrs[i].store(cos);
+        }
     }
 
     public int getAccessFlags()
@@ -85,7 +91,7 @@ public class FIELD_INFO
 
     public String getName()
     {
-        return name;
+        return name.getString();
     }
 
     public FieldDescriptor getDescriptor()
@@ -93,7 +99,7 @@ public class FIELD_INFO
         return descriptor;
     }
 
-    public ATTRIBUTE_INFO[] getAttributes()
+    public AttributeInfo[] getAttributes()
     {
         return attrs;
     }
@@ -111,7 +117,7 @@ public class FIELD_INFO
     public String getConstantValue()
     {
         if (constantValue == null) return null;
-        String val = constantValue.toString();
+        String val = constantValue.str();
         if ("boolean".equals(descriptor.getFQN()))
         {
             if ("1".equals(val))

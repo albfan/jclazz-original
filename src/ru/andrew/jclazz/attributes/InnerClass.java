@@ -5,27 +5,28 @@ import ru.andrew.jclazz.*;
 
 public class InnerClass
 {
-    CONSTANT_Class_info inner_class;
-    CONSTANT_Class_info outer_class;
-    String inner_name;
+    CONSTANT_Class inner_class;
+    CONSTANT_Class outer_class;
+    CONSTANT_Utf8 inner_name;
     int inner_class_access_flags;
 
     private Clazz innerClazz;
     private boolean isPrinted = false;
 
-    public CONSTANT_Class_info getInnerClass()
+    public CONSTANT_Class getInnerClass()
     {
         return inner_class;
     }
 
-    public CONSTANT_Class_info getOuterClass()
+    public CONSTANT_Class getOuterClass()
     {
         return outer_class;
     }
 
     public String getInnerName()
     {
-        return inner_name;
+
+        return inner_name != null ? inner_name.getString() : null;
     }
 
     public int getInnerClassAccessFlags()
@@ -53,10 +54,10 @@ public class InnerClass
         isPrinted = printed;
     }
 
-    public CONSTANT_Class_info getAnonymousSuperClass()
+    public CONSTANT_Class getAnonymousSuperClass()
     {
         if (innerClazz == null) return null;    // Usually it is invoked when innerClazz is already set
-        CONSTANT_Class_info[] intfs = innerClazz.getInterfaces();
+        CONSTANT_Class[] intfs = innerClazz.getInterfaces();
         if (intfs == null || intfs.length == 0)
         {
             return innerClazz.getSuperClassInfo();

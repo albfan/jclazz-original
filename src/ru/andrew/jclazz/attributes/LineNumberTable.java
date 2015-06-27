@@ -1,10 +1,11 @@
 package ru.andrew.jclazz.attributes;
 
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class LineNumberTable extends ATTRIBUTE_INFO
+public class LineNumberTable extends AttributeInfo
 {
     class LineNumber
     {
@@ -14,9 +15,14 @@ public class LineNumberTable extends ATTRIBUTE_INFO
 
     private LineNumber line_number_table[];
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public LineNumberTable(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
         
         int line_number_table_length = cis.readU2();
         line_number_table = new LineNumber[line_number_table_length];
@@ -25,6 +31,17 @@ public class LineNumberTable extends ATTRIBUTE_INFO
             line_number_table[i] = new LineNumber();
             line_number_table[i].start_pc = cis.readU2();
             line_number_table[i].line_number = cis.readU2();
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(line_number_table.length);
+        for (int i = 0; i < line_number_table.length; i++)
+        {
+            cos.writeU2(line_number_table[i].start_pc);
+            cos.writeU2(line_number_table[i].line_number);
         }
     }
 

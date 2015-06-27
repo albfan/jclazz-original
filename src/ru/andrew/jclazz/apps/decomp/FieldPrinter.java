@@ -15,7 +15,7 @@ public class FieldPrinter
         this.indent = indent;
     }
 
-    public void print(PrintWriter pw, FIELD_INFO f_info)
+    public void print(PrintWriter pw, FieldInfo f_info)
     {
         // Inner Class support
         if (f_info.getClazz().isInnerClass() &&
@@ -25,6 +25,7 @@ public class FieldPrinter
         {
             return;
         }
+        if (f_info.isSynthetic()) return;
 
         if (f_info.isDeprecated() || f_info.isSynthetic())
         {

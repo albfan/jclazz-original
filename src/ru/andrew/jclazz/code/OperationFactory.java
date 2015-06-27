@@ -18,7 +18,11 @@ public class OperationFactory
 
     public Operation createOperation(int opcode, long start_byte, Code code)
     {
-        if (opcode >= 1 && opcode <= 45)
+        if (opcode == 0)
+        {
+            return new Nop(opcode, start_byte, code);
+        }
+        else if (opcode >= 1 && opcode <= 45)
         {
             return new Push(opcode, start_byte, code);
         }
@@ -50,7 +54,11 @@ public class OperationFactory
         {
             return new TypeConversion(opcode, start_byte, code);
         }
-        else if ((opcode >= 148 && opcode <= 166) || (opcode == 198) || (opcode == 199))
+        else if ((opcode >= 148 && opcode <= 152))
+        {
+            return new Signum(opcode, start_byte, code);
+        }
+        else if ((opcode >= 153 && opcode <= 166) || (opcode == 198) || (opcode == 199))
         {
             return new If(opcode, start_byte, code);
         }

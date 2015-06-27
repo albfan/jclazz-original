@@ -21,9 +21,9 @@ public class MethodPrinter
         this.indent = indent;
     }
 
-    public void print(PrintWriter pw, METHOD_INFO m_info, Clazz clazz)
+    public void print(PrintWriter pw, MethodInfo m_info, Clazz clazz)
     {
-        if (m_info.isGetFieldForIC()) return;
+        if (m_info.isSynthetic()) return;
 
         if (m_info.isDeprecated() || m_info.isSynthetic())
         {
@@ -126,7 +126,7 @@ public class MethodPrinter
             if (m_info.getExceptions() != null)
             {
                 pw.print(" throws ");
-                CONSTANT_Class_info[] exceptions = m_info.getExceptions().getExceptionTable();
+                CONSTANT_Class[] exceptions = m_info.getExceptions().getExceptionTable();
                 for (int e = 0; e < exceptions.length; e++)
                 {
                     pw.print(clazz.importClass(exceptions[e].getFullyQualifiedName()));

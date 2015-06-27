@@ -4,36 +4,45 @@ import ru.andrew.jclazz.*;
 
 import java.io.*;
 
-public class CONSTANT_Class_info extends CP_INFO
+public class CONSTANT_Class extends CONSTANT
 {
     private int fqn_index;
-    private Clazz clazz;
+    private CONSTANT_Utf8 utf8;
     private boolean loaded = false;
 
     private String name = null;
     private String packageName = null;
     private String baseType = null;
-    String arrayQN = "";
+    private String arrayQN = "";
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException
+    protected CONSTANT_Class(int num, int tag, Clazz clazz)
     {
-        fqn_index = cis.readU2();
-        this.clazz = clazz;
+        super(num, tag, clazz);
     }
 
-    public void complete() throws ClazzException
+    public String getType()
+    {
+        return "java.lang.Class";
+    }
+
+    public void load(ClazzInputStream cis) throws IOException
+    {
+        fqn_index = cis.readU2();
+    }
+
+    public void update() throws ClazzException
     {
         if (loaded) return;
 
         loaded = true;
 
-        clazz.getConstant_pool()[fqn_index].complete();
-        CONSTANT_Utf8_info utf8_info = (CONSTANT_Utf8_info) clazz.getConstant_pool()[fqn_index];
-        if (utf8_info == null)
+        clazz.getConstant_pool()[fqn_index].update();
+        utf8 = (CONSTANT_Utf8) clazz.getConstant_pool()[fqn_index];
+        if (utf8 == null)
         {
-            throw new ClazzException("CONSTANT_Class_Info, name_index = " + fqn_index);
+            throw new ClazzException("CONSTANT_Class, null name_index = " + fqn_index);
         }
-        String descriptor = utf8_info.getString();
+        String descriptor = utf8.getString();
 
         int arrayDimensions = 0;
         while (descriptor.charAt(arrayDimensions) == '[')
@@ -80,16 +89,18 @@ public class CONSTANT_Class_info extends CP_INFO
                 case 'L':
                     String type = descriptor.substring(currentPos + 1, descriptor.length() - 1);
                     type = type.replace('/', '.');
-                    packageName = type.substring(0, type.lastIndexOf('.'));
-                    name = type.substring(type.lastIndexOf('.') + 1);
+                    if (type.lastIndexOf('.') != -1)
+                    {
+                        packageName = type.substring(0, type.lastIndexOf('.'));
+                        name = type.substring(type.lastIndexOf('.') + 1);
+                    }
+                    else
+                    {
+                        name = type;
+                    }
                     break;
             }
         }
-    }
-
-    public String getType()
-    {
-        return "java.lang.Class";
     }
 
     public String getName()
@@ -105,14 +116,22 @@ public class CONSTANT_Class_info extends CP_INFO
     public String getFullyQualifiedName()
     {
         if (baseType != null) return baseType + arrayQN;
-        StringBuffer sb = new StringBuffer();
-        if (packageName != null) sb.append(packageName).append(".");
-        sb.append(name).append(arrayQN);
-        return sb.toString();
+
+        String str = "";
+        if (packageName != null) str = packageName + ".";
+        str += name + arrayQN;
+        return str;
     }
 
-    public String toString()
+    public String str()
     {
         return getFullyQualifiedName();
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        super.store(cos);
+
+        cos.writeU2(utf8.getIndex());
     }
 }

@@ -41,6 +41,11 @@ public class Wide extends Operation
         }
     }
 
+    public int getLength()
+    {
+        return w_opcode == 132 ? 6 : 4;
+    }
+
     Code getCode()
     {
         return wcode;

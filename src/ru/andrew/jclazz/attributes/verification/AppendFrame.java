@@ -25,6 +25,15 @@ public class AppendFrame extends StackMapFrame
         }
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU2(offset_delta);
+        for (int i = 0; i < vtis.length; i++)
+        {
+            vtis[i].store(cos);
+        }
+    }
+
     public int getOffsetDelta()
     {
         return offset_delta;

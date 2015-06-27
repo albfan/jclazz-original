@@ -5,33 +5,44 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class ConstantValue extends ATTRIBUTE_INFO
+public class ConstantValue extends AttributeInfo
 {
-    private CP_INFO cp_info;
+    private CONSTANT constant;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws ClazzException, IOException
+    public ConstantValue(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        long attribute_length = cis.readU4();
-        if (attribute_length != 2) throw new ClazzException("Invalid length of ConstantValue attribute");
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws ClazzException, IOException
+    {
+        attributeLength = (int) cis.readU4();
+        if (attributeLength != 2) throw new ClazzException("Invalid length of ConstantValue attribute");
         int constantvalue_index = cis.readU2();
-        cp_info = clazz.getConstant_pool()[constantvalue_index];
-        if ( (!(cp_info instanceof CONSTANT_Long_info)) &&
-                (!(cp_info instanceof CONSTANT_Float_info)) &&
-                (!(cp_info instanceof CONSTANT_Double_info)) &&
-                (!(cp_info instanceof CONSTANT_Integer_info)) &&
-                (!(cp_info instanceof CONSTANT_String_info)) )
+        constant = clazz.getConstant_pool()[constantvalue_index];
+        if ( (!(constant instanceof CONSTANT_Long)) &&
+                (!(constant instanceof CONSTANT_Float)) &&
+                (!(constant instanceof CONSTANT_Double)) &&
+                (!(constant instanceof CONSTANT_Integer)) &&
+                (!(constant instanceof CONSTANT_String)) )
         {
             throw new ClazzException("ConstantValue is of illegal type");
         }
     }
 
-    public CP_INFO getConstant()
+    public void store(ClazzOutputStream cos) throws IOException
     {
-        return cp_info;
+        cos.writeU4(attributeLength);
+        cos.writeU2(constant.getIndex());
+    }
+
+    public CONSTANT getConstant()
+    {
+        return constant;
     }
 
     public String toString()
     {
-        return ATTR + "ConstantValue: " + cp_info.toString();
+        return ATTR + "ConstantValue: " + constant.str();
     }
 }

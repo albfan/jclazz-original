@@ -28,7 +28,7 @@ public class PutField extends Operation
 
         isInInnerClass = code.getClazz().isInnerClass();
 
-        CONSTANT_Fieldref_info f_info = (CONSTANT_Fieldref_info) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
+        CONSTANT_Fieldref f_info = (CONSTANT_Fieldref) code.getClazz().getConstant_pool()[(params[0] << 8) | params[1]];
         name = f_info.getName();
         isBoolean = "boolean".equalsIgnoreCase(f_info.getFieldDescriptor().getBaseType());
         if (opcode == 179)   // putstatic
@@ -77,7 +77,7 @@ public class PutField extends Operation
         // final variables initialization in constructors should not be printed
         if ("this".equals(objectRef) && super.m_info.isInit())
         {
-            FIELD_INFO field = super.m_info.getClazz().getFieldByName(name);
+            FieldInfo field = super.m_info.getClazz().getFieldByName(name);
             if (field.isFinal() && field.getConstantValue() != null)
             {
                 return;

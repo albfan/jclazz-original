@@ -1,33 +1,42 @@
 package ru.andrew.jclazz.attributes;
 
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class GenericAttribute extends ATTRIBUTE_INFO
+public class GenericAttribute extends AttributeInfo
 {
-    private String attributeName;
     private int[] bytes;
 
-    public GenericAttribute(String attributeName)
+    public GenericAttribute(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        this.attributeName = attributeName;
+        super(attributeName, clazz);
     }
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
     {
-        long attribute_length = cis.readU4();
-        bytes = new int[(int) attribute_length];
-        for (long i = 0; i < attribute_length; i++)
+        attributeLength = (int) cis.readU4();
+        bytes = new int[attributeLength];
+        for (int i = 0; i < attributeLength; i++)
         {
-            bytes[((int) i)] = cis.readU1();
+            bytes[i] = cis.readU1();
+        }
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        for (int i = 0; i < attributeLength; i++)
+        {
+            cos.writeU1(bytes[i]);
         }
     }
 
     public String toString()
     {
         StringBuffer sb = new StringBuffer(ATTR).append("(GEN)");
-        sb.append(attributeName).append(": ");
+        sb.append(attributeName.getString()).append(": ");
         if (bytes.length > 0)
         {
             for (int i = 0; i < bytes.length; i++)

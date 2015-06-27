@@ -23,7 +23,7 @@ public class Return extends Operation
         super(opcode, start_byte, code);
 
         FieldDescriptor returnType = code.getMethod().getDescriptor().getReturnType();
-        if (METHOD_INFO.INIT_METHOD.equals(code.getMethod().getName()))
+        if (MethodInfo.INIT_METHOD.equals(code.getMethod().getName()))
         {
             baseType = "<init>";
         }
@@ -81,7 +81,20 @@ public class Return extends Operation
 
     public void analyze(Block block)
     {
-        isLastInBlock = !block.hasMoreOperations() && block.getParent() == null;    // TODO bug
+        isLastInBlock = !block.hasMoreOperations();
+        Block parent = block;
+        long start = start_byte;
+        while (parent != null)
+        {
+            if (parent.getOperationAfter(start) != null)
+            {
+                isLastInBlock = false;
+                break;
+            }
+            start = parent.getStartByte();
+            parent = parent.getParent();
+        }
+
         if ("<init>".equals(baseType))
         {
             // Return in constructor

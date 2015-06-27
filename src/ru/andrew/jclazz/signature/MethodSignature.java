@@ -17,7 +17,7 @@ ThrowsSignature:
  */
 public class MethodSignature
 {
-    private METHOD_INFO m_info;
+    private MethodInfo m_info;
 
     private FormalTypeParameter[] typeParameters;
     private TypeSignature[] paramTypes;
@@ -28,7 +28,7 @@ public class MethodSignature
     private ClassTypeSignature[] thrownClasses;
     private String[] thrownVariables;
 
-    public MethodSignature(String signature, METHOD_INFO m_info)
+    public MethodSignature(String signature, MethodInfo m_info)
     {
         this.m_info = m_info;
 

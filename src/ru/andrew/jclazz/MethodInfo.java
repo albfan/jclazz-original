@@ -10,10 +10,8 @@ import ru.andrew.jclazz.signature.*;
 import java.io.*;
 import java.util.*;
 
-public class METHOD_INFO
+public class MethodInfo
 {
-    public boolean DEBUG = false;
-
     public static final String INIT_METHOD = "<init>";
     public static final String CLASS_INIT_METHOD = "<clinit>";
 
@@ -31,9 +29,10 @@ public class METHOD_INFO
     public static final int ACC_SYNTHETIC = 0x1000;
 
     private int access_flags;
-    private String name;
+    private CONSTANT_Utf8 name;
     private MethodDescriptor descriptor;
-    private ATTRIBUTE_INFO[] attributes;
+    private CONSTANT_Utf8 descriptorUTF8;
+    private AttributeInfo[] attributes;
 
     private boolean isDeprecated;
     private boolean isSynthetic;
@@ -54,18 +53,19 @@ public class METHOD_INFO
         access_flags = cis.readU2();
 
         int name_index = cis.readU2();
-        name = ((CONSTANT_Utf8_info) clazz.getConstant_pool()[name_index]).getString();
+        name = (CONSTANT_Utf8) clazz.getConstant_pool()[name_index];
 
         int descriptor_index = cis.readU2();
-        descriptor = new MethodDescriptor(((CONSTANT_Utf8_info) clazz.getConstant_pool()[descriptor_index]).getString());
+        descriptorUTF8 = (CONSTANT_Utf8) clazz.getConstant_pool()[descriptor_index];
+        descriptor = new MethodDescriptor(descriptorUTF8.getString());
 
         // Loading attributes
 
         int attributes_count = cis.readU2();
-        attributes = new ATTRIBUTE_INFO[attributes_count];
+        attributes = new AttributeInfo[attributes_count];
         for (int i = 0; i < attributes_count; i++)
         {
-            ATTRIBUTE_INFO attribute = ATTRIBUTE_INFO.loadAttribute(cis, clazz, this);
+            AttributeInfo attribute = AttributesLoader.loadAttribute(cis, clazz, this);
             attributes[i] = attribute;
             if (attribute instanceof Deprecated)
             {
@@ -84,7 +84,6 @@ public class METHOD_INFO
             {
                 if (code != null) throw new ClazzException("Doubling code attribute in method");
                 code = (Code) attribute;
-                code.setMethod(this);
                 topBlock = code.getCodeBlock();
             }
             else if (attribute instanceof Signature)
@@ -93,7 +92,7 @@ public class METHOD_INFO
             }
             else
             {
-                if (isDebug()) System.out.println("METHOD INFO : attribute : " + attribute.getClass() + ", " + attribute);
+                System.out.println("METHOD INFO : attribute : " + attribute.getClass() + ", " + attribute);
             }
         }
 
@@ -110,7 +109,7 @@ public class METHOD_INFO
             topBlock.getLocalVariable(0, clazz.getThisClassInfo().getFullyQualifiedName(), "this");
             addition = 1;
         }
-        if (!CLASS_INIT_METHOD.equals(name))
+        if (!CLASS_INIT_METHOD.equals(name.getString()))
         {
             List params = descriptor.getParams();
             for (int i = 0; i < params.size(); i++)
@@ -146,9 +145,15 @@ public class METHOD_INFO
         }
     }
 
-    private boolean isDebug()
+    public void store(ClazzOutputStream cos) throws IOException
     {
-        return DEBUG;
+        cos.writeU2(access_flags);
+        cos.writeU2(name.getIndex());
+        cos.writeU2(descriptorUTF8.getIndex());
+        for (int i = 0; i < attributes.length; i++)
+        {
+            attributes[i].store(cos);
+        }
     }
 
     public int getAccessFlags()
@@ -158,7 +163,7 @@ public class METHOD_INFO
 
     public String getName()
     {
-        return name;
+        return name.getString();
     }
 
     public MethodDescriptor getDescriptor()
@@ -196,14 +201,14 @@ public class METHOD_INFO
         return topBlock;
     }
 
-    public ATTRIBUTE_INFO[] getAttributes()
+    public AttributeInfo[] getAttributes()
     {
         return attributes;
     }
 
     public boolean isInit()
     {
-        return INIT_METHOD.equals(name);
+        return INIT_METHOD.equals(name.getString());
     }
 
     // Inner Class support

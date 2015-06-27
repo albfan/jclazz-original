@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Condition extends Block
 {
-    private Operation ifOp;
+    private If ifOp;
 
     private String var1;
     private String var2;
@@ -35,7 +35,12 @@ public class Condition extends Block
         this.needReverseOperation = needReverseOperation;
     }
 
-    public Condition(Operation ifOp, Block parent, List ops)
+    public If getIfOperation()
+    {
+        return ifOp;
+    }
+
+    public Condition(If ifOp, Block parent, List ops)
     {
         super(parent, ops != null ? ops : new ArrayList());
         this.ifOp = ifOp;
@@ -114,8 +119,9 @@ public class Condition extends Block
         analyzeIf(block);
     }
 
-    private void analyzeIf(Block block)
+    private void analyzeIf(Block blockA)
     {
+        Block block = getPriorPushOperation() != null ? this : blockA;
         int opcode = ifOp.getOpcode().getOpcode();
 
         Operation prev1 = block.removePriorPushOperation();
@@ -129,11 +135,17 @@ public class Condition extends Block
         else if (opcode >= 153 && opcode <= 158)
         {
             var2 = "0";
+            if (prev1 instanceof Signum)
+            {
+                var2 = ((Signum) prev1).getVar2();
+                var1 = ((Signum) prev1).getVar1();
+            }
         }
         else
         {
             Operation prev2 = block.removePriorPushOperation();
             var2 = prev2.str();
+            // TODO what to do with signum
         }
     }
 

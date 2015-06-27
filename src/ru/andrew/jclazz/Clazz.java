@@ -13,8 +13,6 @@ import java.util.*;
  */
 public final class Clazz
 {
-    public boolean DEBUG = false;
-
     private String fileName;
 
     public static final int ACC_PUBLIC = 1;
@@ -32,14 +30,14 @@ public final class Clazz
     private static final long MAGIC_NUMBER = 0xCAFEBABEL;
     private int minor_version;
     private int major_version;
-    private CP_INFO constant_pool[];
+    private CONSTANT constant_pool[];
     private int access_flags;
-    private CONSTANT_Class_info this_class;
-    private CONSTANT_Class_info super_class;
-    private CONSTANT_Class_info[] interfaces;
-    private FIELD_INFO fields[];
-    private METHOD_INFO methods[];
-    private ATTRIBUTE_INFO[] attributes;
+    private CONSTANT_Class this_class;
+    private CONSTANT_Class super_class;
+    private CONSTANT_Class[] interfaces;
+    private FieldInfo fields[];
+    private MethodInfo methods[];
+    private AttributeInfo[] attributes;
 
     private boolean isDeprecated;
     private boolean isSynthetic;
@@ -76,34 +74,33 @@ public final class Clazz
         minor_version = cis.readU2();
         major_version = cis.readU2();
 
-        int constant_pool_count = cis.readU2();
-        constant_pool = new CP_INFO[constant_pool_count];
-        loadConstants(cis, constant_pool_count);
+        constant_pool = ConstantPoolItemLoader.loadConstants(cis, this);
+        ConstantPoolItemLoader.updateConstants(constant_pool);
 
         access_flags = cis.readU2();
 
-        this_class = (CONSTANT_Class_info) constant_pool[cis.readU2()];
+        this_class = (CONSTANT_Class) constant_pool[cis.readU2()];
 
         super_class = null;
         int super_class_ind = cis.readU2();
-        if (super_class_ind != 0) super_class = (CONSTANT_Class_info) constant_pool[super_class_ind];
+        if (super_class_ind != 0) super_class = (CONSTANT_Class) constant_pool[super_class_ind];
 
         int interfaces_count = cis.readU2();
-        interfaces = new CONSTANT_Class_info[interfaces_count];
+        interfaces = new CONSTANT_Class[interfaces_count];
         for (int i = 0; i < interfaces_count; i++)
         {
             int index = cis.readU2();
-            interfaces[i] = (CONSTANT_Class_info) constant_pool[index]; 
+            interfaces[i] = (CONSTANT_Class) constant_pool[index];
         }
 
         initImports();
 
         int fields_count = cis.readU2();
-        fields = new FIELD_INFO[fields_count];
+        fields = new FieldInfo[fields_count];
         loadFields(cis);
 
         int methods_count = cis.readU2();
-        methods = new METHOD_INFO[methods_count];
+        methods = new MethodInfo[methods_count];
         loadMethods(cis);
 
         int attributes_count = cis.readU2();
@@ -139,38 +136,18 @@ public final class Clazz
             }
             else
             {
-                if (DEBUG) System.out.println("Clazz: unknown class attribute: " + attributes[i].getClass() + " - " + attributes[i].toString());
+                System.out.println("Clazz: unknown class attribute: " + attributes[i].getClass() + " - " + attributes[i].toString());
             }
         }
 
         cis.close();
     }
 
-    private void loadConstants(ClazzInputStream cis, int constant_pool_count) throws ClazzException, IOException
-    {
-        constant_pool[0] = null;
-        for (int i = 0; i < constant_pool_count - 1; i++)
-        {
-            constant_pool[i + 1] = CP_INFO.loadConstant(cis, this);
-            if (constant_pool[i + 1] instanceof CONSTANT_Long_info ||
-                    constant_pool[i + 1] instanceof CONSTANT_Double_info)
-            {
-                i++;
-            }
-        }
-
-        // Complete constants loading
-        for (int i = 0; i < constant_pool_count; i++)
-        {
-            if (constant_pool[i] != null) constant_pool[i].complete();
-        }
-    }
-
     private void loadFields(ClazzInputStream cis) throws ClazzException, IOException
     {
         for (int i = 0; i < fields.length; i++)
         {
-            fields[i] = new FIELD_INFO();
+            fields[i] = new FieldInfo();
             fields[i].load(cis, this);
         }
     }
@@ -179,17 +156,17 @@ public final class Clazz
     {
         for (int i = 0; i < methods.length; i++)
         {
-            methods[i] = new METHOD_INFO();
+            methods[i] = new MethodInfo();
             methods[i].load(cis, this);
         }
     }
 
-    private ATTRIBUTE_INFO[] loadAttributes(ClazzInputStream cis, int attributes_count) throws ClazzException, IOException
+    private AttributeInfo[] loadAttributes(ClazzInputStream cis, int attributes_count) throws ClazzException, IOException
     {
-        ATTRIBUTE_INFO[] attributes = new ATTRIBUTE_INFO[attributes_count];
+        AttributeInfo[] attributes = new AttributeInfo[attributes_count];
         for (int i = 0; i < attributes_count; i++)
         {
-            attributes[i] = ATTRIBUTE_INFO.loadAttribute(cis, this, null);
+            attributes[i] = AttributesLoader.loadAttribute(cis, this, null);
         }
         return attributes;
     }
@@ -213,6 +190,50 @@ public final class Clazz
                 // TODO
             }
         }
+    }
+
+    public void saveToFile(String path) throws IOException
+    {
+        ClazzOutputStream cos = new ClazzOutputStream(path);
+
+        cos.writeU4(MAGIC_NUMBER);
+        cos.writeU2(minor_version);
+        cos.writeU2(major_version);
+        for (int i = 0; i < constant_pool.length; i++)
+        {
+            if (constant_pool[i] != null) constant_pool[i].store(cos);
+        }
+        cos.writeU2(access_flags);
+
+        cos.writeU2(this_class.getIndex());
+        if (super_class != null)
+        {
+            cos.writeU2(super_class.getIndex());
+        }
+        else
+        {
+            cos.writeU2(0);
+        }
+
+        for (int i = 0; i > interfaces.length; i++)
+        {
+            cos.writeU2(interfaces[i].getIndex());
+        }
+
+        for (int i = 0; i > fields.length; i++)
+        {
+            fields[i].store(cos);
+        }
+        for (int i = 0; i > methods.length; i++)
+        {
+            methods[i].store(cos);
+        }
+        for (int i = 0; i > attributes.length; i++)
+        {
+            attributes[i].store(cos);
+        }
+
+        cos.close();
     }
 
     public String getFileName()
@@ -245,22 +266,22 @@ public final class Clazz
         return major_version + "." + minor_version;
     }
 
-    public ATTRIBUTE_INFO[] getAttributes()
+    public AttributeInfo[] getAttributes()
     {
         return attributes;
     }
 
-    public CONSTANT_Class_info getThisClassInfo()
+    public CONSTANT_Class getThisClassInfo()
     {
         return this_class;
     }
 
-    public CONSTANT_Class_info getSuperClassInfo()
+    public CONSTANT_Class getSuperClassInfo()
     {
         return super_class;
     }
 
-    public CP_INFO[] getConstant_pool()
+    public CONSTANT[] getConstant_pool()
     {
         return constant_pool;
     }
@@ -270,17 +291,17 @@ public final class Clazz
         return isDeprecated;
     }
 
-    public CONSTANT_Class_info[] getInterfaces()
+    public CONSTANT_Class[] getInterfaces()
     {
         return interfaces;
     }
 
-    public FIELD_INFO[] getFields()
+    public FieldInfo[] getFields()
     {
         return fields;
     }
 
-    public METHOD_INFO[] getMethods()
+    public MethodInfo[] getMethods()
     {
         return methods;
     }
@@ -308,7 +329,7 @@ public final class Clazz
         return null;
     }
 
-    public FIELD_INFO getFieldByName(String name)
+    public FieldInfo getFieldByName(String name)
     {
         for (int i = 0; i < fields.length; i++)
         {
@@ -571,7 +592,7 @@ public final class Clazz
         return outerClazz;
     }
 
-    public METHOD_INFO getFieldNameForSyntheticMethod(String methodName)
+    public MethodInfo getFieldNameForSyntheticMethod(String methodName)
     {
         for (int i = 0; i < methods.length; i++)
         {

@@ -6,4 +6,9 @@ public class ClazzException extends Exception
     {
         super(message);
     }
+
+    public ClazzException(String message, Throwable cause)
+    {
+        super(message, cause);
+    }
 }

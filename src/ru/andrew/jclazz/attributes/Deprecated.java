@@ -1,14 +1,25 @@
 package ru.andrew.jclazz.attributes;
 
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class Deprecated extends ATTRIBUTE_INFO
+public class Deprecated extends AttributeInfo
 {
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public Deprecated(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4();   // Attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
     }
 
     public String toString()

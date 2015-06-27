@@ -18,6 +18,8 @@ public class GoTo extends Operation
     private boolean isBreak = false;
     private boolean isContinue = false;
 
+    private Loop loop;  //  inner loop support
+
     public GoTo(int opcode, long start_byte, Code code)
     {
         super(opcode, start_byte, code);
@@ -40,6 +42,12 @@ public class GoTo extends Operation
         targetOperation = start_byte + offset;
     }
 
+    public GoTo(long start_byte, long targetOperation)
+    {
+        super(start_byte);
+        this.targetOperation = targetOperation;
+    }
+
     public long getTargetOperation()
     {
         return targetOperation;
@@ -58,6 +66,26 @@ public class GoTo extends Operation
     public void setContinue(boolean isContinue)
     {
         this.isContinue = isContinue;
+    }
+
+    public boolean isBreak()
+    {
+        return isBreak;
+    }
+
+    public boolean isContinue()
+    {
+        return isContinue;
+    }
+
+    public Loop getLoop()
+    {
+        return loop;
+    }
+
+    public void setLoop(Loop loop)
+    {
+        this.loop = loop;
     }
 
     public boolean isPush()
@@ -79,6 +107,10 @@ public class GoTo extends Operation
         else if (isContinue)
         {
             pw.println(indent + "continue;");
+        }
+        else if (loop != null)
+        {
+            // Print nothing
         }
         else
         {
@@ -107,6 +139,11 @@ public class GoTo extends Operation
         else if (isContinue)
         {
             return "continue";
+        }
+        else if (loop != null)
+        {
+            // Print nothing
+            return "";
         }
         else
         {

@@ -5,7 +5,7 @@ import java.io.*;
 public class ClazzInputStream
 {
     private DataInputStream dis = null;
-    private long cnt = 0;
+    private int cnt = 0;
 
     public ClazzInputStream(String fileName) throws FileNotFoundException
     {
@@ -37,7 +37,36 @@ public class ClazzInputStream
         return (high << 16) + low;
     }
 
-    public long getPosition()
+    public double readDouble() throws IOException
+    {
+        cnt += 8;
+        return dis.readDouble();
+    }
+
+    public float readFloat() throws IOException
+    {
+        cnt += 4;
+        return dis.readFloat();
+    }
+
+    public int readInt() throws IOException
+    {
+        cnt += 4;
+        return dis.readInt();
+    }
+
+    public long readLong() throws IOException
+    {
+        cnt += 8;
+        return dis.readLong();
+    }
+
+    public String readUTF() throws IOException
+    {
+        return dis.readUTF();
+    }
+
+    public int getPosition()
     {
         return cnt;
     }

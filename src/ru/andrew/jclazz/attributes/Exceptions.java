@@ -5,24 +5,38 @@ import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 
-public class Exceptions extends ATTRIBUTE_INFO
+public class Exceptions extends AttributeInfo
 {
-    private CONSTANT_Class_info[] exception_table;
+    private CONSTANT_Class[] exception_table;
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws IOException, ClazzException
+    public Exceptions(CONSTANT_Utf8 attributeName, Clazz clazz)
     {
-        cis.readU4(); // attribute length
+        super(attributeName, clazz);
+    }
+
+    public void load(ClazzInputStream cis) throws IOException, ClazzException
+    {
+        attributeLength = (int) cis.readU4();
 
         int number_of_exceptions = cis.readU2();
-        exception_table = new CONSTANT_Class_info[number_of_exceptions];
+        exception_table = new CONSTANT_Class[number_of_exceptions];
         for (int i = 0; i < number_of_exceptions; i++)
         {
             int index = cis.readU2();
-            exception_table[i] = (CONSTANT_Class_info) clazz.getConstant_pool()[index];
+            exception_table[i] = (CONSTANT_Class) clazz.getConstant_pool()[index];
         }
     }
 
-    public CONSTANT_Class_info[] getExceptionTable()
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        for (int i = 0; i < exception_table.length; i++)
+        {
+            cos.writeU2(exception_table[i].getIndex());
+        }
+    }
+
+    public CONSTANT_Class[] getExceptionTable()
     {
         return exception_table;
     }

@@ -59,4 +59,20 @@ public class IfElseGeneric
         }
         System.out.println("AFTER IF");
     }
+
+    public void test5(long i)
+    {
+        if (i == 17L)
+        {
+            System.out.println("lcmp");
+        }
+    }
+
+    public void test6(double i)
+    {
+        if (i < 2.0)
+        {
+            System.out.println("dcmpl");
+        }
+    }
 }

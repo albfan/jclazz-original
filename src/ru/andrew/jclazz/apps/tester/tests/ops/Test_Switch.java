@@ -52,4 +52,20 @@ public class Test_Switch
         }
         System.out.println("AFTER SWITCH");
     }
+
+    public void testSwitch4(int i)
+    {
+        System.out.println("BEFORE SWITCH");
+        switch (i)
+        {
+            case 0:
+            case 1:
+                System.out.println("1");
+                break;
+            case 2:
+                System.out.println("2");
+                return;
+        }
+        System.out.println("AFTER SWITCH");
+    }
 }

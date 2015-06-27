@@ -36,6 +36,23 @@ public class FullFrame extends StackMapFrame
         }
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU2(offset_delta);
+
+        cos.writeU2(locals.length);
+        for (int i = 0; i < locals.length; i++)
+        {
+            locals[i].store(cos);
+        }
+
+        cos.writeU2(stack.length);
+        for (int i = 0; i < stack.length; i++)
+        {
+            stack[i].store(cos);
+        }
+    }
+
     public int getOffsetDelta()
     {
         return offset_delta;

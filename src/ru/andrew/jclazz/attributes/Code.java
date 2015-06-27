@@ -1,79 +1,65 @@
 package ru.andrew.jclazz.attributes;
 
 import ru.andrew.jclazz.*;
+import ru.andrew.jclazz.attributes.verification.*;
 import ru.andrew.jclazz.code.codeitems.blocks.*;
+import ru.andrew.jclazz.code.codeitems.ops.*;
 import ru.andrew.jclazz.code.*;
 import ru.andrew.jclazz.constants.*;
 
 import java.io.*;
 import java.util.*;
 
-public class Code extends ATTRIBUTE_INFO
+public class Code extends AttributeInfo
 {
     public class ExceptionTable
     {
         public int start_pc;
         public int end_pc;
         public int handler_pc;
-        public CONSTANT_Class_info catch_type;  
+        public CONSTANT_Class catch_type;
     }
 
-    private Clazz clazz;
-    private METHOD_INFO method;
+    private MethodInfo method;
 
     private int max_stack;
     private int max_locals;
 
     private Block codeBlock;
     private ExceptionTable[] exception_table;
-    private ATTRIBUTE_INFO[] attributes;
+    private AttributeInfo[] attributes;
 
     private LineNumberTable lnTable = null;
     private LocalVariableTable lvTable = null;
+    private StackMapTable smTable = null;
 
     // Temporary variables
-    private long code_length;
-    private int[][] code;
+    private int[] code;
+    private int l;
 
-    public void setMethod(METHOD_INFO method)
+    public Code(CONSTANT_Utf8 attributeName, Clazz clazz, MethodInfo method)
     {
+        super(attributeName, clazz);
+
         this.method = method;
     }
 
-    public METHOD_INFO getMethod()
+    public MethodInfo getMethod()
     {
         return method;
     }
 
-    public void load(ClazzInputStream cis, Clazz clazz) throws ClazzException, IOException
+    public void load(ClazzInputStream cis) throws ClazzException, IOException
     {
-        this.clazz = clazz;
-
-        cis.readU4();   // attribute length
+        attributeLength = (int) cis.readU4();
         max_stack = cis.readU2();
         max_locals = cis.readU2();
         
-        code_length = cis.readU4();
-        int H;
-        int L;
-        if (code_length <= Integer.MAX_VALUE)
+        int code_length = (int) cis.readU4();
+        code = new int[code_length];
+        for (int j = 0; j < code_length; j++)
         {
-            H = 1;
-            L = (int) code_length;
-            code = new int[H][L];
-        }
-        else
-        {
-            H = 1 + (int) (code_length / Integer.MAX_VALUE);
-            L = (int) (code_length % Integer.MAX_VALUE);
-            code = new int[H][Integer.MAX_VALUE];
-        }
-        for (int j = 0; j < H; j++)
-        {
-            for (int i = 0; (j == H - 1) ? (i < L) : (i < Integer.MAX_VALUE); i++)
-            {
-                code[j][i] = cis.readU1();
-            }
+            code[j] = cis.readU1();
         }
 
         int exception_table_length = cis.readU2();
@@ -91,15 +77,15 @@ public class Code extends ATTRIBUTE_INFO
             }
             else
             {
-                exception_table[i].catch_type = (CONSTANT_Class_info) clazz.getConstant_pool()[catch_type_index];
+                exception_table[i].catch_type = (CONSTANT_Class) clazz.getConstant_pool()[catch_type_index];
             }
         }
 
         int attributes_count = cis.readU2();
-        attributes = new ATTRIBUTE_INFO[attributes_count];
+        attributes = new AttributeInfo[attributes_count];
         for (int i = 0; i < attributes_count; i++)
         {
-            attributes[i] = ATTRIBUTE_INFO.loadAttribute(cis, clazz, method);
+            attributes[i] = AttributesLoader.loadAttribute(cis, clazz, method);
             if (attributes[i] instanceof LineNumberTable)
             {
                 lnTable = (LineNumberTable) attributes[i];
@@ -108,31 +94,54 @@ public class Code extends ATTRIBUTE_INFO
             {
                 lvTable = (LocalVariableTable) attributes[i];
             }
+            else if (attributes[i] instanceof StackMapTable)
+            {
+                smTable = (StackMapTable) attributes[i];
+            }
         }
 
         // Basic code transformation
         ArrayList ops = new ArrayList();
 
         OperationFactory oFactory = OperationFactory.getInstance();
-        reset();
-        while (!eof())
+        l = -1;
+        while (l < code.length - 1)
         {
-            long position = getCurrentPosition();
-            int opcode = getNextByte();
-            ops.add(oFactory.createOperation(opcode, position, this));
+            ops.add(oFactory.createOperation(getNextByte(), l, this));
         }
 
         codeBlock = new Block(ops, clazz, method);
     }
 
+    public int getNextByte()
+    {
+        l++;
+        if (l >= code.length) throw new RuntimeException("End of code is reached");
+        return code[l];
+    }
+
+    public void skipBytes(int count)
+    {
+        l += count;
+    }
+
+    public int getBytecodeLength()
+    {
+        if (codeBlock == null) return 0;
+
+        int len = 0;
+        codeBlock.reset();
+        while (codeBlock.hasMoreOperations())
+        {
+            Operation ci = (Operation) codeBlock.next();
+            len += ci.getLength();
+        }
+        return len;
+    }
+
     public Block getCodeBlock()
     {
         return codeBlock;
-    }
-
-    public Clazz getClazz()
-    {
-        return clazz;
     }
 
     public ExceptionTable[] getExceptionTable()
@@ -150,7 +159,7 @@ public class Code extends ATTRIBUTE_INFO
         return max_locals;
     }
 
-    public ATTRIBUTE_INFO[] getAttributes()
+    public AttributeInfo[] getAttributes()
     {
         return attributes;
     }
@@ -165,55 +174,45 @@ public class Code extends ATTRIBUTE_INFO
         return lvTable;
     }
 
-    // Raw Code Reader
-    
-    private int h = 0;
-    private int l = 0;
-
-    public boolean eof()
+    public StackMapTable getStackMapTable()
     {
-        return getCurrentPosition() == code_length;
-    }
-
-    public void reset()
-    {
-        h = 0;
-        l = 0;
-    }
-
-    public int getNextByte()
-    {
-        if (eof()) throw new RuntimeException("End of code has reached");
-        int retVal = code[h][l];
-        if (l == Integer.MAX_VALUE - 1)
-        {
-            h++;
-            l = 0;
-        }
-        else
-        {
-            l++;
-        }
-        return retVal;
-    }
-
-    public void skipBytes(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            getNextByte();
-        }
-    }
-
-    public long getCurrentPosition()
-    {
-        return (long) h * (long) Integer.MAX_VALUE + (long) l;
+        return smTable;
     }
 
     public String toString()
     {
-        StringBuffer sb = new StringBuffer(ATTR);
-        sb.append("Code: ...");
-        return sb.toString();
+        return ATTR + "Code...";
+    }
+
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        cos.writeU4(attributeLength);
+        cos.writeU2(max_stack);
+        cos.writeU2(max_locals);
+
+        cos.writeU4(getBytecodeLength());
+        // TODO writing code
+
+        cos.writeU2(exception_table.length);
+        for (int i = 0; i < exception_table.length; i++)
+        {
+            cos.writeU2(exception_table[i].start_pc);
+            cos.writeU2(exception_table[i].end_pc);
+            cos.writeU2(exception_table[i].handler_pc);
+            if (exception_table[i].catch_type == null)
+            {
+                cos.writeU2(0);
+            }
+            else
+            {
+                cos.writeU2(exception_table[i].catch_type.getIndex());
+            }
+        }
+
+        cos.writeU2(attributes.length);
+        for (int i = 0; i < attributes.length; i++)
+        {
+            attributes[i].store(cos);
+        }
     }
 }

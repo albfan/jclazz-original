@@ -19,6 +19,11 @@ public class SameLocals1StackItemFrame extends StackMapFrame
         vti.load(cis, clazz);
     }
 
+    public void store(ClazzOutputStream cos) throws IOException
+    {
+        vti.store(cos);
+    }
+
     public int getOffsetDelta()
     {
         return frame_type - 64;

@@ -52,4 +52,30 @@ public class Test_PushPop
 
         double d = arr[1];
     }
+
+    private native int getInt();
+
+    private native long getLong();
+
+    public int test87()    // pop
+    {
+        int i = 2;
+        getInt();
+        return i;
+    }
+
+    public long test88()    //pop2
+    {
+        long i = 5L;
+        getLong();
+        return i;
+    }
+
+    public long test88_2()    //pop2
+    {
+        long i = 5L;
+        getInt();
+        getInt();
+        return i;
+    }
 }
