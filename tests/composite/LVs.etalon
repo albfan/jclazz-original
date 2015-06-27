@@ -1,0 +1,38 @@
+package ru.andrew.jclazz.apps.tester.tests.composite;
+
+public class LVs
+{
+
+    public LVs()
+    {
+    }
+
+    public void test1()
+    {
+        int int_1 = 0;
+        try
+        {
+            int_1 = 7;
+            int_1 = int_1 & 4;
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println(exception_1);
+        }
+    }
+
+    public void test2(int int_1)
+    {
+        int_1 = 0;
+        try
+        {
+            int_1 = 7;
+            int_1 = int_1 & 4;
+        }
+        catch (Exception exception_1)
+        {
+            System.out.println(exception_1);
+        }
+    }
+
+}

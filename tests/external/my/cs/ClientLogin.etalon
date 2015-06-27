@@ -1,0 +1,131 @@
+package Client;
+
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
+import java.awt.event.*;
+
+public class ClientLogin extends JFrame
+{
+    private final String defaultIP = "127.0.0.1";
+    private ClientMorda morda;
+    private JTextField loginArea;
+    private JTextField ipArea;
+    private TextFieldListener loginListener;
+    private JButton ok;
+    private JLabel label;
+    private ButtonL okListener;
+    private ConnectAdapter connectAdapter;
+
+    public ClientLogin()
+    {
+        LoadPreferences();
+        setSize(320, 90);
+        setResizable(false);
+        setTitle("Enter login");
+        getContentPane().setLayout(new GridLayout(2, 2, 10, 5));
+        loginArea = new JTextField(GetUserName());
+        ipArea = new JTextField("127.0.0.1");
+        loginListener = new TextFieldListener(this);
+        loginArea.addActionListener(loginListener);
+        ipArea.addActionListener(loginListener);
+        okListener = new ButtonL(this);
+        connectAdapter = new ConnectAdapter();
+        ok = new JButton("Connect");
+        ok.addActionListener(okListener);
+        label = new JLabel("CS-Chat version 1.3");
+        getContentPane().add(ipArea);
+        getContentPane().add(ok);
+        getContentPane().add(loginArea);
+        getContentPane().add(label);
+        addWindowListener(connectAdapter);
+        setVisible(true);
+        loginArea.requestFocus();
+    }
+
+    public native String GetUserName();
+
+    public native void LoadPreferences();
+
+    public native void SavePreferences(int int_1, int int_2, int int_3, int int_4);
+
+    public void loadMorda(int int_1, int int_2, int int_3, int int_4)
+    {
+        morda = new ClientMorda(this, int_1, int_2, int_3, int_4);
+        setLocation(int_1, int_2);
+    }
+
+    static 
+    {
+        System.loadLibrary("params");
+    }
+
+    class ButtonL implements ActionListener
+    {
+        private ClientLogin ec;
+
+        ButtonL(ClientLogin clientlogin_2)
+        {
+            ec = clientlogin_2;
+        }
+
+        public void actionPerformed(ActionEvent actionevent_1)
+        {
+            if (!loginArea.getText().equalsIgnoreCase(""))
+            {
+                try
+                {
+                    ec.setVisible(false);
+                    morda.start(loginArea.getText(), ipArea.getText());
+                }
+                catch (IOException ioexception_1)
+                {
+                    System.exit(1);
+                }
+            }
+        }
+
+    }
+
+    class TextFieldListener implements ActionListener
+    {
+        private ClientLogin ec;
+
+        TextFieldListener(ClientLogin clientlogin_2)
+        {
+            ec = clientlogin_2;
+        }
+
+        public void actionPerformed(ActionEvent actionevent_1)
+        {
+            if (!loginArea.getText().equalsIgnoreCase(""))
+            {
+                try
+                {
+                    ec.setVisible(false);
+                    morda.start(loginArea.getText(), ipArea.getText());
+                }
+                catch (IOException ioexception_1)
+                {
+                    System.exit(1);
+                }
+            }
+        }
+
+    }
+
+    class ConnectAdapter extends WindowAdapter
+    {
+
+        ConnectAdapter()
+        {
+        }
+
+        public void windowClosing(WindowEvent windowevent_1)
+        {
+            System.exit(0);
+        }
+
+    }
+
+}

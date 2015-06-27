@@ -1,0 +1,148 @@
+package Server;
+
+import java.util.*;
+import org.jdom.output.*;
+import java.net.*;
+import java.io.*;
+import org.jdom.input.*;
+import org.jdom.*;
+import MessageXML.*;
+
+public class ServerRecieve extends Thread
+{
+    String userName;
+    private BufferedReader fromClient;
+    private SAXBuilder sax;
+    private XMLOutputter xmlOutputter;
+    private OutputStream toClient;
+    private Message message;
+    private Socket client;
+    private String cmdS;
+    private String fromS;
+    private String toS;
+    private String messageS;
+
+    ServerRecieve(Socket socket_1) throws IOException
+    {
+        userName = "unnamed";
+        cmdS = "default";
+        client = socket_1;
+        toClient = socket_1.getOutputStream();
+        fromClient = new BufferedReader(new InputStreamReader(socket_1.getInputStream(), "UTF-8"));
+        message = new Message();
+        sax = new SAXBuilder();
+        xmlOutputter = new XMLOutputter();
+    }
+
+    public void run()
+    {
+        do
+        {
+            try
+            {
+                recieveMessage();
+                if (cmdS.equalsIgnoreCase("connect"))
+                {
+                    userName = fromS;
+                    if (ListUser.isUser(userName) > -1)
+                    {
+                        message.setText("connect", "server", userName, "User with this name already exists");
+                        ServerConsole.writeLog(new StringBuffer().append("User ").append(userName).append(" tried to connect, but was denied").toString());
+                        sendMessage(message.getDoc());
+                        client.close();
+                        break;
+                    }
+                    message.setText("connect", "server", userName, "accept");
+                    ServerConsole.writeLog(new StringBuffer().append("User ").append(userName).append(" connected to server").toString());
+                    sendMessage(message.getDoc());
+                    ListUser.addUser(userName, this);
+                }
+                if (cmdS.equalsIgnoreCase("disconnect"))
+                {
+                    ServerConsole.writeLog(new StringBuffer().append("User ").append(userName).append(" diconnected from server").toString());
+                    message.setText("disconnect", "server", userName, "connection closed");
+                    sendMessage(message.getDoc());
+                    ListUser.deleteUser(userName);
+                    client.close();
+                }
+                if (cmdS.equalsIgnoreCase("send"))
+                {
+                    message.setText("message", fromS, toS, messageS);
+                    ServerConsole.writeLog(new StringBuffer().append("Message from ").append(fromS).append(" to ").append(toS).append(" : ").append(messageS).toString());
+                    if (toS.equalsIgnoreCase("broadcast"))
+                    {
+                        ArrayList arraylist_1 = ListUser.getRecievers();
+                        int int_1 = 0;
+                        while (int_1 < arraylist_1.size())
+                        {
+                            ((ServerRecieve) arraylist_1.get(int_1)).sendMessage(message.getDoc());
+                            int_1++;
+                        }
+                    }
+                    else if (ListUser.isUser(toS) > -1)
+                    {
+                        ListUser.getReciever(toS).sendMessage(message.getDoc());
+                    }
+                    else
+                    {
+                        message.setText("message", "server", fromS, "No such user");
+                        sendMessage(message.getDoc());
+                    }
+                }
+            }
+            catch (Exception exception_1)
+            {
+                ServerConsole.writeLog(new StringBuffer().append("Exception :").append(exception_1).toString());
+                ServerConsole.writeLog(new StringBuffer().append("Connection with user ").append(userName).append(" lost").toString());
+                ListUser.deleteUser(userName);
+                break;
+            }
+        }
+        while (!cmdS.equalsIgnoreCase("disconnect"));
+    }
+
+    private void recieveMessage() throws IOException, JDOMException
+    {
+        String string_1 = "";
+        do
+        {
+            String string_2 = fromClient.readLine();
+            string_1 = new StringBuffer().append(string_1).append(string_2).toString();
+        }
+        while (!string_2.endsWith("</packet>"));
+        Document document_1 = sax.build(new StringReader(string_1), "CMESSAGE.dtd");
+        cmdS = document_1.getRootElement().getChildText("COMMAND");
+        fromS = document_1.getRootElement().getChildText("FROM");
+        toS = document_1.getRootElement().getChildText("TO");
+        messageS = document_1.getRootElement().getChildText("MESSAGE");
+    }
+
+    public synchronized void sendMessage(Document document_1)
+    {
+        try
+        {
+            xmlOutputter.output(document_1, toClient);
+            toClient.flush();
+        }
+        catch (IOException ioexception_1)
+        {
+            System.out.println(ioexception_1);
+        }
+    }
+
+    public void closeSocket()
+    {
+        try
+        {
+            message.setText("connect", "server", userName, "You were kicked from server");
+            ServerConsole.writeLog(new StringBuffer().append("User ").append(userName).append(" was kicked").toString());
+            sendMessage(message.getDoc());
+            client.close();
+        }
+        catch (IOException ioexception_1)
+        {
+            System.out.println(ioexception_1);
+        }
+    }
+
+}

@@ -1,0 +1,58 @@
+package ru.andrew.jclazz.apps.tester.tests.blocks;
+
+public class IfOr
+{
+
+    public IfOr()
+    {
+    }
+
+    public void test1(int int_1, int int_2)
+    {
+        System.out.println("BEFORE IF");
+        if ((int_1 == 2) || (int_2 > 7))
+        {
+            System.out.println("IF");
+        }
+        System.out.println("AFTER IF");
+    }
+
+    public void test2(int int_1, int int_2, int int_3)
+    {
+        System.out.println("BEFORE IF");
+        if ((int_1 == 2) || (int_2 > 7) || (int_3 <= 4))
+        {
+            System.out.println("IF");
+        }
+        System.out.println("AFTER IF");
+    }
+
+    public void test3(int int_1, int int_2)
+    {
+        System.out.println("BEFORE IF");
+        if ((int_1 == 2) || (int_2 > 7))
+        {
+            System.out.println("IF");
+        }
+        else
+        {
+            System.out.println("ELSE");
+        }
+        System.out.println("AFTER IF");
+    }
+
+    public void test4(int int_1, int int_2, int int_3, int int_4)
+    {
+        System.out.println("BEFORE IF");
+        if (((int_1 == 2) || (int_2 > 7)) && ((int_3 < 8) || (int_4 >= 7)))
+        {
+            System.out.println("IF");
+        }
+        else
+        {
+            System.out.println("ELSE");
+        }
+        System.out.println("AFTER IF");
+    }
+
+}

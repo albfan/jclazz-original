@@ -1,0 +1,29 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+import java.util.*;
+import java.io.*;
+
+public class MethodsExt
+{
+    public List<Number> testGenerics1(Collection<?> par1, Collection<? super ArrayList> par2) throws ClassNotFoundException
+    {
+        Class.forName("fake");
+        return null;
+    }
+
+    public List<Number> testGenerics2(Collection<? extends List> par3, Collection<Number> par4) throws ClassNotFoundException
+    {
+        Class.forName("fake");
+        return null;
+    }
+
+    public void testGenerics3(Map<String, List<? extends Serializable>> map)
+    {
+        System.out.println("INNER GENERICS");
+    }
+
+    public <T> List<T> testGenerics4(Collection<T> c)
+    {
+        return null;
+    }
+}

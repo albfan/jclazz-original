@@ -1,0 +1,28 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_PutField
+{
+    public static String sstr;
+    public String pstr;
+    private String str;
+
+    public Test_PutField()
+    {
+    }
+
+    public void test1()
+    {
+        str = "123";
+    }
+
+    public void test2(Test_PutField test_putfield_1)
+    {
+        test_putfield_1.pstr = "456";
+    }
+
+    public void test3()
+    {
+        Test_PutField.sstr = "789";
+    }
+
+}

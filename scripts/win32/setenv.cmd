@@ -1,0 +1,1 @@
+set JAVA_HOME="c:\Soft\Java\jdk1.6.0"

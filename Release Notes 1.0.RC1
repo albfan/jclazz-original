@@ -1,0 +1,37 @@
+ jclazz 1.0 Release Candidate 1
+--------------------------------
+
+Release Date: 5 May, 2008
+
+This is the 1st release candidate of jclazz package. It includes the following
+utlities: Java Class Info, Java Decompiler.
+
+jclazz core and applications support Java6.
+Currently following functionality is missing for:
+   Core:
+      - Debug information is not used
+      - Opcode pop2(88) may cause crash
+      - wide opcode supports only iinc opcode
+      - The following opcodes are not supported: jsr, jsr_w, ret, swap, dup_x1, 
+                                                 dup_x2, dup2, dup2_x1, dup2_x2
+   Java Decompiler:
+      - Annotations are not supported
+      - Enums are not fully supported (only simple Enums are correctly decompiled)
+      - Anonymous classes are not correctly indented
+      - Opcodes 148-152 are not correctly printed (some cases of conditions)
+      - Not needed return statements may be sometimes produced
+      - Some Java5 features are not supported in produced output files:
+           - Autoboxing
+           - "for each" loops
+           - static import
+
+ --- IMPORTANT ! ---
+
+Some decompiled files may be erroneously considered invalid. Known cases are:
+ - Some if-else constructions (often inside loops with break and continue operators) 
+   may not correspond to the original constructions, but logic is just the same.
+ - For Java5 and higher classes when using generics cause decompiler to use class 
+   casts. This is not bug as JVM does not support generics (This is Java language
+   extension and used by compilers only).
+ - Using constants may result in decompiled file will not use these constants.
+

@@ -1,0 +1,56 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+import java.util.*;
+
+public class InnerClazz01
+{
+    private String str;
+    private List list;
+    private int i;
+    public String pstr;
+
+    public InnerClazz01()
+    {
+    }
+
+    public void test()
+    {
+        IC ic_1 = new IC();
+        IC ic_2 = new IC("123");
+        IC ic_3 = new IC(true);
+        ic_1.testIC();
+    }
+
+    public class IC
+    {
+        private String s;
+
+        public IC()
+        {
+            s = "default";
+        }
+
+        public IC(boolean boolean_1)
+        {
+            System.out.println("WITH BOOLEAN");
+        }
+
+        public IC(String string_1)
+        {
+            s = string_1;
+        }
+
+        public void testIC()
+        {
+            if ("sss".equals(str))
+            {
+                System.out.println("SSS");
+            }
+            Object object_1 = list.get(0);
+            System.out.println(i);
+            String string_1 = pstr;
+        }
+
+    }
+
+}

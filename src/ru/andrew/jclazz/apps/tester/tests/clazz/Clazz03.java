@@ -1,0 +1,8 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+/**
+ * @deprecated 
+ */
+class Clazz03<Type>
+{
+}
