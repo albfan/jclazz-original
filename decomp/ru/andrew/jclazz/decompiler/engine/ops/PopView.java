@@ -148,23 +148,6 @@ public class PopView extends OperationView
                 // TODO shifts for debug variables
                 lvar.ensure((int) getStartByte() + (getOpcode() <= 58 ? 2 : 1));
 
-                // Check for (condition ? result1 : result2) construction
-                CodeItem prevItem = block.getPreviousOperation();
-                if (prevItem != null && (prevItem instanceof Else) && ((Else) prevItem).getOperationByStartByte(pushOp.getStartByte()) != null)
-                {
-                    OperationView pushOp2 = context.peek();
-                    CodeItem prev2 = block.getOperationPriorTo(prevItem.getStartByte());
-                    if (prev2 != null && (prev2 instanceof IfBlock) && ((IfBlock) prev2).getOperationByStartByte(pushOp2.getStartByte()) != null)
-                    {
-                        context.pop();
-                        IfBlock ifb = (IfBlock) prev2;
-                        String scond = ifb.getSourceConditions();
-                        view = new Object[]{lvar.getView(), " = ", scond.substring(1, scond.length() - 1), " ? ", pushOp2, " : ", pushOp};
-                        block.removePreviousOperation();
-                        block.removePreviousOperation();
-                        return;
-                    }
-                }
                 if ("boolean".equals(lvar.getType()) && pushOp instanceof PushConstView)
                 {
                     ((PushConstView) pushOp).forceBoolean();

@@ -132,4 +132,11 @@ public class IfElseGeneric
         }
         System.out.println("TESTTTT");
     }
+
+    private native String ipaddr(String str, int i);
+    public void test14(int condition)
+    {
+        long len = 100;
+        System.out.println("PKT:" + ((condition == 8) ? ipaddr("1", 26) + "-" + ipaddr("33", 30) : "") + " (" + len + ",");
+    }
 }

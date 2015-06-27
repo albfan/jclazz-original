@@ -17,12 +17,12 @@ public class TestStrings
         String string_6 = "f\"f";
         String string_7 = "g'g";
         String string_8 = "h\\h";
-        String string_9 = "М";
+        String string_9 = "ГЊ";
         String string_10 = "";
         String string_11 = "";
         String string_12 = "'";
         String string_13 = "n";
-        String string_14 = "ру??кий";
+        String string_14 = "СЂСѓСЃСЃРєРёР№";
     }
     
 }

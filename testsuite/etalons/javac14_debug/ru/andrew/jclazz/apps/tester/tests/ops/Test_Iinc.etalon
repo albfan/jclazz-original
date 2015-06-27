@@ -16,7 +16,7 @@ public class Test_Iinc
     public void test2()
     {
         int i = 8;
-        i += 1000;
+        i = (i + 1000);
     }
     
 }

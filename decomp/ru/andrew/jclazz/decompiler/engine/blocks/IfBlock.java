@@ -60,8 +60,12 @@ public class IfBlock extends Block
         return sb.toString();
     }
 
+    /**
+     * @deprecated
+     */
     public String getSourceConditions()
     {
+        /*
         StringBuffer sb = new StringBuffer();
         if (isNegConditions) sb.append("(!");
         if (andConditions.size() > 1) sb.append("(");
@@ -81,6 +85,22 @@ public class IfBlock extends Block
         }
         if (andConditions.size() > 1) sb.append(")");
         if (isNegConditions) sb.append(")");
+        return sb.toString();
+         */
+        StringBuffer sb = new StringBuffer();
+        Iterator i = getSourceConditionsView().iterator();
+        while (i.hasNext())
+        {
+            Object obj = i.next();
+            if (obj instanceof String)
+            {
+                sb.append((String) obj);
+            }
+            else
+            {
+                sb.append(((OperationView) obj).source2());
+            }
+        }
         return sb.toString();
     }
 
@@ -163,5 +183,24 @@ public class IfBlock extends Block
                 isNegConditions = true;
             }
         }
+    }
+
+    private int stackSizeChange;
+    private boolean isPushShortForm = false;
+
+    public void preanalyze(Block block)
+    {
+        stackSizeChange = getMethodView().getMethodContext().stackSize();
+    }
+
+    public void postanalyze(Block block)
+    {
+        stackSizeChange = getMethodView().getMethodContext().stackSize() - stackSizeChange;
+        isPushShortForm = stackSizeChange == 1;
+    }
+
+    public boolean isIsPushShortForm()
+    {
+        return isPushShortForm;
     }
 }

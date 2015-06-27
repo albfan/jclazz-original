@@ -107,12 +107,12 @@ public class IfElseGeneric
     public void test9(boolean boolean_1)
     {
         int int_1 = 0;
-        int_1 = boolean_1 ? 1 : -1;
+        int_1 = ((boolean_1) ? 1 : -1);
     }
     
     public boolean test10(boolean boolean_1)
     {
-        return !(boolean_1);
+        return ((boolean_1) ? false : true);
     }
     
     private native int intVal1();
@@ -122,12 +122,12 @@ public class IfElseGeneric
     public void test11(boolean boolean_1)
     {
         int int_1 = 0;
-        int_1 = boolean_1 ? intVal1() : intVal2();
+        int_1 = ((boolean_1) ? intVal1() : intVal2());
     }
     
     public void test12(boolean boolean_1)
     {
-        k = boolean_1 ? intVal1() : intVal2();
+        k = ((boolean_1) ? intVal1() : intVal2());
     }
     
     public void test13(int int_1)
@@ -137,6 +137,14 @@ public class IfElseGeneric
             return;
         }
         System.out.println("TESTTTT");
+    }
+    
+    private native String ipaddr(String string_1, int int_1);
+    
+    public void test14(int int_1)
+    {
+        long long_1 = 100L;
+        System.out.println(new StringBuffer().append("PKT:").append(((int_1 == 8) ? new StringBuffer().append(ipaddr("1", 26)).append("-").append(ipaddr("33", 30)).toString() : "")).append(" (").append(long_1).append(",").toString());
     }
     
 }

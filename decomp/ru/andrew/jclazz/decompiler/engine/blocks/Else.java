@@ -1,5 +1,7 @@
 package ru.andrew.jclazz.decompiler.engine.blocks;
 
+import java.util.*;
+import java.util.ArrayList;
 import ru.andrew.jclazz.decompiler.engine.ops.*;
 import ru.andrew.jclazz.decompiler.engine.*;
 
@@ -88,6 +90,35 @@ public class Else extends Block
                 }
             }
             prevBlock = prevBlock.getParent();
+        }
+    }
+
+    private int stackSizeChange;
+
+    public void preanalyze(Block block)
+    {
+        stackSizeChange = getMethodView().getMethodContext().stackSize();
+    }
+
+    public void postanalyze(Block block)
+    {
+        stackSizeChange = getMethodView().getMethodContext().stackSize() - stackSizeChange;
+
+        if (stackSizeChange == 1)
+        {
+            // Convert to "condition ? op1 : op2" form
+            CodeItem item = block.getOperationPriorTo(getStartByte());
+            if (item instanceof IfBlock && ((IfBlock) item).isIsPushShortForm())
+            {
+                OperationView elsePush = context.pop();
+                OperationView ifPush = context.pop();
+                FakeConditionalPushView fakePush = new FakeConditionalPushView(getMethodView(), (IfBlock) item, ifPush, elsePush);
+
+                // Placing Fake Push View instead of If and Else Blocks
+                context.push(fakePush);
+                block.removeOperation(item.getStartByte());
+                block.removeOperation(this.getStartByte());
+            }
         }
     }
 }

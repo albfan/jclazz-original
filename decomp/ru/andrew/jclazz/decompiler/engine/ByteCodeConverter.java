@@ -148,15 +148,9 @@ public class ByteCodeConverter
 
             if (citem instanceof Block)
             {
-                if (citem instanceof Loop)
-                {
-                    ((Loop) citem).preanalyze(block);
-                }
+                ((Block) citem).preanalyze(block);
                 analyze2((Block) citem);
-                if (citem instanceof Loop)
-                {
-                    ((Loop) citem).postanalyze(block);
-                }
+                ((Block) citem).postanalyze(block);
             }
         }
     }

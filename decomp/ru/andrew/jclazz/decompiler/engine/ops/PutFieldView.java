@@ -110,22 +110,6 @@ public class PutFieldView extends OperationView
         OperationView pushOp = context.pop();
 
         Object[] val = null;
-        // Check for (condition ? result1 : result2) construction
-        CodeItem prevItem = block.getPreviousOperation();
-        if (prevItem != null && (prevItem instanceof Else) && ((Else) prevItem).getOperationByStartByte(pushOp.getStartByte()) != null)
-        {
-            OperationView pushOp2 = context.peek();
-            CodeItem prev2 = block.getOperationPriorTo(prevItem.getStartByte());
-            if (prev2 != null && (prev2 instanceof IfBlock) && ((IfBlock) prev2).getOperationByStartByte(pushOp2.getStartByte()) != null)
-            {
-                context.pop();
-                IfBlock ifb = (IfBlock) prev2;
-                String scond = ifb.getSourceConditions();
-                val = new Object[]{scond.substring(1, scond.length() - 1), pushOp2, pushOp}; // remove first ( and last )
-                block.removePreviousOperation();
-                block.removePreviousOperation();
-            }
-        }
 
         OperationView refOp = null;
         if (getOpcode() == 181)  // putfield (non static)

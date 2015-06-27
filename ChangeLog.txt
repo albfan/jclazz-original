@@ -1,11 +1,7 @@
-Changes in jclazz 1.2.1
+Changes in jclazz 1.2.2
 
-#1 Bug Fix: Some cosmetics bugs were fixed for GUI.
+#1 Bug Fix: Save of decompiled file writes to predefined file name.
 
-#2 Bug Fix: Local variables reusage for method parameter variables.
+#2 Bug Fix: Condition structures "condition ? operation1 : operation2" were decompiled incorrectly.
 
-#3 Bug Fix: Comparison with zero, incorrect comparison sign.
-
-#4 Bug Fix: some decompilation problems with debug info.
-
-#5 Enhancement: GUI is significantly improved.
+#3 Bug Fix: URL to bug reporting page is corrected

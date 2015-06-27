@@ -331,10 +331,10 @@ test10 : (boolean) : boolean
        )
     {
         0 iload_1
-        1 ifne 8
-        4 iconst_1
+        1 ifeq 8
+        4 iconst_0
         5 goto 9
-        8 iconst_0
+        8 iconst_1
         9 ireturn
     }
 }
@@ -430,6 +430,68 @@ test13 : (int) : void
     }
 }
 
+ipaddr : (java.lang.String, int) : java.lang.String
+{
+    Access Flags: 258 ( PRIVATE  NATIVE )
+
+    Attributes:
+}
+
+test14 : (int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 6
+        Max locals = 4
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 ldc2_w 100L (long)
+        3 lstore_2
+        4 getstatic java.lang.System.out
+        7 new java.lang.StringBuffer
+        10 dup
+        11 invokespecial <init>
+        14 ldc "PKT:" (java.lang.String)
+        16 invokevirtual append
+        19 iload_1
+        20 bipush 8 (int)
+        22 if_icmpne 65
+        25 new java.lang.StringBuffer
+        28 dup
+        29 invokespecial <init>
+        32 aload_0
+        33 ldc "1" (java.lang.String)
+        35 bipush 26 (int)
+        37 invokespecial ipaddr
+        40 invokevirtual append
+        43 ldc "-" (java.lang.String)
+        45 invokevirtual append
+        48 aload_0
+        49 ldc "33" (java.lang.String)
+        51 bipush 30 (int)
+        53 invokespecial ipaddr
+        56 invokevirtual append
+        59 invokevirtual toString
+        62 goto 67
+        65 ldc "" (java.lang.String)
+        67 invokevirtual append
+        70 ldc " (" (java.lang.String)
+        72 invokevirtual append
+        75 lload_2
+        76 invokevirtual append
+        79 ldc "," (java.lang.String)
+        81 invokevirtual append
+        84 invokevirtual toString
+        87 invokevirtual println
+        90 return
+    }
+}
+
 Constant Pool:
 0: 
 1: Methodref: java.lang.Object.<init> (()V)
@@ -457,66 +519,99 @@ Constant Pool:
 23: Methodref: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric.intVal2 (()I)
 24: Fieldref: int
 25: String: "TESTTTT"
-26: Class: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric
-27: Class: java.lang.Object
-28: Utf8: k
-29: Utf8: I
-30: Utf8: t
-31: Utf8: Z
-32: Utf8: <init>
-33: Utf8: ()V
-34: Utf8: Code
-35: Utf8: test1
-36: Utf8: (Ljava/util/List;)V
-37: Utf8: test2
-38: Utf8: test3
-39: Utf8: (Ljava/util/List;I)V
-40: Utf8: test4
-41: Utf8: test5
-42: Utf8: (J)V
-43: Utf8: test6
-44: Utf8: (D)V
-45: Utf8: test7
-46: Utf8: (Ljava/lang/String;)V
-47: Utf8: test8
-48: Utf8: (I)V
-49: Utf8: test9
-50: Utf8: (Z)V
-51: Utf8: test10
-52: Utf8: (Z)Z
-53: Utf8: intVal1
-54: Utf8: ()I
-55: Utf8: intVal2
-56: Utf8: test11
-57: Utf8: test12
-58: Utf8: test13
-59: NameAndType: <init> (()V)
-60: Class: java.lang.System
-61: NameAndType: out (Ljava/io/PrintStream;)
-62: Utf8: BEFORE IF
-63: Class: java.io.PrintStream
-64: NameAndType: println ((Ljava/lang/String;)V)
-65: Utf8: java/util/ArrayList
-66: Utf8: TRUE
-67: Utf8: AFTER IF
-68: Utf8: FALSE
-69: Utf8: IF
-70: Utf8: ELSEIF
-71: Utf8: ELSE
-72: Utf8: lcmp
-73: Utf8: dcmpl
-74: Utf8: 
-75: Utf8: ==
-76: Utf8: !=
-77: Utf8: A
-78: NameAndType: intVal1 (()I)
-79: NameAndType: intVal2 (()I)
-80: NameAndType: k (I)
-81: Utf8: TESTTTT
-82: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric
-83: Utf8: java/lang/Object
-84: Utf8: java/lang/System
-85: Utf8: out
-86: Utf8: Ljava/io/PrintStream;
-87: Utf8: java/io/PrintStream
-88: Utf8: println
+26: Long: 100L
+27: 
+28: Class: java.lang.StringBuffer
+29: Methodref: java.lang.StringBuffer.<init> (()V)
+30: String: "PKT:"
+31: Methodref: java.lang.StringBuffer.append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+32: String: "1"
+33: Methodref: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric.ipaddr ((Ljava/lang/String;I)Ljava/lang/String;)
+34: String: "-"
+35: String: "33"
+36: Methodref: java.lang.StringBuffer.toString (()Ljava/lang/String;)
+37: String: " ("
+38: Methodref: java.lang.StringBuffer.append ((J)Ljava/lang/StringBuffer;)
+39: String: ","
+40: Class: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric
+41: Class: java.lang.Object
+42: Utf8: k
+43: Utf8: I
+44: Utf8: t
+45: Utf8: Z
+46: Utf8: <init>
+47: Utf8: ()V
+48: Utf8: Code
+49: Utf8: test1
+50: Utf8: (Ljava/util/List;)V
+51: Utf8: test2
+52: Utf8: test3
+53: Utf8: (Ljava/util/List;I)V
+54: Utf8: test4
+55: Utf8: test5
+56: Utf8: (J)V
+57: Utf8: test6
+58: Utf8: (D)V
+59: Utf8: test7
+60: Utf8: (Ljava/lang/String;)V
+61: Utf8: test8
+62: Utf8: (I)V
+63: Utf8: test9
+64: Utf8: (Z)V
+65: Utf8: test10
+66: Utf8: (Z)Z
+67: Utf8: intVal1
+68: Utf8: ()I
+69: Utf8: intVal2
+70: Utf8: test11
+71: Utf8: test12
+72: Utf8: test13
+73: Utf8: ipaddr
+74: Utf8: (Ljava/lang/String;I)Ljava/lang/String;
+75: Utf8: test14
+76: NameAndType: <init> (()V)
+77: Class: java.lang.System
+78: NameAndType: out (Ljava/io/PrintStream;)
+79: Utf8: BEFORE IF
+80: Class: java.io.PrintStream
+81: NameAndType: println ((Ljava/lang/String;)V)
+82: Utf8: java/util/ArrayList
+83: Utf8: TRUE
+84: Utf8: AFTER IF
+85: Utf8: FALSE
+86: Utf8: IF
+87: Utf8: ELSEIF
+88: Utf8: ELSE
+89: Utf8: lcmp
+90: Utf8: dcmpl
+91: Utf8: 
+92: Utf8: ==
+93: Utf8: !=
+94: Utf8: A
+95: NameAndType: intVal1 (()I)
+96: NameAndType: intVal2 (()I)
+97: NameAndType: k (I)
+98: Utf8: TESTTTT
+99: Utf8: java/lang/StringBuffer
+100: Utf8: PKT:
+101: NameAndType: append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+102: Utf8: 1
+103: NameAndType: ipaddr ((Ljava/lang/String;I)Ljava/lang/String;)
+104: Utf8: -
+105: Utf8: 33
+106: NameAndType: toString (()Ljava/lang/String;)
+107: Utf8:  (
+108: NameAndType: append ((J)Ljava/lang/StringBuffer;)
+109: Utf8: ,
+110: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric
+111: Utf8: java/lang/Object
+112: Utf8: java/lang/System
+113: Utf8: out
+114: Utf8: Ljava/io/PrintStream;
+115: Utf8: java/io/PrintStream
+116: Utf8: println
+117: Utf8: append
+118: Utf8: (Ljava/lang/String;)Ljava/lang/StringBuffer;
+119: Utf8: toString
+120: Utf8: ()Ljava/lang/String;
+121: Utf8: (J)Ljava/lang/StringBuffer;

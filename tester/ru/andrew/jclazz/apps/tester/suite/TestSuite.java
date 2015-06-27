@@ -180,6 +180,20 @@ public class TestSuite
             return;
         }
 
+        // Here we compare with etalon
+        if (!new File(source.getPath(compiler) + ".etalon").exists())
+        {
+            logError(source, compiler, "Etalon file is MISSING");
+        }
+        else
+        {
+            boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
+            if (!etalonComparison)
+            {
+                logError(source, compiler, "Etalon test FAILED");
+            }
+        }
+
         // Stage 3 - Recompiling source
         renameClassFiles(source.getPath(compiler));
         CompilerWrapper wrapper2 = new CompilerWrapper(compiler.getCmd() + " " + source.getPath(compiler) + ".java");
@@ -218,19 +232,6 @@ public class TestSuite
                 else
                 {
                     logError(source, compiler, "Compiled Class Comparison FAILED");
-                    // Here we can try to compare with etalon
-                    if (!new File(source.getPath(compiler) + ".etalon").exists())
-                    {
-                        logError(source, compiler, "Etalon file is MISSING");
-                    }
-                    else
-                    {
-                        boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
-                        if (!etalonComparison)
-                        {
-                            logError(source, compiler, "Etalon test FAILED");
-                        }
-                    }
                 }
             }
             catch (IOException ioe)

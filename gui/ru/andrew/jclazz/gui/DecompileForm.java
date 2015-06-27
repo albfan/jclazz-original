@@ -48,12 +48,13 @@ public class DecompileForm extends JDialog implements ClipboardOwner
             sourceText = sourceText.replaceAll(">", "&gt;");
             sourceText = sourceText.replaceAll("\n", "<BR>");
             sourcePane.setText(sourceText);
+            sourcePane.setCaretPosition(0);
         }
         catch (Throwable ex)
         {
             sourcePane.setText("Exception occured while decompiling");
 
-            String link = "http://jclazz.sourceforge.net";
+            String link = "http://sourceforge.net/tracker/?group_id=226227&atid=1066690";
             String exception = unpackException(ex);
 
             JTextPane text = new JTextPane();
@@ -103,8 +104,7 @@ public class DecompileForm extends JDialog implements ClipboardOwner
         JFileChooser chooser = new JFileChooser();
         String saveName = clazz.getFileName();
         saveName = saveName.substring(0, saveName.lastIndexOf('.')) + ".java";
-        File exportFile = new File(saveName);
-        chooser.setSelectedFile(exportFile);
+        chooser.setSelectedFile(new File(saveName));
 
         int returnVal = chooser.showSaveDialog(this);
         if(returnVal != JFileChooser.APPROVE_OPTION)
@@ -114,7 +114,7 @@ public class DecompileForm extends JDialog implements ClipboardOwner
         }
         try
         {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(exportFile));
+            PrintWriter pw = new PrintWriter(new FileOutputStream(chooser.getSelectedFile()));
             pw.println(source);
             pw.close();
         }
@@ -149,6 +149,8 @@ public class DecompileForm extends JDialog implements ClipboardOwner
 
         sourcePane.setContentType("text/html");
         sourcePane.setEditable(false);
+        sourcePane.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        sourcePane.setEnabled(false);
         jScrollPane2.setViewportView(sourcePane);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -1,9 +1,9 @@
-jclazz 1.2.1 Release
+jclazz 1.2.2 Release
 --------------------
 
-Release Date: 26 April, 2009
+Release Date: 30 April, 2009
 
-This is the release of jclazz version 1.2.1.
+This is the release of jclazz version 1.2.2.
 
 1. About
 

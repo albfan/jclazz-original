@@ -716,4 +716,12 @@ public class Block implements CodeItem
     {
         analyze(block);
     }
+
+    public void preanalyze(Block block)
+    {
+    }
+
+    public void postanalyze(Block block)
+    {
+    }
 }
