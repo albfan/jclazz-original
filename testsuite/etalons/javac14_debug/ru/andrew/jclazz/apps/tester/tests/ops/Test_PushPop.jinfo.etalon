@@ -1,0 +1,494 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_PushPop.java
+
+Fields:
+class$java$lang$Integer : java.lang.Class
+{
+    Access Flags: 8 ( STATIC )
+
+    Attributes:
+        @Synthetic
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 24
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                2: line 13
+                4: line 14
+                6: line 15
+                9: line 16
+                12: line 17
+                15: line 18
+                18: line 19
+                21: line 20
+                24: line 21
+                27: line 22
+                30: line 23
+                33: line 24
+                36: line 25
+                39: line 26
+                42: line 27
+                46: line 28
+                51: line 29
+                55: line 30
+                78: line 31
+            @LocalVariableTable: 
+                0+79: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                2+77: s1 (Ljava/lang/String;), 1
+                4+75: i1 (I), 2
+                6+73: i2 (I), 3
+                9+70: i3 (I), 4
+                12+67: i4 (I), 5
+                15+64: i5 (I), 6
+                18+61: i6 (I), 7
+                21+58: i7 (I), 8
+                24+55: l1 (J), 9
+                27+52: l2 (J), 11
+                30+49: f1 (F), 13
+                33+46: f2 (F), 14
+                36+43: f3 (F), 15
+                39+40: d1 (D), 16
+                42+37: d2 (D), 18
+                46+33: i8 (I), 20
+                51+28: i9 (I), 21
+                55+24: s2 (Ljava/lang/String;), 22
+                78+1: c1 (Ljava/lang/Class;), 23
+        Exceptions:
+       )
+    {
+        0 aconst_null
+        1 astore_1
+        2 iconst_m1
+        3 istore_2
+        4 iconst_0
+        5 istore_3
+        6 iconst_1
+        7 istore LV-4
+        9 iconst_2
+        10 istore LV-5
+        12 iconst_3
+        13 istore LV-6
+        15 iconst_4
+        16 istore LV-7
+        18 iconst_5
+        19 istore LV-8
+        21 lconst_0
+        22 lstore LV-9
+        24 lconst_1
+        25 lstore LV-11
+        27 fconst_0
+        28 fstore LV-13
+        30 fconst_1
+        31 fstore LV-14
+        33 fconst_2
+        34 fstore LV-15
+        36 dconst_0
+        37 dstore LV-16
+        39 dconst_1
+        40 dstore LV-18
+        42 bipush 17 (int)
+        44 istore LV-20
+        46 sipush 440 (int)
+        49 istore LV-21
+        51 ldc "123" (java.lang.String)
+        53 astore LV-22
+        55 getstatic ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.class$java$lang$Integer
+        58 ifnonnull 73
+        61 ldc "java.lang.Integer" (java.lang.String)
+        63 invokestatic ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.class$
+        66 dup
+        67 putstatic ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.class$java$lang$Integer
+        70 goto 76
+        73 getstatic ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.class$java$lang$Integer
+        76 astore LV-23
+        78 return
+    }
+}
+
+test2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 15
+        Attributes:
+            @LineNumberTable:
+                0: line 35
+                2: line 36
+                6: line 37
+                11: line 38
+                16: line 39
+                21: line 40
+                24: line 41
+                28: line 42
+            @LocalVariableTable: 
+                0+29: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                2+27: l1 (J), 1
+                6+23: l2 (J), 3
+                11+18: l3 (J), 5
+                16+13: l4 (J), 7
+                21+8: l5 (J), 9
+                24+5: l6 (J), 11
+                28+1: l7 (J), 13
+        Exceptions:
+       )
+    {
+        0 lconst_1
+        1 lstore_1
+        2 ldc2_w 2L (long)
+        5 lstore_3
+        6 ldc2_w 3L (long)
+        9 lstore LV-5
+        11 ldc2_w 4L (long)
+        14 lstore LV-7
+        16 ldc2_w 5L (long)
+        19 lstore LV-9
+        21 lload_3
+        22 lstore LV-11
+        24 lload LV-9
+        26 lstore LV-13
+        28 return
+    }
+}
+
+test3 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 46
+                4: line 47
+                8: line 48
+                12: line 49
+                18: line 50
+                22: line 51
+            @LocalVariableTable: 
+                0+23: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                4+19: arr ([D), 1
+                22+1: d (D), 2
+        Exceptions:
+       )
+    {
+        0 iconst_3
+        1 newarray of double
+        3 astore_1
+        4 aload_1
+        5 iconst_0
+        6 dconst_0
+        7 dastore
+        8 aload_1
+        9 iconst_1
+        10 dconst_1
+        11 dastore
+        12 aload_1
+        13 iconst_2
+        14 ldc2_w 2.0 (double)
+        17 dastore
+        18 aload_1
+        19 iconst_1
+        20 daload
+        21 dstore_2
+        22 return
+    }
+}
+
+getInt : () : int
+{
+    Access Flags: 258 ( PRIVATE  NATIVE )
+
+    Attributes:
+}
+
+getLong : () : long
+{
+    Access Flags: 258 ( PRIVATE  NATIVE )
+
+    Attributes:
+}
+
+test87 : () : int
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 59
+                2: line 60
+                7: line 61
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                2+7: i (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_2
+        1 istore_1
+        2 aload_0
+        3 invokespecial getInt
+        6 pop
+        7 iload_1
+        8 ireturn
+    }
+}
+
+test88 : () : long
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 66
+                4: line 67
+                9: line 68
+            @LocalVariableTable: 
+                0+11: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                4+7: i (J), 1
+        Exceptions:
+       )
+    {
+        0 ldc2_w 5L (long)
+        3 lstore_1
+        4 aload_0
+        5 invokespecial getLong
+        8 pop2
+        9 lload_1
+        10 lreturn
+    }
+}
+
+test88_2 : () : long
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 73
+                4: line 74
+                9: line 75
+                14: line 76
+            @LocalVariableTable: 
+                0+16: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;), 0
+                4+12: i (J), 1
+        Exceptions:
+       )
+    {
+        0 ldc2_w 5L (long)
+        3 lstore_1
+        4 aload_0
+        5 invokespecial getInt
+        8 pop
+        9 aload_0
+        10 invokespecial getInt
+        13 pop
+        14 lload_1
+        15 lreturn
+    }
+}
+
+class$ : (java.lang.String) : java.lang.Class
+{
+    Access Flags: 8 ( STATIC )
+
+    Attributes:
+    @Synthetic
+    CODE
+       (
+        Max stack = 3
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 30
+            @LocalVariableTable: 
+                6+12: x1 (Ljava/lang/ClassNotFoundException;), 1
+                0+18: x0 (Ljava/lang/String;), 0
+        Exceptions:
+            [0-4): 5 - java.lang.ClassNotFoundException
+       )
+    {
+        0 aload_0
+        1 invokestatic java.lang.Class.forName
+        4 areturn
+        5 astore_1
+        6 new java.lang.NoClassDefFoundError
+        9 dup
+        10 aload_1
+        11 invokevirtual getMessage
+        14 invokespecial <init>
+        17 athrow
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Class.forName ((Ljava/lang/String;)Ljava/lang/Class;)
+2: Class: java.lang.ClassNotFoundException
+3: Class: java.lang.NoClassDefFoundError
+4: Methodref: java.lang.ClassNotFoundException.getMessage (()Ljava/lang/String;)
+5: Methodref: java.lang.NoClassDefFoundError.<init> ((Ljava/lang/String;)V)
+6: Methodref: java.lang.Object.<init> (()V)
+7: String: "123"
+8: Fieldref: java.lang.Class
+9: String: "java.lang.Integer"
+10: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.class$ ((Ljava/lang/String;)Ljava/lang/Class;)
+11: Long: 2L
+12: 
+13: Long: 3L
+14: 
+15: Long: 4L
+16: 
+17: Long: 5L
+18: 
+19: Double: 2.0
+20: 
+21: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.getInt (()I)
+22: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop.getLong (()J)
+23: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop
+24: Class: java.lang.Object
+25: Utf8: class$java$lang$Integer
+26: Utf8: Ljava/lang/Class;
+27: Utf8: Synthetic
+28: Utf8: <init>
+29: Utf8: ()V
+30: Utf8: Code
+31: Utf8: LineNumberTable
+32: Utf8: LocalVariableTable
+33: Utf8: this
+34: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop;
+35: Utf8: test1
+36: Utf8: s1
+37: Utf8: Ljava/lang/String;
+38: Utf8: i1
+39: Utf8: I
+40: Utf8: i2
+41: Utf8: i3
+42: Utf8: i4
+43: Utf8: i5
+44: Utf8: i6
+45: Utf8: i7
+46: Utf8: l1
+47: Utf8: J
+48: Utf8: l2
+49: Utf8: f1
+50: Utf8: F
+51: Utf8: f2
+52: Utf8: f3
+53: Utf8: d1
+54: Utf8: D
+55: Utf8: d2
+56: Utf8: i8
+57: Utf8: i9
+58: Utf8: s2
+59: Utf8: c1
+60: Utf8: test2
+61: Utf8: l3
+62: Utf8: l4
+63: Utf8: l5
+64: Utf8: l6
+65: Utf8: l7
+66: Utf8: test3
+67: Utf8: arr
+68: Utf8: [D
+69: Utf8: d
+70: Utf8: getInt
+71: Utf8: ()I
+72: Utf8: getLong
+73: Utf8: ()J
+74: Utf8: test87
+75: Utf8: i
+76: Utf8: test88
+77: Utf8: test88_2
+78: Utf8: class$
+79: Utf8: (Ljava/lang/String;)Ljava/lang/Class;
+80: Utf8: x1
+81: Utf8: Ljava/lang/ClassNotFoundException;
+82: Utf8: x0
+83: Utf8: SourceFile
+84: Utf8: Test_PushPop.java
+85: Class: java.lang.Class
+86: NameAndType: forName ((Ljava/lang/String;)Ljava/lang/Class;)
+87: Utf8: java/lang/ClassNotFoundException
+88: Utf8: java/lang/NoClassDefFoundError
+89: NameAndType: getMessage (()Ljava/lang/String;)
+90: NameAndType: <init> ((Ljava/lang/String;)V)
+91: NameAndType: <init> (()V)
+92: Utf8: 123
+93: NameAndType: class$java$lang$Integer (Ljava/lang/Class;)
+94: Utf8: java.lang.Integer
+95: NameAndType: class$ ((Ljava/lang/String;)Ljava/lang/Class;)
+96: NameAndType: getInt (()I)
+97: NameAndType: getLong (()J)
+98: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_PushPop
+99: Utf8: java/lang/Object
+100: Utf8: java/lang/Class
+101: Utf8: forName
+102: Utf8: getMessage
+103: Utf8: ()Ljava/lang/String;
+104: Utf8: (Ljava/lang/String;)V

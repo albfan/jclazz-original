@@ -5,6 +5,7 @@ import java.util.*;
 public class IfElseGeneric
 {
     private int k;
+    boolean t;
 
     public IfElseGeneric()
     {
@@ -127,6 +128,15 @@ public class IfElseGeneric
     public void test12(boolean boolean_1)
     {
         k = boolean_1 ? intVal1() : intVal2();
+    }
+    
+    public void test13(int int_1)
+    {
+        if (0 > int_1)
+        {
+            return;
+        }
+        System.out.println("TESTTTT");
     }
     
 }

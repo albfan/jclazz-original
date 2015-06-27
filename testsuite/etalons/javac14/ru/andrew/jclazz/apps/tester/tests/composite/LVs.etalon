@@ -93,4 +93,12 @@ public class LVs
         }
     }
     
+    public void test8(String string_1, char char_1, int int_1)
+    {
+        if (106 == char_1)
+        {
+            System.out.println("IF char");
+        }
+    }
+    
 }

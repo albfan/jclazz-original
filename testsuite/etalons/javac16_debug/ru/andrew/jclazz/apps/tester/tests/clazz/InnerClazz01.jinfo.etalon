@@ -1,0 +1,248 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: InnerClazz01.java
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC
+      Outer class - ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01
+      Inner name - IC
+      Inner class access flags - 1
+
+Fields:
+str : java.lang.String
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+list : java.util.List
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+i : int
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+pstr : java.lang.String
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 13
+                4: line 14
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 18
+                9: line 19
+                20: line 20
+                30: line 21
+                34: line 22
+            @LocalVariableTable: 
+                0+35: this (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;), 0
+                9+26: ic1 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01$IC;), 1
+                20+15: ic2 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01$IC;), 2
+                30+5: ic3 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01$IC;), 3
+        Exceptions:
+       )
+    {
+        0 new ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC
+        3 dup
+        4 aload_0
+        5 invokespecial <init>
+        8 astore_1
+        9 new ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC
+        12 dup
+        13 aload_0
+        14 ldc "123" (java.lang.String)
+        16 invokespecial <init>
+        19 astore_2
+        20 new ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC
+        23 dup
+        24 aload_0
+        25 iconst_1
+        26 invokespecial <init>
+        29 astore_3
+        30 aload_1
+        31 invokevirtual testIC
+        34 return
+    }
+}
+
+access$000 : (ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01) : java.lang.String
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 5
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield str
+        4 areturn
+    }
+}
+
+access$100 : (ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01) : java.util.List
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 5
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield list
+        4 areturn
+    }
+}
+
+access$200 : (ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01) : int
+{
+    Access Flags: 4104 ( STATIC  SYNTHETIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 5
+            @LocalVariableTable: 
+                0+5: x0 (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield i
+        4 ireturn
+    }
+}
+
+Constant Pool:
+0: 
+1: Fieldref: int
+2: Fieldref: java.util.List
+3: Fieldref: java.lang.String
+4: Methodref: java.lang.Object.<init> (()V)
+5: Class: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC
+6: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC.<init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)V)
+7: String: "123"
+8: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC.<init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Ljava/lang/String;)V)
+9: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC.<init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Z)V)
+10: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01$IC.testIC (()V)
+11: Class: ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01
+12: Class: java.lang.Object
+13: Utf8: IC
+14: Utf8: InnerClasses
+15: Utf8: str
+16: Utf8: Ljava/lang/String;
+17: Utf8: list
+18: Utf8: Ljava/util/List;
+19: Utf8: i
+20: Utf8: I
+21: Utf8: pstr
+22: Utf8: <init>
+23: Utf8: ()V
+24: Utf8: Code
+25: Utf8: LineNumberTable
+26: Utf8: LocalVariableTable
+27: Utf8: this
+28: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;
+29: Utf8: test
+30: Utf8: ic1
+31: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01$IC;
+32: Utf8: ic2
+33: Utf8: ic3
+34: Utf8: access$000
+35: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)Ljava/lang/String;
+36: Utf8: x0
+37: Utf8: access$100
+38: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)Ljava/util/List;
+39: Utf8: access$200
+40: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)I
+41: Utf8: SourceFile
+42: Utf8: InnerClazz01.java
+43: NameAndType: i (I)
+44: NameAndType: list (Ljava/util/List;)
+45: NameAndType: str (Ljava/lang/String;)
+46: NameAndType: <init> (()V)
+47: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01$IC
+48: NameAndType: <init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)V)
+49: Utf8: 123
+50: NameAndType: <init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Ljava/lang/String;)V)
+51: NameAndType: <init> ((Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Z)V)
+52: NameAndType: testIC (()V)
+53: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01
+54: Utf8: java/lang/Object
+55: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;)V
+56: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Ljava/lang/String;)V
+57: Utf8: (Lru/andrew/jclazz/apps/tester/tests/clazz/InnerClazz01;Z)V
+58: Utf8: testIC

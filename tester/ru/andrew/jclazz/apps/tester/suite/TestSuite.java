@@ -181,7 +181,7 @@ public class TestSuite
         }
 
         // Stage 3 - Recompiling source
-        new File(source.getPath(compiler) + ".class").renameTo(new File(source.getPath(compiler) + "_orig.class"));
+        renameClassFiles(source.getPath(compiler));
         CompilerWrapper wrapper2 = new CompilerWrapper(compiler.getCmd() + " " + source.getPath(compiler) + ".java");
         wrapper2.start();
         int compile_2_result = wrapper2.result();
@@ -199,17 +199,39 @@ public class TestSuite
         }
 
         // Comparing compiled classes
-        boolean classComparison1 = FileComparator.compare(source.getPath(compiler) + ".class", source.getPath(compiler) + "_orig.class");
-        if (!classComparison1)
+        boolean classComparison = compareClassFiles(source.getPath(compiler));
+        if (!classComparison)
         {
-            logError(source, compiler, "Compiled Class Comparison FAILED after PASS-2 compilation");
             // Generating infoj files for further comparison
             try
             {
-                InfoJCreator.generateInfoFile(source.getPath(compiler) + ".class");
-                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + ".jinfo"));
-                InfoJCreator.generateInfoFile(source.getPath(compiler) + "_orig.class");
-                new File(source.getPath(compiler) + ".jinfo").renameTo(new File(source.getPath(compiler) + "_orig.jinfo"));
+                generateJInfoFiles(source.getPath(compiler));
+                generateJInfoFilesForOrigs(source.getPath(compiler));
+                if (new File(source.getPath(compiler) + ".jinfo.etalon").exists())
+                {
+                    boolean jinfoComparison = compareJInfoFiles(source.getPath(compiler));
+                    if (!jinfoComparison)
+                    {
+                        logError(source, compiler, "Compiled Class Comparison FAILED");
+                    }
+                }
+                else
+                {
+                    logError(source, compiler, "Compiled Class Comparison FAILED");
+                    // Here we can try to compare with etalon
+                    if (!new File(source.getPath(compiler) + ".etalon").exists())
+                    {
+                        logError(source, compiler, "Etalon file is MISSING");
+                    }
+                    else
+                    {
+                        boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
+                        if (!etalonComparison)
+                        {
+                            logError(source, compiler, "Etalon test FAILED");
+                        }
+                    }
+                }
             }
             catch (IOException ioe)
             {
@@ -220,19 +242,167 @@ public class TestSuite
                 logError(source, compiler, "InfoJ generation error: " + ce.getMessage());
             }
         }
+    }
 
-        // Here we can try to compare with etalon
-        if (!new File(source.getPath(compiler) + ".etalon").exists())
+    private boolean compareClassFiles(String base)
+    {
+        // Comparing main file
+        boolean result = FileComparator.compare(base + ".class", base + "_orig.class");
+        if (!result) return false;
+
+        File mainFile = new File(base + ".class");
+        String baseName = mainFile.getName();
+        if (baseName.endsWith(".class"))
         {
-            logError(source, compiler, "Etalon file is MISSING");
+            baseName = baseName.substring(0, baseName.length() - 6);
         }
-        else
+        File dir = mainFile.getParentFile();
+        File[] innerClasses = dir.listFiles(new InnerClassFilenameFilter(baseName + "$"));
+        // Comparing inner classes
+        for (File f : innerClasses)
         {
-            boolean etalonComparison = FileComparator.compare(source.getPath(compiler) + ".etalon", source.getPath(compiler) + ".java");
-            if (!etalonComparison)
-            {
-                logError(source, compiler, "Etalon test FAILED");
-            }
+            String className = f.getAbsolutePath();
+            String origName = className.substring(0, className.length() - ".class".length()) + "_orig.class";
+            result = FileComparator.compare(className, origName);
+            if (!result) return false;
+        }
+
+        return true;
+    }
+
+    private boolean compareJInfoFiles(String base)
+    {
+        // Comparing main file
+        boolean result = FileComparator.compare(base + ".jinfo", base + ".jinfo.etalon");
+        if (!result) return false;
+
+        File mainFile = new File(base + ".jinfo");
+        String baseName = mainFile.getName();
+        if (baseName.endsWith(".jinfo"))
+        {
+            baseName = baseName.substring(0, baseName.length() - ".jinfo".length());
+        }
+        File dir = mainFile.getParentFile();
+        File[] innerClasses = dir.listFiles(new JInfoInnerClassFilenameFilter(baseName + "$"));
+        // Comparing inner classes
+        for (File f : innerClasses)
+        {
+            String className = f.getAbsolutePath();
+            String etalonName = className + ".etalon";
+            result = FileComparator.compare(className, etalonName);
+            if (!result) return false;
+        }
+
+        return true;
+    }
+
+    private void renameClassFiles(String base)
+    {
+        File baseFile = new File(base + ".class");
+        String baseName = baseFile.getName();
+        if (baseName.endsWith(".class"))
+        {
+            baseName = baseName.substring(0, baseName.length() - 6);
+        }
+        File dir = baseFile.getParentFile();
+
+        // renaming the class itself
+        baseFile.renameTo(new File(base + "_orig.class"));
+
+        // renaming inner classes if any
+        File[] innerClasses = dir.listFiles(new InnerClassFilenameFilter(baseName + "$"));
+        for (File f : innerClasses)
+        {
+            String newName = f.getAbsolutePath();
+            newName = newName.substring(0, newName.length() - ".class".length());
+            f.renameTo(new File(newName + "_orig.class"));
+        }
+    }
+
+    private void generateJInfoFiles(String base) throws IOException, ClazzException
+    {
+        File baseFile = new File(base + ".class");
+        String baseName = baseFile.getName();
+        if (baseName.endsWith(".class"))
+        {
+            baseName = baseName.substring(0, baseName.length() - ".class".length());
+        }
+        File dir = baseFile.getParentFile();
+
+        // generating jinfo for main file
+        InfoJCreator.generateInfoFile(base + ".class");
+
+        // generating jinfo for inner class files
+        File[] innerClasses = dir.listFiles(new InnerClassFilenameFilter(baseName + "$"));
+        for (File f : innerClasses)
+        {
+            InfoJCreator.generateInfoFile(f.getAbsolutePath());
+        }
+    }
+
+    private void generateJInfoFilesForOrigs(String base) throws IOException, ClazzException
+    {
+        File baseFile = new File(base + "_orig.class");
+        String baseName = baseFile.getName();
+        if (baseName.endsWith("_orig.class"))
+        {
+            baseName = baseName.substring(0, baseName.length() - "_orig.class".length());
+        }
+        File dir = baseFile.getParentFile();
+
+        // generating jinfo for main file
+        InfoJCreator.generateInfoFile(base + "_orig.class");
+
+        // generating jinfo for inner class files
+        File[] innerClasses = dir.listFiles(new OriginalInnerClassFilenameFilter(baseName + "$"));
+        for (File f : innerClasses)
+        {
+            InfoJCreator.generateInfoFile(f.getAbsolutePath());
+        }
+    }
+
+    private class InnerClassFilenameFilter implements FilenameFilter
+    {
+        private String baseName;
+
+        public InnerClassFilenameFilter(String baseName)
+        {
+            this.baseName = baseName;
+        }
+
+        public boolean accept(File dir, String name)
+        {
+             return name.startsWith(baseName) && name.endsWith(".class") && !name.endsWith("_orig.class");
+        }
+    }
+
+    private class OriginalInnerClassFilenameFilter implements FilenameFilter
+    {
+        private String baseName;
+
+        public OriginalInnerClassFilenameFilter(String baseName)
+        {
+            this.baseName = baseName;
+        }
+
+        public boolean accept(File dir, String name)
+        {
+             return name.startsWith(baseName) && name.endsWith("_orig.class");
+        }
+    }
+
+    private class JInfoInnerClassFilenameFilter implements FilenameFilter
+    {
+        private String baseName;
+
+        public JInfoInnerClassFilenameFilter(String baseName)
+        {
+            this.baseName = baseName;
+        }
+
+        public boolean accept(File dir, String name)
+        {
+             return name.startsWith(baseName) && name.endsWith(".jinfo") && !name.endsWith("_orig.jinfo");
         }
     }
 

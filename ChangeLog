@@ -1,9 +1,0 @@
-Changes in jclazz 1.2.0
-
-Full JVM operations support.
-Now all operations including different dups and swap opcodes are supported.
-
-A plenty of minor and critical bugfixes for decompiler for almost all Java constructions:
-loops, try-catch-finally, synchronized, condition blocks;
-Changes in almost all operations.
-Important bugfix for encoding support.

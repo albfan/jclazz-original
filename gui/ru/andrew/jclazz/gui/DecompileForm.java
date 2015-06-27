@@ -43,26 +43,58 @@ public class DecompileForm extends JDialog implements ClipboardOwner
 
             String sourceText = source;
 
-            sourceText = sourceText.replaceAll("\n", "<BR>");
             sourceText = sourceText.replaceAll(" ", "&nbsp;");
+            sourceText = sourceText.replaceAll("<", "&lt;");
+            sourceText = sourceText.replaceAll(">", "&gt;");
+            sourceText = sourceText.replaceAll("\n", "<BR>");
             sourcePane.setText(sourceText);
         }
         catch (Throwable ex)
         {
             sourcePane.setText("Exception occured while decompiling");
 
-            String version = ClassDecompiler.getVersion();
-            String link = "http://jclazz.sourceforge.net/submitbug.jsp?ver=" + version;
+            String link = "http://jclazz.sourceforge.net";
+            String exception = unpackException(ex);
 
             JTextPane text = new JTextPane();
             text.setContentType("text/html");
-            text.setText("<html>Error occured while decompiling!<BR>Please follow the link <b>" + link + "</b> to submit a bug</html>");
+            text.setText("<html>Error occured while decompiling!<BR>Please submit bug at <b>" + link + "</b><BR>" + exception + "</html>");
             text.setEditable(false);
             text.setBackground(this.getBackground());
 
             JOptionPane.showMessageDialog(this, text, "Error", JOptionPane.ERROR_MESSAGE);
 
             throw new IllegalArgumentException("Error decompiling");
+        }
+    }
+
+    private String unpackException(Throwable ex)
+    {
+        PrintWriter pw = null;
+        try
+        {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            pw = new PrintWriter(new OutputStreamWriter(baos));
+            ex.printStackTrace(pw);
+            pw.flush();
+            String str = baos.toString();
+            int ind = 0;
+            int cnt = 0;
+            while (ind != -1 && cnt < 5)
+            {
+                ind = str.indexOf("\n", ind + 1);
+                cnt++;
+            }
+            if (ind != -1)
+            {
+                str = str.substring(0, ind);
+            }
+            str = str.replaceAll("\n", "<BR>");
+            return str;
+        }
+        finally
+        {
+            pw.close();
         }
     }
 
@@ -142,7 +174,7 @@ public class DecompileForm extends JDialog implements ClipboardOwner
         });
         jMenu2.add(savaAsMenuItem);
 
-        CtrlCMenuItem.setText("Copy to Clipboard");
+        CtrlCMenuItem.setText("Copy All to Clipboard");
         CtrlCMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CtrlCMenuItemActionPerformed(evt);

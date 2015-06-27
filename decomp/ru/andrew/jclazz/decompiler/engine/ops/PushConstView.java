@@ -6,16 +6,35 @@ import ru.andrew.jclazz.decompiler.*;
 
 public class PushConstView extends OperationView
 {
+    private String pushValue;
+
     public PushConstView(Operation operation, MethodSourceView methodView)
     {
         super(operation, methodView);
 
-        view = new Object[]{source()};
+        pushValue = ((PushConst) operation).isClassPushed() ? alias(((PushConst) operation).getPushValue()) : ((PushConst) operation).getPushValue();
     }
 
     public String getPushType()
     {
         return ((PushConst) operation).getPushType();
+    }
+
+    public void forceBoolean()
+    {
+        if ("0".equals(pushValue))
+        {
+            pushValue = "false";
+        }
+        if ("1".equals(pushValue))
+        {
+            pushValue = "true";
+        }
+    }
+
+    protected void buildView()
+    {
+        view = new Object[]{pushValue};
     }
 
     public String getPushValue()
@@ -25,7 +44,7 @@ public class PushConstView extends OperationView
 
     public String source()
     {
-        return ((PushConst) operation).isClassPushed() ? alias(((PushConst) operation).getPushValue()) : ((PushConst) operation).getPushValue();
+        return null;
     }
     
     public void analyze(Block block)

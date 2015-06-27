@@ -9,6 +9,7 @@ public final class FileComparator
     {
         File file1 = new File(path1);
         File file2 = new File(path2);
+        if (!file2.exists()) return false;
         int bufferSize = (int) Math.max(file1.length(), file2.length());
         FileInputStream fis1 = null;
         FileInputStream fis2 = null;

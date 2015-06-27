@@ -1,0 +1,286 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_BitArithmetic
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_BitArithmetic.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_BitArithmetic;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 22
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                2: line 13
+                4: line 14
+                9: line 15
+                14: line 16
+                19: line 17
+                24: line 18
+                29: line 19
+                34: line 20
+                39: line 21
+                46: line 22
+                51: line 23
+                58: line 24
+                63: line 25
+                70: line 26
+            @LocalVariableTable: 
+                0+71: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_BitArithmetic;), 0
+                2+69: i1 (I), 1
+                4+67: l1 (J), 2
+                9+62: i2 (I), 4
+                14+57: l2 (J), 5
+                19+52: i3 (I), 7
+                24+47: l3 (J), 8
+                29+42: i4 (I), 10
+                34+37: l4 (J), 11
+                39+32: i5 (I), 13
+                46+25: l5 (J), 14
+                51+20: i6 (I), 16
+                58+13: l6 (J), 17
+                63+8: i7 (I), 19
+                70+1: l7 (J), 20
+        Exceptions:
+       )
+    {
+        0 iconst_1
+        1 istore_1
+        2 lconst_1
+        3 lstore_2
+        4 iload_1
+        5 iconst_4
+        6 ishl
+        7 istore LV-4
+        9 lload_2
+        10 iconst_4
+        11 lshl
+        12 lstore LV-5
+        14 iload_1
+        15 iconst_4
+        16 ishr
+        17 istore LV-7
+        19 lload_2
+        20 iconst_4
+        21 lshr
+        22 lstore LV-8
+        24 iload_1
+        25 iconst_4
+        26 iushr
+        27 istore LV-10
+        29 lload_2
+        30 iconst_4
+        31 lushr
+        32 lstore LV-11
+        34 iload_1
+        35 iconst_4
+        36 iand
+        37 istore LV-13
+        39 lload_2
+        40 ldc2_w 4L (long)
+        43 land
+        44 lstore LV-14
+        46 iload_1
+        47 iconst_4
+        48 ior
+        49 istore LV-16
+        51 lload_2
+        52 ldc2_w 4L (long)
+        55 lor
+        56 lstore LV-17
+        58 iload_1
+        59 iconst_4
+        60 ixor
+        61 istore LV-19
+        63 lload_2
+        64 ldc2_w 4L (long)
+        67 lxor
+        68 lstore LV-20
+        70 return
+    }
+}
+
+test2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 23
+        Attributes:
+            @LineNumberTable:
+                0: line 30
+                2: line 31
+                4: line 32
+                6: line 33
+                11: line 34
+                16: line 35
+                21: line 36
+                26: line 37
+                31: line 38
+                36: line 39
+                41: line 40
+                47: line 41
+                52: line 42
+                58: line 43
+                63: line 44
+                69: line 45
+            @LocalVariableTable: 
+                0+70: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_BitArithmetic;), 0
+                2+68: s (I), 1
+                4+66: i1 (I), 2
+                6+64: l1 (J), 3
+                11+59: i2 (I), 5
+                16+54: l2 (J), 6
+                21+49: i3 (I), 8
+                26+44: l3 (J), 9
+                31+39: i4 (I), 11
+                36+34: l4 (J), 12
+                41+29: i5 (I), 14
+                47+23: l5 (J), 15
+                52+18: i6 (I), 17
+                58+12: l6 (J), 18
+                63+7: i7 (I), 20
+                69+1: l7 (J), 21
+        Exceptions:
+       )
+    {
+        0 iconst_3
+        1 istore_1
+        2 iconst_1
+        3 istore_2
+        4 lconst_1
+        5 lstore_3
+        6 iload_2
+        7 iload_1
+        8 ishl
+        9 istore LV-5
+        11 lload_3
+        12 iload_1
+        13 lshl
+        14 lstore LV-6
+        16 iload_2
+        17 iload_1
+        18 ishr
+        19 istore LV-8
+        21 lload_3
+        22 iload_1
+        23 lshr
+        24 lstore LV-9
+        26 iload_2
+        27 iload_1
+        28 iushr
+        29 istore LV-11
+        31 lload_3
+        32 iload_1
+        33 lushr
+        34 lstore LV-12
+        36 iload_2
+        37 iload_1
+        38 iand
+        39 istore LV-14
+        41 lload_3
+        42 iload_1
+        43 i2l
+        44 land
+        45 lstore LV-15
+        47 iload_2
+        48 iload_1
+        49 ior
+        50 istore LV-17
+        52 lload_3
+        53 iload_1
+        54 i2l
+        55 lor
+        56 lstore LV-18
+        58 iload_2
+        59 iload_1
+        60 ixor
+        61 istore LV-20
+        63 lload_3
+        64 iload_1
+        65 i2l
+        66 lxor
+        67 lstore LV-21
+        69 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Long: 4L
+3: 
+4: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_BitArithmetic
+5: Class: java.lang.Object
+6: Utf8: <init>
+7: Utf8: ()V
+8: Utf8: Code
+9: Utf8: LineNumberTable
+10: Utf8: LocalVariableTable
+11: Utf8: this
+12: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_BitArithmetic;
+13: Utf8: test1
+14: Utf8: i1
+15: Utf8: I
+16: Utf8: l1
+17: Utf8: J
+18: Utf8: i2
+19: Utf8: l2
+20: Utf8: i3
+21: Utf8: l3
+22: Utf8: i4
+23: Utf8: l4
+24: Utf8: i5
+25: Utf8: l5
+26: Utf8: i6
+27: Utf8: l6
+28: Utf8: i7
+29: Utf8: l7
+30: Utf8: test2
+31: Utf8: s
+32: Utf8: SourceFile
+33: Utf8: Test_BitArithmetic.java
+34: NameAndType: <init> (()V)
+35: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_BitArithmetic
+36: Utf8: java/lang/Object

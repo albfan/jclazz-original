@@ -44,7 +44,9 @@ public class Catch extends Block
             PopView pop = (PopView) removeFirstOperation();
             if (exceptionClassInfo != null)
             {
-                lv = getLocalVariable(pop.getLocalVariableNumber(), exceptionClassInfo.getFullyQualifiedName());
+                lv = getLocalVariable(pop.getLocalVariableNumber(), exceptionClassInfo.getFullyQualifiedName(), (int) pop.getStartByte());
+                // +1 because in catch block first operation usually "store"
+                lv.ensure((int) handler_pc + 1);
             }
         }
 

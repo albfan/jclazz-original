@@ -1,0 +1,23 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+public enum ClazzEnum3
+{
+    PUBLIC(1), STATIC(2), FINAL(3);
+    private int id;
+
+    private ClazzEnum3(int id)
+    {
+        this.id = id;
+    }
+    
+    public int getId()
+    {
+        return id;
+    }
+    
+    public static String getClassName()
+    {
+        return ClazzEnum3.class.getName();
+    }
+    
+}

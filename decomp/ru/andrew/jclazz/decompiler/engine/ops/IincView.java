@@ -29,12 +29,12 @@ public class IincView extends OperationView
 
     public void analyze(Block block)
     {
-        lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null);
+        lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null, (int) getStartByte());
     }
 
     public void analyze2(Block block)
     {
-        lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null);
+        lvar = block.getLocalVariable(((Iinc) operation).getLocalVariableNumber(), null, (int) getStartByte());
         view = new Object[]{lvar.getView(), (((Iinc) operation).getIncValue() == 1 ? "++" : " += " + ((Iinc) operation).getIncValue())};
     }
 }

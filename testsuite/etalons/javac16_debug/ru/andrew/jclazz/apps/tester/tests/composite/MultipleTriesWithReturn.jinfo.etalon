@@ -1,0 +1,155 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.composite.MultipleTriesWithReturn
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: MultipleTriesWithReturn.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/composite/MultipleTriesWithReturn;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 14
+                8: line 27
+                11: line 16
+                12: line 20
+                20: line 21
+                21: line 23
+                22: line 25
+                30: line 30
+                38: line 35
+                41: line 32
+                42: line 34
+                49: line 36
+            @LocalVariableTable: 
+                22+8: e (Ljava/lang/Exception;), 2
+                12+18: exc (Ljava/lang/Exception;), 1
+                42+7: e (Ljava/lang/Exception;), 1
+                0+50: this (Lru/andrew/jclazz/apps/tester/tests/composite/MultipleTriesWithReturn;), 0
+            @StackMapTable: 
+                SameLocals1StackItemFrame (+11): stack item = Object(java.lang.Exception)
+                FullFrame (+9): locals - Object(ru.andrew.jclazz.apps.tester.tests.composite.MultipleTriesWithReturn) Object(java.lang.Exception), stack - Object(java.lang.Exception)
+                ChopFrame (+8): 1 last absent locals
+                SameLocals1StackItemFrame (+10): stack item = Object(java.lang.Exception)
+                SameFrame (+7): 
+            
+        Exceptions:
+            [0-8): 11 - java.lang.Exception
+            [12-20): 21 - java.lang.Exception
+            [30-38): 41 - java.lang.Exception
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "TRY-1" (java.lang.String)
+        5 invokevirtual println
+        8 goto 30
+        11 astore_1
+        12 getstatic java.lang.System.out
+        15 ldc "INNER TRY" (java.lang.String)
+        17 invokevirtual println
+        20 return
+        21 astore_2
+        22 getstatic java.lang.System.out
+        25 ldc "E" (java.lang.String)
+        27 invokevirtual println
+        30 getstatic java.lang.System.out
+        33 ldc "TRY-2" (java.lang.String)
+        35 invokevirtual println
+        38 goto 49
+        41 astore_1
+        42 getstatic java.lang.System.out
+        45 aload_1
+        46 invokevirtual println
+        49 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "TRY-1"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: Class: java.lang.Exception
+6: String: "INNER TRY"
+7: String: "E"
+8: String: "TRY-2"
+9: Methodref: java.io.PrintStream.println ((Ljava/lang/Object;)V)
+10: Class: ru.andrew.jclazz.apps.tester.tests.composite.MultipleTriesWithReturn
+11: Class: java.lang.Object
+12: Utf8: <init>
+13: Utf8: ()V
+14: Utf8: Code
+15: Utf8: LineNumberTable
+16: Utf8: LocalVariableTable
+17: Utf8: this
+18: Utf8: Lru/andrew/jclazz/apps/tester/tests/composite/MultipleTriesWithReturn;
+19: Utf8: test
+20: Utf8: e
+21: Utf8: Ljava/lang/Exception;
+22: Utf8: exc
+23: Utf8: StackMapTable
+24: Class: java.lang.Exception
+25: Class: ru.andrew.jclazz.apps.tester.tests.composite.MultipleTriesWithReturn
+26: Class: java.lang.Exception
+27: Utf8: SourceFile
+28: Utf8: MultipleTriesWithReturn.java
+29: NameAndType: <init> (()V)
+30: Class: java.lang.System
+31: NameAndType: out (Ljava/io/PrintStream;)
+32: Utf8: TRY-1
+33: Class: java.io.PrintStream
+34: NameAndType: println ((Ljava/lang/String;)V)
+35: Utf8: java/lang/Exception
+36: Utf8: INNER TRY
+37: Utf8: E
+38: Utf8: TRY-2
+39: NameAndType: println ((Ljava/lang/Object;)V)
+40: Utf8: ru/andrew/jclazz/apps/tester/tests/composite/MultipleTriesWithReturn
+41: Utf8: java/lang/Object
+42: Utf8: java/lang/System
+43: Utf8: out
+44: Utf8: Ljava/io/PrintStream;
+45: Utf8: java/io/PrintStream
+46: Utf8: println
+47: Utf8: (Ljava/lang/String;)V
+48: Utf8: (Ljava/lang/Object;)V

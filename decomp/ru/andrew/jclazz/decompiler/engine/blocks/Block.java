@@ -1,10 +1,14 @@
 package ru.andrew.jclazz.decompiler.engine.blocks;
 
+import java.util.Map.Entry;
 import ru.andrew.jclazz.decompiler.engine.*;
 import ru.andrew.jclazz.decompiler.engine.ops.*;
 import ru.andrew.jclazz.decompiler.*;
 
 import java.util.*;
+import ru.andrew.jclazz.core.ClazzException;
+import ru.andrew.jclazz.core.FieldDescriptor;
+import ru.andrew.jclazz.core.attributes.LocalVariableTable;
 
 public class Block implements CodeItem
 {
@@ -27,6 +31,11 @@ public class Block implements CodeItem
         this.ops = ops;
         this.parent = parent;
         this.context = parent.context;
+
+        if (parent != null)
+        {
+            this.m_info = parent.m_info;
+        }
     }
 
     public Block(List ops, MethodSourceView m_info)
@@ -515,20 +524,64 @@ public class Block implements CodeItem
 
     // Local Variables management
 
-    protected HashMap lvars = new HashMap();
+    protected Map lvars = new HashMap();    // var number > Map (start byte > LocalVariable)
 
-    public LocalVariable getLocalVariable(int ivar, String type)
+    protected LocalVariable retrieve(Integer num, int start_byte)
     {
-        LocalVariable lv = (LocalVariable) lvars.get(new Integer(ivar));
+        Map lvs = (Map) lvars.get(num);
+        if (lvs == null) return null;
+
+        LocalVariable lv = null;
+        for (Iterator i = lvs.entrySet().iterator(); i.hasNext();)
+        {
+            Map.Entry entry = (Entry) i.next();
+            if (start_byte >= ((Integer) entry.getKey()).intValue())
+            {
+                lv = (LocalVariable) entry.getValue();
+            }
+        }
+
+        return lv;
+    }
+
+    public LocalVariable getLocalVariable(int ivar, String type, int start_byte)
+    {
+        LocalVariable lv = retrieve(new Integer(ivar), start_byte);
         Block parentBlock = this;
         while ((lv == null) && (parentBlock != null))
         {
-            lv = (LocalVariable) parentBlock.lvars.get(new Integer(ivar));
+            lv = (LocalVariable) parentBlock.retrieve(new Integer(ivar), start_byte);
             parentBlock = parentBlock.parent;
+        }
+
+        LocalVariableTable.LocalVariable lv_debug = null;
+        if (m_info.getMethod().getCodeBlock() != null && m_info.getMethod().getCodeBlock().getLocalVariableTable() != null)
+        {
+            lv_debug = m_info.getMethod().getCodeBlock().getLocalVariableTable().getLocalVariable(ivar, start_byte);
+        }
+        if (lv != null && lv_debug != null)
+        {
+            if (lv.getName() != null && !lv.getName().equals(lv_debug.name.getValue()))
+            {
+                // Reuse local variable
+                lv = null;
+            }
         }
         if (lv != null && type != null && !LocalVariable.UNKNOWN_TYPE.equals(lv.getType()) && !lv.getType().equals(type))
         {
-            if (!checkType(type, lv.getType()))
+            if (lv_debug != null)
+            {
+                try
+                {
+                    type = new FieldDescriptor(lv_debug.descriptor.getString()).getFQN();
+                }
+                catch (ClazzException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            if (!lv.isIsMethodArg() && !checkType(type, lv.getType()))
             {
                 // Reuse local variable
                 lv = null;
@@ -541,14 +594,42 @@ public class Block implements CodeItem
         if (lv == null)
         {
             lv = new LocalVariable(ivar, type, getMethodView());
-            storeLVInBlock(ivar, lv);
+            storeLVInBlock(ivar, lv, start_byte);
         }
         return lv;
     }
 
-    protected void storeLVInBlock(int ivar, LocalVariable lv)
+    protected void storeLVInBlock(int ivar, LocalVariable lv, int start_byte)
     {
-        lvars.put(new Integer(ivar), lv);
+        Block storeBlock = this;
+        if (storeBlock instanceof Condition)
+        {
+            Block parent4cond = storeBlock.parent;
+            if (parent4cond instanceof IfBlock)
+            {
+                storeBlock = parent4cond.parent;
+            }
+            if (parent4cond instanceof Loop)
+            {
+                if (((Loop) parent4cond).isBackLoop())
+                {
+                    storeBlock = parent4cond;
+                }
+                else
+                {
+                    storeBlock = parent4cond.parent;
+                }
+            }
+        }
+
+        Map lvs = (Map) storeBlock.lvars.get(new Integer(ivar));
+        if (lvs == null)
+        {
+            lvs = new TreeMap();
+            storeBlock.lvars.put(new Integer(ivar), lvs);
+        }
+
+        lvs.put(new Integer(start_byte), lv);
     }
 
     // Checks if fqn can be casted to fqnBase without special cast operator

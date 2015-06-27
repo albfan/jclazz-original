@@ -1,0 +1,212 @@
+<jclazz_unit_tests>
+    
+    <java_versions>
+        <java_version>
+            <current_version>1.3</current_version>
+            <next_version>1.4</next_version>
+        </java_version>
+        <java_version>
+            <current_version>1.4</current_version>
+            <next_version>5.0</next_version>
+        </java_version>
+        <java_version>
+            <current_version>5.0</current_version>
+            <next_version/>
+        </java_version>
+    </java_versions>
+
+    <compilers>
+        <compiler name="javac16" java_version="5.0">
+            <path>c:\Soft\Java\jdk1.6.0_10\bin\javac.exe</path>
+            <default_args>-g:none -encoding UTF-8</default_args>
+        </compiler>
+        <compiler name="javac14" java_version="1.4">
+            <path>c:\Soft\Java\j2sdk1.4.2_18\bin\javac.exe</path>
+            <default_args>-g:none -encoding UTF-8</default_args>
+        </compiler>
+        <compiler name="javac16_debug" java_version="5.0">
+            <path>c:\Soft\Java\jdk1.6.0_10\bin\javac.exe</path>
+            <default_args>-g -encoding UTF-8</default_args>
+        </compiler>
+        <compiler name="javac14_debug" java_version="1.4">
+            <path>c:\Soft\Java\j2sdk1.4.2_18\bin\javac.exe</path>
+            <default_args>-g -encoding UTF-8</default_args>
+        </compiler>
+
+        <compiler name="javac14_ext" java_version="ext">
+            <path>c:\Soft\Java\j2sdk1.4.2_18\bin\javac.exe</path>
+            <default_args/>
+        </compiler>
+
+        <compiler name="javac16_ext" java_version="ext">
+            <path>c:\Soft\Java\jdk1.6.0_10\bin\javac.exe</path>
+            <default_args/>
+        </compiler>
+
+        <!--
+        <compiler name="jikes" java_version="1.4">
+            <path>d:\Andrew\proj\Java\jclazz\jc_tester\compilers\Jikes\jikes.exe</path>
+            <default_args>-g:none -classpath "c:\Soft\Java\j2sdk1.4.2_18\jre\lib\rt.jar"</default_args>
+        </compiler>
+        -->
+
+        <!--
+        <compiler name="ECJ" java_version="5.0">
+            <path>c:\Soft\Java\jre6\bin\java.exe</path>
+            <default_args>-cp d:\Andrew\proj\Java\jclazz\jc_tester\compilers\ECJ\org.eclipse.jdt.core.jar org.eclipse.jdt.internal.compiler.batch.Main -g:none</default_args>
+        </compiler>
+        -->
+    </compilers>
+
+    <sources java_version="1.4">
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.AnonymousClazz01</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Clazz01</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Clazz02</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazz01</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Intf01</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.MethodsCommon</class>
+
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.IfOr</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.LoopGeneric</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.LoopIfBreak</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.LoopIfContinue</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.LoopOr</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.SyncGeneric</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.TryGeneric</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.blocks.TryWithBreakContinue</class>
+
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Arithmetic</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Array</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_BitArithmetic</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_CheckCast</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_GetField</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Iinc</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_InstanceOf</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_MultiArray</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_New</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_PushPop</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_PutField</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Return</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Switch</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_Throw</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.ops.Test_TypeConversion</class>
+
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.DoubleIfInLoop</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.LVs</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.MultipleTriesWithReturn</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.SuperInit</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.SwitchWithIf</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.FinalParam</class>
+
+        <class>ru.andrew.jclazz.apps.tester.tests.other.TestStrings</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.other.ThisField</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.other.Casting</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.other.ClassTest</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.other.Fibo</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.other.Usa</class>
+    </sources>
+    <sources java_version="5.0">
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Clazz03</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Clazz04</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.Clazz05</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.ClazzAnnotation</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum3</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum4</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.FieldCommon</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.InnerClazzGenerics</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.MethodsExt</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.clazz.MethodsVarArg</class>
+        <class>ru.andrew.jclazz.apps.tester.tests.composite.TestByte</class>
+    </sources>
+
+    <external>
+        <extclass compiler="javac14_ext">Client.ClientLogin</extclass>
+        <extclass compiler="javac14_ext">Client.ClientMorda</extclass>
+        <extclass compiler="javac14_ext">Client.Reciever</extclass>
+        <extclass compiler="javac14_ext">Client.Sender</extclass>
+        <extclass compiler="javac14_ext">Server.ServerRecieve</extclass>
+        <extclass compiler="javac14_ext">weblogic.ejbc20</extclass>
+        <extclass compiler="javac14_ext">ru.andrew.jclazz.gui.MainForm</extclass>
+        <extclass compiler="javac14_ext">lushnikov.TaskManager.GUIFrame</extclass>
+
+        <extclass compiler="javac16_ext">obf1.Applet_Sub1_class</extclass>
+        <extclass compiler="javac16_ext">obf1.Class1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class3</extclass>
+        <extclass compiler="javac16_ext">obf1.Class4</extclass>
+        <extclass compiler="javac16_ext">obf1.Class5</extclass>
+        <extclass compiler="javac16_ext">obf1.Class6</extclass>
+        <extclass compiler="javac16_ext">obf1.Class7</extclass>
+        <extclass compiler="javac16_ext">obf1.Class8</extclass>
+        <extclass compiler="javac16_ext">obf1.Class9</extclass>
+        <extclass compiler="javac16_ext">obf1.Class10</extclass>
+        <extclass compiler="javac16_ext">obf1.Class11</extclass>
+        <extclass compiler="javac16_ext">obf1.Class12</extclass>
+        <extclass compiler="javac16_ext">obf1.Class13</extclass>
+        <extclass compiler="javac16_ext">obf1.Class14</extclass>
+        <extclass compiler="javac16_ext">obf1.Class15</extclass>
+        <extclass compiler="javac16_ext">obf1.Class16</extclass>
+        <extclass compiler="javac16_ext">obf1.Class17</extclass>
+        <extclass compiler="javac16_ext">obf1.Class18</extclass>
+        <extclass compiler="javac16_ext">obf1.Class19</extclass>
+        <extclass compiler="javac16_ext">obf1.Class20</extclass>
+        <extclass compiler="javac16_ext">obf1.Class21</extclass>
+        <extclass compiler="javac16_ext">obf1.Class22</extclass>
+        <extclass compiler="javac16_ext">obf1.Class23</extclass>
+        <extclass compiler="javac16_ext">obf1.Class24</extclass>
+        <extclass compiler="javac16_ext">obf1.Class25</extclass>
+        <extclass compiler="javac16_ext">obf1.Class26</extclass>
+        <extclass compiler="javac16_ext">obf1.Class27</extclass>
+        <extclass compiler="javac16_ext">obf1.Class28</extclass>
+        <extclass compiler="javac16_ext">obf1.Class29</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub1_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub1_Sub2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub1_Sub3</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub1_Sub4</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub3</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub1_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub1_Sub2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub2</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub3</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub4</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub5</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub2_Sub4_Sub6</extclass>
+        <extclass compiler="javac16_ext">obf1.Class30_Sub3</extclass>
+        <extclass compiler="javac16_ext">obf1.Class31</extclass>
+        <extclass compiler="javac16_ext">obf1.Class32</extclass>
+        <extclass compiler="javac16_ext">obf1.Class33</extclass>
+        <extclass compiler="javac16_ext">obf1.Class34</extclass>
+        <extclass compiler="javac16_ext">obf1.Class35</extclass>
+        <extclass compiler="javac16_ext">obf1.Class36</extclass>
+        <extclass compiler="javac16_ext">obf1.Class37</extclass>
+        <extclass compiler="javac16_ext">obf1.Class38</extclass>
+        <extclass compiler="javac16_ext">obf1.Class39</extclass>
+        <extclass compiler="javac16_ext">obf1.Class40</extclass>
+        <extclass compiler="javac16_ext">obf1.Class41</extclass>
+        <extclass compiler="javac16_ext">obf1.Class42</extclass>
+        <extclass compiler="javac16_ext">obf1.Class42_Sub1</extclass>
+        <extclass compiler="javac16_ext">obf1.Class43</extclass>
+        <extclass compiler="javac16_ext">obf1.Class44</extclass>
+        <extclass compiler="javac16_ext">obf1.Class45</extclass>
+        <extclass compiler="javac16_ext">obf1.Class46</extclass>
+        <extclass compiler="javac16_ext">obf1.Class47</extclass>
+        <extclass compiler="javac16_ext">obf1.Class48</extclass>
+        <extclass compiler="javac16_ext">obf1.Class49</extclass>
+        <extclass compiler="javac16_ext">obf1.Class50</extclass>
+        <extclass compiler="javac16_ext">obf1.client</extclass>
+        <extclass compiler="javac16_ext">obf1.EGUI</extclass>
+        <extclass compiler="javac16_ext">obf1.Frame_Sub1</extclass>
+    </external>
+    
+</jclazz_unit_tests>

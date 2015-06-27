@@ -194,8 +194,10 @@ public class SignatureView
         {
             String genType = asString(paramTypes[i], clazz);
             String rawgenType = genType.indexOf('<') != -1 ? genType.substring(0, genType.indexOf('<')) : genType;
-            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, rawgenType);
+            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, rawgenType, 0);
+            lv.ensure(0);
             lv.setPrinted(true);
+            lv.setIsMethodArg(true);
             if ("long".equals(rawgenType) || "double".equals(rawgenType))
             {
                 lvi += 2;
@@ -209,8 +211,10 @@ public class SignatureView
         if (paramTypes.length > 0)
         {
             String lp = asString(paramTypes[paramTypes.length - 1], clazz);
-            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, lp.indexOf('<') != -1 ? lp.substring(0, lp.indexOf('<')) : lp);
+            LocalVariable lv = m_info.getTopBlock().getLocalVariable(lvi + addition, lp.indexOf('<') != -1 ? lp.substring(0, lp.indexOf('<')) : lp, 0);
+            lv.ensure(0);
             lv.setPrinted(true);
+            lv.setIsMethodArg(true);
 
             if (!m_info.getMethod().isVarargs())
             {

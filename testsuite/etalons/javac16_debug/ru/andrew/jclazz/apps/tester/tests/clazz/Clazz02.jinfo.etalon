@@ -1,0 +1,56 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.Clazz02
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 1057 ( PUBLIC  SUPER  ABSTRACT )
+
+Attributes:
+@SourceFile: Clazz02.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz02;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Class: ru.andrew.jclazz.apps.tester.tests.clazz.Clazz02
+3: Class: java.lang.Object
+4: Utf8: <init>
+5: Utf8: ()V
+6: Utf8: Code
+7: Utf8: LineNumberTable
+8: Utf8: LocalVariableTable
+9: Utf8: this
+10: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/Clazz02;
+11: Utf8: SourceFile
+12: Utf8: Clazz02.java
+13: NameAndType: <init> (()V)
+14: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/Clazz02
+15: Utf8: java/lang/Object

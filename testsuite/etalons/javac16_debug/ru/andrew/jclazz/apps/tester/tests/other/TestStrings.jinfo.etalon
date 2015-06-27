@@ -1,0 +1,178 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.other.TestStrings
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: TestStrings.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/other/TestStrings;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 15
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                3: line 13
+                6: line 14
+                9: line 15
+                13: line 16
+                17: line 17
+                21: line 18
+                25: line 19
+                29: line 20
+                33: line 21
+                37: line 22
+                41: line 23
+                45: line 24
+                49: line 25
+                53: line 26
+            @LocalVariableTable: 
+                0+54: this (Lru/andrew/jclazz/apps/tester/tests/other/TestStrings;), 0
+                3+51: str1 (Ljava/lang/String;), 1
+                6+48: str2 (Ljava/lang/String;), 2
+                9+45: str3 (Ljava/lang/String;), 3
+                13+41: str4 (Ljava/lang/String;), 4
+                17+37: str5 (Ljava/lang/String;), 5
+                21+33: str6 (Ljava/lang/String;), 6
+                25+29: str7 (Ljava/lang/String;), 7
+                29+25: str8 (Ljava/lang/String;), 8
+                33+21: str9 (Ljava/lang/String;), 9
+                37+17: str10 (Ljava/lang/String;), 10
+                41+13: str11 (Ljava/lang/String;), 11
+                45+9: str12 (Ljava/lang/String;), 12
+                49+5: str13 (Ljava/lang/String;), 13
+                53+1: str14 (Ljava/lang/String;), 14
+        Exceptions:
+       )
+    {
+        0 ldc "a\ba" (java.lang.String)
+        2 astore_1
+        3 ldc "b\tb" (java.lang.String)
+        5 astore_2
+        6 ldc "c\nc" (java.lang.String)
+        8 astore_3
+        9 ldc "d\fd" (java.lang.String)
+        11 astore LV-4
+        13 ldc "e\re" (java.lang.String)
+        15 astore LV-5
+        17 ldc "f\"f" (java.lang.String)
+        19 astore LV-6
+        21 ldc "g'g" (java.lang.String)
+        23 astore LV-7
+        25 ldc "h\\h" (java.lang.String)
+        27 astore LV-8
+        29 ldc "Ì" (java.lang.String)
+        31 astore LV-9
+        33 ldc "" (java.lang.String)
+        35 astore LV-10
+        37 ldc "" (java.lang.String)
+        39 astore LV-11
+        41 ldc "'" (java.lang.String)
+        43 astore LV-12
+        45 ldc "n" (java.lang.String)
+        47 astore LV-13
+        49 ldc "???????" (java.lang.String)
+        51 astore LV-14
+        53 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: String: "a\ba"
+3: String: "b\tb"
+4: String: "c\nc"
+5: String: "d\fd"
+6: String: "e\re"
+7: String: "f\"f"
+8: String: "g'g"
+9: String: "h\\h"
+10: String: "Ì"
+11: String: ""
+12: String: ""
+13: String: "'"
+14: String: "n"
+15: String: "???????"
+16: Class: ru.andrew.jclazz.apps.tester.tests.other.TestStrings
+17: Class: java.lang.Object
+18: Utf8: <init>
+19: Utf8: ()V
+20: Utf8: Code
+21: Utf8: LineNumberTable
+22: Utf8: LocalVariableTable
+23: Utf8: this
+24: Utf8: Lru/andrew/jclazz/apps/tester/tests/other/TestStrings;
+25: Utf8: test1
+26: Utf8: str1
+27: Utf8: Ljava/lang/String;
+28: Utf8: str2
+29: Utf8: str3
+30: Utf8: str4
+31: Utf8: str5
+32: Utf8: str6
+33: Utf8: str7
+34: Utf8: str8
+35: Utf8: str9
+36: Utf8: str10
+37: Utf8: str11
+38: Utf8: str12
+39: Utf8: str13
+40: Utf8: str14
+41: Utf8: SourceFile
+42: Utf8: TestStrings.java
+43: NameAndType: <init> (()V)
+44: Utf8: aa
+45: Utf8: b	b
+46: Utf8: c
+c
+47: Utf8: dd
+48: Utf8: ee
+49: Utf8: f"f
+50: Utf8: g'g
+51: Utf8: h\h
+52: Utf8: Ì
+53: Utf8: 
+54: Utf8: 
+55: Utf8: '
+56: Utf8: n
+57: Utf8: ???????
+58: Utf8: ru/andrew/jclazz/apps/tester/tests/other/TestStrings
+59: Utf8: java/lang/Object

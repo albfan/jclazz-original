@@ -12,6 +12,7 @@ public class LocalVariable
     private String type;
     private String name;
     private boolean isFinal = false;
+    private boolean isMethodArg = false;
 
     private boolean forceThis = false;
 
@@ -35,6 +36,16 @@ public class LocalVariable
     public int getLVNumber()
     {
         return lv_num;
+    }
+
+    public void setIsMethodArg(boolean isMethodArg)
+    {
+        this.isMethodArg = isMethodArg;
+    }
+
+    public boolean isIsMethodArg()
+    {
+        return isMethodArg;
     }
 
     public LVView getView()

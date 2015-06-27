@@ -48,7 +48,7 @@ public class PushVariableView extends OperationView
             else if (mn == 'd') suffix = "double";
             else if (mn == 'i') suffix = "int";
             else if (mn == 'a') suffix = null;   // TODO what is ref?
-            lvar = block.getLocalVariable(((PushVariable) operation).getLocalVariableNumber(), suffix);
+            lvar = block.getLocalVariable(((PushVariable) operation).getLocalVariableNumber(), suffix, (int) getStartByte());
         }
     }
 
@@ -63,7 +63,7 @@ public class PushVariableView extends OperationView
             else if (mn == 'd') suffix = "double";
             else if (mn == 'i') suffix = "int";
             else if (mn == 'a') suffix = null;   // TODO what is ref?
-            lvar = block.getLocalVariable(((PushVariable) operation).getLocalVariableNumber(), suffix);
+            lvar = block.getLocalVariable(((PushVariable) operation).getLocalVariableNumber(), suffix, (int) getStartByte());
 
             lvar.ensure((int) getStartByte());
             view = new Object[]{lvar.getView()};

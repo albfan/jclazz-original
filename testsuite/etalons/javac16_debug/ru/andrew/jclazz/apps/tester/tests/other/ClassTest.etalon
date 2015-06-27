@@ -1,0 +1,31 @@
+package ru.andrew.jclazz.apps.tester.tests.other;
+
+public class ClassTest
+{
+
+    public ClassTest()
+    {
+    }
+    
+    public int foo(int i, int j)
+    {
+        while (true)
+        {
+            try
+            {
+                while (i < j)
+                {
+                    j++;
+                    i = (j / i);
+                }
+                break;
+            }
+            catch (RuntimeException runtimeexception_1)
+            {
+                i = 10;
+            }
+        }
+        return j;
+    }
+    
+}

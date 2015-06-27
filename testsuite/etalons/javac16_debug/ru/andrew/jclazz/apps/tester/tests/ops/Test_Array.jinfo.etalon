@@ -1,0 +1,200 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_Array
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_Array.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (java.lang.Object[]) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                3: line 13
+            @LocalVariableTable: 
+                0+4: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;), 0
+                0+4: objs ([Ljava/lang/Object;), 1
+                3+1: len (I), 2
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 arraylength
+        2 istore_2
+        3 return
+    }
+}
+
+test2 : (java.lang.Object[]) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 17
+                5: line 18
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;), 0
+                0+6: objs ([Ljava/lang/Object;), 1
+                5+1: obj (Ljava/lang/Object;), 2
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 bipush 7 (int)
+        3 aaload
+        4 astore_2
+        5 return
+    }
+}
+
+test3 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 22
+                20: line 23
+            @LocalVariableTable: 
+                0+21: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;), 0
+                20+1: strs ([Ljava/lang/String;), 1
+        Exceptions:
+       )
+    {
+        0 iconst_3
+        1 anewarray of java.lang.String
+        4 dup
+        5 iconst_0
+        6 ldc "1" (java.lang.String)
+        8 aastore
+        9 dup
+        10 iconst_1
+        11 ldc "2" (java.lang.String)
+        13 aastore
+        14 dup
+        15 iconst_2
+        16 ldc "3" (java.lang.String)
+        18 aastore
+        19 astore_1
+        20 return
+    }
+}
+
+test4 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 27
+                6: line 28
+            @LocalVariableTable: 
+                0+7: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;), 0
+                6+1: massive ([[I), 1
+        Exceptions:
+       )
+    {
+        0 bipush 10 (int)
+        2 anewarray of int[]
+        5 astore_1
+        6 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Class: java.lang.String
+3: String: "1"
+4: String: "2"
+5: String: "3"
+6: Class: int[]
+7: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_Array
+8: Class: java.lang.Object
+9: Utf8: <init>
+10: Utf8: ()V
+11: Utf8: Code
+12: Utf8: LineNumberTable
+13: Utf8: LocalVariableTable
+14: Utf8: this
+15: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_Array;
+16: Utf8: test1
+17: Utf8: ([Ljava/lang/Object;)V
+18: Utf8: objs
+19: Utf8: [Ljava/lang/Object;
+20: Utf8: len
+21: Utf8: I
+22: Utf8: test2
+23: Utf8: obj
+24: Utf8: Ljava/lang/Object;
+25: Utf8: test3
+26: Utf8: strs
+27: Utf8: [Ljava/lang/String;
+28: Utf8: test4
+29: Utf8: massive
+30: Utf8: [[I
+31: Utf8: SourceFile
+32: Utf8: Test_Array.java
+33: NameAndType: <init> (()V)
+34: Utf8: java/lang/String
+35: Utf8: 1
+36: Utf8: 2
+37: Utf8: 3
+38: Utf8: [I
+39: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_Array
+40: Utf8: java/lang/Object

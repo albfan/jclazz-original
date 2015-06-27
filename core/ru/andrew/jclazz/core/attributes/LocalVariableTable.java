@@ -66,13 +66,13 @@ public class LocalVariableTable extends AttributeInfo
             if (local_variable_table[i].index == ivar)
             {
                 if (start_pc >= local_variable_table[i].start_pc &&
-                    start_pc < (local_variable_table[i].start_pc + local_variable_table[i].length))
+                    start_pc <= (local_variable_table[i].start_pc + local_variable_table[i].length))
                 {
                     return local_variable_table[i];
                 }
                 else if (start_pc < local_variable_table[i].start_pc)
                 {
-                    guess_lv = i;
+                    guess_lv = i;   // TODO strange logic
                 }
             }
         }

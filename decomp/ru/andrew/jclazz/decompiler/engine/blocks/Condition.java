@@ -19,6 +19,7 @@ public class Condition extends Block
 
     private boolean needReverseOperation = true;
     private static final Map reversedOps;
+    private static final Map negOps;
 
     static
     {
@@ -29,6 +30,14 @@ public class Condition extends Block
         reversedOps.put("<", ">=");
         reversedOps.put("<=", ">");
         reversedOps.put(">", "<=");
+
+        negOps = new HashMap(6);
+        negOps.put("!=", "!=");
+        negOps.put("==", "==");
+        negOps.put(">=", "<=");
+        negOps.put("<", ">");
+        negOps.put("<=", ">=");
+        negOps.put(">", "<");
     }
 
     public void setNeedReverseOperation(boolean needReverseOperation)
@@ -147,6 +156,10 @@ public class Condition extends Block
                 var2str = "";
                 var1 = ((SignumView) prev1).getVar1();
             }
+            else
+            {
+                operation = (String) negOps.get(operation);
+            }
         }
         else
         {
@@ -159,10 +172,12 @@ public class Condition extends Block
             OperationView prev2 = context.pop();
             if (prevPop != null)
             {
-                LocalVariable popedLV = block.getLocalVariable(prevPop.getLocalVariableNumber(), null);
+                //LocalVariable popedLV = block.getLocalVariable(prevPop.getLocalVariableNumber(), null, (int) prevPop.getStartByte());
+                LocalVariable popedLV = prevPop.getLocalVariable();
                 //popedLV.setPrinted(true);
                 var2 = prevPop;
                 //popedLV.setPrinted(false);
+                //popedLV.ensure((int) prevPop.getStartByte() + 1);
                 FakePopView fakePop = new FakePopView(getMethodView(), popedLV, "0");
                 // insert fake pop before loop
                 getParent().getParent().addOperation(fakePop, block.getParent().getStartByte());
@@ -180,6 +195,7 @@ public class Condition extends Block
      */
     public String str()
     {
+        /*
         if (isVar1Boolean && "0".equals(var2str))
         {
             String oper = needReverseOperation ? (String) reversedOps.get(operation) : operation;
@@ -193,6 +209,22 @@ public class Condition extends Block
             }
         }
         return ("".equals(var2str) ? (var2 instanceof PopView ? "(" + var2.source2() + ")" : var2.source2()) : var2str) + " " + (needReverseOperation ? (String) reversedOps.get(operation) : operation) + " " + var1.source2();
+         */
+        StringBuffer sb = new StringBuffer();
+        Iterator i = getView().iterator();
+        while (i.hasNext())
+        {
+            Object obj = i.next();
+            if (obj instanceof String)
+            {
+                sb.append((String) obj);
+            }
+            else
+            {
+                sb.append(((OperationView) obj).source2());
+            }
+        }
+        return sb.toString();
     }
 
     public List getView()

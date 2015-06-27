@@ -372,7 +372,7 @@ public class InvokeView extends OperationView
                     if (nextPop instanceof PopView)
                     {
                         PopView popView = (PopView) nextPop;
-                        LocalVariable popedLV = block.getLocalVariable(popView.getLocalVariableNumber(), null);
+                        LocalVariable popedLV = block.getLocalVariable(popView.getLocalVariableNumber(), null, (int) getStartByte());
                         //popedLV.setPrinted(true);
                         refOp = popView;
                         objectref = "(" + popView.source3() + ")";

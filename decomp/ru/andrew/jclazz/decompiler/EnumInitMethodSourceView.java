@@ -29,7 +29,7 @@ public class EnumInitMethodSourceView extends MethodSourceView
         for (int i = addition - 1; i < addition + 1; i++)
         {
             FieldDescriptor fd = (FieldDescriptor) params.get(i);
-            topBlock.getLocalVariable(i + addition, fd.getFQN());
+            topBlock.getLocalVariable(i + addition, fd.getFQN(), 0);
         }
 
         super.printMethodParametersBySignature();

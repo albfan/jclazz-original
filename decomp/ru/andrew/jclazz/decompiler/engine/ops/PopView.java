@@ -28,6 +28,11 @@ public class PopView extends OperationView
         return ((Pop) operation).getLocalVariableNumber();
     }
 
+    public LocalVariable getLocalVariable()
+    {
+        return lvar;
+    }
+
     public String source()
     {
         /*
@@ -134,13 +139,14 @@ public class PopView extends OperationView
             OperationView pushOp = context.pop();
             if (getOpcode() >= 54 && getOpcode() <= 78)
             {
-                lvar = block.getLocalVariable(((Pop) operation).getLocalVariableNumber(), pushOp.getPushType());
+                lvar = block.getLocalVariable(((Pop) operation).getLocalVariableNumber(), pushOp.getPushType(), (int) getStartByte());
                 
                 //if (pushOp.ref != null)
                 //{
                 //    pushOp.ref.setLocalVariable(lvar);
                 //}
-                lvar.ensure((int) getStartByte());
+                // TODO shifts for debug variables
+                lvar.ensure((int) getStartByte() + (getOpcode() <= 58 ? 2 : 1));
 
                 // Check for (condition ? result1 : result2) construction
                 CodeItem prevItem = block.getPreviousOperation();
@@ -158,6 +164,10 @@ public class PopView extends OperationView
                         block.removePreviousOperation();
                         return;
                     }
+                }
+                if ("boolean".equals(lvar.getType()) && pushOp instanceof PushConstView)
+                {
+                    ((PushConstView) pushOp).forceBoolean();
                 }
                 view = new Object[]{lvar.getView(), " = ", pushOp};
             }

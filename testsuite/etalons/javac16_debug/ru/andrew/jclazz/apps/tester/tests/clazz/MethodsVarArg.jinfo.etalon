@@ -1,0 +1,172 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.MethodsVarArg
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: MethodsVarArg.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 9
+                4: line 10
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (java.lang.Number[]) : void
+{
+    Access Flags: 129 ( PUBLIC  VARARGS )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 14
+                8: line 15
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg;), 0
+                0+9: nums ([Ljava/lang/Number;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "VARARGS1" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test2 : (java.lang.Integer, java.lang.Number[]) : void
+{
+    Access Flags: 129 ( PUBLIC  VARARGS )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 19
+                8: line 20
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg;), 0
+                0+9: i (Ljava/lang/Integer;), 1
+                0+9: nums ([Ljava/lang/Number;), 2
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "VARARGS2" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test3 : (java.util.List[]) : void
+{
+    Access Flags: 129 ( PUBLIC  VARARGS )
+
+    Attributes:
+    @Signature: ([Ljava/util/List<Ljava/lang/Number;>;)V
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 24
+                8: line 25
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg;), 0
+                0+9: lists ([Ljava/util/List;), 1
+            @LocalVariableTypeTable: 
+                0+9: lists (sign=[Ljava/util/List<Ljava/lang/Number;>;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "VARARGS+GENERICS" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "VARARGS1"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "VARARGS2"
+6: String: "VARARGS+GENERICS"
+7: Class: ru.andrew.jclazz.apps.tester.tests.clazz.MethodsVarArg
+8: Class: java.lang.Object
+9: Utf8: <init>
+10: Utf8: ()V
+11: Utf8: Code
+12: Utf8: LineNumberTable
+13: Utf8: LocalVariableTable
+14: Utf8: this
+15: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg;
+16: Utf8: test1
+17: Utf8: ([Ljava/lang/Number;)V
+18: Utf8: nums
+19: Utf8: [Ljava/lang/Number;
+20: Utf8: test2
+21: Utf8: (Ljava/lang/Integer;[Ljava/lang/Number;)V
+22: Utf8: i
+23: Utf8: Ljava/lang/Integer;
+24: Utf8: test3
+25: Utf8: ([Ljava/util/List;)V
+26: Utf8: lists
+27: Utf8: [Ljava/util/List;
+28: Utf8: LocalVariableTypeTable
+29: Utf8: [Ljava/util/List<Ljava/lang/Number;>;
+30: Utf8: Signature
+31: Utf8: ([Ljava/util/List<Ljava/lang/Number;>;)V
+32: Utf8: SourceFile
+33: Utf8: MethodsVarArg.java
+34: NameAndType: <init> (()V)
+35: Class: java.lang.System
+36: NameAndType: out (Ljava/io/PrintStream;)
+37: Utf8: VARARGS1
+38: Class: java.io.PrintStream
+39: NameAndType: println ((Ljava/lang/String;)V)
+40: Utf8: VARARGS2
+41: Utf8: VARARGS+GENERICS
+42: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/MethodsVarArg
+43: Utf8: java/lang/Object
+44: Utf8: java/lang/System
+45: Utf8: out
+46: Utf8: Ljava/io/PrintStream;
+47: Utf8: java/io/PrintStream
+48: Utf8: println
+49: Utf8: (Ljava/lang/String;)V

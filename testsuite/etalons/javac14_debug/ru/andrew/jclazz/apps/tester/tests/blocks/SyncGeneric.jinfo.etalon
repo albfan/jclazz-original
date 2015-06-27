@@ -1,0 +1,189 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.SyncGeneric
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: SyncGeneric.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 7
+                4: line 8
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/SyncGeneric;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+testSync : (java.lang.Object) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 12
+                8: line 13
+                12: line 15
+                20: line 16
+                30: line 17
+                38: line 18
+            @LocalVariableTable: 
+                0+39: this (Lru/andrew/jclazz/apps/tester/tests/blocks/SyncGeneric;), 0
+                0+39: obj (Ljava/lang/Object;), 1
+        Exceptions:
+            [12-22): 25
+            [25-28): 25
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE SYNC" (java.lang.String)
+        5 invokevirtual println
+        8 aload_1
+        9 dup
+        10 astore_2
+        11 monitorenter
+        12 getstatic java.lang.System.out
+        15 ldc "SYNC BLOCK" (java.lang.String)
+        17 invokevirtual println
+        20 aload_2
+        21 monitorexit
+        22 goto 30
+        25 astore_3
+        26 aload_2
+        27 monitorexit
+        28 aload_3
+        29 athrow
+        30 getstatic java.lang.System.out
+        33 ldc "AFTER SYNC" (java.lang.String)
+        35 invokevirtual println
+        38 return
+    }
+}
+
+testSyncInLoop : (boolean) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+            @LineNumberTable:
+                0: line 22
+                2: line 25
+                6: line 27
+                10: line 29
+                15: line 31
+                27: line 32
+            @LocalVariableTable: 
+                0+38: this (Lru/andrew/jclazz/apps/tester/tests/blocks/SyncGeneric;), 0
+                0+38: b (Z), 1
+                2+36: i (I), 2
+        Exceptions:
+            [6-12): 20
+            [15-17): 20
+            [20-24): 20
+       )
+    {
+        0 iconst_0
+        1 istore_2
+        2 aload_0
+        3 dup
+        4 astore_3
+        5 monitorenter
+        6 iload_1
+        7 ifeq 15
+        10 aload_3
+        11 monitorexit
+        12 goto 2
+        15 aload_3
+        16 monitorexit
+        17 goto 27
+        20 astore LV-4
+        22 aload_3
+        23 monitorexit
+        24 aload LV-4
+        26 athrow
+        27 getstatic java.lang.System.out
+        30 ldc "4" (java.lang.String)
+        32 invokevirtual println
+        35 goto 2
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "BEFORE SYNC"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "SYNC BLOCK"
+6: String: "AFTER SYNC"
+7: String: "4"
+8: Class: ru.andrew.jclazz.apps.tester.tests.blocks.SyncGeneric
+9: Class: java.lang.Object
+10: Utf8: <init>
+11: Utf8: ()V
+12: Utf8: Code
+13: Utf8: LineNumberTable
+14: Utf8: LocalVariableTable
+15: Utf8: this
+16: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/SyncGeneric;
+17: Utf8: testSync
+18: Utf8: (Ljava/lang/Object;)V
+19: Utf8: obj
+20: Utf8: Ljava/lang/Object;
+21: Utf8: testSyncInLoop
+22: Utf8: (Z)V
+23: Utf8: b
+24: Utf8: Z
+25: Utf8: i
+26: Utf8: I
+27: Utf8: SourceFile
+28: Utf8: SyncGeneric.java
+29: NameAndType: <init> (()V)
+30: Class: java.lang.System
+31: NameAndType: out (Ljava/io/PrintStream;)
+32: Utf8: BEFORE SYNC
+33: Class: java.io.PrintStream
+34: NameAndType: println ((Ljava/lang/String;)V)
+35: Utf8: SYNC BLOCK
+36: Utf8: AFTER SYNC
+37: Utf8: 4
+38: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/SyncGeneric
+39: Utf8: java/lang/Object
+40: Utf8: java/lang/System
+41: Utf8: out
+42: Utf8: Ljava/io/PrintStream;
+43: Utf8: java/io/PrintStream
+44: Utf8: println
+45: Utf8: (Ljava/lang/String;)V

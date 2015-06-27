@@ -1,0 +1,71 @@
+package ru.andrew.jclazz.apps.tester.tests.clazz;
+
+import java.awt.*;
+
+public class ClazzEnum2
+{
+
+    public ClazzEnum2()
+    {
+    }
+    
+    public void main()
+    {
+        Component.BaselineResizeBehavior os = Component.BaselineResizeBehavior.CONSTANT_ASCENT;
+        switch (SM_1.switchMap[os.ordinal()])
+        {
+            case 1:
+                System.out.println("You chose Windows!");
+                break;
+            case 2:
+                System.out.println("You chose Unix!");
+                break;
+            case 3:
+                System.out.println("You chose Linux!");
+                break;
+            case 4:
+                System.out.println("You chose Macintosh!");
+                break;
+            default:
+                System.out.println("I don't know your OS.");
+        }
+    }
+    
+    static class SM_1
+    {
+        static int[] switchMap;
+        static 
+        {
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CONSTANT_ASCENT.ordinal()] = 1;
+            }
+            catch (NoSuchFieldError ex)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CONSTANT_DESCENT.ordinal()] = 2;
+            }
+            catch (NoSuchFieldError ex)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.CENTER_OFFSET.ordinal()] = 3;
+            }
+            catch (NoSuchFieldError ex)
+            {
+            }
+            try
+            {
+                SM_1.switchMap[Component.BaselineResizeBehavior.OTHER.ordinal()] = 4;
+            }
+            catch (NoSuchFieldError ex)
+            {
+            }
+        }
+        
+    }
+
+}

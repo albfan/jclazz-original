@@ -6,6 +6,7 @@ import javax.swing.*;
 import ru.andrew.jclazz.core.*;
 import ru.andrew.jclazz.core.attributes.*;
 import ru.andrew.jclazz.core.constants.*;
+import ru.andrew.jclazz.gui.nodes.*;
 
 public class ClazzTreeNode extends DefaultMutableTreeNode
 {
@@ -18,7 +19,7 @@ public class ClazzTreeNode extends DefaultMutableTreeNode
 
         if (clazzObject instanceof AttributeInfo)
         {
-            icon = loadIconFromJar("/res/anonymousClass.png");
+            icon = loadIconFromJar("/res/attribute.png");
         }
         else if (clazzObject instanceof FieldInfo)
         {
@@ -45,11 +46,11 @@ public class ClazzTreeNode extends DefaultMutableTreeNode
         }
         else if (clazzObject instanceof CONSTANT[])
         {
-            icon = loadIconFromJar("/res/class.png");
+            icon = loadIconFromJar("/res/other.png");
         }
         else
         {
-            icon = loadIconFromJar("/res/advice.png");
+            icon = loadIconFromJar("/res/other.png");
         }
 
         this.description = description;
@@ -65,9 +66,53 @@ public class ClazzTreeNode extends DefaultMutableTreeNode
         return icon;
     }
 
-    private Icon loadIconFromJar(String path)
+    protected Icon loadIconFromJar(String path)
     {
         URL url = this.getClass().getResource(path);
         return new ImageIcon(url);
+    }
+
+    // Nodes creation
+
+    protected ClazzTreeNode createAttribtueNode(AttributeInfo attrInfo)
+    {
+        if (attrInfo instanceof Code)
+        {
+            return new CodeAttributeNode((Code) attrInfo);
+        }
+        else
+        {
+            return new AttributeNode(attrInfo);
+        }
+    }
+
+    protected ClazzTreeNode createFieldNode(FieldInfo fieldInfo)
+    {
+        return new FieldNode(fieldInfo);
+    }
+
+    protected ClazzTreeNode createMethodNode(MethodInfo methodInfo)
+    {
+        return new MethodNode(methodInfo);
+    }
+
+    protected ClazzTreeNode createClazzNode(Clazz clazz)
+    {
+        return new ClazzNode(clazz);
+    }
+
+    protected ClazzTreeNode createInnerClassNode(InnerClass innerClass)
+    {
+        return new ClazzTreeNode(innerClass.getInnerClass().getName(), innerClass, "File not found: " + innerClass.getInnerClass().getFullyQualifiedName());
+    }
+
+    protected ClazzTreeNode createConstantPoolNode(CONSTANT[] consts)
+    {
+        return new ConstantPoolNode(consts);
+    }
+
+    protected String escape(String s)
+    {
+        return s.replaceAll("<", "&lt;");
     }
 }

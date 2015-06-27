@@ -46,7 +46,7 @@ public class GUIFrame extends JFrame implements UserInterface
                     {
                         theIOJournal.saveToFile(".\\Settings\\journal.xml", theJournalStorage);
                     }
-                    catch (IOException ioexception_1)
+                    catch (IOException ex)
                     {
                         JOptionPane.showMessageDialog(getGUIFrame(), "Error when saving journal to \".\\Setings\\journal.xml\" file");
                     }
@@ -145,7 +145,7 @@ public class GUIFrame extends JFrame implements UserInterface
             UIManager.setLookAndFeel(style);
             SwingUtilities.updateComponentTreeUI(this);
         }
-        catch (Exception exception_1)
+        catch (Exception e)
         {
         }
     }

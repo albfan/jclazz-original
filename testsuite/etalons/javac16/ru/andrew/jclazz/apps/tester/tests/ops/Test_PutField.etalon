@@ -5,6 +5,8 @@ public class Test_PutField
     public static String sstr;
     public String pstr;
     private String str;
+    private boolean b;
+    private final boolean b2 = true;
 
     public Test_PutField()
     {
@@ -23,6 +25,11 @@ public class Test_PutField
     public void test3()
     {
         Test_PutField.sstr = "789";
+    }
+    
+    public void test4()
+    {
+        b = true;
     }
     
 }

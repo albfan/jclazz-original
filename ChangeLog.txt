@@ -1,0 +1,11 @@
+Changes in jclazz 1.2.1
+
+#1 Bug Fix: Some cosmetics bugs were fixed for GUI.
+
+#2 Bug Fix: Local variables reusage for method parameter variables.
+
+#3 Bug Fix: Comparison with zero, incorrect comparison sign.
+
+#4 Bug Fix: some decompilation problems with debug info.
+
+#5 Enhancement: GUI is significantly improved.

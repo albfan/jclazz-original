@@ -1,0 +1,154 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 8 ()
+
+Attributes:
+@InnerClasses: 
+    * Inner class - ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1
+      Outer class - ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2
+      Inner name - SM_1
+      Inner class access flags - 8
+    * Inner class - java.awt.Component$BaselineResizeBehavior
+      Outer class - java.awt.Component
+      Inner name - BaselineResizeBehavior
+      Inner class access flags - 16409
+
+Fields:
+switchMap : int[]
+{
+    Access Flags: 8 ( STATIC )
+
+    Attributes:
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 0 ()
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+<clinit> : () : void
+{
+    Access Flags: 8 ( STATIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 3
+        Max locals = 1
+        Attributes:
+            @StackMapTable: 
+                SameLocals1StackItemFrame (+14): stack item = Object(java.lang.NoSuchFieldError)
+                SameFrame (+0): 
+                SameLocals1StackItemFrame (+13): stack item = Object(java.lang.NoSuchFieldError)
+                SameFrame (+0): 
+                SameLocals1StackItemFrame (+13): stack item = Object(java.lang.NoSuchFieldError)
+                SameFrame (+0): 
+                SameLocals1StackItemFrame (+13): stack item = Object(java.lang.NoSuchFieldError)
+                SameFrame (+0): 
+            
+        Exceptions:
+            [0-11): 14 - java.lang.NoSuchFieldError
+            [15-26): 29 - java.lang.NoSuchFieldError
+            [30-41): 44 - java.lang.NoSuchFieldError
+            [45-56): 59 - java.lang.NoSuchFieldError
+       )
+    {
+        0 getstatic ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1.switchMap
+        3 getstatic java.awt.Component$BaselineResizeBehavior.CONSTANT_ASCENT
+        6 invokevirtual ordinal
+        9 iconst_1
+        10 iastore
+        11 goto 15
+        14 astore_0
+        15 getstatic ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1.switchMap
+        18 getstatic java.awt.Component$BaselineResizeBehavior.CONSTANT_DESCENT
+        21 invokevirtual ordinal
+        24 iconst_2
+        25 iastore
+        26 goto 30
+        29 astore_0
+        30 getstatic ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1.switchMap
+        33 getstatic java.awt.Component$BaselineResizeBehavior.CENTER_OFFSET
+        36 invokevirtual ordinal
+        39 iconst_3
+        40 iastore
+        41 goto 45
+        44 astore_0
+        45 getstatic ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1.switchMap
+        48 getstatic java.awt.Component$BaselineResizeBehavior.OTHER
+        51 invokevirtual ordinal
+        54 iconst_4
+        55 iastore
+        56 goto 60
+        59 astore_0
+        60 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: int[]
+3: Fieldref: java.awt.Component$BaselineResizeBehavior
+4: Methodref: java.awt.Component$BaselineResizeBehavior.ordinal (()I)
+5: Class: java.lang.NoSuchFieldError
+6: Fieldref: java.awt.Component$BaselineResizeBehavior
+7: Fieldref: java.awt.Component$BaselineResizeBehavior
+8: Fieldref: java.awt.Component$BaselineResizeBehavior
+9: Class: ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2$SM_1
+10: Class: java.lang.Object
+11: Utf8: switchMap
+12: Utf8: [I
+13: Utf8: <init>
+14: Utf8: ()V
+15: Utf8: Code
+16: Utf8: <clinit>
+17: Utf8: StackMapTable
+18: Class: java.lang.NoSuchFieldError
+19: NameAndType: <init> (()V)
+20: NameAndType: switchMap ([I)
+21: Class: java.awt.Component$BaselineResizeBehavior
+22: NameAndType: CONSTANT_ASCENT (Ljava/awt/Component$BaselineResizeBehavior;)
+23: NameAndType: ordinal (()I)
+24: Utf8: java/lang/NoSuchFieldError
+25: NameAndType: CONSTANT_DESCENT (Ljava/awt/Component$BaselineResizeBehavior;)
+26: NameAndType: CENTER_OFFSET (Ljava/awt/Component$BaselineResizeBehavior;)
+27: NameAndType: OTHER (Ljava/awt/Component$BaselineResizeBehavior;)
+28: Class: ru.andrew.jclazz.apps.tester.tests.clazz.ClazzEnum2
+29: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/ClazzEnum2$SM_1
+30: Utf8: SM_1
+31: Utf8: InnerClasses
+32: Utf8: java/lang/Object
+33: Class: java.awt.Component
+34: Utf8: java/awt/Component$BaselineResizeBehavior
+35: Utf8: BaselineResizeBehavior
+36: Utf8: CONSTANT_ASCENT
+37: Utf8: Ljava/awt/Component$BaselineResizeBehavior;
+38: Utf8: ordinal
+39: Utf8: ()I
+40: Utf8: CONSTANT_DESCENT
+41: Utf8: CENTER_OFFSET
+42: Utf8: OTHER
+43: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/ClazzEnum2
+44: Utf8: java/awt/Component

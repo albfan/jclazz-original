@@ -176,7 +176,7 @@ public class MethodSourceView extends SourceView
         // Initializing local variables, passed as params to this method
         if (!methodInfo.isStatic())
         {
-            LocalVariable lv_this = topBlock.getLocalVariable(0, null);
+            LocalVariable lv_this = topBlock.getLocalVariable(0, null, 0);
             lv_this.forceThis();
         }
 
@@ -264,8 +264,9 @@ public class MethodSourceView extends SourceView
             {
                 FieldDescriptor fd = (FieldDescriptor) params.get(i);
                 String rawType = fd.getFQN();
-                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, rawType);
+                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, rawType, 0);
                 lv.ensure(0);
+                lv.setIsMethodArg(true);
                 printView(lv.getView());
                 //print(importClass(fd.getFQN()) + " " + lv.getName());
 
@@ -285,8 +286,9 @@ public class MethodSourceView extends SourceView
             if (params.size() > 0)
             {
                 FieldDescriptor fd = (FieldDescriptor) params.get(params.size() - 1);
-                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, fd.getFQN());
+                LocalVariable lv = topBlock.getLocalVariable(lvi + addition, fd.getFQN(), 0);
                 lv.ensure(0);
+                lv.setIsMethodArg(true);
                 String lpFQN = importClass(fd.getFQN());
                 if (!methodInfo.isVarargs())
                 {

@@ -1,0 +1,654 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: IfElseGeneric.java
+
+Fields:
+k : int
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+}
+
+t : boolean
+{
+    Access Flags: 0 ()
+
+    Attributes:
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 11
+                4: line 12
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : (java.util.List) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 16
+                8: line 17
+                15: line 19
+                23: line 21
+                31: line 22
+            @LocalVariableTable: 
+                0+32: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+32: list (Ljava/util/List;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 aload_1
+        9 instanceof java.util.ArrayList
+        12 ifeq 23
+        15 getstatic java.lang.System.out
+        18 ldc "TRUE" (java.lang.String)
+        20 invokevirtual println
+        23 getstatic java.lang.System.out
+        26 ldc "AFTER IF" (java.lang.String)
+        28 invokevirtual println
+        31 return
+    }
+}
+
+test2 : (java.util.List) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 26
+                8: line 27
+                15: line 29
+                26: line 33
+                34: line 35
+                42: line 36
+            @LocalVariableTable: 
+                0+43: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+43: list (Ljava/util/List;), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 aload_1
+        9 instanceof java.util.ArrayList
+        12 ifeq 26
+        15 getstatic java.lang.System.out
+        18 ldc "TRUE" (java.lang.String)
+        20 invokevirtual println
+        23 goto 34
+        26 getstatic java.lang.System.out
+        29 ldc "FALSE" (java.lang.String)
+        31 invokevirtual println
+        34 getstatic java.lang.System.out
+        37 ldc "AFTER IF" (java.lang.String)
+        39 invokevirtual println
+        42 return
+    }
+}
+
+test3 : (java.util.List, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 40
+                8: line 41
+                21: line 43
+                32: line 45
+                38: line 47
+                49: line 51
+                57: line 53
+                65: line 54
+            @LocalVariableTable: 
+                0+66: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+66: list (Ljava/util/List;), 1
+                0+66: i (I), 2
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 aload_1
+        9 instanceof java.util.ArrayList
+        12 ifeq 32
+        15 iload_2
+        16 bipush 10 (int)
+        18 if_icmple 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 57
+        32 iload_2
+        33 bipush 10 (int)
+        35 if_icmpgt 49
+        38 getstatic java.lang.System.out
+        41 ldc "ELSEIF" (java.lang.String)
+        43 invokevirtual println
+        46 goto 57
+        49 getstatic java.lang.System.out
+        52 ldc "ELSE" (java.lang.String)
+        54 invokevirtual println
+        57 getstatic java.lang.System.out
+        60 ldc "AFTER IF" (java.lang.String)
+        62 invokevirtual println
+        65 return
+    }
+}
+
+test4 : (java.util.List, int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 58
+                8: line 59
+                21: line 61
+                32: line 63
+                38: line 65
+                46: line 67
+                54: line 68
+            @LocalVariableTable: 
+                0+55: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+55: list (Ljava/util/List;), 1
+                0+55: i (I), 2
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BEFORE IF" (java.lang.String)
+        5 invokevirtual println
+        8 aload_1
+        9 instanceof java.util.ArrayList
+        12 ifeq 32
+        15 iload_2
+        16 bipush 10 (int)
+        18 if_icmple 32
+        21 getstatic java.lang.System.out
+        24 ldc "IF" (java.lang.String)
+        26 invokevirtual println
+        29 goto 46
+        32 iload_2
+        33 bipush 10 (int)
+        35 if_icmpgt 46
+        38 getstatic java.lang.System.out
+        41 ldc "ELSEIF" (java.lang.String)
+        43 invokevirtual println
+        46 getstatic java.lang.System.out
+        49 ldc "AFTER IF" (java.lang.String)
+        51 invokevirtual println
+        54 return
+    }
+}
+
+test5 : (long) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 72
+                8: line 74
+                16: line 76
+            @LocalVariableTable: 
+                0+17: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+17: i (J), 1
+        Exceptions:
+       )
+    {
+        0 lload_1
+        1 ldc2_w 17L (long)
+        4 lcmp
+        5 ifne 16
+        8 getstatic java.lang.System.out
+        11 ldc "lcmp" (java.lang.String)
+        13 invokevirtual println
+        16 return
+    }
+}
+
+test6 : (double) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 4
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 80
+                8: line 82
+                16: line 84
+            @LocalVariableTable: 
+                0+17: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+17: i (D), 1
+        Exceptions:
+       )
+    {
+        0 dload_1
+        1 ldc2_w 2.0 (double)
+        4 dcmpg
+        5 ifge 16
+        8 getstatic java.lang.System.out
+        11 ldc "dcmpl" (java.lang.String)
+        13 invokevirtual println
+        16 return
+    }
+}
+
+test7 : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 88
+                6: line 90
+                14: line 92
+                22: line 93
+                28: line 95
+                36: line 97
+            @LocalVariableTable: 
+                0+37: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+37: str (Ljava/lang/String;), 1
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 ldc "" (java.lang.String)
+        3 if_acmpne 14
+        6 getstatic java.lang.System.out
+        9 ldc "==" (java.lang.String)
+        11 invokevirtual println
+        14 getstatic java.lang.System.out
+        17 ldc "IF" (java.lang.String)
+        19 invokevirtual println
+        22 aload_1
+        23 ldc "" (java.lang.String)
+        25 if_acmpeq 36
+        28 getstatic java.lang.System.out
+        31 ldc "!=" (java.lang.String)
+        33 invokevirtual println
+        36 return
+    }
+}
+
+test8 : (int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 101
+                6: line 104
+                14: line 105
+            @LocalVariableTable: 
+                0+15: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+15: a (I), 1
+        Exceptions:
+       )
+    {
+        0 iload_1
+        1 bipush 10 (int)
+        3 if_icmpne 6
+        6 getstatic java.lang.System.out
+        9 ldc "A" (java.lang.String)
+        11 invokevirtual println
+        14 return
+    }
+}
+
+test9 : (boolean) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 109
+                2: line 110
+                12: line 111
+            @LocalVariableTable: 
+                0+13: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+13: b (Z), 1
+                2+11: i (I), 2
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_2
+        2 iload_1
+        3 ifeq 10
+        6 iconst_1
+        7 goto 11
+        10 iconst_m1
+        11 istore_2
+        12 return
+    }
+}
+
+test10 : (boolean) : boolean
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 115
+            @LocalVariableTable: 
+                0+10: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+10: b (Z), 1
+        Exceptions:
+       )
+    {
+        0 iload_1
+        1 ifne 8
+        4 iconst_1
+        5 goto 9
+        8 iconst_0
+        9 ireturn
+    }
+}
+
+intVal1 : () : int
+{
+    Access Flags: 258 ( PRIVATE  NATIVE )
+
+    Attributes:
+}
+
+intVal2 : () : int
+{
+    Access Flags: 258 ( PRIVATE  NATIVE )
+
+    Attributes:
+}
+
+test11 : (boolean) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 124
+                2: line 125
+                18: line 126
+            @LocalVariableTable: 
+                0+19: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+19: b (Z), 1
+                2+17: i (I), 2
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_2
+        2 iload_1
+        3 ifeq 13
+        6 aload_0
+        7 invokespecial intVal1
+        10 goto 17
+        13 aload_0
+        14 invokespecial intVal2
+        17 istore_2
+        18 return
+    }
+}
+
+test12 : (boolean) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 130
+                19: line 131
+            @LocalVariableTable: 
+                0+20: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+20: b (Z), 1
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 iload_1
+        2 ifeq 12
+        5 aload_0
+        6 invokespecial intVal1
+        9 goto 16
+        12 aload_0
+        13 invokespecial intVal2
+        16 putfield k
+        19 return
+    }
+}
+
+test13 : (int) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 135
+                5: line 137
+                6: line 139
+                14: line 140
+            @LocalVariableTable: 
+                0+15: this (Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;), 0
+                0+15: indx (I), 1
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 iload_1
+        2 if_icmple 6
+        5 return
+        6 getstatic java.lang.System.out
+        9 ldc "TESTTTT" (java.lang.String)
+        11 invokevirtual println
+        14 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "BEFORE IF"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: Class: java.util.ArrayList
+6: String: "TRUE"
+7: String: "AFTER IF"
+8: String: "FALSE"
+9: String: "IF"
+10: String: "ELSEIF"
+11: String: "ELSE"
+12: Long: 17L
+13: 
+14: String: "lcmp"
+15: Double: 2.0
+16: 
+17: String: "dcmpl"
+18: String: ""
+19: String: "=="
+20: String: "!="
+21: String: "A"
+22: Methodref: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric.intVal1 (()I)
+23: Methodref: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric.intVal2 (()I)
+24: Fieldref: int
+25: String: "TESTTTT"
+26: Class: ru.andrew.jclazz.apps.tester.tests.blocks.IfElseGeneric
+27: Class: java.lang.Object
+28: Utf8: k
+29: Utf8: I
+30: Utf8: t
+31: Utf8: Z
+32: Utf8: <init>
+33: Utf8: ()V
+34: Utf8: Code
+35: Utf8: LineNumberTable
+36: Utf8: LocalVariableTable
+37: Utf8: this
+38: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric;
+39: Utf8: test1
+40: Utf8: (Ljava/util/List;)V
+41: Utf8: list
+42: Utf8: Ljava/util/List;
+43: Utf8: test2
+44: Utf8: test3
+45: Utf8: (Ljava/util/List;I)V
+46: Utf8: i
+47: Utf8: test4
+48: Utf8: test5
+49: Utf8: (J)V
+50: Utf8: J
+51: Utf8: test6
+52: Utf8: (D)V
+53: Utf8: D
+54: Utf8: test7
+55: Utf8: (Ljava/lang/String;)V
+56: Utf8: str
+57: Utf8: Ljava/lang/String;
+58: Utf8: test8
+59: Utf8: (I)V
+60: Utf8: a
+61: Utf8: test9
+62: Utf8: (Z)V
+63: Utf8: b
+64: Utf8: test10
+65: Utf8: (Z)Z
+66: Utf8: intVal1
+67: Utf8: ()I
+68: Utf8: intVal2
+69: Utf8: test11
+70: Utf8: test12
+71: Utf8: test13
+72: Utf8: indx
+73: Utf8: SourceFile
+74: Utf8: IfElseGeneric.java
+75: NameAndType: <init> (()V)
+76: Class: java.lang.System
+77: NameAndType: out (Ljava/io/PrintStream;)
+78: Utf8: BEFORE IF
+79: Class: java.io.PrintStream
+80: NameAndType: println ((Ljava/lang/String;)V)
+81: Utf8: java/util/ArrayList
+82: Utf8: TRUE
+83: Utf8: AFTER IF
+84: Utf8: FALSE
+85: Utf8: IF
+86: Utf8: ELSEIF
+87: Utf8: ELSE
+88: Utf8: lcmp
+89: Utf8: dcmpl
+90: Utf8: 
+91: Utf8: ==
+92: Utf8: !=
+93: Utf8: A
+94: NameAndType: intVal1 (()I)
+95: NameAndType: intVal2 (()I)
+96: NameAndType: k (I)
+97: Utf8: TESTTTT
+98: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/IfElseGeneric
+99: Utf8: java/lang/Object
+100: Utf8: java/lang/System
+101: Utf8: out
+102: Utf8: Ljava/io/PrintStream;
+103: Utf8: java/io/PrintStream
+104: Utf8: println

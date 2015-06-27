@@ -1,9 +1,5 @@
 package ru.andrew.jclazz.gui;
 
-import ru.andrew.jclazz.gui.DecompileForm;
-import ru.andrew.jclazz.gui.ClazzTreeUI;
-import ru.andrew.jclazz.gui.ClazzTreeNodeCellRenderer;
-import ru.andrew.jclazz.gui.ClazzTreeNode;
 import java.awt.event.*;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;

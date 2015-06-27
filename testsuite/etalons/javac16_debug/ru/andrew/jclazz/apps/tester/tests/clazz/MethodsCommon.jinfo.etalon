@@ -1,0 +1,452 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.clazz.MethodsCommon
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 1057 ( PUBLIC  SUPER  ABSTRACT )
+
+Attributes:
+@SourceFile: MethodsCommon.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 10
+                4: line 11
+                12: line 12
+            @LocalVariableTable: 
+                0+13: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 getstatic java.lang.System.out
+        7 ldc "DEFAULT CONSTRUCTOR" (java.lang.String)
+        9 invokevirtual println
+        12 return
+    }
+}
+
+<init> : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 15
+                4: line 16
+                12: line 17
+            @LocalVariableTable: 
+                0+13: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+                0+13: initVar (Ljava/lang/String;), 1
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 getstatic java.lang.System.out
+        7 ldc "ADDITIONAL CONSTRUCTOR" (java.lang.String)
+        9 invokevirtual println
+        12 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 21
+                8: line 22
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "PRIVATE METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test2 : () : void
+{
+    Access Flags: 4 ( PROTECTED )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 26
+                8: line 27
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "PROTECTED METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test3 : () : void
+{
+    Access Flags: 9 ( PUBLIC  STATIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 0
+        Attributes:
+            @LineNumberTable:
+                0: line 31
+                8: line 32
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "STATIC METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test4 : () : void
+{
+    Access Flags: 17 ( PUBLIC  FINAL )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 36
+                8: line 37
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "FINAL METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test5 : () : void
+{
+    Access Flags: 33 ( PUBLIC  SYNCHRONIZED )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 41
+                8: line 42
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "SYNC METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test6 : () : void
+{
+    Access Flags: 257 ( PUBLIC  NATIVE )
+
+    Attributes:
+}
+
+test7 : () : void
+{
+    Access Flags: 1025 ( PUBLIC  ABSTRACT )
+
+    Attributes:
+}
+
+test8 : () : void
+{
+    Access Flags: 2049 ( PUBLIC  STRICT )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 50
+                8: line 51
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "STRICTFP METHOD" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+test9 : (java.lang.String, java.io.PrintWriter, int, boolean) : java.math.BigInteger
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.IllegalArgumentException
+            java.lang.ClassNotFoundException
+            java.lang.IllegalAccessException
+            java.lang.InstantiationException
+    CODE
+       (
+        Max stack = 2
+        Max locals = 5
+        Attributes:
+            @LineNumberTable:
+                0: line 55
+                9: line 56
+            @LocalVariableTable: 
+                0+14: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+                0+14: par1 (Ljava/lang/String;), 1
+                0+14: pw (Ljava/io/PrintWriter;), 2
+                0+14: k (I), 3
+                0+14: b (Z), 4
+        Exceptions:
+       )
+    {
+        0 ldc "fake" (java.lang.String)
+        2 invokestatic java.lang.Class.forName
+        5 invokevirtual newInstance
+        8 pop
+        9 lconst_0
+        10 invokestatic java.math.BigInteger.valueOf
+        13 areturn
+    }
+}
+
+test10 : (java.lang.Class) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 0
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 61
+            @LocalVariableTable: 
+                0+1: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+                0+1: cl (Ljava/lang/Class;), 1
+        Exceptions:
+       )
+    {
+        0 return
+    }
+}
+
+test11 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 65
+                7: line 66
+            @LocalVariableTable: 
+                0+8: this (Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 ldc_w java.lang.Integer.class (java.lang.Class)
+        4 invokevirtual test10
+        7 return
+    }
+}
+
+test12 : (java.lang.String) : void
+{
+    Access Flags: 1025 ( PUBLIC  ABSTRACT )
+
+    Attributes:
+}
+
+<clinit> : () : void
+{
+    Access Flags: 8 ( STATIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 0
+        Attributes:
+            @LineNumberTable:
+                0: line 72
+                8: line 73
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "STATIC" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "DEFAULT CONSTRUCTOR"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "ADDITIONAL CONSTRUCTOR"
+6: String: "PRIVATE METHOD"
+7: String: "PROTECTED METHOD"
+8: String: "STATIC METHOD"
+9: String: "FINAL METHOD"
+10: String: "SYNC METHOD"
+11: String: "STRICTFP METHOD"
+12: String: "fake"
+13: Methodref: java.lang.Class.forName ((Ljava/lang/String;)Ljava/lang/Class;)
+14: Methodref: java.lang.Class.newInstance (()Ljava/lang/Object;)
+15: Methodref: java.math.BigInteger.valueOf ((J)Ljava/math/BigInteger;)
+16: Class: java.lang.Integer
+17: Methodref: ru.andrew.jclazz.apps.tester.tests.clazz.MethodsCommon.test10 ((Ljava/lang/Class;)V)
+18: String: "STATIC"
+19: Class: ru.andrew.jclazz.apps.tester.tests.clazz.MethodsCommon
+20: Class: java.lang.Object
+21: Utf8: <init>
+22: Utf8: ()V
+23: Utf8: Code
+24: Utf8: LineNumberTable
+25: Utf8: LocalVariableTable
+26: Utf8: this
+27: Utf8: Lru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon;
+28: Utf8: (Ljava/lang/String;)V
+29: Utf8: initVar
+30: Utf8: Ljava/lang/String;
+31: Utf8: test1
+32: Utf8: test2
+33: Utf8: test3
+34: Utf8: test4
+35: Utf8: test5
+36: Utf8: test6
+37: Utf8: test7
+38: Utf8: test8
+39: Utf8: test9
+40: Utf8: (Ljava/lang/String;Ljava/io/PrintWriter;IZ)Ljava/math/BigInteger;
+41: Utf8: par1
+42: Utf8: pw
+43: Utf8: Ljava/io/PrintWriter;
+44: Utf8: k
+45: Utf8: I
+46: Utf8: b
+47: Utf8: Z
+48: Utf8: Exceptions
+49: Class: java.lang.IllegalArgumentException
+50: Class: java.lang.ClassNotFoundException
+51: Class: java.lang.IllegalAccessException
+52: Class: java.lang.InstantiationException
+53: Utf8: test10
+54: Utf8: (Ljava/lang/Class;)V
+55: Utf8: cl
+56: Utf8: Ljava/lang/Class;
+57: Utf8: test11
+58: Utf8: test12
+59: Utf8: <clinit>
+60: Utf8: SourceFile
+61: Utf8: MethodsCommon.java
+62: NameAndType: <init> (()V)
+63: Class: java.lang.System
+64: NameAndType: out (Ljava/io/PrintStream;)
+65: Utf8: DEFAULT CONSTRUCTOR
+66: Class: java.io.PrintStream
+67: NameAndType: println ((Ljava/lang/String;)V)
+68: Utf8: ADDITIONAL CONSTRUCTOR
+69: Utf8: PRIVATE METHOD
+70: Utf8: PROTECTED METHOD
+71: Utf8: STATIC METHOD
+72: Utf8: FINAL METHOD
+73: Utf8: SYNC METHOD
+74: Utf8: STRICTFP METHOD
+75: Utf8: fake
+76: Class: java.lang.Class
+77: NameAndType: forName ((Ljava/lang/String;)Ljava/lang/Class;)
+78: NameAndType: newInstance (()Ljava/lang/Object;)
+79: Class: java.math.BigInteger
+80: NameAndType: valueOf ((J)Ljava/math/BigInteger;)
+81: Utf8: java/lang/Integer
+82: NameAndType: test10 ((Ljava/lang/Class;)V)
+83: Utf8: STATIC
+84: Utf8: ru/andrew/jclazz/apps/tester/tests/clazz/MethodsCommon
+85: Utf8: java/lang/Object
+86: Utf8: java/lang/IllegalArgumentException
+87: Utf8: java/lang/ClassNotFoundException
+88: Utf8: java/lang/IllegalAccessException
+89: Utf8: java/lang/InstantiationException
+90: Utf8: java/lang/System
+91: Utf8: out
+92: Utf8: Ljava/io/PrintStream;
+93: Utf8: java/io/PrintStream
+94: Utf8: println
+95: Utf8: java/lang/Class
+96: Utf8: forName
+97: Utf8: (Ljava/lang/String;)Ljava/lang/Class;
+98: Utf8: newInstance
+99: Utf8: ()Ljava/lang/Object;
+100: Utf8: java/math/BigInteger
+101: Utf8: valueOf
+102: Utf8: (J)Ljava/math/BigInteger;

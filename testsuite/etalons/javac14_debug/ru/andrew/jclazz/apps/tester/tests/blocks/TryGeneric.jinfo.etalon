@@ -1,0 +1,705 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.TryGeneric
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: TryGeneric.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 9
+                4: line 10
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 14
+                8: line 17
+                16: line 18
+                19: line 40
+                22: line 19
+                23: line 21
+                31: line 22
+                34: line 40
+                37: line 23
+                38: line 25
+                46: line 26
+                49: line 40
+                52: line 27
+                53: line 29
+                61: line 30
+                64: line 40
+                67: line 33
+                82: line 34
+                90: line 35
+                98: line 36
+                106: line 37
+                114: line 38
+                122: line 39
+                132: line 41
+                140: line 42
+            @LocalVariableTable: 
+                23+8: e (Ljava/lang/Exception;), 1
+                38+8: err (Ljava/lang/Error;), 1
+                53+8: t (Ljava/lang/Throwable;), 1
+                0+141: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+        Exceptions:
+            [8-16): 22 - java.lang.Exception
+            [8-16): 37 - java.lang.Error
+            [8-16): 52 - java.lang.Throwable
+            [8-19): 67
+            [22-34): 67
+            [37-49): 67
+            [52-64): 67
+            [67-71): 67
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "Before try" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "TRY BLOCK" (java.lang.String)
+        13 invokevirtual println
+        16 jsr 73
+        19 goto 132
+        22 astore_1
+        23 getstatic java.lang.System.out
+        26 ldc "CATCH BLOCK 1" (java.lang.String)
+        28 invokevirtual println
+        31 jsr 73
+        34 goto 132
+        37 astore_1
+        38 getstatic java.lang.System.out
+        41 ldc "CATCH BLOCK 2" (java.lang.String)
+        43 invokevirtual println
+        46 jsr 73
+        49 goto 132
+        52 astore_1
+        53 getstatic java.lang.System.out
+        56 ldc "CATCH BLOCK 3" (java.lang.String)
+        58 invokevirtual println
+        61 jsr 73
+        64 goto 132
+        67 astore_2
+        68 jsr 73
+        71 aload_2
+        72 athrow
+        73 astore_3
+        74 getstatic java.lang.System.out
+        77 ldc "." (java.lang.String)
+        79 invokevirtual println
+        82 getstatic java.lang.System.out
+        85 ldc ".." (java.lang.String)
+        87 invokevirtual println
+        90 getstatic java.lang.System.out
+        93 ldc "..." (java.lang.String)
+        95 invokevirtual println
+        98 getstatic java.lang.System.out
+        101 ldc "FINALLY BLOCK" (java.lang.String)
+        103 invokevirtual println
+        106 getstatic java.lang.System.out
+        109 ldc "..." (java.lang.String)
+        111 invokevirtual println
+        114 getstatic java.lang.System.out
+        117 ldc ".." (java.lang.String)
+        119 invokevirtual println
+        122 getstatic java.lang.System.out
+        125 ldc "." (java.lang.String)
+        127 invokevirtual println
+        130 ret LV-3
+        132 getstatic java.lang.System.out
+        135 ldc "After try" (java.lang.String)
+        137 invokevirtual println
+        140 return
+    }
+}
+
+test2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 46
+                8: line 49
+                16: line 52
+                24: line 61
+                27: line 54
+                28: line 56
+                36: line 61
+                39: line 58
+                40: line 60
+                48: line 62
+                56: line 63
+                59: line 86
+                62: line 64
+                63: line 66
+                71: line 67
+                79: line 69
+                80: line 71
+                88: line 72
+                91: line 86
+                94: line 73
+                95: line 75
+                103: line 76
+                106: line 86
+                109: line 79
+                124: line 80
+                132: line 81
+                140: line 82
+                148: line 83
+                156: line 84
+                164: line 85
+                174: line 87
+                182: line 88
+            @LocalVariableTable: 
+                28+8: ee (Ljava/lang/Exception;), 1
+                40+8: tt (Ljava/lang/Throwable;), 1
+                63+16: e (Ljava/lang/Exception;), 1
+                80+8: err (Ljava/lang/Error;), 1
+                95+8: t (Ljava/lang/Throwable;), 1
+                0+183: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+        Exceptions:
+            [16-24): 27 - java.lang.Exception
+            [16-24): 39 - java.lang.Throwable
+            [8-56): 62 - java.lang.Exception
+            [8-56): 79 - java.lang.Error
+            [8-56): 94 - java.lang.Throwable
+            [8-59): 109
+            [62-91): 109
+            [94-106): 109
+            [109-113): 109
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "Before try" (java.lang.String)
+        5 invokevirtual println
+        8 getstatic java.lang.System.out
+        11 ldc "TRY BLOCK start" (java.lang.String)
+        13 invokevirtual println
+        16 getstatic java.lang.System.out
+        19 ldc "INNER TRY BLOCK" (java.lang.String)
+        21 invokevirtual println
+        24 goto 48
+        27 astore_1
+        28 getstatic java.lang.System.out
+        31 ldc "INNER CATCH BLOCK 1" (java.lang.String)
+        33 invokevirtual println
+        36 goto 48
+        39 astore_1
+        40 getstatic java.lang.System.out
+        43 ldc "INNER CATCH BLOCK 2" (java.lang.String)
+        45 invokevirtual println
+        48 getstatic java.lang.System.out
+        51 ldc "TRY BLOCK end" (java.lang.String)
+        53 invokevirtual println
+        56 jsr 115
+        59 goto 174
+        62 astore_1
+        63 getstatic java.lang.System.out
+        66 ldc "CATCH BLOCK 1" (java.lang.String)
+        68 invokevirtual println
+        71 new java.lang.RuntimeException
+        74 dup
+        75 invokespecial <init>
+        78 athrow
+        79 astore_1
+        80 getstatic java.lang.System.out
+        83 ldc "CATCH BLOCK 2" (java.lang.String)
+        85 invokevirtual println
+        88 jsr 115
+        91 goto 174
+        94 astore_1
+        95 getstatic java.lang.System.out
+        98 ldc "CATCH BLOCK 3" (java.lang.String)
+        100 invokevirtual println
+        103 jsr 115
+        106 goto 174
+        109 astore_2
+        110 jsr 115
+        113 aload_2
+        114 athrow
+        115 astore_3
+        116 getstatic java.lang.System.out
+        119 ldc "." (java.lang.String)
+        121 invokevirtual println
+        124 getstatic java.lang.System.out
+        127 ldc ".." (java.lang.String)
+        129 invokevirtual println
+        132 getstatic java.lang.System.out
+        135 ldc "..." (java.lang.String)
+        137 invokevirtual println
+        140 getstatic java.lang.System.out
+        143 ldc "FINALLY BLOCK" (java.lang.String)
+        145 invokevirtual println
+        148 getstatic java.lang.System.out
+        151 ldc "..." (java.lang.String)
+        153 invokevirtual println
+        156 getstatic java.lang.System.out
+        159 ldc ".." (java.lang.String)
+        161 invokevirtual println
+        164 getstatic java.lang.System.out
+        167 ldc "." (java.lang.String)
+        169 invokevirtual println
+        172 ret LV-3
+        174 getstatic java.lang.System.out
+        177 ldc "After try" (java.lang.String)
+        179 invokevirtual println
+        182 return
+    }
+}
+
+test3 : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 94
+                9: line 96
+                10: line 98
+                18: line 102
+                21: line 100
+                22: line 103
+            @LocalVariableTable: 
+                22+0: e (Ljava/lang/Exception;), 2
+                0+23: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+                0+23: style (Ljava/lang/String;), 1
+        Exceptions:
+            [0-9): 21 - java.lang.Exception
+            [10-18): 21 - java.lang.Exception
+       )
+    {
+        0 ldc "" (java.lang.String)
+        2 aload_1
+        3 invokevirtual equals
+        6 ifeq 10
+        9 return
+        10 getstatic java.lang.System.out
+        13 ldc "SOUT" (java.lang.String)
+        15 invokevirtual println
+        18 goto 22
+        21 astore_2
+        22 return
+    }
+}
+
+test4 : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 109
+                9: line 121
+                18: line 113
+                26: line 121
+                34: line 122
+                37: line 115
+                38: line 117
+                46: line 121
+                54: line 122
+                57: line 121
+                68: line 123
+            @LocalVariableTable: 
+                38+8: e (Ljava/lang/Exception;), 2
+                0+69: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+                0+69: style (Ljava/lang/String;), 1
+        Exceptions:
+            [0-9): 37 - java.lang.Exception
+            [18-26): 37 - java.lang.Exception
+            [0-9): 57
+            [18-26): 57
+            [37-46): 57
+            [57-58): 57
+       )
+    {
+        0 ldc "" (java.lang.String)
+        2 aload_1
+        3 invokevirtual equals
+        6 ifeq 18
+        9 getstatic java.lang.System.out
+        12 ldc "FINALLY" (java.lang.String)
+        14 invokevirtual println
+        17 return
+        18 getstatic java.lang.System.out
+        21 ldc "SOUT" (java.lang.String)
+        23 invokevirtual println
+        26 getstatic java.lang.System.out
+        29 ldc "FINALLY" (java.lang.String)
+        31 invokevirtual println
+        34 goto 68
+        37 astore_2
+        38 getstatic java.lang.System.out
+        41 ldc "EXCEPTION" (java.lang.String)
+        43 invokevirtual println
+        46 getstatic java.lang.System.out
+        49 ldc "FINALLY" (java.lang.String)
+        51 invokevirtual println
+        54 goto 68
+        57 astore_3
+        58 getstatic java.lang.System.out
+        61 ldc "FINALLY" (java.lang.String)
+        63 invokevirtual println
+        66 aload_3
+        67 athrow
+        68 return
+    }
+}
+
+test5 : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 129
+                9: line 131
+                17: line 133
+                25: line 141
+                33: line 142
+                36: line 135
+                37: line 137
+                45: line 141
+                53: line 142
+                56: line 141
+                67: line 143
+            @LocalVariableTable: 
+                37+8: e (Ljava/lang/Exception;), 2
+                0+68: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+                0+68: style (Ljava/lang/String;), 1
+        Exceptions:
+            [0-25): 36 - java.lang.Exception
+            [0-25): 56
+            [36-45): 56
+            [56-57): 56
+       )
+    {
+        0 ldc "" (java.lang.String)
+        2 aload_1
+        3 invokevirtual equals
+        6 ifeq 17
+        9 new java.lang.RuntimeException
+        12 dup
+        13 invokespecial <init>
+        16 athrow
+        17 getstatic java.lang.System.out
+        20 ldc "SOUT" (java.lang.String)
+        22 invokevirtual println
+        25 getstatic java.lang.System.out
+        28 ldc "FINALLY" (java.lang.String)
+        30 invokevirtual println
+        33 goto 67
+        36 astore_2
+        37 getstatic java.lang.System.out
+        40 ldc "EXCEPTION" (java.lang.String)
+        42 invokevirtual println
+        45 getstatic java.lang.System.out
+        48 ldc "FINALLY" (java.lang.String)
+        50 invokevirtual println
+        53 goto 67
+        56 astore_3
+        57 getstatic java.lang.System.out
+        60 ldc "FINALLY" (java.lang.String)
+        62 invokevirtual println
+        65 aload_3
+        66 athrow
+        67 return
+    }
+}
+
+test6 : (java.lang.String) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.Throwable
+    CODE
+       (
+        Max stack = 2
+        Max locals = 4
+        Attributes:
+            @LineNumberTable:
+                0: line 149
+                9: line 151
+                17: line 153
+                25: line 161
+                33: line 162
+                36: line 155
+                37: line 157
+                45: line 161
+                53: line 162
+                56: line 161
+                67: line 163
+            @LocalVariableTable: 
+                37+8: e (Ljava/lang/Exception;), 2
+                0+68: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+                0+68: style (Ljava/lang/String;), 1
+        Exceptions:
+            [0-25): 36 - java.lang.Exception
+            [0-25): 56
+            [36-45): 56
+            [56-57): 56
+       )
+    {
+        0 ldc "" (java.lang.String)
+        2 aload_1
+        3 invokevirtual equals
+        6 ifeq 17
+        9 new java.lang.Throwable
+        12 dup
+        13 invokespecial <init>
+        16 athrow
+        17 getstatic java.lang.System.out
+        20 ldc "SOUT" (java.lang.String)
+        22 invokevirtual println
+        25 getstatic java.lang.System.out
+        28 ldc "FINALLY" (java.lang.String)
+        30 invokevirtual println
+        33 goto 67
+        36 astore_2
+        37 getstatic java.lang.System.out
+        40 ldc "EXCEPTION" (java.lang.String)
+        42 invokevirtual println
+        45 getstatic java.lang.System.out
+        48 ldc "FINALLY" (java.lang.String)
+        50 invokevirtual println
+        53 goto 67
+        56 astore_3
+        57 getstatic java.lang.System.out
+        60 ldc "FINALLY" (java.lang.String)
+        62 invokevirtual println
+        65 aload_3
+        66 athrow
+        67 return
+    }
+}
+
+test7 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    @Exceptions: 
+            java.lang.Throwable
+    CODE
+       (
+        Max stack = 3
+        Max locals = 3
+        Attributes:
+            @LineNumberTable:
+                0: line 167
+                9: line 172
+                22: line 175
+                23: line 181
+                26: line 178
+                27: line 180
+                29: line 182
+                37: line 183
+            @LocalVariableTable: 
+                23+0: eofexception (Ljava/io/EOFException;), 2
+                27+2: throwable (Ljava/lang/Throwable;), 2
+                0+38: this (Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;), 0
+                9+29: datainputstream (Ljava/io/DataInputStream;), 1
+        Exceptions:
+            [9-22): 22 - java.io.EOFException
+            [9-22): 26 - java.lang.Throwable
+       )
+    {
+        0 new java.io.DataInputStream
+        3 dup
+        4 aconst_null
+        5 invokespecial <init>
+        8 astore_1
+        9 getstatic java.lang.System.out
+        12 aload_1
+        13 invokevirtual readUTF
+        16 invokevirtual println
+        19 goto 9
+        22 astore_2
+        23 goto 29
+        26 astore_2
+        27 aload_2
+        28 athrow
+        29 getstatic java.lang.System.out
+        32 ldc "1" (java.lang.String)
+        34 invokevirtual println
+        37 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: String: "Before try"
+4: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+5: String: "TRY BLOCK"
+6: Class: java.lang.Exception
+7: String: "CATCH BLOCK 1"
+8: Class: java.lang.Error
+9: String: "CATCH BLOCK 2"
+10: Class: java.lang.Throwable
+11: String: "CATCH BLOCK 3"
+12: String: "."
+13: String: ".."
+14: String: "..."
+15: String: "FINALLY BLOCK"
+16: String: "After try"
+17: String: "TRY BLOCK start"
+18: String: "INNER TRY BLOCK"
+19: String: "INNER CATCH BLOCK 1"
+20: String: "INNER CATCH BLOCK 2"
+21: String: "TRY BLOCK end"
+22: Class: java.lang.RuntimeException
+23: Methodref: java.lang.RuntimeException.<init> (()V)
+24: String: ""
+25: Methodref: java.lang.String.equals ((Ljava/lang/Object;)Z)
+26: String: "SOUT"
+27: String: "FINALLY"
+28: String: "EXCEPTION"
+29: Methodref: java.lang.Throwable.<init> (()V)
+30: Class: java.io.DataInputStream
+31: Methodref: java.io.DataInputStream.<init> ((Ljava/io/InputStream;)V)
+32: Methodref: java.io.DataInputStream.readUTF (()Ljava/lang/String;)
+33: Class: java.io.EOFException
+34: String: "1"
+35: Class: ru.andrew.jclazz.apps.tester.tests.blocks.TryGeneric
+36: Class: java.lang.Object
+37: Utf8: <init>
+38: Utf8: ()V
+39: Utf8: Code
+40: Utf8: LineNumberTable
+41: Utf8: LocalVariableTable
+42: Utf8: this
+43: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric;
+44: Utf8: test1
+45: Utf8: e
+46: Utf8: Ljava/lang/Exception;
+47: Utf8: err
+48: Utf8: Ljava/lang/Error;
+49: Utf8: t
+50: Utf8: Ljava/lang/Throwable;
+51: Utf8: test2
+52: Utf8: ee
+53: Utf8: tt
+54: Utf8: test3
+55: Utf8: (Ljava/lang/String;)V
+56: Utf8: style
+57: Utf8: Ljava/lang/String;
+58: Utf8: test4
+59: Utf8: test5
+60: Utf8: test6
+61: Utf8: Exceptions
+62: Utf8: test7
+63: Utf8: eofexception
+64: Utf8: Ljava/io/EOFException;
+65: Utf8: throwable
+66: Utf8: datainputstream
+67: Utf8: Ljava/io/DataInputStream;
+68: Utf8: SourceFile
+69: Utf8: TryGeneric.java
+70: NameAndType: <init> (()V)
+71: Class: java.lang.System
+72: NameAndType: out (Ljava/io/PrintStream;)
+73: Utf8: Before try
+74: Class: java.io.PrintStream
+75: NameAndType: println ((Ljava/lang/String;)V)
+76: Utf8: TRY BLOCK
+77: Utf8: java/lang/Exception
+78: Utf8: CATCH BLOCK 1
+79: Utf8: java/lang/Error
+80: Utf8: CATCH BLOCK 2
+81: Utf8: java/lang/Throwable
+82: Utf8: CATCH BLOCK 3
+83: Utf8: .
+84: Utf8: ..
+85: Utf8: ...
+86: Utf8: FINALLY BLOCK
+87: Utf8: After try
+88: Utf8: TRY BLOCK start
+89: Utf8: INNER TRY BLOCK
+90: Utf8: INNER CATCH BLOCK 1
+91: Utf8: INNER CATCH BLOCK 2
+92: Utf8: TRY BLOCK end
+93: Utf8: java/lang/RuntimeException
+94: Utf8: 
+95: Class: java.lang.String
+96: NameAndType: equals ((Ljava/lang/Object;)Z)
+97: Utf8: SOUT
+98: Utf8: FINALLY
+99: Utf8: EXCEPTION
+100: Utf8: java/io/DataInputStream
+101: NameAndType: <init> ((Ljava/io/InputStream;)V)
+102: NameAndType: readUTF (()Ljava/lang/String;)
+103: Utf8: java/io/EOFException
+104: Utf8: 1
+105: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/TryGeneric
+106: Utf8: java/lang/Object
+107: Utf8: java/lang/System
+108: Utf8: out
+109: Utf8: Ljava/io/PrintStream;
+110: Utf8: java/io/PrintStream
+111: Utf8: println
+112: Utf8: java/lang/String
+113: Utf8: equals
+114: Utf8: (Ljava/lang/Object;)Z
+115: Utf8: (Ljava/io/InputStream;)V
+116: Utf8: readUTF
+117: Utf8: ()Ljava/lang/String;

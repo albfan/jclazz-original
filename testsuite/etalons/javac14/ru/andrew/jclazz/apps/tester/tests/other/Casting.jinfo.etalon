@@ -1,0 +1,122 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.other.Casting
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+main : (java.lang.String[]) : void
+{
+    Access Flags: 9 ( PUBLIC  STATIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 3
+        Max locals = 2
+        Attributes:
+        Exceptions:
+       )
+    {
+        0 iconst_0
+        1 istore_1
+        2 iload_1
+        3 sipush 128 (int)
+        6 if_icmpge 52
+        9 getstatic java.lang.System.out
+        12 new java.lang.StringBuffer
+        15 dup
+        16 invokespecial <init>
+        19 ldc "ascii " (java.lang.String)
+        21 invokevirtual append
+        24 iload_1
+        25 invokevirtual append
+        28 ldc " character " (java.lang.String)
+        30 invokevirtual append
+        33 iload_1
+        34 i2c
+        35 invokevirtual append
+        38 invokevirtual toString
+        41 invokevirtual println
+        44 iload_1
+        45 iconst_1
+        46 iadd
+        47 i2c
+        48 istore_1
+        49 goto 2
+        52 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: java.io.PrintStream
+3: Class: java.lang.StringBuffer
+4: Methodref: java.lang.StringBuffer.<init> (()V)
+5: String: "ascii "
+6: Methodref: java.lang.StringBuffer.append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+7: Methodref: java.lang.StringBuffer.append ((I)Ljava/lang/StringBuffer;)
+8: String: " character "
+9: Methodref: java.lang.StringBuffer.append ((C)Ljava/lang/StringBuffer;)
+10: Methodref: java.lang.StringBuffer.toString (()Ljava/lang/String;)
+11: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+12: Class: ru.andrew.jclazz.apps.tester.tests.other.Casting
+13: Class: java.lang.Object
+14: Utf8: <init>
+15: Utf8: ()V
+16: Utf8: Code
+17: Utf8: main
+18: Utf8: ([Ljava/lang/String;)V
+19: NameAndType: <init> (()V)
+20: Class: java.lang.System
+21: NameAndType: out (Ljava/io/PrintStream;)
+22: Utf8: java/lang/StringBuffer
+23: Utf8: ascii 
+24: NameAndType: append ((Ljava/lang/String;)Ljava/lang/StringBuffer;)
+25: NameAndType: append ((I)Ljava/lang/StringBuffer;)
+26: Utf8:  character 
+27: NameAndType: append ((C)Ljava/lang/StringBuffer;)
+28: NameAndType: toString (()Ljava/lang/String;)
+29: Class: java.io.PrintStream
+30: NameAndType: println ((Ljava/lang/String;)V)
+31: Utf8: ru/andrew/jclazz/apps/tester/tests/other/Casting
+32: Utf8: java/lang/Object
+33: Utf8: java/lang/System
+34: Utf8: out
+35: Utf8: Ljava/io/PrintStream;
+36: Utf8: append
+37: Utf8: (Ljava/lang/String;)Ljava/lang/StringBuffer;
+38: Utf8: (I)Ljava/lang/StringBuffer;
+39: Utf8: (C)Ljava/lang/StringBuffer;
+40: Utf8: toString
+41: Utf8: ()Ljava/lang/String;
+42: Utf8: java/io/PrintStream
+43: Utf8: println
+44: Utf8: (Ljava/lang/String;)V

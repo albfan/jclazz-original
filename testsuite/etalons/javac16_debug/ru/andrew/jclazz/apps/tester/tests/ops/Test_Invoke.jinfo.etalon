@@ -1,0 +1,393 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 50.0
+JVM supported: 1.6 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: Test_Invoke.java
+
+Fields:
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 9
+                4: line 10
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+testStatic : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 14
+                5: line 15
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 iconst_m1
+        1 invokestatic java.lang.Math.abs
+        4 pop
+        5 return
+    }
+}
+
+testInterface : (java.util.List) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 19
+                7: line 20
+            @LocalVariableTable: 
+                0+8: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+                0+8: list (Ljava/util/List;), 1
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 invokeinterface size
+        6 pop
+        7 return
+    }
+}
+
+testVirtual : (java.lang.Integer) : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 24
+                5: line 25
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+                0+6: i (Ljava/lang/Integer;), 1
+        Exceptions:
+       )
+    {
+        0 aload_1
+        1 invokevirtual intValue
+        4 pop
+        5 return
+    }
+}
+
+testSpecial1 : () : void
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 29
+                8: line 30
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 new ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke
+        3 dup
+        4 invokespecial <init>
+        7 pop
+        8 return
+    }
+}
+
+testSpecial2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 34
+                4: line 35
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial testSpecial1
+        4 return
+    }
+}
+
+testSpecial3 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 39
+                5: line 40
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial toString
+        4 pop
+        5 return
+    }
+}
+
+testVirtual2 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 44
+                5: line 45
+            @LocalVariableTable: 
+                0+6: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokevirtual toString
+        4 pop
+        5 return
+    }
+}
+
+toString : () : java.lang.String
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 49
+            @LocalVariableTable: 
+                0+3: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 ldc "123" (java.lang.String)
+        2 areturn
+    }
+}
+
+testDynamic : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 0
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 54
+            @LocalVariableTable: 
+                0+1: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 return
+    }
+}
+
+testBool : (boolean) : void
+{
+    Access Flags: 2 ( PRIVATE )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 2
+        Attributes:
+            @LineNumberTable:
+                0: line 58
+                8: line 59
+            @LocalVariableTable: 
+                0+9: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+                0+9: bool (Z), 1
+        Exceptions:
+       )
+    {
+        0 getstatic java.lang.System.out
+        3 ldc "BOOL" (java.lang.String)
+        5 invokevirtual println
+        8 return
+    }
+}
+
+testBoolMain : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 63
+                5: line 64
+                10: line 65
+            @LocalVariableTable: 
+                0+11: this (Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 iconst_1
+        2 invokespecial testBool
+        5 aload_0
+        6 iconst_0
+        7 invokespecial testBool
+        10 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Methodref: java.lang.Math.abs ((I)I)
+3: InterfaceMethodref: java.util.List.size (()I)
+4: Methodref: java.lang.Integer.intValue (()I)
+5: Class: ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke
+6: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke.<init> (()V)
+7: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke.testSpecial1 (()V)
+8: Methodref: java.lang.Object.toString (()Ljava/lang/String;)
+9: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke.toString (()Ljava/lang/String;)
+10: String: "123"
+11: Fieldref: java.io.PrintStream
+12: String: "BOOL"
+13: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+14: Methodref: ru.andrew.jclazz.apps.tester.tests.ops.Test_Invoke.testBool ((Z)V)
+15: Class: java.lang.Object
+16: Utf8: <init>
+17: Utf8: ()V
+18: Utf8: Code
+19: Utf8: LineNumberTable
+20: Utf8: LocalVariableTable
+21: Utf8: this
+22: Utf8: Lru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke;
+23: Utf8: testStatic
+24: Utf8: testInterface
+25: Utf8: (Ljava/util/List;)V
+26: Utf8: list
+27: Utf8: Ljava/util/List;
+28: Utf8: testVirtual
+29: Utf8: (Ljava/lang/Integer;)V
+30: Utf8: i
+31: Utf8: Ljava/lang/Integer;
+32: Utf8: testSpecial1
+33: Utf8: testSpecial2
+34: Utf8: testSpecial3
+35: Utf8: testVirtual2
+36: Utf8: toString
+37: Utf8: ()Ljava/lang/String;
+38: Utf8: testDynamic
+39: Utf8: testBool
+40: Utf8: (Z)V
+41: Utf8: bool
+42: Utf8: Z
+43: Utf8: testBoolMain
+44: Utf8: SourceFile
+45: Utf8: Test_Invoke.java
+46: NameAndType: <init> (()V)
+47: Class: java.lang.Math
+48: NameAndType: abs ((I)I)
+49: Class: java.util.List
+50: NameAndType: size (()I)
+51: Class: java.lang.Integer
+52: NameAndType: intValue (()I)
+53: Utf8: ru/andrew/jclazz/apps/tester/tests/ops/Test_Invoke
+54: NameAndType: testSpecial1 (()V)
+55: NameAndType: toString (()Ljava/lang/String;)
+56: Utf8: 123
+57: Class: java.lang.System
+58: NameAndType: out (Ljava/io/PrintStream;)
+59: Utf8: BOOL
+60: Class: java.io.PrintStream
+61: NameAndType: println ((Ljava/lang/String;)V)
+62: NameAndType: testBool ((Z)V)
+63: Utf8: java/lang/Object
+64: Utf8: java/lang/Math
+65: Utf8: abs
+66: Utf8: (I)I
+67: Utf8: java/util/List
+68: Utf8: size
+69: Utf8: ()I
+70: Utf8: java/lang/Integer
+71: Utf8: intValue
+72: Utf8: java/lang/System
+73: Utf8: out
+74: Utf8: Ljava/io/PrintStream;
+75: Utf8: java/io/PrintStream
+76: Utf8: println
+77: Utf8: (Ljava/lang/String;)V

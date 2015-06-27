@@ -1,0 +1,16 @@
+package ru.andrew.jclazz.apps.tester.tests.ops;
+
+public class Test_Iinc
+{
+    public void test1()
+    {
+        int i = 8;
+        i++;
+    }
+
+    public void test2()
+    {
+        int i = 8;
+        i += 1000;
+    }
+}

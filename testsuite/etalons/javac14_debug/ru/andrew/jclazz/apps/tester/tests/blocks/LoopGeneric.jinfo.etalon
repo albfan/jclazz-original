@@ -1,0 +1,112 @@
+This Class  : ru.andrew.jclazz.apps.tester.tests.blocks.LoopGeneric
+Super Class : java.lang.Object
+Implemented Interfaces:
+
+Version: 46.0
+JVM supported: 1.2 and greater
+
+Access Flags: 33 ( PUBLIC  SUPER )
+
+Attributes:
+@SourceFile: LoopGeneric.java
+
+Fields:
+exit : boolean
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+}
+
+
+Methods:
+<init> : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 1
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 8
+                4: line 9
+            @LocalVariableTable: 
+                0+5: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopGeneric;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 invokespecial <init>
+        4 return
+    }
+}
+
+test1 : () : void
+{
+    Access Flags: 1 ( PUBLIC )
+
+    Attributes:
+    CODE
+       (
+        Max stack = 2
+        Max locals = 1
+        Attributes:
+            @LineNumberTable:
+                0: line 13
+                7: line 15
+                18: line 17
+            @LocalVariableTable: 
+                0+19: this (Lru/andrew/jclazz/apps/tester/tests/blocks/LoopGeneric;), 0
+        Exceptions:
+       )
+    {
+        0 aload_0
+        1 getfield exit
+        4 ifeq 18
+        7 getstatic java.lang.System.out
+        10 ldc "EXIT" (java.lang.String)
+        12 invokevirtual println
+        15 goto 0
+        18 return
+    }
+}
+
+Constant Pool:
+0: 
+1: Methodref: java.lang.Object.<init> (()V)
+2: Fieldref: boolean
+3: Fieldref: java.io.PrintStream
+4: String: "EXIT"
+5: Methodref: java.io.PrintStream.println ((Ljava/lang/String;)V)
+6: Class: ru.andrew.jclazz.apps.tester.tests.blocks.LoopGeneric
+7: Class: java.lang.Object
+8: Utf8: exit
+9: Utf8: Z
+10: Utf8: <init>
+11: Utf8: ()V
+12: Utf8: Code
+13: Utf8: LineNumberTable
+14: Utf8: LocalVariableTable
+15: Utf8: this
+16: Utf8: Lru/andrew/jclazz/apps/tester/tests/blocks/LoopGeneric;
+17: Utf8: test1
+18: Utf8: SourceFile
+19: Utf8: LoopGeneric.java
+20: NameAndType: <init> (()V)
+21: NameAndType: exit (Z)
+22: Class: java.lang.System
+23: NameAndType: out (Ljava/io/PrintStream;)
+24: Utf8: EXIT
+25: Class: java.io.PrintStream
+26: NameAndType: println ((Ljava/lang/String;)V)
+27: Utf8: ru/andrew/jclazz/apps/tester/tests/blocks/LoopGeneric
+28: Utf8: java/lang/Object
+29: Utf8: java/lang/System
+30: Utf8: out
+31: Utf8: Ljava/io/PrintStream;
+32: Utf8: java/io/PrintStream
+33: Utf8: println
+34: Utf8: (Ljava/lang/String;)V
