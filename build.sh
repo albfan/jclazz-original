@@ -1,3 +1,5 @@
+#!/bin/sh
+
 (cd jclazz-core; ant.sh)
 (cd jclazz-decomp; ant.sh)
 (cd jclazz-gui; ant.sh)
